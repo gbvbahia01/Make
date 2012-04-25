@@ -9,6 +9,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -19,12 +20,18 @@ public class MakeEntity {
     public static <T> T makeEntity(Class<T> entity) {
         try {
             T toReturn = entity.newInstance();
-            for (Field f :entity.getDeclaredFields()){
-                for (Annotation ann : f.getAnnotations()){
-                    
+            for (Field f : toReturn.getClass().getDeclaredFields()) {
+                boolean accessField = f.isAccessible();
+                f.setAccessible(true);
+                if (f.isAnnotationPresent(NotNull.class)) {
+                    if (f.getType().equals(Integer.class)) {
+                        f.set(toReturn, MakeInteger.getMax(5));
+                    }
                 }
+                f.setAccessible(accessField);
             }
-            
+            return toReturn;
+
         } catch (InstantiationException ex) {
             Logger logger = Logger.getLogger(MakeEntity.class.getName());
             logger.log(Level.SEVERE, I18N.getMsg("instantiationException",
@@ -36,6 +43,5 @@ public class MakeEntity {
                     entity.getName()), ex);
             throw new RuntimeException(ex);
         }
-        return null;
     }
 }
