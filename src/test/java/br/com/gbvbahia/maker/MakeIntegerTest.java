@@ -7,6 +7,7 @@ package br.com.gbvbahia.maker;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  *
@@ -23,6 +24,7 @@ public class MakeIntegerTest extends TestCase {
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
+    @Test
     public void testGetIntervalo() {
         for (int min = 1; min < 100; min++) {
             for (int max = min + 1; max < 200; max++) {
@@ -41,6 +43,7 @@ public class MakeIntegerTest extends TestCase {
     /**
      * Test of getMax method, of class MakeInteger.
      */
+    @Test
     public void testGetMax() {
         for (int i = 1; i < 100; i++) {
             Integer result = MakeInteger.getMax(i);
