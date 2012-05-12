@@ -32,13 +32,17 @@ public class MakeInteger {
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
+        if (min == max) {
+            return min;
+        }
         double ale = r.nextDouble();
-        int numero = min + ((int) (ale * (max -min)));
+        int numero = min + ((int) (ale * (max - min)));
         return numero;
     }
 
     /**
      * Retorna um número aleatório limitado ao max passado.
+     *
      * @param max Minimo 1.
      * @return Integer limitado ao max.
      */
