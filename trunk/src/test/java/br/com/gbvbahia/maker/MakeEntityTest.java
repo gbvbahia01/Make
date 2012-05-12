@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.entityes.EntityMinMaxTest;
+import br.com.gbvbahia.entityes.EntityNotNullTest;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -13,6 +14,7 @@ import javax.validation.ValidatorFactory;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 
 /**
  *
@@ -26,6 +28,7 @@ public class MakeEntityTest extends TestCase {
         super("Make Entity");
     }
 
+    @Test
     public void testMakeMinMaxEntity() throws Exception {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -76,10 +79,29 @@ public class MakeEntityTest extends TestCase {
         }
     }
 
-    private void validarJSR303(Validator validator, EntityMinMaxTest test) {
-        Set<ConstraintViolation<EntityMinMaxTest>> erros =
+    @Test
+    public void testMakeNotNullEntity() throws Exception {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        for (int i = 0; i < 100; i++) {
+            EntityNotNullTest test = MakeEntity.makeEntity(EntityNotNullTest.class);
+            logger.info(test);
+            assertNotNull("Test é nulo.", test);
+            assertNull("Nulo não nulo", test.getInteiro());
+            assertNotNull("inteiroObjeto é nulo.", test.getInteiroObjeto());
+            assertNotNull("longObjeto é nulo.", test.getLongObjeto());
+            assertNotNull("byteObjeto é nulo.", test.getByteObjeto());
+            assertNotNull("shortObjeto é nulo.", test.getShortObjeto());
+            assertNotNull("bigInteger é nulo.", test.getBigInteger());
+            assertNotNull("bigDecimal é nulo.", test.getBigDecimal());
+            validarJSR303(validator, test);
+        }
+    }
+
+    private void validarJSR303(Validator validator, Object test) {
+        Set<ConstraintViolation<Object>> erros =
                 validator.validate(test);
-        for (ConstraintViolation<EntityMinMaxTest> erro : erros) {
+        for (ConstraintViolation<Object> erro : erros) {
             logger.error(erro.getMessage());
         }
         assertTrue("Erros de validação encontrados",
