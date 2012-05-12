@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * Gerador de números inteiros aleatório.
  *
- * @since 21/04/2012
+ * @since 11/05/2012
  * @author Guilherme
  */
 public class MakeLong {
