@@ -5,13 +5,9 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.MakeEntity;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.validation.constraints.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,6 +46,19 @@ public class MakeEntity {
         }
     }
 
+    /**
+     * Verifica o tipo do campo e insere o valor correspondente.
+     *
+     * @param <T> Generic que representa proprietário do campo. Por
+     * exemplo: Classe carro tem um campo int rodas, o Field f seria
+     * rodas e T seria a classe Carro que terá o campo definido.
+     * @param f O campo que terá o valor definido.
+     * @param toReturn Objeto que contém o Field.
+     * @throws IllegalAccessException se no momento de execução não
+     * houver acesso ao campo.
+     * @throws IllegalArgumentException Se algum argumento anotado não
+     * for válido.
+     */
     private static <T> void insertValue(Field f, T toReturn)
             throws IllegalAccessException, IllegalArgumentException {
         if (f.getType().equals(Integer.class)) {
@@ -76,8 +85,8 @@ public class MakeEntity {
     }
 
     private static Integer valueToInteger(Field f) {
-        Long[] minMax = getMinMaxLongValues(f, Integer.MAX_VALUE,
-                Integer.MIN_VALUE);
+        Long[] minMax = getMinMaxLongValues(f, Integer.MIN_VALUE,
+                Integer.MAX_VALUE);
         int min = minMax[0].intValue();
         int max = minMax[1].intValue();
         return MakeInteger.getIntervalo(min, max);
@@ -125,6 +134,21 @@ public class MakeEntity {
         return MakeShort.getIntervalo(min, max);
     }
 
+    /**
+     * Cria um valor entre os valores anotados com
+     * javax.validation.constraints.Min ou
+     * javax.validation.constraints.Max da especificação JSR303.<br>
+     * Se não encontrar os valores irá utilizar os determinados nos
+     * parâmetros minValue e/ou MaxValue
+     *
+     * @param f Campo a ter o valor determinado.
+     * @param minValue Mínimo aceitavel, será utilizado se não houver
+     * a anotação @Min da JSR303.
+     * @param maxValue Máximo aceitavel, será utilizado se não houver
+     * a anotação @Max da JSR303.
+     * @return Array de duas posições, [0] será o minimo e [1] o
+     * máximo.
+     */
     private static Long[] getMinMaxLongValues(Field f,
             Number minValue, Number maxValue) {
         Long[] toReturn = new Long[2];
