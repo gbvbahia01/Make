@@ -36,7 +36,7 @@ public class MakeInteger {
             return min;
         }
         double ale = r.nextDouble();
-        int numero = min + ((int) (ale * (max - min)));
+        int numero = min + ((int) (ale * ((max + 1) - min)));
         return numero;
     }
 
