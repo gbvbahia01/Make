@@ -76,21 +76,24 @@ public class MakeEntity {
     }
 
     private static Integer valueToInteger(Field f) {
-        Long[] minMax = getMinMaxLongValues(f, Integer.MAX_VALUE);
+        Long[] minMax = getMinMaxLongValues(f, Integer.MAX_VALUE,
+                Integer.MIN_VALUE);
         int min = minMax[0].intValue();
         int max = minMax[1].intValue();
         return MakeInteger.getIntervalo(min, max);
     }
 
     private static Long valueToLong(Field f) {
-        Long[] minMax = getMinMaxLongValues(f, Long.MAX_VALUE);
+        Long[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
+                Long.MAX_VALUE);
         long min = minMax[0];
         long max = minMax[1];
         return MakeLong.getIntervalo(min, max);
     }
 
     private static BigInteger valueToBigInteger(Field f) {
-        Long[] minMax = getMinMaxLongValues(f, Long.MAX_VALUE);
+        Long[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
+                Long.MAX_VALUE);
         long min = minMax[0];
         long max = minMax[1];
         return new BigInteger(new Long(MakeLong.getIntervalo(min,
@@ -98,7 +101,8 @@ public class MakeEntity {
     }
 
     private static BigDecimal valueToBigDecimal(Field f) {
-        Long[] minMax = getMinMaxLongValues(f, Long.MAX_VALUE);
+        Long[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
+                Long.MAX_VALUE);
         long min = minMax[0];
         long max = minMax[1];
         return new BigDecimal(new Double(MakeDouble.getIntervalo(min,
@@ -106,25 +110,28 @@ public class MakeEntity {
     }
 
     private static Byte valueToByte(Field f) {
-        Long[] minMax = getMinMaxLongValues(f, Byte.MAX_VALUE);
+        Long[] minMax = getMinMaxLongValues(f, Byte.MIN_VALUE,
+                Byte.MAX_VALUE);
         byte min = minMax[0].byteValue();
         byte max = minMax[1].byteValue();
         return MakeByte.getIntervalo(min, max);
     }
 
     private static Short valueToShort(Field f) {
-        Long[] minMax = getMinMaxLongValues(f, Short.MAX_VALUE);
+        Long[] minMax = getMinMaxLongValues(f, Short.MIN_VALUE,
+                Short.MAX_VALUE);
         short min = minMax[0].shortValue();
         short max = minMax[1].shortValue();
         return MakeShort.getIntervalo(min, max);
     }
 
-    private static Long[] getMinMaxLongValues(Field f, Number maxValue) {
+    private static Long[] getMinMaxLongValues(Field f,
+            Number minValue, Number maxValue) {
         Long[] toReturn = new Long[2];
         if (f.isAnnotationPresent(Min.class)) {
             toReturn[0] = new Long(f.getAnnotation(Min.class).value());
         } else {
-            toReturn[0] = 0l;
+            toReturn[0] = minValue.longValue();
         }
         if (f.isAnnotationPresent(Max.class)) {
             toReturn[1] = new Long(f.getAnnotation(Max.class).value());
