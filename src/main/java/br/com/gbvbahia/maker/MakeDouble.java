@@ -13,7 +13,7 @@ import java.util.Random;
  * @since 11/05/2012
  * @author Guilherme
  */
-public class MakeLong {
+public class MakeDouble {
 
     /**
      * Gerador de números aleatórios.
@@ -27,32 +27,27 @@ public class MakeLong {
      * @param max Número máximo aceitavel.
      * @return Número aleatório.
      */
-    public static Long getIntervalo(final long min, final long max) {
+    public static double getIntervalo(final double min, final double max) {
         if (min > max) {
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
-        if (min == max) {
-            return min;
-        }
         double ale = r.nextDouble();
-        long numero = min + ((long) (ale * (max - min)));
+        double numero = min + ( (ale * (max - min)));
         return numero;
     }
 
     /**
-     * Retorna um número aleatório limitado ao max passado. Este
-     * método embora receba long como parámetro trabalha com Inteiro e
-     * o maior número a retornar será o Integer.MAX_VALUE.
-     *
+     * Retorna um número aleatório limitado ao max passado.
+
      * @param max Minimo 1.
-     * @return Long limitado ao max.
+     * @return Double limitado ao max.
      */
-    public static Long getMax(final long max) {
+    public static Double getMax(final double max) {
         if (max <= 0) {
             throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
         }
-
-        return getIntervalo(1, max);
+        
+        return getIntervalo(0, max);
     }
 }

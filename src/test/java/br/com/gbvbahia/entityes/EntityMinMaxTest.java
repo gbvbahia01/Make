@@ -4,6 +4,8 @@
  */
 package br.com.gbvbahia.entityes;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -12,7 +14,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author Guilherme
  */
-public class EntityTest {
+public class EntityMinMaxTest {
 
     public Integer inteiro;
     @NotNull
@@ -20,10 +22,16 @@ public class EntityTest {
     @Max(4)
     public Integer inteiroObjeto;
     @NotNull
+    @Min(-3)
+    @Max(-2)
+    public Integer inteiroNegativoObjeto;
+    @NotNull
     @Min(0)
     @Max(100)
     public int primitivoInt;
     @NotNull
+    @Min(-2000000000)
+    @Max(-1000000000)
     public Long longObjeto;
     @NotNull
     @Min(1000000000)
@@ -45,6 +53,14 @@ public class EntityTest {
     @Min(32000)
     @Max(32050)
     public short primitivoShort;
+    @NotNull
+    @Min(300000000)
+    @Max(320500000)
+    public BigInteger bigInteger;
+    @NotNull
+    @Min(0)
+    @Max(1)
+    public BigDecimal bigDecimal;
 
     public Integer getInteiro() {
         return inteiro;
@@ -118,8 +134,32 @@ public class EntityTest {
         this.shortObjeto = shortObjeto;
     }
 
+    public BigInteger getBigInteger() {
+        return bigInteger;
+    }
+
+    public void setBigInteger(BigInteger bigInteger) {
+        this.bigInteger = bigInteger;
+    }
+
+    public BigDecimal getBigDecimal() {
+        return bigDecimal;
+    }
+
+    public void setBigDecimal(BigDecimal bigDecimal) {
+        this.bigDecimal = bigDecimal;
+    }
+
+    public Integer getInteiroNegativoObjeto() {
+        return inteiroNegativoObjeto;
+    }
+
+    public void setInteiroNegativoObjeto(Integer inteiroNegativoObjeto) {
+        this.inteiroNegativoObjeto = inteiroNegativoObjeto;
+    }
+
     @Override
     public String toString() {
-        return "EntityTest{" + "inteiro=" + inteiro + ", inteiroObjeto=" + inteiroObjeto + ", primitivoInt=" + primitivoInt + ", longObjeto=" + longObjeto + ", primitivoLong=" + primitivoLong + ", byteObjeto=" + byteObjeto + ", primitivoByte=" + primitivoByte + ", shortObjeto=" + shortObjeto + ", primitivoShort=" + primitivoShort + '}';
+        return "EntityMinMaxTest{" + "inteiro=" + inteiro + ", inteiroObjeto=" + inteiroObjeto + ", inteiroNegativoObjeto=" + inteiroNegativoObjeto + ", primitivoInt=" + primitivoInt + ", longObjeto=" + longObjeto + ", primitivoLong=" + primitivoLong + ", byteObjeto=" + byteObjeto + ", primitivoByte=" + primitivoByte + ", shortObjeto=" + shortObjeto + ", primitivoShort=" + primitivoShort + ", bigInteger=" + bigInteger + ", bigDecimal=" + bigDecimal + '}';
     }
 }

@@ -19,10 +19,7 @@ public class MakeByte {
      * @return Byte limitado ao max.
      */
     public static Byte getMax(final byte max) {
-        if (max <= 0) {
-            throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
-        }
-        return MakeInteger.getMax(max).byteValue();
+        return MakeLong.getMax(max).byteValue();
     }
 
     /**
@@ -33,6 +30,6 @@ public class MakeByte {
      * @return Número aleatório.
      */
     public static Byte getIntervalo(final byte min, final byte max) {
-        return MakeInteger.getIntervalo(min, max).byteValue();
+        return MakeLong.getIntervalo(min, max).byteValue();
     }
 }

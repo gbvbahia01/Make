@@ -16,7 +16,7 @@ import org.junit.Test;
 public class MakeByteTest extends TestCase {
 
     private Log logger = LogFactory.getLog("MakeByteTest");
-    
+
     public MakeByteTest() {
         super("Maker :: Byte");
     }
@@ -29,8 +29,8 @@ public class MakeByteTest extends TestCase {
         for (byte min = 1; min < Byte.MAX_VALUE - 100; min++) {
             for (byte max = (byte) (min + 1); max < Byte.MAX_VALUE; max++) {
                 Byte result = MakeByte.getIntervalo(min, max);
-                logger.debug("Max: " + max 
-                        + " Min:" + min 
+                logger.debug("Max: " + max
+                        + " Min:" + min
                         + " Result:" + result);
                 assertTrue("Intervalo incorreto: Max: " + max
                         + " Min:" + min + " Result: " + result,
@@ -48,9 +48,10 @@ public class MakeByteTest extends TestCase {
         for (byte i = 1; i < Byte.MAX_VALUE; i++) {
             Byte result = MakeByte.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
-            assertTrue(result <= i);
-            assertTrue("Intervalo incorreta", result < i);
+            assertTrue("Intervalo incorreto", result <= i);
         }
-
+        Byte result2 = MakeByte.getMax(new Byte("1"));
+        logger.debug("Max: 1 Result: " + result2);
+        assertTrue("Teste minimo incorreto", result2 <= 1);
     }
 }
