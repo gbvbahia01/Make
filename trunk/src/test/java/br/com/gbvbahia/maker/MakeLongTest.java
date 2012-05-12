@@ -26,6 +26,7 @@ public class MakeLongTest extends TestCase {
      */
     @Test
     public void testGetIntervalo() {
+        logger.info("Maker :: Long - GetIntervalo");
         for (long min = 1000000000; min < 1000000100; min++) {
             for (long max = min + 1; max < 1000000200; max++) {
                 Long result = MakeLong.getIntervalo(min, max);
@@ -45,13 +46,14 @@ public class MakeLongTest extends TestCase {
      */
     @Test
     public void testGetMax() {
+        logger.info("Maker :: Long - GetMax");
         for (int i = 1000000000; i <= 1000000100; i++) {
             Long result = MakeLong.getMax(i);
-            logger.info("Max: " + i + " Result: " + result);
+            logger.debug("Max: " + i + " Result: " + result);
             assertTrue("Intervalo incorreta", result <= i);
         }
         Long result2 = MakeLong.getMax(1l);
-        logger.info("Max: 1 Result: " + result2);
+        logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }
 }

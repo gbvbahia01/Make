@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
+import java.math.BigInteger;
 import java.util.Random;
 
 /**
@@ -36,7 +37,7 @@ public class MakeLong {
             return min;
         }
         double ale = r.nextDouble();
-        long numero = min + ((long) (ale * (max - min)));
+        long numero = min + new BigInteger(new Long((long) (ale * (max - min))).toString()).abs().longValue();
         return numero;
     }
 

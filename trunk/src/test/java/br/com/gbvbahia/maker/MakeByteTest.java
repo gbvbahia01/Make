@@ -20,12 +20,13 @@ public class MakeByteTest extends TestCase {
     public MakeByteTest() {
         super("Maker :: Byte");
     }
-
+    
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
     @Test
     public void testGetIntervalo() {
+        logger.info("Maker :: Byte - GetIntervalo");
         for (byte min = 1; min < Byte.MAX_VALUE - 100; min++) {
             for (byte max = (byte) (min + 1); max < Byte.MAX_VALUE; max++) {
                 Byte result = MakeByte.getIntervalo(min, max);
@@ -45,6 +46,7 @@ public class MakeByteTest extends TestCase {
      */
     @Test
     public void testGetMax() {
+        logger.info("Maker :: Byte - GetMax");
         for (byte i = 1; i < Byte.MAX_VALUE; i++) {
             Byte result = MakeByte.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);

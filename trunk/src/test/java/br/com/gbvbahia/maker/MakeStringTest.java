@@ -24,11 +24,13 @@ public class MakeStringTest extends TestCase {
         super("Maker :: String");
     }
 
+
     /**
      * Test of getString method, of class MakeString.
      */
     @Test
     public void testGetString_int_int() {
+           logger.info("Maker :: String - GetString_int_int");
         for (int min = 1; min < 100; min++) {
             for (int max = min + 1; max < 200; max++) {
                 String result = MakeString.getString(min, max);
@@ -49,6 +51,7 @@ public class MakeStringTest extends TestCase {
      */
     @Test
     public void testGerarSenha_int_int() {
+        logger.info("Maker :: String - GerarSenha_int_int");
         for (int min = 1; min < 100; min++) {
             for (int max = min + 1; max < 200; max++) {
                 String result = MakeString.gerarSenha(min, max);
@@ -68,6 +71,7 @@ public class MakeStringTest extends TestCase {
      */
     @Test
     public void testGetString_int() {
+        logger.info("Maker :: String - GetString_int");
         for (int i = 1; i < 100; i++) {
             String result = MakeString.getString(i);
             assertTrue(result.length() <= i);
@@ -84,6 +88,7 @@ public class MakeStringTest extends TestCase {
      */
     @Test
     public void testGerarSenha_int() {
+        logger.info("Maker :: String - GerarSenha_int");
         for (int i = 1; i < 100; i++) {
             String result = MakeString.gerarSenha(i);
             assertTrue(result.length() <= i);
@@ -96,6 +101,7 @@ public class MakeStringTest extends TestCase {
 
     @Test
     public void testGerarEmail() {
+        logger.info("Maker :: String - GerarEmail");
         for (int i = 0; i < 100; i++) {
             String email = MakeString.gerarEmail();
             String inicio = StringUtils.substringBefore(email, "@");

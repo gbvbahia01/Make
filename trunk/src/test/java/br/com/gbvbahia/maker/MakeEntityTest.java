@@ -4,7 +4,9 @@
  */
 package br.com.gbvbahia.maker;
 
+import br.com.gbvbahia.entityes.EntityMaxTest;
 import br.com.gbvbahia.entityes.EntityMinMaxTest;
+import br.com.gbvbahia.entityes.EntityMinTest;
 import br.com.gbvbahia.entityes.EntityNotNullTest;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
@@ -28,13 +30,15 @@ public class MakeEntityTest extends TestCase {
         super("Make Entity");
     }
 
+    
     @Test
     public void testMakeMinMaxEntity() throws Exception {
+        logger.info("Maker :: Entity - MakeMinMaxEntity");
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityMinMaxTest test = MakeEntity.makeEntity(EntityMinMaxTest.class);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNull("Nulo não nulo", test.getInteiro());
             assertTrue("Valor Integer inesperado",
@@ -79,13 +83,84 @@ public class MakeEntityTest extends TestCase {
         }
     }
 
+      @Test
+    public void testMakeMinEntity() throws Exception {
+          logger.info("Maker :: Entity - MakeMinEntity");
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        for (int i = 0; i < 100; i++) {
+            EntityMinTest test = MakeEntity.makeEntity(EntityMinTest.class);
+            logger.debug(test);
+            assertNotNull("Test é nulo.", test);
+            assertTrue("Valor Integer inesperado",
+                    test.getInteiroObjeto() >= 4);
+            assertTrue("Valor int inesperado",
+                    test.getPrimitivoInt() >= 100);
+            assertTrue("Valor Long inesperado",
+                    test.getLongObjeto() >= -1000000000);
+            assertTrue("Valor long inesperado",
+                    test.getPrimitivoLong() >= 2000000000);
+            assertTrue("Valor Byte inesperado",
+                    test.getByteObjeto() >= 126);
+            assertTrue("Valor byte inesperado",
+                    test.getPrimitivoByte() >= 22);
+            assertTrue("Valor Short inesperado",
+                    test.getShortObjeto() >= 32000);
+            assertTrue("Valor short inesperado",
+                    test.getPrimitivoShort() >= 32050);
+            assertTrue("Valor BigInteger inesperado",
+                    test.getBigInteger().longValue() >= 320500000);
+            assertTrue("Valor BigDecimal inesperado",
+                    test.getBigDecimal().doubleValue() >= 1);
+            assertTrue("Valor Integer Negativo inesperado",
+                    test.getInteiroNegativoObjeto() >= -2);
+            validarJSR303(validator, test);
+        }
+    }
+    
+    @Test
+    public void testMakeMaxEntity() throws Exception {
+        logger.info("Maker :: Entity - MakeMaxEntity");
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        for (int i = 0; i < 100; i++) {
+            EntityMaxTest test = MakeEntity.makeEntity(EntityMaxTest.class);
+            logger.debug(test);
+            assertNotNull("Test é nulo.", test);
+            assertTrue("Valor Integer inesperado",
+                    test.getInteiroObjeto() <= 4);
+            assertTrue("Valor int inesperado",
+                    test.getPrimitivoInt() <= 100);
+            assertTrue("Valor Long inesperado",
+                    test.getLongObjeto() <= -1000000000);
+            assertTrue("Valor long inesperado",
+                    test.getPrimitivoLong() <= 2000000000);
+            assertTrue("Valor Byte inesperado",
+                    test.getByteObjeto() <= 126);
+            assertTrue("Valor byte inesperado",
+                    test.getPrimitivoByte() <= 22);
+            assertTrue("Valor Short inesperado",
+                    test.getShortObjeto() <= 32000);
+            assertTrue("Valor short inesperado",
+                    test.getPrimitivoShort() <= 32050);
+            assertTrue("Valor BigInteger inesperado",
+                    test.getBigInteger().longValue() <= 320500000);
+            assertTrue("Valor BigDecimal inesperado",
+                    test.getBigDecimal().doubleValue() <= 1);
+            assertTrue("Valor Integer Negativo inesperado",
+                    test.getInteiroNegativoObjeto() <= -2);
+            validarJSR303(validator, test);
+        }
+    }
+
     @Test
     public void testMakeNotNullEntity() throws Exception {
+        logger.info("Maker :: Entity - MakeNotNullEntity");
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityNotNullTest test = MakeEntity.makeEntity(EntityNotNullTest.class);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNull("Nulo não nulo", test.getInteiro());
             assertNotNull("inteiroObjeto é nulo.", test.getInteiroObjeto());

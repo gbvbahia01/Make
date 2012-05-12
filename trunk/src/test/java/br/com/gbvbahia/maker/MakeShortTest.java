@@ -26,6 +26,7 @@ public class MakeShortTest extends TestCase {
      */
     @Test
     public void testGetIntervalo() {
+        logger.info("Maker :: Short - GetIntervalo");
         for (short min = 32666; min < Short.MAX_VALUE; min++) {
             for (short max = (short) (min + 1); max < Short.MAX_VALUE; max++) {
                 Short result = MakeShort.getIntervalo(min, max);
@@ -45,6 +46,7 @@ public class MakeShortTest extends TestCase {
      */
     @Test
     public void testGetMax() {
+        logger.info("Maker :: Short - GetMax");
         for (short i = 32666; i < Short.MAX_VALUE; i++) {
             Short result = MakeShort.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
