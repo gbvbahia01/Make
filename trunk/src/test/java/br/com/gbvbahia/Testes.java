@@ -5,9 +5,7 @@
 package br.com.gbvbahia;
 
 import br.com.gbvbahia.i18n.I18NTest;
-import br.com.gbvbahia.maker.MakeEntityTest;
-import br.com.gbvbahia.maker.MakeIntegerTest;
-import br.com.gbvbahia.maker.MakeStringTest;
+import br.com.gbvbahia.maker.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -18,7 +16,10 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
     I18NTest.class,
+    MakeByteTest.class,
+    MakeShortTest.class,
     MakeIntegerTest.class,
+    MakeLongTest.class,
     MakeStringTest.class,
     MakeEntityTest.class
 })
