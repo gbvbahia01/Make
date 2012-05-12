@@ -13,12 +13,12 @@ import org.junit.Test;
  *
  * @author Guilherme
  */
-public class MakeIntegerTest extends TestCase {
+public class MakeDoubleTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeIntegerTest");
+    private Log logger = LogFactory.getLog("MakeDoubleTest");
 
-    public MakeIntegerTest() {
-        super("Maker :: Integer");
+    public MakeDoubleTest() {
+        super("Maker :: Double");
     }
 
     /**
@@ -26,9 +26,9 @@ public class MakeIntegerTest extends TestCase {
      */
     @Test
     public void testGetIntervalo() {
-        for (int min = 1; min < 100; min++) {
-            for (int max = min + 1; max < 200; max++) {
-                Integer result = MakeInteger.getIntervalo(min, max);
+        for (double min = 10.1; min < 20.1; min++) {
+            for (double max = min + 0.1; max < 20.1; max += 0.1) {
+                Double result = MakeDouble.getIntervalo(min, max);
                 logger.debug("Max: " + max
                         + " Min:" + min
                         + " Result:" + result);
@@ -45,12 +45,12 @@ public class MakeIntegerTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        for (int i = 1; i < 100; i++) {
-            Integer result = MakeInteger.getMax(i);
+        for (double i = 1000000000.11111; i <= 1000000020.22; i += 0.1) {
+            Double result = MakeDouble.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
             assertTrue("Intervalo incorreta", result <= i);
         }
-        Integer result2 = MakeInteger.getMax(1);
+        Double result2 = MakeDouble.getMax(1l);
         logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }

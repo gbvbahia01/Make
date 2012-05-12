@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
     MakeShortTest.class,
     MakeIntegerTest.class,
     MakeLongTest.class,
+    MakeDoubleTest.class,
     MakeStringTest.class,
     MakeEntityTest.class
 })

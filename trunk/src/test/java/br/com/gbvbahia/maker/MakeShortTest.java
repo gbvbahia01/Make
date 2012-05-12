@@ -16,7 +16,7 @@ import org.junit.Test;
 public class MakeShortTest extends TestCase {
 
     private Log logger = LogFactory.getLog("MakeShortTest");
-    
+
     public MakeShortTest() {
         super("Maker :: Short");
     }
@@ -29,8 +29,8 @@ public class MakeShortTest extends TestCase {
         for (short min = 32666; min < Short.MAX_VALUE; min++) {
             for (short max = (short) (min + 1); max < Short.MAX_VALUE; max++) {
                 Short result = MakeShort.getIntervalo(min, max);
-                logger.debug("Max: " + max 
-                        + " Min:" + min 
+                logger.debug("Max: " + max
+                        + " Min:" + min
                         + " Result:" + result);
                 assertTrue("Intervalo incorreto: Max: " + max
                         + " Min:" + min + " Result: " + result,
@@ -48,9 +48,10 @@ public class MakeShortTest extends TestCase {
         for (short i = 32666; i < Short.MAX_VALUE; i++) {
             Short result = MakeShort.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
-            assertTrue(result <= i);
-            assertTrue("Intervalo incorreta", result < i);
+            assertTrue("Intervalo incorreta", result <= i);
         }
-
+        Short result2 = MakeShort.getMax(new Short("1"));
+        logger.debug("Max: 1 Result: " + result2);
+        assertTrue("Teste minimo incorreto", result2 <= 1);
     }
 }
