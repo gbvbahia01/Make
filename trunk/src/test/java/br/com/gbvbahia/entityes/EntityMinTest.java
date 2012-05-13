@@ -18,38 +18,41 @@ public class EntityMinTest {
 
     @NotNull
     @Min(4)
-    public Integer inteiroObjeto;
+    private Integer inteiroObjeto;
     @NotNull
     @Min(-2)
-    public Integer inteiroNegativoObjeto;
+    private Integer inteiroNegativoObjeto;
     @NotNull
     @Min(100)
-    public int primitivoInt;
+    private int primitivoInt;
     @NotNull
     @Min(-1000000000)
-    public Long longObjeto;
+    private Long longObjeto;
     @NotNull
     @Min(2000000000)
-    public long primitivoLong;
+    private long primitivoLong;
     @NotNull
     @Min(126)
-    public Byte byteObjeto;
+    private Byte byteObjeto;
     @NotNull
     @Min(22)
-    public byte primitivoByte;
+    private byte primitivoByte;
     @NotNull
     @Min(32000)
-    public Short shortObjeto;
+    private Short shortObjeto;
     @NotNull
     @Min(32050)
-    public short primitivoShort;
+    private short primitivoShort;
     @NotNull
     @Min(320500000)
-    public BigInteger bigInteger;
+    private BigInteger bigInteger;
     @NotNull
     @Min(1)
-    public BigDecimal bigDecimal;
-
+    private BigDecimal bigDecimal;
+    @Min(10)
+    @NotNull
+    private String string;
+    
     public int getPrimitivoInt() {
         return primitivoInt;
     }
@@ -138,10 +141,27 @@ public class EntityMinTest {
         this.inteiroNegativoObjeto = inteiroNegativoObjeto;
     }
 
-    @Override
-    public String toString() {
-        return "EntityMinTest{" + "inteiroObjeto=" + inteiroObjeto + ", inteiroNegativoObjeto=" + inteiroNegativoObjeto + ", primitivoInt=" + primitivoInt + ", longObjeto=" + longObjeto + ", primitivoLong=" + primitivoLong + ", byteObjeto=" + byteObjeto + ", primitivoByte=" + primitivoByte + ", shortObjeto=" + shortObjeto + ", primitivoShort=" + primitivoShort + ", bigInteger=" + bigInteger + ", bigDecimal=" + bigDecimal + '}';
+    public String getString() {
+        return string;
     }
 
+    public void setString(String string) {
+        this.string = string;
+    }
 
+    @Override
+    public String toString() {
+        return "EntityMinTest{" + "inteiroObjeto=" + inteiroObjeto 
+                + ", inteiroNegativoObjeto=" + inteiroNegativoObjeto
+                + ", primitivoInt=" + primitivoInt 
+                + ", longObjeto=" + longObjeto 
+                + ", primitivoLong=" + primitivoLong 
+                + ", byteObjeto=" + byteObjeto 
+                + ", primitivoByte=" + primitivoByte 
+                + ", shortObjeto=" + shortObjeto 
+                + ", primitivoShort=" + primitivoShort 
+                + ", bigInteger=" + bigInteger 
+                + ", bigDecimal=" + bigDecimal 
+                + ", string=" + string + '}';
+    }
 }
