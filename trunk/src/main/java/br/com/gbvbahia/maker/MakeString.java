@@ -5,7 +5,6 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
-import java.util.Random;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -17,6 +16,17 @@ import org.apache.commons.lang3.StringUtils;
 public final class MakeString {
 
     /**
+     * Quantidade máxima de caracteres quando não informado pelo
+     * desenvolvedor.
+     */
+    public static final int MAX_LENGTH_DEFAULT = 255;
+    /**
+     * Quantidade minina de caracteres quando não informado pelo
+     * desenvolvedor.
+     */
+    public static final int MIN_LENGTH_DEFAULT = 1;
+
+    /**
      * Gera uma String no tamanho limitado solicidato. Alterando de
      * Upper para Lower case entre as letras.
      *
@@ -25,6 +35,11 @@ public final class MakeString {
      * @return A sring no tamanho solicitado.
      */
     public static String getString(final int min, final int max) {
+        if (min < 1) {
+            throw new IllegalArgumentException(
+                    I18N.getMsg("caractereToStringErro",
+                    new Integer(min)));
+        }
         int numero = MakeInteger.getIntervalo(min, max);
         return getString(numero);
     }
@@ -39,6 +54,11 @@ public final class MakeString {
      * <code>(!,#,@,&,$)</code>
      */
     public static String gerarSenha(final int min, final int max) {
+        if (min < 1) {
+            throw new IllegalArgumentException(
+                    I18N.getMsg("caractereToStringErro",
+                    new Integer(min)));
+        }
         int numero = MakeInteger.getIntervalo(min, max);
         return gerarSenha(numero);
     }
@@ -51,6 +71,11 @@ public final class MakeString {
      * @return A sring no tamanho solicitado.
      */
     public static String getString(final int caracteres) {
+        if (caracteres < 1) {
+            throw new IllegalArgumentException(
+                    I18N.getMsg("caractereToStringErro",
+                    new Integer(caracteres)));
+        }
         StringBuilder sb = new StringBuilder();
         String[] mai = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
             "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
@@ -75,7 +100,8 @@ public final class MakeString {
     public static String gerarSenha(final int caracteres) {
         if (caracteres <= 0) {
             throw new IllegalArgumentException(
-                    I18N.getMsg("caracteresMaxErro"));
+                    I18N.getMsg("caractereToStringErro",
+                    new Integer(caracteres)));
         }
         String toReturn = "";
         for (int i = 0; i < caracteres; i++) {
@@ -95,7 +121,8 @@ public final class MakeString {
 
     /**
      * Gera um e-mail válido aleatoriamente. O texto após @ é fixo em
-     * algumas possibilidades. <code>{"@hotmail.com", "@gmail.com",
+     * algumas possibilidades.
+     * <code>{"@hotmail.com", "@gmail.com",
      * "@yahoo.com", "@bol.com.br", "@globo.com", "@nikko.jp",
      * "@uol.com.br"};</code>
      *
@@ -108,7 +135,8 @@ public final class MakeString {
         int tamanho = MakeInteger.getIntervalo(3, 8);
         String ini = MakeString.getString(tamanho);
         int emailFim = MakeInteger.getMax(emails.length);
-        return StringUtils.replace(StringUtils.lowerCase(ini), " ", "") + emails[emailFim];
+        return StringUtils.replace(StringUtils.lowerCase(ini),
+                " ", "") + emails[emailFim];
     }
 
     /**
