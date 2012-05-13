@@ -14,20 +14,22 @@ import javax.validation.constraints.NotNull;
  */
 public class EntityNotNullTest {
 
-    public Integer inteiro;
+    private Integer inteiro;
     @NotNull
-    public Integer inteiroObjeto;
+    private Integer inteiroObjeto;
     @NotNull
-    public Long longObjeto;
+    private Long longObjeto;
     @NotNull
-    public Byte byteObjeto;
+    private Byte byteObjeto;
     @NotNull
-    public Short shortObjeto;
+    private Short shortObjeto;
     @NotNull
-    public BigInteger bigInteger;
+    private BigInteger bigInteger;
     @NotNull
-    public BigDecimal bigDecimal;
-
+    private BigDecimal bigDecimal;
+    @NotNull
+    private String string;
+    
     public Integer getInteiro() {
         return inteiro;
     }
@@ -84,8 +86,25 @@ public class EntityNotNullTest {
         this.bigDecimal = bigDecimal;
     }
 
+    public String getString() {
+        return string;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
+
     @Override
     public String toString() {
-        return "EntityNotNullTest{" + "inteiro=" + inteiro + ", inteiroObjeto=" + inteiroObjeto + ", longObjeto=" + longObjeto + ", byteObjeto=" + byteObjeto + ", shortObjeto=" + shortObjeto + ", bigInteger=" + bigInteger + ", bigDecimal=" + bigDecimal + '}';
+        return "EntityNotNullTest{" + "inteiro=" + inteiro 
+                + ", inteiroObjeto=" + inteiroObjeto 
+                + ", longObjeto=" + longObjeto 
+                + ", byteObjeto=" + byteObjeto 
+                + ", shortObjeto=" + shortObjeto 
+                + ", bigInteger=" + bigInteger 
+                + ", bigDecimal=" + bigDecimal 
+                + ", string=" + string + '}';
     }
+
+
 }

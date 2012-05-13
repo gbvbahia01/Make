@@ -16,52 +16,54 @@ import javax.validation.constraints.NotNull;
  */
 public class EntityMinMaxTest {
 
-    public Integer inteiro;
+    private Integer inteiro;
     @NotNull
     @Min(3)
     @Max(4)
-    public Integer inteiroObjeto;
+    private Integer inteiroObjeto;
     @NotNull
     @Min(-3)
     @Max(-2)
-    public Integer inteiroNegativoObjeto;
+    private Integer inteiroNegativoObjeto;
     @NotNull
     @Min(0)
     @Max(100)
-    public int primitivoInt;
+    private int primitivoInt;
     @NotNull
     @Min(-2000000000)
     @Max(-1000000000)
-    public Long longObjeto;
+    private Long longObjeto;
     @NotNull
     @Min(1000000000)
     @Max(2000000000)
-    public long primitivoLong;
+    private long primitivoLong;
     @NotNull
     @Min(50)
     @Max(126)
-    public Byte byteObjeto;
+    private Byte byteObjeto;
     @NotNull
     @Min(11)
     @Max(22)
-    public byte primitivoByte;
+    private byte primitivoByte;
     @NotNull
     @Min(30000)
     @Max(32000)
-    public Short shortObjeto;
+    private Short shortObjeto;
     @NotNull
     @Min(32000)
     @Max(32050)
-    public short primitivoShort;
+    private short primitivoShort;
     @NotNull
     @Min(300000000)
     @Max(320500000)
-    public BigInteger bigInteger;
+    private BigInteger bigInteger;
     @NotNull
     @Min(0)
     @Max(1)
-    public BigDecimal bigDecimal;
+    private BigDecimal bigDecimal;
 
+    
+    
     public Integer getInteiro() {
         return inteiro;
     }
