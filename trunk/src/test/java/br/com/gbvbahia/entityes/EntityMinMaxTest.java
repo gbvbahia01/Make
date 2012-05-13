@@ -1,11 +1,14 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package br.com.gbvbahia.entityes;
 
+//~--- JDK imports ------------------------------------------------------------
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -16,54 +19,56 @@ import javax.validation.constraints.NotNull;
  */
 public class EntityMinMaxTest {
 
-    private Integer inteiro;
-    @NotNull
-    @Min(3)
-    @Max(4)
-    private Integer inteiroObjeto;
-    @NotNull
-    @Min(-3)
-    @Max(-2)
-    private Integer inteiroNegativoObjeto;
     @NotNull
     @Min(0)
-    @Max(100)
-    private int primitivoInt;
-    @NotNull
-    @Min(-2000000000)
-    @Max(-1000000000)
-    private Long longObjeto;
-    @NotNull
-    @Min(1000000000)
-    @Max(2000000000)
-    private long primitivoLong;
-    @NotNull
-    @Min(50)
-    @Max(126)
-    private Byte byteObjeto;
-    @NotNull
-    @Min(11)
-    @Max(22)
-    private byte primitivoByte;
-    @NotNull
-    @Min(30000)
-    @Max(32000)
-    private Short shortObjeto;
-    @NotNull
-    @Min(32000)
-    @Max(32050)
-    private short primitivoShort;
+    @Max(1)
+    private BigDecimal bigDecimal;
     @NotNull
     @Min(300000000)
     @Max(320500000)
     private BigInteger bigInteger;
     @NotNull
+    @Min(50)
+    @Max(126)
+    private Byte byteObjeto;
+    private Integer inteiro;
+    @NotNull
+    @Min(-3)
+    @Max(-2)
+    private Integer inteiroNegativoObjeto;
+    @NotNull
+    @Min(3)
+    @Max(4)
+    private Integer inteiroObjeto;
+    @NotNull
+    @Min(-2000000000)
+    @Max(-1000000000)
+    private Long longObjeto;
+    @NotNull
+    @Min(11)
+    @Max(22)
+    private byte primitivoByte;
+    @NotNull
     @Min(0)
-    @Max(1)
-    private BigDecimal bigDecimal;
+    @Max(100)
+    private int primitivoInt;
+    @NotNull
+    @Min(1000000000)
+    @Max(2000000000)
+    private long primitivoLong;
+    @NotNull
+    @Min(32000)
+    @Max(32050)
+    private short primitivoShort;
+    @NotNull
+    @Min(30000)
+    @Max(32000)
+    private Short shortObjeto;
+    @Max(10)
+    @Min(5)
+    @NotNull
+    private String string;
 
-    
-    
     public Integer getInteiro() {
         return inteiro;
     }
@@ -160,8 +165,28 @@ public class EntityMinMaxTest {
         this.inteiroNegativoObjeto = inteiroNegativoObjeto;
     }
 
+    public String getString() {
+        return string;
+    }
+
+    public void setString(String string) {
+        this.string = string;
+    }
+
     @Override
     public String toString() {
-        return "EntityMinMaxTest{" + "inteiro=" + inteiro + ", inteiroObjeto=" + inteiroObjeto + ", inteiroNegativoObjeto=" + inteiroNegativoObjeto + ", primitivoInt=" + primitivoInt + ", longObjeto=" + longObjeto + ", primitivoLong=" + primitivoLong + ", byteObjeto=" + byteObjeto + ", primitivoByte=" + primitivoByte + ", shortObjeto=" + shortObjeto + ", primitivoShort=" + primitivoShort + ", bigInteger=" + bigInteger + ", bigDecimal=" + bigDecimal + '}';
+        return "EntityMinMaxTest{" + "inteiro=" + inteiro
+                + ", inteiroObjeto=" + inteiroObjeto
+                + ", inteiroNegativoObjeto=" + inteiroNegativoObjeto
+                + ", primitivoInt=" + primitivoInt
+                + ", longObjeto=" + longObjeto + ", primitivoLong="
+                + primitivoLong + ", byteObjeto=" + byteObjeto
+                + ", primitivoByte=" + primitivoByte
+                + ", shortObjeto=" + shortObjeto
+                + ", primitivoShort="
+                + primitivoShort + ", bigInteger="
+                + bigInteger + ", bigDecimal="
+                + bigDecimal + ", string=" + string
+                + '}';
     }
 }

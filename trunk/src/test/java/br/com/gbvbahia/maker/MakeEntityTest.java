@@ -30,7 +30,6 @@ public class MakeEntityTest extends TestCase {
         super("Make Entity");
     }
 
-    
     @Test
     public void testMakeMinMaxEntity() throws Exception {
         logger.info("Maker :: Entity - MakeMinMaxEntity");
@@ -79,13 +78,16 @@ public class MakeEntityTest extends TestCase {
             assertTrue("Valor Integer Negativo inesperado",
                     test.getInteiroNegativoObjeto() >= -3
                     && test.getInteiroNegativoObjeto() <= -2);
+            assertTrue("Valor String inesperado",
+                    new Long(test.getString()) <= 10
+                    && new Long(test.getString()) >= 5);
             validarJSR303(validator, test);
         }
     }
 
-      @Test
+    @Test
     public void testMakeMinEntity() throws Exception {
-          logger.info("Maker :: Entity - MakeMinEntity");
+        logger.info("Maker :: Entity - MakeMinEntity");
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
@@ -114,10 +116,12 @@ public class MakeEntityTest extends TestCase {
                     test.getBigDecimal().doubleValue() >= 1);
             assertTrue("Valor Integer Negativo inesperado",
                     test.getInteiroNegativoObjeto() >= -2);
+            assertTrue("Valor String inesperado",
+                    new Long(test.getString()) >= 10);
             validarJSR303(validator, test);
         }
     }
-    
+
     @Test
     public void testMakeMaxEntity() throws Exception {
         logger.info("Maker :: Entity - MakeMaxEntity");
@@ -149,6 +153,8 @@ public class MakeEntityTest extends TestCase {
                     test.getBigDecimal().doubleValue() <= 1);
             assertTrue("Valor Integer Negativo inesperado",
                     test.getInteiroNegativoObjeto() <= -2);
+            assertTrue("Valor String inesperado",
+                    new Long(test.getString()) <= 10);
             validarJSR303(validator, test);
         }
     }
@@ -169,6 +175,7 @@ public class MakeEntityTest extends TestCase {
             assertNotNull("shortObjeto é nulo.", test.getShortObjeto());
             assertNotNull("bigInteger é nulo.", test.getBigInteger());
             assertNotNull("bigDecimal é nulo.", test.getBigDecimal());
+            assertNotNull("String nula", test.getString());
             validarJSR303(validator, test);
         }
     }

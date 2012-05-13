@@ -28,11 +28,14 @@ public class MakeEntity {
                 logger.debug("GenericType: " + f.getGenericType().toString());
                 logger.debug("Type: " + f.getType().toString());
                 boolean accessField = f.isAccessible();
-                f.setAccessible(true);
-                if (f.isAnnotationPresent(NotNull.class)) {
-                    insertValue(f, toReturn);
+                try {
+                    f.setAccessible(true);
+                    if (f.isAnnotationPresent(NotNull.class)) {
+                        insertValue(f, toReturn);
+                    }
+                } finally {
+                    f.setAccessible(accessField);
                 }
-                f.setAccessible(accessField);
             }
             return toReturn;
         } catch (InstantiationException ex) {
@@ -81,6 +84,8 @@ public class MakeEntity {
             f.set(toReturn, valueToBigInteger(f));
         } else if (f.getType().equals(BigDecimal.class)) {
             f.set(toReturn, valueToBigDecimal(f));
+        } else if (f.getType().equals(String.class)) {
+            f.set(toReturn, valueToString(f));
         }
     }
 
@@ -98,6 +103,14 @@ public class MakeEntity {
         long min = minMax[0];
         long max = minMax[1];
         return MakeLong.getIntervalo(min, max);
+    }
+
+    private static String valueToString(Field f) {
+        Long[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
+                Long.MAX_VALUE);
+        long min = minMax[0];
+        long max = minMax[1];
+        return MakeLong.getIntervalo(min, max).toString();
     }
 
     private static BigInteger valueToBigInteger(Field f) {
