@@ -12,6 +12,7 @@ import java.math.BigInteger;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 /**
  *
@@ -31,6 +32,7 @@ public class EntityMinMaxTest {
     @Min(50)
     @Max(126)
     private Byte byteObjeto;
+    @Null
     private Integer inteiro;
     @NotNull
     @Min(-3)

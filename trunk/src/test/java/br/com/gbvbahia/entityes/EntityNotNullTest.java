@@ -7,6 +7,7 @@ package br.com.gbvbahia.entityes;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 /**
  *
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
  */
 public class EntityNotNullTest {
 
+    @Null
     private Integer inteiro;
     @NotNull
     private Integer inteiroObjeto;
