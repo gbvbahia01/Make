@@ -4,10 +4,7 @@
  */
 package br.com.gbvbahia.maker;
 
-import br.com.gbvbahia.entityes.EntityMaxTest;
-import br.com.gbvbahia.entityes.EntityMinMaxTest;
-import br.com.gbvbahia.entityes.EntityMinTest;
-import br.com.gbvbahia.entityes.EntityNotNullTest;
+import br.com.gbvbahia.entityes.*;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -28,6 +25,25 @@ public class MakeEntityTest extends TestCase {
 
     public MakeEntityTest() {
         super("Make Entity");
+    }
+
+    @Test
+    public void testMakeBoolaenEntity() throws Exception {
+        logger.info("Maker :: Entity - MakeBoolaenEntity");
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        EntityBooleanTest test = MakeEntity.makeEntity(EntityBooleanTest.class);
+        logger.debug(test);
+        assertNotNull("Test é nulo.", test);
+        assertTrue("BooleanObjectTrue nao true",
+                test.getBooleanObjectTrue());
+        assertTrue("BooleanPrimitiveTrue nao true",
+                test.getBooleanPrimitiveTrue());
+        assertFalse("BooleanObjectFalse nao false",
+                test.getBooleanObjectFalse());
+        assertFalse("BooleanPrimitiveFalse nao false",
+                test.getBooleanPrimitiveFalse());
+        validarJSR303(validator, test);
     }
 
     @Test

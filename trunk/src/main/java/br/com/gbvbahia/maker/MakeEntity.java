@@ -94,7 +94,21 @@ public class MakeEntity {
             f.set(toReturn, valueToBigDecimal(f));
         } else if (f.getType().equals(String.class)) {
             f.set(toReturn, valueToString(f));
+        } else if (f.getType().equals(Boolean.class)) {
+            f.set(toReturn, valueToBoolean(f));
+        } else if (f.getType().equals(boolean.class)) {
+            f.set(toReturn, valueToBoolean(f).booleanValue());
         }
+    }
+
+    private static Boolean valueToBoolean(Field f) {
+        if (f.isAnnotationPresent(AssertTrue.class)) {
+            return true;
+        }
+        if (f.isAnnotationPresent(AssertFalse.class)) {
+            return false;
+        }
+        return MakeInteger.getMax(2) == 2;
     }
 
     private static Integer valueToInteger(Field f) {
