@@ -43,6 +43,8 @@ public class MakeEntityTest extends TestCase {
                 test.getBooleanObjectFalse());
         assertFalse("BooleanPrimitiveFalse nao false",
                 test.getBooleanPrimitiveFalse());
+        assertNotNull("booleanTrueOrFalse nulo",
+                test.getBooleanTrueOrFalse());
         validarJSR303(validator, test);
     }
 

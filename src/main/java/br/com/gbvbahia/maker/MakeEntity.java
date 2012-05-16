@@ -25,14 +25,17 @@ public class MakeEntity {
         try {
             T toReturn = entity.newInstance();
             for (Field f : toReturn.getClass().getDeclaredFields()) {
-                logger.debug("GenericType: " + f.getGenericType().toString());
                 logger.debug("Type: " + f.getType().toString());
                 boolean accessField = f.isAccessible();
                 try {
                     f.setAccessible(true);
-                    if (f.isAnnotationPresent(NotNull.class)) {
+                    if (!f.isAnnotationPresent(Null.class)) {
                         insertValue(f, toReturn);
                     }
+                    logger.debug("GenericString: "
+                            + f.toGenericString()
+                            + " value: "
+                            + f.get(toReturn));
                 } finally {
                     f.setAccessible(accessField);
                 }

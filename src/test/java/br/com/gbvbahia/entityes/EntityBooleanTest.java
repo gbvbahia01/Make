@@ -26,6 +26,8 @@ public class EntityBooleanTest {
     @AssertTrue
     @NotNull
     private Boolean booleanPrimitiveTrue;
+    @NotNull
+    private Boolean booleanTrueOrFalse;
 
     public Boolean getBooleanObjectFalse() {
         return booleanObjectFalse;
@@ -59,6 +61,14 @@ public class EntityBooleanTest {
         this.booleanPrimitiveTrue = booleanPrimitiveTrue;
     }
 
+    public Boolean getBooleanTrueOrFalse() {
+        return booleanTrueOrFalse;
+    }
+
+    public void setBooleanTrueOrFalse(Boolean booleanTrueOrFalse) {
+        this.booleanTrueOrFalse = booleanTrueOrFalse;
+    }
+
     @Override
     public String toString() {
         return "EntityBooleanTest{"
@@ -66,6 +76,7 @@ public class EntityBooleanTest {
                 + ", booleanObjectTrue=" + booleanObjectTrue
                 + ", booleanPrimitiveFalse=" + booleanPrimitiveFalse
                 + ", booleanPrimitiveTrue=" + booleanPrimitiveTrue
+                + ", booleanTrueOrFalse=" + booleanTrueOrFalse
                 + '}';
     }
 }
