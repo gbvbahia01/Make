@@ -20,10 +20,10 @@ import org.junit.runners.Suite;
     MakeShortTest.class,
     MakeIntegerTest.class,
     MakeLongTest.class,
+    MakeFloatTest.class,
     MakeDoubleTest.class,
     MakeStringTest.class,
     MakeEntityTest.class
 })
 public class Testes {
-    
 }

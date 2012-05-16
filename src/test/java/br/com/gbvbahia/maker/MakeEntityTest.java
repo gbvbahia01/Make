@@ -81,6 +81,18 @@ public class MakeEntityTest extends TestCase {
             assertTrue("Valor String inesperado",
                     new Long(test.getString()) <= 10
                     && new Long(test.getString()) >= 5);
+            assertTrue("Valor doubleObjeto inesperado",
+                    test.getDoubleObjeto() <= 10
+                    && test.getDoubleObjeto() >= -50);
+            assertTrue("Valor primitivoDouble inesperado",
+                    test.getPrimitivoDouble() >= 512
+                    && test.getPrimitivoDouble() <= 515);
+            assertTrue("Valor floatObjeto inesperado",
+                    test.getFloatObjeto() >= 5000
+                    || test.getFloatObjeto() <= 5150);
+            assertTrue("Valor primitivoFloat inesperado",
+                    test.getPrimitivoFloat() >= 1
+                    || test.getPrimitivoFloat() <= 3);
             validarJSR303(validator, test);
         }
     }
@@ -118,6 +130,14 @@ public class MakeEntityTest extends TestCase {
                     test.getInteiroNegativoObjeto() >= -2);
             assertTrue("Valor String inesperado",
                     new Long(test.getString()) >= 10);
+            assertTrue("Valor doubleObjeto inesperado",
+                    test.getDoubleObjeto() >= -500);
+            assertTrue("Valor primitivoDouble inesperado",
+                    test.getPrimitivoDouble() >= 512);
+            assertTrue("Valor floatObjeto inesperado",
+                    test.getFloatObjeto() >= 5000);
+            assertTrue("Valor primitivoFloat inesperado",
+                    test.getPrimitivoFloat() >= 1);
             validarJSR303(validator, test);
         }
     }
@@ -155,6 +175,14 @@ public class MakeEntityTest extends TestCase {
                     test.getInteiroNegativoObjeto() <= -2);
             assertTrue("Valor String inesperado",
                     new Long(test.getString()) <= 10);
+            assertTrue("Valor doubleObjeto inesperado",
+                    test.getDoubleObjeto() <= -10);
+            assertTrue("Valor primitivoDouble inesperado",
+                    test.getPrimitivoDouble() <= -15);
+            assertTrue("Valor floatObjeto inesperado",
+                    test.getFloatObjeto() <= 5000);
+            assertTrue("Valor primitivoFloat inesperado",
+                    test.getPrimitivoFloat() <= 1);
             validarJSR303(validator, test);
         }
     }
@@ -176,6 +204,8 @@ public class MakeEntityTest extends TestCase {
             assertNotNull("bigInteger é nulo.", test.getBigInteger());
             assertNotNull("bigDecimal é nulo.", test.getBigDecimal());
             assertNotNull("String nula", test.getString());
+            assertNotNull("doubleObjeto é nulo", test.getDoubleObjeto());
+            assertNotNull("floatObjeto é nulo", test.getFloatObjeto());
             validarJSR303(validator, test);
         }
     }
