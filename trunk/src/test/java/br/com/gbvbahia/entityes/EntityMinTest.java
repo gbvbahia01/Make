@@ -52,7 +52,19 @@ public class EntityMinTest {
     @Min(10)
     @NotNull
     private String string;
-    
+    @Min(-500)
+    @NotNull
+    private Double doubleObjeto;
+    @Min(512)
+    @NotNull
+    private double primitivoDouble;
+    @NotNull
+    @Min(5000)
+    private Float floatObjeto;
+    @NotNull
+    @Min(1)
+    private float primitivoFloat;
+
     public int getPrimitivoInt() {
         return primitivoInt;
     }
@@ -149,19 +161,56 @@ public class EntityMinTest {
         this.string = string;
     }
 
+    public Double getDoubleObjeto() {
+        return doubleObjeto;
+    }
+
+    public void setDoubleObjeto(Double doubleObjeto) {
+        this.doubleObjeto = doubleObjeto;
+    }
+
+    public Float getFloatObjeto() {
+        return floatObjeto;
+    }
+
+    public void setFloatObjeto(Float floatObjeto) {
+        this.floatObjeto = floatObjeto;
+    }
+
+    public double getPrimitivoDouble() {
+        return primitivoDouble;
+    }
+
+    public void setPrimitivoDouble(double primitivoDouble) {
+        this.primitivoDouble = primitivoDouble;
+    }
+
+    public float getPrimitivoFloat() {
+        return primitivoFloat;
+    }
+
+    public void setPrimitivoFloat(float primitivoFloat) {
+        this.primitivoFloat = primitivoFloat;
+    }
+
     @Override
     public String toString() {
-        return "EntityMinTest{" + "inteiroObjeto=" + inteiroObjeto 
+        return "EntityMinTest{" + "inteiroObjeto=" + inteiroObjeto
                 + ", inteiroNegativoObjeto=" + inteiroNegativoObjeto
-                + ", primitivoInt=" + primitivoInt 
-                + ", longObjeto=" + longObjeto 
-                + ", primitivoLong=" + primitivoLong 
-                + ", byteObjeto=" + byteObjeto 
-                + ", primitivoByte=" + primitivoByte 
-                + ", shortObjeto=" + shortObjeto 
-                + ", primitivoShort=" + primitivoShort 
-                + ", bigInteger=" + bigInteger 
-                + ", bigDecimal=" + bigDecimal 
-                + ", string=" + string + '}';
+                + ", primitivoInt=" + primitivoInt
+                + ", longObjeto=" + longObjeto
+                + ", primitivoLong=" + primitivoLong
+                + ", byteObjeto=" + byteObjeto
+                + ", primitivoByte=" + primitivoByte
+                + ", shortObjeto=" + shortObjeto
+                + ", primitivoShort=" + primitivoShort
+                + ", bigInteger=" + bigInteger
+                + ", bigDecimal=" + bigDecimal
+                + ", string=" + string
+                + ", doubleObjeto=" + doubleObjeto
+                + ", primitivoDouble=" + primitivoDouble
+                + ", floatObjeto=" + floatObjeto
+                + ", primitivoFloat=" + primitivoFloat
+                + '}';
     }
 }

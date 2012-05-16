@@ -13,7 +13,7 @@ import java.util.Random;
  * @since 11/05/2012
  * @author Guilherme
  */
-public class MakeDouble {
+public class MakeFloat {
 
     /**
      * Gerador de números aleatórios.
@@ -27,13 +27,13 @@ public class MakeDouble {
      * @param max Número máximo aceitavel.
      * @return Número aleatório.
      */
-    public static Double getIntervalo(final double min, final double max) {
+    public static Float getIntervalo(final double min, final double max) {
         if (min > max) {
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
         double ale = r.nextDouble();
-        double numero = min + ( (ale * (max - min)));
+        float numero = (float) (min + ( (ale * (max - min))));
         return numero;
     }
 
@@ -43,7 +43,7 @@ public class MakeDouble {
      * @param max Minimo 1.
      * @return Double limitado ao max.
      */
-    public static Double getMax(final double max) {
+    public static Float getMax(final double max) {
         if (max <= 0) {
             throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
         }

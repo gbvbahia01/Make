@@ -80,6 +80,14 @@ public class MakeEntity {
             f.set(toReturn, valueToShort(f));
         } else if (f.getType().equals(short.class)) {
             f.set(toReturn, valueToShort(f).shortValue());
+        } else if (f.getType().equals(Double.class)) {
+            f.set(toReturn, valueToDouble(f));
+        } else if (f.getType().equals(double.class)) {
+            f.set(toReturn, valueToDouble(f).doubleValue());
+        } else if (f.getType().equals(Float.class)) {
+            f.set(toReturn, valueToFloat(f));
+        } else if (f.getType().equals(float.class)) {
+            f.set(toReturn, valueToFloat(f).floatValue());
         } else if (f.getType().equals(BigInteger.class)) {
             f.set(toReturn, valueToBigInteger(f));
         } else if (f.getType().equals(BigDecimal.class)) {
@@ -129,6 +137,22 @@ public class MakeEntity {
         long max = minMax[1];
         return new BigDecimal(new Double(MakeDouble.getIntervalo(min,
                 max)).toString());
+    }
+
+    private static Double valueToDouble(Field f) {
+        Long[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
+                Long.MAX_VALUE);
+        long min = minMax[0];
+        long max = minMax[1];
+        return MakeDouble.getIntervalo(min, max);
+    }
+
+    private static Float valueToFloat(Field f) {
+        Long[] minMax = getMinMaxLongValues(f, Float.MIN_VALUE,
+                Float.MAX_VALUE);
+        long min = minMax[0];
+        long max = minMax[1];
+        return MakeDouble.getIntervalo(min, max).floatValue();
     }
 
     private static Byte valueToByte(Field f) {

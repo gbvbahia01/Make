@@ -29,6 +29,10 @@ public class EntityNotNullTest {
     private BigDecimal bigDecimal;
     @NotNull
     private String string;
+    @NotNull
+    private Double doubleObjeto;
+    @NotNull
+    private Float floatObjeto;
     
     public Integer getInteiro() {
         return inteiro;
@@ -94,6 +98,22 @@ public class EntityNotNullTest {
         this.string = string;
     }
 
+    public Double getDoubleObjeto() {
+        return doubleObjeto;
+    }
+
+    public void setDoubleObjeto(Double doubleObjeto) {
+        this.doubleObjeto = doubleObjeto;
+    }
+
+    public Float getFloatObjeto() {
+        return floatObjeto;
+    }
+
+    public void setFloatObjeto(Float floatObjeto) {
+        this.floatObjeto = floatObjeto;
+    }
+
     @Override
     public String toString() {
         return "EntityNotNullTest{" + "inteiro=" + inteiro 
@@ -103,6 +123,8 @@ public class EntityNotNullTest {
                 + ", shortObjeto=" + shortObjeto 
                 + ", bigInteger=" + bigInteger 
                 + ", bigDecimal=" + bigDecimal 
+                + ", doubleObjeto=" + doubleObjeto 
+                + ", floatObjeto=" + floatObjeto 
                 + ", string=" + string + '}';
     }
 
