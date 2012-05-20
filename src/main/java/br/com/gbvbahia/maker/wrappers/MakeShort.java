@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker;
+package br.com.gbvbahia.maker.wrappers;
 
 /**
  * @since v.1 11/05/2012

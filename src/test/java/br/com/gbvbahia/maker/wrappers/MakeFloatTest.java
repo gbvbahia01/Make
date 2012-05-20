@@ -2,33 +2,34 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker;
+package br.com.gbvbahia.maker.wrappers;
 
+import br.com.gbvbahia.maker.wrappers.MakeDouble;
+import br.com.gbvbahia.maker.wrappers.MakeFloat;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  *
  * @author Guilherme
  */
-public class MakeDoubleTest extends TestCase {
+public class MakeFloatTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeDoubleTest");
+    private Log logger = LogFactory.getLog("MakeFloatTest");
 
-    public MakeDoubleTest() {
-        super("Maker :: Double");
+    public MakeFloatTest() {
+        super("Maker :: Float");
     }
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Double - GetIntervalo");
-        for (double min = 10.1; min < 20.1; min++) {
-            for (double max = min + 0.1; max < 20.1; max += 0.1) {
+        logger.info("Maker :: Float - GetIntervalo");
+        for (float min = -10.1f; min < 0.1f; min++) {
+            for (float max = min + 0.1f; max < 0.1f; max += 0.1f) {
                 Double result = MakeDouble.getIntervalo(min, max);
                 logger.debug("Max: " + max
                         + " Min:" + min
@@ -46,13 +47,13 @@ public class MakeDoubleTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Double - GetMax");
-        for (double i = 1000000000.11111; i <= 1000000020.22; i += 0.1) {
-            Double result = MakeDouble.getMax(i);
+        logger.info("Maker :: Float - GetMax");
+        for (float i = 1.11111f; i <= 20.22f; i += 0.1f) {
+            Float result = MakeFloat.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
             assertTrue("Intervalo incorreta", result <= i);
         }
-        Double result2 = MakeDouble.getMax(1l);
+        Float result2 = MakeFloat.getMax(1l);
         logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }

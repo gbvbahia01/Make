@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker;
+package br.com.gbvbahia.maker.string;
 
+import br.com.gbvbahia.maker.wrappers.MakeInteger;
 import br.com.gbvbahia.i18n.I18N;
 import org.apache.commons.lang3.StringUtils;
 

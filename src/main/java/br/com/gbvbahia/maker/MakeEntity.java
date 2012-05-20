@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker;
+package br.com.gbvbahia.maker.wrappers;
 
+import br.com.gbvbahia.maker.wrappers.MakeLong;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,22 +14,23 @@ import org.junit.Test;
  *
  * @author Guilherme
  */
-public class MakeFloatTest extends TestCase {
+public class MakeLongTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeFloatTest");
+    private Log logger = LogFactory.getLog("MakeLongTest");
 
-    public MakeFloatTest() {
-        super("Maker :: Float");
+    public MakeLongTest() {
+        super("Maker :: Long");
     }
+
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Float - GetIntervalo");
-        for (float min = -10.1f; min < 0.1f; min++) {
-            for (float max = min + 0.1f; max < 0.1f; max += 0.1f) {
-                Double result = MakeDouble.getIntervalo(min, max);
+        logger.info("Maker :: Long - GetIntervalo");
+        for (long min = 1000000000; min < 1000000100; min++) {
+            for (long max = min + 1; max < 1000000200; max++) {
+                Long result = MakeLong.getIntervalo(min, max);
                 logger.debug("Max: " + max
                         + " Min:" + min
                         + " Result:" + result);
@@ -45,13 +47,13 @@ public class MakeFloatTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Float - GetMax");
-        for (float i = 1.11111f; i <= 20.22f; i += 0.1f) {
-            Float result = MakeFloat.getMax(i);
+        logger.info("Maker :: Long - GetMax");
+        for (int i = 1000000000; i <= 1000000100; i++) {
+            Long result = MakeLong.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
             assertTrue("Intervalo incorreta", result <= i);
         }
-        Float result2 = MakeFloat.getMax(1l);
+        Long result2 = MakeLong.getMax(1l);
         logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }

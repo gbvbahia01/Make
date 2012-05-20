@@ -4,6 +4,13 @@
  */
 package br.com.gbvbahia;
 
+import br.com.gbvbahia.maker.string.MakeStringTest;
+import br.com.gbvbahia.maker.wrappers.MakeIntegerTest;
+import br.com.gbvbahia.maker.wrappers.MakeDoubleTest;
+import br.com.gbvbahia.maker.wrappers.MakeFloatTest;
+import br.com.gbvbahia.maker.wrappers.MakeByteTest;
+import br.com.gbvbahia.maker.wrappers.MakeShortTest;
+import br.com.gbvbahia.maker.wrappers.MakeLongTest;
 import br.com.gbvbahia.i18n.I18NTest;
 import br.com.gbvbahia.maker.*;
 import org.junit.runner.RunWith;

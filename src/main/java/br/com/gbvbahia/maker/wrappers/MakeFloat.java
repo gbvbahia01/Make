@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker;
+package br.com.gbvbahia.maker.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
-import java.math.BigInteger;
 import java.util.Random;
 
 /**
@@ -14,7 +13,7 @@ import java.util.Random;
  * @since 11/05/2012
  * @author Guilherme
  */
-public class MakeLong {
+public class MakeFloat {
 
     /**
      * Gerador de números aleatórios.
@@ -28,32 +27,27 @@ public class MakeLong {
      * @param max Número máximo aceitavel.
      * @return Número aleatório.
      */
-    public static Long getIntervalo(final long min, final long max) {
+    public static Float getIntervalo(final double min, final double max) {
         if (min > max) {
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
-        if (min == max) {
-            return min;
-        }
         double ale = r.nextDouble();
-        long numero = min + new BigInteger(new Long((long) (ale * (max - min))).toString()).abs().longValue();
+        float numero = (float) (min + ( (ale * (max - min))));
         return numero;
     }
 
     /**
-     * Retorna um número aleatório limitado ao max passado. Este
-     * método embora receba long como parámetro trabalha com Inteiro e
-     * o maior número a retornar será o Integer.MAX_VALUE.
-     *
+     * Retorna um número aleatório limitado ao max passado.
+
      * @param max Minimo 1.
-     * @return Long limitado ao max.
+     * @return Double limitado ao max.
      */
-    public static Long getMax(final long max) {
+    public static Float getMax(final double max) {
         if (max <= 0) {
             throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
         }
-
-        return getIntervalo(1, max);
+        
+        return getIntervalo(0, max);
     }
 }
