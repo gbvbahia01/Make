@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.string.MakeCharacter;
 import br.com.gbvbahia.maker.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -92,6 +93,10 @@ public class MakeEntity {
             f.set(toReturn, valueToFloat(f));
         } else if (f.getType().equals(float.class)) {
             f.set(toReturn, valueToFloat(f).floatValue());
+        } else if (f.getType().equals(Character.class)) {
+            f.set(toReturn, MakeCharacter.getCharacter());
+        } else if(f.getType().equals(char.class)){
+            f.set(toReturn, MakeCharacter.getCharacter().charValue());
         } else if (f.getType().equals(BigInteger.class)) {
             f.set(toReturn, valueToBigInteger(f));
         } else if (f.getType().equals(BigDecimal.class)) {
