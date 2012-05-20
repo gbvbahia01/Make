@@ -212,7 +212,7 @@ public class MakeEntityTest extends TestCase {
         Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityNotNullTest test = MakeEntity.makeEntity(EntityNotNullTest.class);
-            logger.debug(test);
+            logger.info(test);
             assertNotNull("Test é nulo.", test);
             assertNull("Nulo não nulo", test.getInteiro());
             assertNotNull("inteiroObjeto é nulo.", test.getInteiroObjeto());
@@ -224,6 +224,7 @@ public class MakeEntityTest extends TestCase {
             assertNotNull("String nula", test.getString());
             assertNotNull("doubleObjeto é nulo", test.getDoubleObjeto());
             assertNotNull("floatObjeto é nulo", test.getFloatObjeto());
+            assertNotNull("characterObjeto é nulo", test.getCharacterObjeto());
             validarJSR303(validator, test);
         }
     }

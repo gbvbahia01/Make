@@ -35,6 +35,8 @@ public class EntityNotNullTest {
     private Double doubleObjeto;
     @NotNull
     private Float floatObjeto;
+    @NotNull
+    private Character characterObjeto;
     
     public Integer getInteiro() {
         return inteiro;
@@ -116,6 +118,14 @@ public class EntityNotNullTest {
         this.floatObjeto = floatObjeto;
     }
 
+    public Character getCharacterObjeto() {
+        return characterObjeto;
+    }
+
+    public void setCharacterObjeto(Character characterObjeto) {
+        this.characterObjeto = characterObjeto;
+    }
+
     @Override
     public String toString() {
         return "EntityNotNullTest{" + "inteiro=" + inteiro 
@@ -127,6 +137,7 @@ public class EntityNotNullTest {
                 + ", bigDecimal=" + bigDecimal 
                 + ", doubleObjeto=" + doubleObjeto 
                 + ", floatObjeto=" + floatObjeto 
+                + ", characterObjeto=" + characterObjeto
                 + ", string=" + string + '}';
     }
 

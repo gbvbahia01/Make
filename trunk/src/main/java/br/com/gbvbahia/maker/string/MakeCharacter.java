@@ -81,7 +81,7 @@ public class MakeCharacter {
     /**
      * Uma letra ou um numero ou um simbolo.
      *
-     * @return
+     * @return Qualquer Character de Number, Symbols ou Letter
      */
     public static Character getCharacter() {
         switch (MakeInteger.getMax(5)) {
