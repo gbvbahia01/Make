@@ -2,34 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker;
+package br.com.gbvbahia.maker.wrappers;
 
+import br.com.gbvbahia.maker.wrappers.MakeDouble;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  *
  * @author Guilherme
  */
-public class MakeLongTest extends TestCase {
+public class MakeDoubleTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeLongTest");
+    private Log logger = LogFactory.getLog("MakeDoubleTest");
 
-    public MakeLongTest() {
-        super("Maker :: Long");
+    public MakeDoubleTest() {
+        super("Maker :: Double");
     }
-
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Long - GetIntervalo");
-        for (long min = 1000000000; min < 1000000100; min++) {
-            for (long max = min + 1; max < 1000000200; max++) {
-                Long result = MakeLong.getIntervalo(min, max);
+        logger.info("Maker :: Double - GetIntervalo");
+        for (double min = 10.1; min < 20.1; min++) {
+            for (double max = min + 0.1; max < 20.1; max += 0.1) {
+                Double result = MakeDouble.getIntervalo(min, max);
                 logger.debug("Max: " + max
                         + " Min:" + min
                         + " Result:" + result);
@@ -46,13 +47,13 @@ public class MakeLongTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Long - GetMax");
-        for (int i = 1000000000; i <= 1000000100; i++) {
-            Long result = MakeLong.getMax(i);
+        logger.info("Maker :: Double - GetMax");
+        for (double i = 1000000000.11111; i <= 1000000020.22; i += 0.1) {
+            Double result = MakeDouble.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
             assertTrue("Intervalo incorreta", result <= i);
         }
-        Long result2 = MakeLong.getMax(1l);
+        Double result2 = MakeDouble.getMax(1l);
         logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }

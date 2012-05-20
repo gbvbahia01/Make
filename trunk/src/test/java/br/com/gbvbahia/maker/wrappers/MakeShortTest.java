@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker;
+package br.com.gbvbahia.maker.wrappers;
 
+import br.com.gbvbahia.maker.wrappers.MakeShort;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,23 +14,23 @@ import org.junit.Test;
  *
  * @author Guilherme
  */
-public class MakeByteTest extends TestCase {
+public class MakeShortTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeByteTest");
+    private Log logger = LogFactory.getLog("MakeShortTest");
 
-    public MakeByteTest() {
-        super("Maker :: Byte");
+    public MakeShortTest() {
+        super("Maker :: Short");
     }
-    
+
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Byte - GetIntervalo");
-        for (byte min = 1; min < Byte.MAX_VALUE - 100; min++) {
-            for (byte max = (byte) (min + 1); max < Byte.MAX_VALUE; max++) {
-                Byte result = MakeByte.getIntervalo(min, max);
+        logger.info("Maker :: Short - GetIntervalo");
+        for (short min = 32666; min < Short.MAX_VALUE; min++) {
+            for (short max = (short) (min + 1); max < Short.MAX_VALUE; max++) {
+                Short result = MakeShort.getIntervalo(min, max);
                 logger.debug("Max: " + max
                         + " Min:" + min
                         + " Result:" + result);
@@ -46,13 +47,13 @@ public class MakeByteTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Byte - GetMax");
-        for (byte i = 1; i < Byte.MAX_VALUE; i++) {
-            Byte result = MakeByte.getMax(i);
+        logger.info("Maker :: Short - GetMax");
+        for (short i = 32666; i < Short.MAX_VALUE; i++) {
+            Short result = MakeShort.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
-            assertTrue("Intervalo incorreto", result <= i);
+            assertTrue("Intervalo incorreta", result <= i);
         }
-        Byte result2 = MakeByte.getMax(new Byte("1"));
+        Short result2 = MakeShort.getMax(new Short("1"));
         logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }
