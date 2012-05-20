@@ -56,4 +56,12 @@ public class MakeLong {
 
         return getIntervalo(1, max);
     }
+
+    /**
+     * Não pode ser instânciada.
+     */
+    private MakeLong() {
+    }
+    
+    
 }

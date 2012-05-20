@@ -30,4 +30,10 @@ public class MakeShort {
     public static Short getIntervalo(final short min, final short max) {
         return MakeLong.getIntervalo(min, max).shortValue();
     }
+
+    /**
+     * Não pode ser instânciada.
+     */
+    private MakeShort() {
+    }
 }
