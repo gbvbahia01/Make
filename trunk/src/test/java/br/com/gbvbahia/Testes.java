@@ -13,6 +13,7 @@ import br.com.gbvbahia.maker.wrappers.MakeShortTest;
 import br.com.gbvbahia.maker.wrappers.MakeLongTest;
 import br.com.gbvbahia.i18n.I18NTest;
 import br.com.gbvbahia.maker.*;
+import br.com.gbvbahia.maker.string.MakeCharacterTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -29,6 +30,7 @@ import org.junit.runners.Suite;
     MakeLongTest.class,
     MakeFloatTest.class,
     MakeDoubleTest.class,
+    MakeCharacterTest.class,
     MakeStringTest.class,
     MakeEntityTest.class
 })

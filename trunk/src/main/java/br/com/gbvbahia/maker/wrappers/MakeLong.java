@@ -5,7 +5,10 @@
 package br.com.gbvbahia.maker.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Random;
 
 /**
@@ -37,7 +40,17 @@ public class MakeLong {
             return min;
         }
         double ale = r.nextDouble();
-        long numero = min + new BigInteger(new Long((long) (ale * (max - min))).toString()).abs().longValue();
+        long numero = 0L;
+        if (min < 0 && max > 0) {
+            long longValue = new BigDecimal((ale * (max + min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+            if (longValue > 0) {
+                numero = min + longValue;
+            } else {
+                numero = min - longValue;
+            }
+        } else {
+            numero = min + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+        }
         return numero;
     }
 
@@ -62,6 +75,4 @@ public class MakeLong {
      */
     private MakeLong() {
     }
-    
-    
 }

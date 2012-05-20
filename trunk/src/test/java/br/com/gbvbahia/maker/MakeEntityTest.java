@@ -66,9 +66,9 @@ public class MakeEntityTest extends TestCase {
                     test.getPrimitivoInt() >= 0);
             assertTrue("Valor int inesperado",
                     test.getPrimitivoInt() <= 100);
-            assertNotNull("Valor Long inesperado",
+            assertNotNull("Valor Long nulo",
                     test.getLongObjeto());
-            assertTrue("Valor Long inesperado",
+            assertTrue("Valor Long inesperado: " + test.getLongObjeto(),
                     test.getLongObjeto() >= -2000000000
                     && test.getLongObjeto() <= -1000000000);
             assertFalse("Valor long inesperado",
@@ -128,9 +128,9 @@ public class MakeEntityTest extends TestCase {
                     test.getInteiroObjeto() >= 4);
             assertTrue("Valor int inesperado",
                     test.getPrimitivoInt() >= 100);
-            assertTrue("Valor Long inesperado",
+            assertTrue("Valor Long inesperado: " + test.getLongObjeto(),
                     test.getLongObjeto() >= -1000000000);
-            assertTrue("Valor long inesperado",
+            assertTrue("Valor long inesperado: " + test.getPrimitivoLong(),
                     test.getPrimitivoLong() >= 2000000000);
             assertTrue("Valor Byte inesperado",
                     test.getByteObjeto() >= 126);
@@ -169,13 +169,13 @@ public class MakeEntityTest extends TestCase {
             EntityMaxTest test = MakeEntity.makeEntity(EntityMaxTest.class);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
-            assertTrue("Valor Integer inesperado",
+            assertTrue("Valor: " + test.getInteiroObjeto() + " maior que 4",
                     test.getInteiroObjeto() <= 4);
             assertTrue("Valor int inesperado",
                     test.getPrimitivoInt() <= 100);
-            assertTrue("Valor Long inesperado",
+            assertTrue("Valor Long inesperado: " + test.getLongObjeto(),
                     test.getLongObjeto() <= -1000000000);
-            assertTrue("Valor long inesperado",
+            assertTrue("Valor long inesperado: " + test.getPrimitivoLong(),
                     test.getPrimitivoLong() <= 2000000000);
             assertTrue("Valor Byte inesperado",
                     test.getByteObjeto() <= 126);

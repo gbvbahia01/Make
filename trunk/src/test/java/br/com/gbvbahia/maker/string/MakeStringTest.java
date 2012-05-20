@@ -48,14 +48,14 @@ public class MakeStringTest extends TestCase {
     }
 
     /**
-     * Test of gerarSenha method, of class MakeString.
+     * Test of getPassword method, of class MakeString.
      */
     @Test
     public void testGerarSenha_int_int() {
         logger.info("Maker :: String - GerarSenha_int_int");
         for (int min = 1; min < 100; min++) {
             for (int max = min + 1; max < 200; max++) {
-                String result = MakeString.gerarSenha(min, max);
+                String result = MakeString.getPassword(min, max);
                 assertTrue("Senha erro: Max: " + max
                         + " Min:" + min + " Result: " + result.length(),
                         result.length() >= min
@@ -85,13 +85,13 @@ public class MakeStringTest extends TestCase {
     }
 
     /**
-     * Test of gerarSenha method, of class MakeString.
+     * Test of getPassword method, of class MakeString.
      */
     @Test
     public void testGerarSenha_int() {
         logger.info("Maker :: String - GerarSenha_int");
         for (int i = 1; i < 100; i++) {
-            String result = MakeString.gerarSenha(i);
+            String result = MakeString.getPassword(i);
             assertTrue(result.length() <= i);
             assertTrue("Senha erro: Resultado" + result.length()
                     + " Esperado: " + i, result.length() <= i);
@@ -104,7 +104,7 @@ public class MakeStringTest extends TestCase {
     public void testGerarEmail() {
         logger.info("Maker :: String - GerarEmail");
         for (int i = 0; i < 100; i++) {
-            String email = MakeString.gerarEmail();
+            String email = MakeString.getEmail();
             String inicio = StringUtils.substringBefore(email, "@");
             String fim = StringUtils.substringAfter(email, "@");
             assertNotNull("Email Inicio nulo", inicio);
