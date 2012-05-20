@@ -17,6 +17,33 @@ import org.apache.commons.lang3.StringUtils;
 public final class MakeString {
 
     /**
+     * Utilize para determinar o tipo de Caracteres que podem ser
+     * retornados na String.<br> ALL: Todos os tipos de caracter.<br>
+     * LETTER: Somente caracter tipo letrra a-zA-Z incluindo
+     * espaço.<br> NUMBER: Somente numeros.<br> SYMBOL: Qualquer
+     * caracter dentro de MakeCharacter.SYMBOLS<br>
+     */
+    public enum StringType {
+
+        /**
+         * LETTER: Somente caracter tipo letrra a-zA-Z <b>incluindo</b>
+         * espaço.
+         */
+        LETTER,
+        /**
+         * NUMBER: Somente numeros.
+         */
+        NUMBER,
+        /**
+         * Qualquer caracter dentro de MakeCharacter.SYMBOLS.
+         */
+        SYMBOL,
+        /**
+         * Todos os tipos de caracter.
+         */
+        ALL
+    };
+    /**
      * Quantidade máxima de caracteres quando não informado pelo
      * desenvolvedor.
      */
@@ -29,7 +56,10 @@ public final class MakeString {
 
     /**
      * Gera uma String no tamanho limitado solicidato. Alterando de
-     * Upper para Lower case entre as letras.
+     * Upper para Lower case entre as letras. Todo tipo de caracteres
+     * poderá ser incluído na String gerada, utilize:<br>
+     * getString(int caracteres, StringType type) para controlar os
+     * tipos de caracteres.
      *
      * @param max Máximo de caracteres
      * @param min Minimo de caracteres
@@ -42,7 +72,7 @@ public final class MakeString {
                     new Integer(min)));
         }
         int numero = MakeInteger.getIntervalo(min, max);
-        return getString(numero);
+        return getString(numero, StringType.ALL);
     }
 
     /**
@@ -71,24 +101,68 @@ public final class MakeString {
      * @param caracteres Quantidade de caracteres.
      * @return A sring no tamanho solicitado.
      */
-    public static String getString(final int caracteres) {
+    public static String getString(final int caracteres,
+            final StringType type) {
         if (caracteres < 1) {
             throw new IllegalArgumentException(
                     I18N.getMsg("caractereToStringErro",
                     new Integer(caracteres)));
         }
         StringBuilder sb = new StringBuilder();
-        String[] mai = {"A", "B", "C", "D", "E", "F", "G", "H", "I",
-            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
-            "U", "V", "X", "Z", " "};
         for (int i = 0; i < caracteres; i++) {
-            if (i % 2 == 0) {
-                sb.append(mai[MakeInteger.getMax(mai.length) - 1]);
-            } else {
-                sb.append(mai[MakeInteger.getMax(mai.length) - 1].toLowerCase());
+            switch (type) {
+                case LETTER:
+                    letter(sb);
+                    break;
+                case NUMBER:
+                    sb.append(MakeCharacter.getNumber());
+                    break;
+                case SYMBOL:
+                    sb.append(MakeCharacter.getSymbols());
+                    break;
+                default:
+                    all(sb);
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Adiciona qualquer tipo de caractere na String, Simbolo,
+     * numérico e letras.
+     *
+     * @param sb StringBuilder a ser inserido o caracter.
+     */
+    private static void all(final StringBuilder sb) {
+        switch (MakeInteger.getMax(5)) {
+            case 3:
+                sb.append(MakeCharacter.getNumber());
+                break;
+            case 1:
+                sb.append(MakeCharacter.getSymbols());
+                break;
+            default:
+                letter(sb);
+        }
+    }
+
+    /**
+     * Adiciona letras na StringBuilder. Podendo ser Upper ou Lower e
+     * espaços.
+     *
+     * @param sb StringBuilder a ser inserido o caracter.
+     */
+    private static void letter(final StringBuilder sb) {
+        switch (MakeInteger.getMax(5)) {
+            case 3:
+                sb.append(MakeCharacter.getLetter().toString().toUpperCase());
+                break;
+            case 1:
+                sb.append(" ");
+                break;
+            default:
+                sb.append(MakeCharacter.getLetter().toString());
+        }
     }
 
     /**
@@ -134,10 +208,17 @@ public final class MakeString {
             "@gmail.com", "@yahoo.com", "@bol.com.br", "@globo.com",
             "@nikko.jp", "@uol.com.br", "@saber.com.br"};
         int tamanho = MakeInteger.getIntervalo(3, 8);
-        String ini = MakeString.getString(tamanho);
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < tamanho; i++) {
+            if (MakeInteger.getMax(2) % 2 == 0) {
+                builder.append(MakeCharacter.getLetter());
+            } else {
+                builder.append(MakeCharacter.getNumber());
+            }
+        }
         int emailFim = MakeInteger.getMax(emails.length - 1);
-        return StringUtils.replace(StringUtils.lowerCase(ini),
-                " ", "") + emails[emailFim];
+        return StringUtils.replace(StringUtils.lowerCase(builder.toString()),
+                " ", "_") + emails[emailFim];
     }
 
     /**
