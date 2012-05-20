@@ -4,8 +4,8 @@
  */
 package br.com.gbvbahia.maker.string;
 
-import br.com.gbvbahia.maker.wrappers.MakeInteger;
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.wrappers.MakeInteger;
 import org.apache.commons.lang3.StringUtils;
 
 /**
