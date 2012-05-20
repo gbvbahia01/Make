@@ -32,4 +32,12 @@ public class MakeInteger {
     public static Integer getMax(final int max) {
         return MakeLong.getIntervalo(1, max).intValue();
     }
+
+    /**
+     * Não pode ser instânciada.
+     */
+    private MakeInteger() {
+    }
+    
+    
 }

@@ -4,8 +4,6 @@
  */
 package br.com.gbvbahia.maker.wrappers;
 
-import br.com.gbvbahia.i18n.I18N;
-
 /**
  * @since v.1 11/05/2012
  * @author Guilherme

@@ -50,4 +50,12 @@ public class MakeFloat {
         
         return getIntervalo(0, max);
     }
+
+    /**
+     * Não pode ser instânciada.
+     */
+    private MakeFloat() {
+    }
+    
+    
 }

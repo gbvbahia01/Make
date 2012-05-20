@@ -50,4 +50,12 @@ public class MakeDouble {
         
         return getIntervalo(0, max);
     }
+
+    /**
+     * Não pode ser instânciada.
+     */
+    private MakeDouble() {
+    }
+    
+    
 }
