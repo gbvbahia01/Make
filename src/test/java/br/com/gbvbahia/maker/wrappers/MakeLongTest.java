@@ -42,6 +42,29 @@ public class MakeLongTest extends TestCase {
 
     }
 
+    @Test
+    public void testMinMaxIsReturned() throws Exception {
+        logger.info("Maker :: Long - MinMaxIsReturned");
+        int min = 1, max = 3;
+        boolean minOk = false, maxOk = false;
+        for (int i = 0; i < 100; i++) {
+            if (!minOk && MakeLong.getIntervalo(min, max) == min) {
+                logger.info("minOk setter true, interation: " + i);
+                minOk = true;
+            }
+            if (!maxOk && MakeLong.getIntervalo(min, max) == max) {
+                logger.info("maxOk setter true, interation: " + i);
+                maxOk = true;
+            }
+            if (MakeLong.getIntervalo(min, max) > max
+                    || MakeLong.getIntervalo(min, max) < min) {
+                fail("Resultado não pode ser menor minimo ou maior que maximo!");
+            }
+        }
+        assertTrue("Mínimo não foi atingido", minOk);
+        assertTrue("Máximo não foi atingido", maxOk);
+    }
+
     /**
      * Test of getMax method, of class MakeInteger.
      */

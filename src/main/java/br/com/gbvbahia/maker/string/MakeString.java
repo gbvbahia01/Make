@@ -54,14 +54,14 @@ public final class MakeString {
      * @return Senha com numeros, letras e caracteres especiais
      * <code>(!,#,@,&,$)</code>
      */
-    public static String gerarSenha(final int min, final int max) {
+    public static String getPassword(final int min, final int max) {
         if (min < 1) {
             throw new IllegalArgumentException(
                     I18N.getMsg("caractereToStringErro",
                     new Integer(min)));
         }
         int numero = MakeInteger.getIntervalo(min, max);
-        return gerarSenha(numero);
+        return getPassword(numero);
     }
 
     /**
@@ -83,9 +83,9 @@ public final class MakeString {
             "U", "V", "X", "Z", " "};
         for (int i = 0; i < caracteres; i++) {
             if (i % 2 == 0) {
-                sb.append(mai[MakeInteger.getMax(mai.length)]);
+                sb.append(mai[MakeInteger.getMax(mai.length) - 1]);
             } else {
-                sb.append(mai[MakeInteger.getMax(mai.length)].toLowerCase());
+                sb.append(mai[MakeInteger.getMax(mai.length) - 1].toLowerCase());
             }
         }
         return sb.toString();
@@ -98,7 +98,7 @@ public final class MakeString {
      * @return Senha com numeros, letras e caracteres especiais
      * <code>(!,#,@,&,$)</code>
      */
-    public static String gerarSenha(final int caracteres) {
+    public static String getPassword(final int caracteres) {
         if (caracteres <= 0) {
             throw new IllegalArgumentException(
                     I18N.getMsg("caractereToStringErro",
@@ -114,7 +114,7 @@ public final class MakeString {
                 "K", "k", "L", "l", "M", "m", "N", "n", "O",
                 "o", "P", "p", "Q", "q", "R", "r", "S", "s", "T", "t",
                 "U", "u", "V", "v", "X", "x", "Z", "z"};
-            int letra1 = MakeInteger.getMax(a.length);
+            int letra1 = MakeInteger.getMax(a.length - 1);
             toReturn += a[letra1];
         }
         return toReturn;
@@ -129,13 +129,13 @@ public final class MakeString {
      *
      * @return
      */
-    public static String gerarEmail() {
+    public static String getEmail() {
         String[] emails = {"@hotmail.com",
             "@gmail.com", "@yahoo.com", "@bol.com.br", "@globo.com",
             "@nikko.jp", "@uol.com.br", "@saber.com.br"};
         int tamanho = MakeInteger.getIntervalo(3, 8);
         String ini = MakeString.getString(tamanho);
-        int emailFim = MakeInteger.getMax(emails.length);
+        int emailFim = MakeInteger.getMax(emails.length - 1);
         return StringUtils.replace(StringUtils.lowerCase(ini),
                 " ", "") + emails[emailFim];
     }
