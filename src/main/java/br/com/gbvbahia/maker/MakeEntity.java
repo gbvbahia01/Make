@@ -56,26 +56,4 @@ public class MakeEntity {
             throw new RuntimeException(ex);
         }
     }
-
-    /**
-     * Verifica o tipo do campo e insere o valor correspondente.
-     *
-     * @param <T> Generic que representa proprietário do campo. Por
-     * exemplo: Classe carro tem um campo int rodas, o Field f seria
-     * rodas e T seria a classe Carro que terá o campo definido.
-     * @param f O campo que terá o valor definido.
-     * @param toReturn Objeto que contém o Field.
-     * @throws IllegalAccessException se no momento de execução não
-     * houver acesso ao campo.
-     * @throws IllegalArgumentException Se algum argumento anotado não
-     * for válido.
-     */
-    private static <T> void insertValue(Field f, T toReturn)
-            throws IllegalAccessException, IllegalArgumentException {
-        if (f.getType().equals(Character.class)) {
-            f.set(toReturn, MakeCharacter.getCharacter());
-        } else if (f.getType().equals(char.class)) {
-            f.set(toReturn, MakeCharacter.getCharacter().charValue());
-        }
-    }
 }
