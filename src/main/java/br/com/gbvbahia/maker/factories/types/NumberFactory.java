@@ -26,7 +26,7 @@ public class NumberFactory implements ValueFactory {
     /**
      * Logger para depuração.
      */
-    private static Log logger = LogFactory.getLog("MinMaxFactory");
+    private static Log logger = LogFactory.getLog("NumberFactory");
 
     @Override
     public <T> void makeValue(final Field f, final T entity)
@@ -107,13 +107,13 @@ public class NumberFactory implements ValueFactory {
         if (f.isAnnotationPresent(Min.class)) {
             toReturn[0] = new Long(f.getAnnotation(Min.class).value());
         } else {
-            logger.info("Default value for " + f.getType().getSimpleName());
+            logger.debug("Default value for " + f.getType().getSimpleName());
             toReturn[0] = minValue.longValue();
         }
         if (f.isAnnotationPresent(Max.class)) {
             toReturn[1] = new Long(f.getAnnotation(Max.class).value());
         } else {
-            logger.info("Default value for " + f.getType().getSimpleName());
+            logger.debug("Default value for " + f.getType().getSimpleName());
             toReturn[1] = maxValue.longValue();
         }
         return toReturn;
