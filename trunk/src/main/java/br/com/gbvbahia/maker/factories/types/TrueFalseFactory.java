@@ -4,11 +4,14 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
+import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.wrappers.MakeInteger;
 import java.lang.reflect.Field;
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.AssertTrue;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Factory para classes anotadas com @AssertTrue e/ou @AssertFalse da
@@ -19,6 +22,8 @@ import javax.validation.constraints.AssertTrue;
  */
 public class TrueFalseFactory implements ValueFactory {
 
+    private static Log logger = LogFactory.getLog("TrueFalseFactory");
+
     @Override
     public <T> void makeValue(Field f, T entity)
             throws IllegalAccessException, IllegalArgumentException {
@@ -27,8 +32,7 @@ public class TrueFalseFactory implements ValueFactory {
         } else if (f.getType().equals(boolean.class)) {
             f.set(entity, valueToBoolean(f).booleanValue());
         } else {
-            throw new IllegalArgumentException("O tipo anotado com"
-                    + " @AssertTrue ou @AssertFalse não é válido!");
+            throw new IllegalArgumentException(I18N.getMsg("tipoDesconhecidoTrueFalse"));
         }
     }
 
@@ -39,6 +43,8 @@ public class TrueFalseFactory implements ValueFactory {
         if (f.isAnnotationPresent(AssertFalse.class)) {
             return false;
         }
+        logger.debug(I18N.getMsg("defaultValue",
+                f.getType().getSimpleName()));
         return MakeInteger.getMax(2) == 2;
     }
 }
