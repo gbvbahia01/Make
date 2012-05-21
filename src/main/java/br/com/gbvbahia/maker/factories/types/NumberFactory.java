@@ -4,8 +4,8 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
+import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.string.MakeCharacter;
 import br.com.gbvbahia.maker.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -80,9 +80,7 @@ public class NumberFactory implements ValueFactory {
         } else if (f.getType().equals(String.class)) {
             f.set(toReturn, valueToString(f));
         } else {
-            throw new IllegalArgumentException("O tipo anotado com"
-                    + " @Min ou @Max não é válido, tabém não é mapeado"
-                    + " para receber um valor default!");
+            throw new IllegalArgumentException(I18N.getMsg("tipoDesconhecidoMinMax"));
         }
     }
 
@@ -107,13 +105,15 @@ public class NumberFactory implements ValueFactory {
         if (f.isAnnotationPresent(Min.class)) {
             toReturn[0] = new Long(f.getAnnotation(Min.class).value());
         } else {
-            logger.debug("Default value for " + f.getType().getSimpleName());
+            logger.debug(I18N.getMsg("defaultValue",
+                    f.getType().getSimpleName()));
             toReturn[0] = minValue.longValue();
         }
         if (f.isAnnotationPresent(Max.class)) {
             toReturn[1] = new Long(f.getAnnotation(Max.class).value());
         } else {
-            logger.debug("Default value for " + f.getType().getSimpleName());
+            logger.debug(I18N.getMsg("defaultValue",
+                    f.getType().getSimpleName()));
             toReturn[1] = maxValue.longValue();
         }
         return toReturn;

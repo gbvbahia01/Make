@@ -4,6 +4,7 @@
  */
 package br.com.gbvbahia.maker.string;
 
+import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.wrappers.MakeInteger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,7 +53,7 @@ public class MakeCharacter {
      */
     public static Character getNumber() {
         char toReturn = NUMBERS[MakeInteger.getMax(NUMBERS.length) - 1];
-        logger.debug("MakeCharacter.geNumber retornou: " + toReturn);
+        logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geNumber", toReturn));
         return toReturn;
     }
 
@@ -63,7 +64,7 @@ public class MakeCharacter {
      */
     public static Character getLetter() {
         char toReturn = LETTERS[MakeInteger.getMax(LETTERS.length) - 1];
-        logger.debug("MakeCharacter.geLetter retornou: " + toReturn);
+        logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geLetter", toReturn));
         return toReturn;
     }
 
@@ -74,7 +75,7 @@ public class MakeCharacter {
      */
     public static Character getSymbols() {
         Character toReturn = SYMBOLS[MakeInteger.getMax(SYMBOLS.length) - 1];
-        logger.debug("MakeCharacter.geSymbols retornou: " + toReturn);
+        logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geSymbols", toReturn));
         return toReturn;
     }
 

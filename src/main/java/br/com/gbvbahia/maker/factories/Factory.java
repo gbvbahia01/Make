@@ -13,20 +13,24 @@ import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  *
  * @author Guilherme
  */
 public final class Factory {
-    
+
+    private static Log logger = LogFactory.getLog("Factory");
+
     public static ValueFactory makeFactory(Field f) {
         if (f.isAnnotationPresent(Min.class)
-                || f.isAnnotationPresent(Max.class)){
+                || f.isAnnotationPresent(Max.class)) {
             return new NumberFactory();
         }
         if (f.isAnnotationPresent(AssertTrue.class)
-                || f.isAnnotationPresent(AssertFalse.class)){
+                || f.isAnnotationPresent(AssertFalse.class)) {
             return new TrueFalseFactory();
         }
         return new DefaultFactory();
