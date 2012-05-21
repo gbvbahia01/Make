@@ -212,7 +212,7 @@ public class MakeEntityTest extends TestCase {
         Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityNotNullTest test = MakeEntity.makeEntity(EntityNotNullTest.class);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNull("Nulo não nulo", test.getInteiro());
             assertNotNull("inteiroObjeto é nulo.", test.getInteiroObjeto());

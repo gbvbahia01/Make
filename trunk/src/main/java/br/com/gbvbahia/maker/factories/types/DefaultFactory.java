@@ -32,16 +32,16 @@ public class DefaultFactory extends NumberFactory {
             super.makeValue(f, entity);
         } catch (IllegalArgumentException ex) {
             if (f.getType().equals(Character.class)) {
-                logger.info("Default value for Character");
+                logger.debug("Default value for Character");
                 f.set(entity, MakeCharacter.getCharacter());
             } else if (f.getType().equals(char.class)) {
-                logger.info("Default value for char");
+                logger.debug("Default value for char");
                 f.set(entity, MakeCharacter.getCharacter().charValue());
             } else if (f.getType().equals(Boolean.class)) {
-                logger.info("Default value for Boolean");
+                logger.debug("Default value for Boolean");
                 f.set(entity, MakeBoolean.getBoolean());
             } else if (f.getType().equals(boolean.class)) {
-                logger.info("Default value for boolean");
+                logger.debug("Default value for boolean");
                 f.set(entity, MakeBoolean.getBoolean().booleanValue());
             }
         }
