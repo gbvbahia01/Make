@@ -5,6 +5,8 @@
 package br.com.gbvbahia.maker.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 /**
@@ -33,21 +35,31 @@ public class MakeDouble {
                     new Object[]{min, max}));
         }
         double ale = r.nextDouble();
-        double numero = min + ( (ale * (max - min)));
+        double numero = 0D;
+        if (min < 0 && max > 0) {
+            double doubleValue = new BigDecimal((ale * (max + min))).doubleValue();
+            if (doubleValue > 0) {
+                numero = min + doubleValue;
+            } else {
+                numero = min - doubleValue;
+            }
+        } else {
+            numero = min + new BigDecimal((ale * (max - min))).doubleValue();
+        }
         return numero;
     }
 
     /**
      * Retorna um número aleatório limitado ao max passado.
-
+     *
      * @param max Minimo 1.
-     * @return Double limitado ao max.
+     * @return Double limitado ao max. Minimo é zero.
      */
     public static Double getMax(final double max) {
         if (max <= 0) {
             throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
         }
-        
+
         return getIntervalo(0, max);
     }
 
@@ -56,6 +68,4 @@ public class MakeDouble {
      */
     private MakeDouble() {
     }
-    
-    
 }
