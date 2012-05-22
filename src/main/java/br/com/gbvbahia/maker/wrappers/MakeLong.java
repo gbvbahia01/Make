@@ -58,14 +58,13 @@ public class MakeLong {
      * o maior número a retornar será o Integer.MAX_VALUE.
      *
      * @param max Minimo 1.
-     * @return Long limitado ao max.
+     * @return Long limitado ao max, minimo é zero.
      */
     public static Long getMax(final long max) {
         if (max <= 0) {
             throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
         }
-
-        return getIntervalo(1, max);
+        return getIntervalo(0, max);
     }
 
     /**
