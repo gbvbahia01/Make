@@ -97,8 +97,8 @@ public class MakeEntityTest extends TestCase {
                     test.getInteiroNegativoObjeto() >= -3
                     && test.getInteiroNegativoObjeto() <= -2);
             assertTrue("Valor String inesperado",
-                    new Long(test.getString()) <= 10
-                    && new Long(test.getString()) >= 5);
+                    new Double(test.getString()) <= 10
+                    && new Double(test.getString()) >= 5);
             assertTrue("Valor doubleObjeto inesperado",
                     test.getDoubleObjeto() <= 10
                     && test.getDoubleObjeto() >= -50);
@@ -147,7 +147,7 @@ public class MakeEntityTest extends TestCase {
             assertTrue("Valor Integer Negativo inesperado",
                     test.getInteiroNegativoObjeto() >= -2);
             assertTrue("Valor String inesperado",
-                    new Long(test.getString()) >= 10);
+                    new Double(test.getString()) >= 10);
             assertTrue("Valor doubleObjeto inesperado",
                     test.getDoubleObjeto() >= -500);
             assertTrue("Valor primitivoDouble inesperado",
@@ -192,7 +192,7 @@ public class MakeEntityTest extends TestCase {
             assertTrue("Valor Integer Negativo inesperado",
                     test.getInteiroNegativoObjeto() <= -2);
             assertTrue("Valor String inesperado",
-                    new Long(test.getString()) <= 10);
+                    new Double(test.getString()) <= 10);
             assertTrue("Valor doubleObjeto inesperado",
                     test.getDoubleObjeto() <= -10);
             assertTrue("Valor primitivoDouble inesperado",

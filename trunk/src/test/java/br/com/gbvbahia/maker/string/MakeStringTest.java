@@ -31,8 +31,8 @@ public class MakeStringTest extends TestCase {
     @Test
     public void testGetString_int_int() {
         logger.info("Maker :: String - GetString_int_int");
-        for (int min = 1; min < 100; min++) {
-            for (int max = min + 1; max < 200; max++) {
+        for (int min = 1; min < 50; min++) {
+            for (int max = min + 1; max < 100; max++) {
                 String result = MakeString.getString(min, max);
                 assertTrue("String erro: Max: " + max
                         + " Min:" + min + " Result: " + result.length(),
@@ -52,8 +52,8 @@ public class MakeStringTest extends TestCase {
     @Test
     public void testGerarSenha_int_int() {
         logger.info("Maker :: String - GerarSenha_int_int");
-        for (int min = 1; min < 100; min++) {
-            for (int max = min + 1; max < 200; max++) {
+        for (int min = 1; min < 50; min++) {
+            for (int max = min + 1; max < 100; max++) {
                 String result = MakeString.getPassword(min, max);
                 assertTrue("Senha erro: Max: " + max
                         + " Min:" + min + " Result: " + result.length(),
