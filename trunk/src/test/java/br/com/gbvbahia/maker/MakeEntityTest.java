@@ -138,7 +138,7 @@ public class MakeEntityTest extends TestCase {
         logger.info("Maker :: Entity - MakeMinEntity");
         for (int i = 0; i < 100; i++) {
             EntityMinTest test = MakeEntity.makeEntity(EntityMinTest.class);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertTrue("Valor Integer inesperado",
                     test.getInteiroObjeto() >= 4);
