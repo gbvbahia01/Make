@@ -101,7 +101,7 @@ public class NumberFactory implements ValueFactory {
      * @return Array de duas posições, [0] será o minimo e [1] o
      * máximo.
      */
-    private static Number[] getMinMaxLongValues(Field f,
+    private static Number[] getMinMaxValues(Field f,
             Number minValue, Number maxValue) {
         Number[] toReturn = new Number[2];
         if (f.isAnnotationPresent(Min.class)) {
@@ -126,7 +126,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static Integer valueToInteger(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Integer.MIN_VALUE,
+        Number[] minMax = getMinMaxValues(f, Integer.MIN_VALUE,
                 Integer.MAX_VALUE);
         int min = minMax[0].intValue();
         int max = minMax[1].intValue();
@@ -134,7 +134,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static Number valueToLong(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
+        Number[] minMax = getMinMaxValues(f, Long.MIN_VALUE,
                 Long.MAX_VALUE);
         long min = minMax[0].longValue();
         long max = minMax[1].longValue();
@@ -142,7 +142,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static String valueToString(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, -Double.MAX_VALUE,
+        Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
@@ -150,7 +150,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static BigInteger valueToBigInteger(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
+        Number[] minMax = getMinMaxValues(f, Long.MIN_VALUE,
                 Long.MAX_VALUE);
         long min = minMax[0].longValue();
         long max = minMax[1].longValue();
@@ -159,7 +159,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static BigDecimal valueToBigDecimal(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, -Double.MAX_VALUE,
+        Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
@@ -168,7 +168,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static Double valueToDouble(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, -Double.MAX_VALUE,
+        Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
@@ -176,7 +176,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static Float valueToFloat(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, -Float.MAX_VALUE,
+        Number[] minMax = getMinMaxValues(f, -Float.MAX_VALUE,
                 Float.MAX_VALUE);
         float min = minMax[0].floatValue();
         float max = minMax[1].floatValue();
@@ -184,7 +184,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static Byte valueToByte(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Byte.MIN_VALUE,
+        Number[] minMax = getMinMaxValues(f, Byte.MIN_VALUE,
                 Byte.MAX_VALUE);
         byte min = minMax[0].byteValue();
         byte max = minMax[1].byteValue();
@@ -192,7 +192,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static Short valueToShort(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Short.MIN_VALUE,
+        Number[] minMax = getMinMaxValues(f, Short.MIN_VALUE,
                 Short.MAX_VALUE);
         short min = minMax[0].shortValue();
         short max = minMax[1].shortValue();
