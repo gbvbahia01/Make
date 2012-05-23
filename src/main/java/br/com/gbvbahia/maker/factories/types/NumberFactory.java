@@ -10,6 +10,8 @@ import br.com.gbvbahia.maker.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import org.apache.commons.logging.Log;
@@ -104,17 +106,21 @@ public class NumberFactory implements ValueFactory {
         Number[] toReturn = new Number[2];
         if (f.isAnnotationPresent(Min.class)) {
             toReturn[0] = new Long(f.getAnnotation(Min.class).value());
+        } else if (f.isAnnotationPresent(DecimalMin.class)) {
+            toReturn[0] = new Double(f.getAnnotation(DecimalMin.class).value());
         } else {
             logger.debug(I18N.getMsg("defaultValue",
                     f.getType().getSimpleName()));
-            toReturn[0] = minValue.longValue();
+            toReturn[0] = minValue.doubleValue();
         }
         if (f.isAnnotationPresent(Max.class)) {
             toReturn[1] = new Long(f.getAnnotation(Max.class).value());
+        } else if (f.isAnnotationPresent(DecimalMax.class)) {
+            toReturn[1] = new Double(f.getAnnotation(DecimalMax.class).value());
         } else {
             logger.debug(I18N.getMsg("defaultValue",
                     f.getType().getSimpleName()));
-            toReturn[1] = maxValue.longValue();
+            toReturn[1] = maxValue.doubleValue();
         }
         return toReturn;
     }
@@ -136,7 +142,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static String valueToString(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Double.MIN_VALUE,
+        Number[] minMax = getMinMaxLongValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
@@ -153,7 +159,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static BigDecimal valueToBigDecimal(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Double.MIN_VALUE,
+        Number[] minMax = getMinMaxLongValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
@@ -162,15 +168,15 @@ public class NumberFactory implements ValueFactory {
     }
 
     private static Double valueToDouble(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Long.MIN_VALUE,
-                Long.MAX_VALUE);
+        Number[] minMax = getMinMaxLongValues(f, -Double.MAX_VALUE,
+                Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
         return MakeDouble.getIntervalo(min, max);
     }
 
     private static Float valueToFloat(Field f) {
-        Number[] minMax = getMinMaxLongValues(f, Float.MIN_VALUE,
+        Number[] minMax = getMinMaxLongValues(f, -Float.MAX_VALUE,
                 Float.MAX_VALUE);
         float min = minMax[0].floatValue();
         float max = minMax[1].floatValue();

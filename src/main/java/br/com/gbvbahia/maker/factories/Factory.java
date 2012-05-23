@@ -9,10 +9,7 @@ import br.com.gbvbahia.maker.factories.types.NumberFactory;
 import br.com.gbvbahia.maker.factories.types.TrueFalseFactory;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import java.lang.reflect.Field;
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -26,7 +23,9 @@ public final class Factory {
 
     public static ValueFactory makeFactory(Field f) {
         if (f.isAnnotationPresent(Min.class)
-                || f.isAnnotationPresent(Max.class)) {
+                || f.isAnnotationPresent(Max.class)
+                || f.isAnnotationPresent(DecimalMin.class)
+                || f.isAnnotationPresent(DecimalMax.class)) {
             return new NumberFactory();
         }
         if (f.isAnnotationPresent(AssertTrue.class)
