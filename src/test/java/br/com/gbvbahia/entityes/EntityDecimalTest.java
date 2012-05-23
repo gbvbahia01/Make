@@ -21,7 +21,7 @@ public class EntityDecimalTest {
     @DecimalMax(value="-3.5")
     @NotNull
     private BigDecimal bigDecimal;
-
+    
     public Integer getIntegerObjeto() {
         return integerObjeto;
     }

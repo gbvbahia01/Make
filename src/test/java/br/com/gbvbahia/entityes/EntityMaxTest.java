@@ -67,6 +67,9 @@ public class EntityMaxTest {
     @NotNull
     @Max(1)
     private float primitivoFloat;
+    @NotNull
+    @Max(Long.MIN_VALUE + 1)
+    private Long longObjetoMinMaxValue;
 
     public int getPrimitivoInt() {
         return primitivoInt;
@@ -196,6 +199,14 @@ public class EntityMaxTest {
         this.primitivoFloat = primitivoFloat;
     }
 
+    public Long getLongObjetoMinMaxValue() {
+        return longObjetoMinMaxValue;
+    }
+
+    public void setLongObjetoMinMaxValue(Long longObjetoMinMaxValue) {
+        this.longObjetoMinMaxValue = longObjetoMinMaxValue;
+    }
+
     @Override
     public String toString() {
         return "EntityMaxTest{" + "bigDecimal=" + bigDecimal
@@ -214,6 +225,7 @@ public class EntityMaxTest {
                 + ", primitivoDouble=" + primitivoDouble
                 + ", floatObjeto=" + floatObjeto
                 + ", primitivoFloat=" + primitivoFloat
+                + ", longObjetoMinMaxValue=" + longObjetoMinMaxValue
                 + '}';
     }
 }
