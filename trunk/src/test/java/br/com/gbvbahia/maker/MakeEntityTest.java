@@ -13,7 +13,7 @@ import javax.validation.ValidatorFactory;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
+import org.junit.*;
 
 /**
  *
@@ -22,16 +22,36 @@ import org.junit.Test;
 public class MakeEntityTest extends TestCase {
 
     private Log logger = LogFactory.getLog("MakeEntityTest");
+    private Validator validator;
+
+    @Before
+    @Override
+    public void setUp() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
 
     public MakeEntityTest() {
         super("Make Entity");
     }
 
     @Test
+    public void testMakeDecimalMaxEntity() throws Exception {
+        logger.info("Maker :: Entity - MakeDecimalMaxEntity");
+        EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class);
+        logger.info(test);
+        assertNotNull("Test é nulo.", test);
+        assertNotNull("IntegerObjeto nulo", test.getIntegerObjeto());
+        assertTrue("IntergerObjeto maior que 3: "
+                + test.getIntegerObjeto(),
+                test.getIntegerObjeto() <= 3);
+        assertTrue("BigDecima maior que 3.5",
+                test.getBigDecimal().doubleValue() <= -3.5);
+    }
+
+    @Test
     public void testMakeBoolaenEntity() throws Exception {
         logger.info("Maker :: Entity - MakeBoolaenEntity");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         EntityBooleanTest test = MakeEntity.makeEntity(EntityBooleanTest.class);
         logger.debug(test);
         assertNotNull("Test é nulo.", test);
@@ -45,14 +65,12 @@ public class MakeEntityTest extends TestCase {
                 test.getBooleanPrimitiveFalse());
         assertNotNull("booleanTrueOrFalse nulo",
                 test.getBooleanTrueOrFalse());
-        validarJSR303(validator, test);
+        validarJSR303(test);
     }
 
     @Test
     public void testMakeMinMaxEntity() throws Exception {
         logger.info("Maker :: Entity - MakeMinMaxEntity");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityMinMaxTest test = MakeEntity.makeEntity(EntityMinMaxTest.class);
             logger.debug(test);
@@ -111,15 +129,13 @@ public class MakeEntityTest extends TestCase {
             assertTrue("Valor primitivoFloat inesperado",
                     test.getPrimitivoFloat() >= 1
                     || test.getPrimitivoFloat() <= 3);
-            validarJSR303(validator, test);
+            validarJSR303(test);
         }
     }
 
     @Test
     public void testMakeMinEntity() throws Exception {
         logger.info("Maker :: Entity - MakeMinEntity");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityMinTest test = MakeEntity.makeEntity(EntityMinTest.class);
             logger.debug(test);
@@ -156,15 +172,13 @@ public class MakeEntityTest extends TestCase {
                     test.getFloatObjeto() >= 5000);
             assertTrue("Valor primitivoFloat inesperado",
                     test.getPrimitivoFloat() >= 1);
-            validarJSR303(validator, test);
+            validarJSR303(test);
         }
     }
 
     @Test
     public void testMakeMaxEntity() throws Exception {
         logger.info("Maker :: Entity - MakeMaxEntity");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityMaxTest test = MakeEntity.makeEntity(EntityMaxTest.class);
             logger.debug(test);
@@ -201,15 +215,13 @@ public class MakeEntityTest extends TestCase {
                     test.getFloatObjeto() <= 5000);
             assertTrue("Valor primitivoFloat inesperado",
                     test.getPrimitivoFloat() <= 1);
-            validarJSR303(validator, test);
+            validarJSR303(test);
         }
     }
 
     @Test
     public void testMakeNotNullEntity() throws Exception {
         logger.info("Maker :: Entity - MakeNotNullEntity");
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         for (int i = 0; i < 100; i++) {
             EntityNotNullTest test = MakeEntity.makeEntity(EntityNotNullTest.class);
             logger.debug(test);
@@ -225,11 +237,11 @@ public class MakeEntityTest extends TestCase {
             assertNotNull("doubleObjeto é nulo", test.getDoubleObjeto());
             assertNotNull("floatObjeto é nulo", test.getFloatObjeto());
             assertNotNull("characterObjeto é nulo", test.getCharacterObjeto());
-            validarJSR303(validator, test);
+            validarJSR303(test);
         }
     }
 
-    private void validarJSR303(Validator validator, Object test) {
+    private void validarJSR303(Object test) {
         Set<ConstraintViolation<Object>> erros =
                 validator.validate(test);
         for (ConstraintViolation<Object> erro : erros) {
