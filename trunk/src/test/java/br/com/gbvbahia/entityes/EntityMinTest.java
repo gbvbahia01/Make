@@ -64,6 +64,9 @@ public class EntityMinTest {
     @NotNull
     @Min(1)
     private float primitivoFloat;
+    @NotNull
+    @Min(Long.MAX_VALUE - 1)
+    private Long longObjetoMinMaxValue;
 
     public int getPrimitivoInt() {
         return primitivoInt;
@@ -193,6 +196,14 @@ public class EntityMinTest {
         this.primitivoFloat = primitivoFloat;
     }
 
+    public Long getLongObjetoMinMaxValue() {
+        return longObjetoMinMaxValue;
+    }
+
+    public void setLongObjetoMinMaxValue(Long longObjetoMinMaxValue) {
+        this.longObjetoMinMaxValue = longObjetoMinMaxValue;
+    }
+
     @Override
     public String toString() {
         return "EntityMinTest{" + "inteiroObjeto=" + inteiroObjeto
@@ -211,6 +222,7 @@ public class EntityMinTest {
                 + ", primitivoDouble=" + primitivoDouble
                 + ", floatObjeto=" + floatObjeto
                 + ", primitivoFloat=" + primitivoFloat
+                + ", longObjetoMinMaxValue=" + longObjetoMinMaxValue
                 + '}';
     }
 }
