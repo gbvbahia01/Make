@@ -46,7 +46,7 @@ public class MakeEntityTest extends TestCase {
     
     
     @Test
-    public void testMakeDecimalMaxEntity() throws Exception {
+    public void testMakeDecimalEntity() throws Exception {
         logger.debug("Maker :: Entity - MakeDecimalMaxEntity");
         for (int i = 0; i < 50; i++) {
             EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class);
