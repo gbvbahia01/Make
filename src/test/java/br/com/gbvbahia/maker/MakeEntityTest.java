@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.entityes.*;
+import java.math.BigDecimal;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -36,11 +37,20 @@ public class MakeEntityTest extends TestCase {
     }
 
     @Test
+    public void testMakeDigits() throws Exception {
+        EntityDigits test = new EntityDigits();
+        test.setBigDecimal(new BigDecimal("-999.99"));
+        logger.info(test);
+        validarJSR303(test);
+    }
+    
+    
+    @Test
     public void testMakeDecimalMaxEntity() throws Exception {
         logger.debug("Maker :: Entity - MakeDecimalMaxEntity");
         for (int i = 0; i < 50; i++) {
             EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("IntegerObjeto nulo", test.getIntegerObjeto());
             assertTrue("IntergerObjeto maior que 3: "
