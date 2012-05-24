@@ -37,16 +37,27 @@ public class MakeEntityTest extends TestCase {
 
     @Test
     public void testMakeDecimalMaxEntity() throws Exception {
-        logger.info("Maker :: Entity - MakeDecimalMaxEntity");
-        EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class);
-        logger.info(test);
-        assertNotNull("Test é nulo.", test);
-        assertNotNull("IntegerObjeto nulo", test.getIntegerObjeto());
-        assertTrue("IntergerObjeto maior que 3: "
-                + test.getIntegerObjeto(),
-                test.getIntegerObjeto() <= 3);
-        assertTrue("BigDecima maior que 3.5",
-                test.getBigDecimal().doubleValue() <= -3.5);
+        logger.debug("Maker :: Entity - MakeDecimalMaxEntity");
+        for (int i = 0; i < 50; i++) {
+            EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class);
+            logger.info(test);
+            assertNotNull("Test é nulo.", test);
+            assertNotNull("IntegerObjeto nulo", test.getIntegerObjeto());
+            assertTrue("IntergerObjeto maior que 3: "
+                    + test.getIntegerObjeto(),
+                    test.getIntegerObjeto() <= 3);
+            assertTrue("BigDecima maior que 3.5",
+                    test.getBigDecimal().doubleValue() <= -3.5);
+            assertTrue("MaxBigDecimal maior que -1.79769313486231570E+307",
+                    test.getMaxBigDecimal().doubleValue() <= -1.79769313486231570E+307);
+            assertTrue("MinBigDecimal menor que 1.79769313486231570E+307",
+                    test.getMinBigDecimal().doubleValue() >= 1.79769313486231570E+307);
+            assertTrue("ShortObjeto menor que 32760 ou maior que 32765: "
+                    + test.getShortObjeto(),
+                    test.getShortObjeto() >= 32760 
+                    && test.getShortObjeto() <= 32765 );
+            validarJSR303(test);
+        }
     }
 
     @Test
