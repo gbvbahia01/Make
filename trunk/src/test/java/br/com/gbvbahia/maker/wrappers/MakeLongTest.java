@@ -49,11 +49,11 @@ public class MakeLongTest extends TestCase {
         boolean minOk = false, maxOk = false;
         for (int i = 0; i < 100; i++) {
             if (!minOk && MakeLong.getIntervalo(min, max) == min) {
-                logger.info("minOk setter true, interation: " + i);
+                logger.debug("minOk setter true, interation: " + i);
                 minOk = true;
             }
             if (!maxOk && MakeLong.getIntervalo(min, max) == max) {
-                logger.info("maxOk setter true, interation: " + i);
+                logger.debug("maxOk setter true, interation: " + i);
                 maxOk = true;
             }
             if (MakeLong.getIntervalo(min, max) > max
