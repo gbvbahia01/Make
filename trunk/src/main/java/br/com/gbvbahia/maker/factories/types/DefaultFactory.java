@@ -5,8 +5,8 @@
 package br.com.gbvbahia.maker.factories.types;
 
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.string.MakeCharacter;
-import br.com.gbvbahia.maker.wrappers.MakeBoolean;
+import br.com.gbvbahia.maker.types.string.MakeCharacter;
+import br.com.gbvbahia.maker.types.wrappers.MakeBoolean;
 import java.lang.reflect.Field;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
