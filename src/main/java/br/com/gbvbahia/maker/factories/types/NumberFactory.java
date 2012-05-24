@@ -4,9 +4,14 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
+import br.com.gbvbahia.maker.types.wrappers.MakeFloat;
+import br.com.gbvbahia.maker.types.wrappers.MakeLong;
+import br.com.gbvbahia.maker.types.wrappers.MakeShort;
+import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
+import br.com.gbvbahia.maker.types.wrappers.MakeByte;
+import br.com.gbvbahia.maker.types.wrappers.MakeDouble;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
