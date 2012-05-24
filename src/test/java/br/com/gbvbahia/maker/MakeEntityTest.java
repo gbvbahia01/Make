@@ -38,16 +38,19 @@ public class MakeEntityTest extends TestCase {
 
     @Test
     public void testMakeDigits() throws Exception {
-        EntityDigits test = new EntityDigits();
-        test.setBigDecimal(new BigDecimal("-999.99"));
-        logger.info(test);
+        logger.info("Maker :: Entity - MakeDigits");
+        for (int i = 0; i < 50; i++) {
+        EntityDigits test = MakeEntity.makeEntity(EntityDigits.class);
+        logger.debug(test);
+        assertNotNull("Test é nulo.", test);
+        assertNotNull("IntegerObjeto nulo", test.getBigDecimal());
         validarJSR303(test);
+        }
     }
-    
-    
+
     @Test
     public void testMakeDecimalEntity() throws Exception {
-        logger.debug("Maker :: Entity - MakeDecimalMaxEntity");
+        logger.info("Maker :: Entity - MakeDecimalEntity");
         for (int i = 0; i < 50; i++) {
             EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class);
             logger.debug(test);
@@ -64,8 +67,8 @@ public class MakeEntityTest extends TestCase {
                     test.getMinBigDecimal().doubleValue() >= 1.79769313486231570E+307);
             assertTrue("ShortObjeto menor que 32760 ou maior que 32765: "
                     + test.getShortObjeto(),
-                    test.getShortObjeto() >= 32760 
-                    && test.getShortObjeto() <= 32765 );
+                    test.getShortObjeto() >= 32760
+                    && test.getShortObjeto() <= 32765);
             validarJSR303(test);
         }
     }
