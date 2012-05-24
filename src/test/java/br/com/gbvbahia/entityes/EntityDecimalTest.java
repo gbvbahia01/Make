@@ -7,6 +7,7 @@ package br.com.gbvbahia.entityes;
 import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,23 +15,19 @@ import javax.validation.constraints.NotNull;
  * @author Guilherme
  */
 public class EntityDecimalTest {
-    
-    @DecimalMax(value="3.5")
+
+    @DecimalMax(value = "3.5")
     @NotNull
     private Integer integerObjeto;
-    
-    @DecimalMax(value="-3.5")
+    @DecimalMax(value = "-3.5")
     @NotNull
     private BigDecimal bigDecimal;
-    
     @NotNull
     @DecimalMax("-1.79769313486231570E+307")
     private BigDecimal maxBigDecimal;
-    
     @NotNull
     @DecimalMin("1.79769313486231570E+307")
     private BigDecimal minBigDecimal;
-    
     @NotNull
     @DecimalMin("32760")
     @DecimalMax("32765")
@@ -43,7 +40,7 @@ public class EntityDecimalTest {
     public void setMaxBigDecimal(BigDecimal maxBigDecima) {
         this.maxBigDecimal = maxBigDecima;
     }
-    
+
     public Integer getIntegerObjeto() {
         return integerObjeto;
     }
@@ -84,6 +81,4 @@ public class EntityDecimalTest {
                 + ", minBigDecimal=" + minBigDecimal
                 + ", maxBigDecima=" + maxBigDecimal + '}';
     }
-
-
 }
