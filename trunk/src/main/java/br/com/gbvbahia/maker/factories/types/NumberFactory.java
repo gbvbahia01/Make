@@ -10,10 +10,9 @@ import br.com.gbvbahia.maker.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import java.math.RoundingMode;
+import javax.validation.constraints.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -101,13 +100,15 @@ public class NumberFactory implements ValueFactory {
      * @return Array de duas posições, [0] será o minimo e [1] o
      * máximo.
      */
-    private static Number[] getMinMaxValues(Field f,
+    private Number[] getMinMaxValues(Field f,
             Number minValue, Number maxValue) {
         Number[] toReturn = new Number[2];
         if (f.isAnnotationPresent(Min.class)) {
             toReturn[0] = new Long(f.getAnnotation(Min.class).value());
         } else if (f.isAnnotationPresent(DecimalMin.class)) {
             toReturn[0] = new Double(f.getAnnotation(DecimalMin.class).value());
+        } else if (f.isAnnotationPresent(Digits.class)) {
+            toReturn[0] = 0.0;
         } else {
             logger.debug(I18N.getMsg("defaultValue",
                     f.getType().getSimpleName()));
@@ -117,6 +118,8 @@ public class NumberFactory implements ValueFactory {
             toReturn[1] = new Long(f.getAnnotation(Max.class).value());
         } else if (f.isAnnotationPresent(DecimalMax.class)) {
             toReturn[1] = new Double(f.getAnnotation(DecimalMax.class).value());
+        } else if (f.isAnnotationPresent(Digits.class)) {
+            toReturn[1] = maxDigits(f.getAnnotation(Digits.class).integer());
         } else {
             logger.debug(I18N.getMsg("defaultValue",
                     f.getType().getSimpleName()));
@@ -125,7 +128,7 @@ public class NumberFactory implements ValueFactory {
         return toReturn;
     }
 
-    private static Integer valueToInteger(Field f) {
+    private Integer valueToInteger(Field f) {
         Number[] minMax = getMinMaxValues(f, Integer.MIN_VALUE,
                 Integer.MAX_VALUE);
         int min = minMax[0].intValue();
@@ -133,7 +136,7 @@ public class NumberFactory implements ValueFactory {
         return MakeInteger.getIntervalo(min, max);
     }
 
-    private static Number valueToLong(Field f) {
+    private Number valueToLong(Field f) {
         Number[] minMax = getMinMaxValues(f, Long.MIN_VALUE,
                 Long.MAX_VALUE);
         long min = minMax[0].longValue();
@@ -141,15 +144,16 @@ public class NumberFactory implements ValueFactory {
         return MakeLong.getIntervalo(min, max);
     }
 
-    private static String valueToString(Field f) {
+    private String valueToString(Field f) {
         Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
-        return MakeDouble.getIntervalo(min, max).toString();
+        Double intervalo = MakeDouble.getIntervalo(min, max);
+        return maxDecimal(f, intervalo).toString();
     }
 
-    private static BigInteger valueToBigInteger(Field f) {
+    private BigInteger valueToBigInteger(Field f) {
         Number[] minMax = getMinMaxValues(f, Long.MIN_VALUE,
                 Long.MAX_VALUE);
         long min = minMax[0].longValue();
@@ -158,24 +162,25 @@ public class NumberFactory implements ValueFactory {
                 max)).toString());
     }
 
-    private static BigDecimal valueToBigDecimal(Field f) {
+    private BigDecimal valueToBigDecimal(Field f) {
         Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
-        return new BigDecimal(new Double(MakeDouble.getIntervalo(min,
-                max)).toString());
+        Double intervalo = new Double(MakeDouble.getIntervalo(min, max));
+        return new BigDecimal(maxDecimal(f, intervalo).toString());
     }
 
-    private static Double valueToDouble(Field f) {
+    private Double valueToDouble(Field f) {
         Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
-        return MakeDouble.getIntervalo(min, max);
+        Double intervalo = MakeDouble.getIntervalo(min, max);
+        return maxDecimal(f, intervalo).doubleValue();
     }
 
-    private static Float valueToFloat(Field f) {
+    private Float valueToFloat(Field f) {
         Number[] minMax = getMinMaxValues(f, -Float.MAX_VALUE,
                 Float.MAX_VALUE);
         float min = minMax[0].floatValue();
@@ -183,7 +188,7 @@ public class NumberFactory implements ValueFactory {
         return MakeFloat.getIntervalo(min, max).floatValue();
     }
 
-    private static Byte valueToByte(Field f) {
+    private Byte valueToByte(Field f) {
         Number[] minMax = getMinMaxValues(f, Byte.MIN_VALUE,
                 Byte.MAX_VALUE);
         byte min = minMax[0].byteValue();
@@ -191,11 +196,45 @@ public class NumberFactory implements ValueFactory {
         return MakeByte.getIntervalo(min, max);
     }
 
-    private static Short valueToShort(Field f) {
+    private Short valueToShort(Field f) {
         Number[] minMax = getMinMaxValues(f, Short.MIN_VALUE,
                 Short.MAX_VALUE);
         short min = minMax[0].shortValue();
         short max = minMax[1].shortValue();
         return MakeShort.getIntervalo(min, max);
+    }
+
+    /**
+     * Cria um número maior possivel com a quantidade de digitos
+     * informado.<br> Máximo Long é 9,223,372,036,854,775,807L,
+     * utilizo 8 porque 9 teria problema em:
+     * 9,999,999,999,999,999,999L NOK, oito aguenta uma casa decimal a
+     * mais: 8,888,888,888,888,888,888L OK
+     *
+     * @param integer Representa a quantidade de números.
+     * @return Se integer fo 2, retorna 88, se for 3, 888...
+     */
+    private Long maxDigits(int integer) {
+        String toReturn = "";
+        return new Long(StringUtils.leftPad(toReturn, integer, "8"));
+    }
+
+    /**
+     * Verifica se existe a anotação Digits no field, se existir garante
+     * que o valor a ser definido esteja dentro da qantidade máxima
+     * delimitada.
+     * @param f Field que terá o valor determinado.
+     * @param valor Valor que será inserido no field.
+     * @return O valor passado se não houver @Digits, se houver o valor
+     * será alterado para se encaixar na necessidade.
+     */
+    private Number maxDecimal(Field f, Number valor) {
+        if (f.isAnnotationPresent(Digits.class)) {
+            int maxDecimal = f.getAnnotation(Digits.class).fraction();
+            return new BigDecimal(valor.toString()).setScale(maxDecimal,
+                    RoundingMode.HALF_EVEN).doubleValue();
+        } else {
+            return valor;
+        }
     }
 }
