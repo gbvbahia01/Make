@@ -4,17 +4,13 @@
  */
 package br.com.gbvbahia;
 
-import br.com.gbvbahia.maker.types.wrappers.MakeShortTest;
-import br.com.gbvbahia.maker.types.wrappers.MakeFloatTest;
-import br.com.gbvbahia.maker.types.wrappers.MakeDoubleTest;
-import br.com.gbvbahia.maker.types.wrappers.MakeIntegerTest;
-import br.com.gbvbahia.maker.types.wrappers.MakeBooleanTest;
-import br.com.gbvbahia.maker.types.wrappers.MakeByteTest;
-import br.com.gbvbahia.maker.types.wrappers.MakeLongTest;
 import br.com.gbvbahia.i18n.I18NTest;
 import br.com.gbvbahia.maker.MakeEntityTest;
+import br.com.gbvbahia.maker.types.date.MakeCalendarTest;
+import br.com.gbvbahia.maker.types.date.MakeDateTest;
 import br.com.gbvbahia.maker.types.string.MakeCharacterTest;
 import br.com.gbvbahia.maker.types.string.MakeStringTest;
+import br.com.gbvbahia.maker.types.wrappers.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -34,6 +30,8 @@ import org.junit.runners.Suite;
     MakeDoubleTest.class,
     MakeCharacterTest.class,
     MakeStringTest.class,
+    MakeCalendarTest.class,
+    MakeDateTest.class,
     MakeEntityTest.class
 })
 public class Testes {

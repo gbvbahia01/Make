@@ -30,7 +30,7 @@ public class MakeBooleanTest {
         boolean trueCheck = false, falseCheck = false;
         for (int i = 0; i < 100; i++) {
             Boolean b = MakeBoolean.getBoolean();
-            logger.info("Result Boolean: " + b);
+            logger.debug("Result Boolean: " + b);
             assertNotNull("Boolean nulo!", b);
             if (b) {
                 trueCheck = true;
