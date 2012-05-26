@@ -47,44 +47,44 @@ public class NumberFactory implements ValueFactory {
      * exemplo: Classe carro tem um campo int rodas, o Field f seria
      * rodas e T seria a classe Carro que terá o campo definido.
      * @param f O campo que terá o valor definido.
-     * @param toReturn Objeto que contém o Field.
+     * @param entity Objeto que contém o Field.
      * @throws IllegalAccessException se no momento de execução não
      * houver acesso ao campo.
      * @throws IllegalArgumentException Se algum argumento anotado não
      * for válido.
      */
-    private <T> void insertValue(Field f, T toReturn)
+    private <T> void insertValue(Field f, T entity)
             throws IllegalAccessException, IllegalArgumentException {
         if (f.getType().equals(Integer.class)) {
-            f.set(toReturn, valueToInteger(f));
+            f.set(entity, valueToInteger(f));
         } else if (f.getType().equals(int.class)) {
-            f.set(toReturn, valueToInteger(f).intValue());
+            f.set(entity, valueToInteger(f).intValue());
         } else if (f.getType().equals(Long.class)) {
-            f.set(toReturn, valueToLong(f));
+            f.set(entity, valueToLong(f));
         } else if (f.getType().equals(long.class)) {
-            f.set(toReturn, valueToLong(f).longValue());
+            f.set(entity, valueToLong(f).longValue());
         } else if (f.getType().equals(Byte.class)) {
-            f.set(toReturn, valueToByte(f));
+            f.set(entity, valueToByte(f));
         } else if (f.getType().equals(byte.class)) {
-            f.set(toReturn, valueToByte(f).byteValue());
+            f.set(entity, valueToByte(f).byteValue());
         } else if (f.getType().equals(Short.class)) {
-            f.set(toReturn, valueToShort(f));
+            f.set(entity, valueToShort(f));
         } else if (f.getType().equals(short.class)) {
-            f.set(toReturn, valueToShort(f).shortValue());
+            f.set(entity, valueToShort(f).shortValue());
         } else if (f.getType().equals(Double.class)) {
-            f.set(toReturn, valueToDouble(f));
+            f.set(entity, valueToDouble(f));
         } else if (f.getType().equals(double.class)) {
-            f.set(toReturn, valueToDouble(f).doubleValue());
+            f.set(entity, valueToDouble(f).doubleValue());
         } else if (f.getType().equals(Float.class)) {
-            f.set(toReturn, valueToFloat(f));
+            f.set(entity, valueToFloat(f));
         } else if (f.getType().equals(float.class)) {
-            f.set(toReturn, valueToFloat(f).floatValue());
+            f.set(entity, valueToFloat(f).floatValue());
         } else if (f.getType().equals(BigInteger.class)) {
-            f.set(toReturn, valueToBigInteger(f));
+            f.set(entity, valueToBigInteger(f));
         } else if (f.getType().equals(BigDecimal.class)) {
-            f.set(toReturn, valueToBigDecimal(f));
+            f.set(entity, valueToBigDecimal(f));
         } else if (f.getType().equals(String.class)) {
-            f.set(toReturn, valueToString(f));
+            f.set(entity, valueToString(f));
         } else {
             throw new IllegalArgumentException(I18N.getMsg("tipoDesconhecidoMinMax"));
         }
