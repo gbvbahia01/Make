@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Past;
 
 /**
  *
@@ -21,20 +22,17 @@ public class DateFactory implements ValueFactory {
             throws IllegalAccessException, IllegalArgumentException {
         if (f.getType().equals(Date.class)) {
             f.set(entity, valueTime(f).getTime());
-            return;
-        }
-        if (f.getType().isInstance(Calendar.class)) {
+        } else if (f.getType().equals(Calendar.class)) {
             f.set(entity, valueTime(f));
-            return;
         }
-        LogInfo.logDefaultValue(entity, f, "DateFactory");
     }
 
     private Calendar valueTime(Field f) {
         if (f.isAnnotationPresent(Future.class)) {
             return MakeCalendar.getInFuture();
-        } else {
+        } else if (f.isAnnotationPresent(Past.class)) {
             return MakeCalendar.getInPast();
         }
+        return MakeCalendar.getCalendar();
     }
 }

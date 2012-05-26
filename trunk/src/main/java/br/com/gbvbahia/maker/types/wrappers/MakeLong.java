@@ -40,11 +40,20 @@ public class MakeLong {
         double ale = r.nextDouble();
         long numero = 0L;
         if (min < 0 && max > 0) {
-            long longValue = new BigDecimal((ale * (max + min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+            long longValue;
+            if (max + min == 0) {
+                if (r.nextInt() % 2 == 0) {
+                    longValue = new BigDecimal((ale * (max / 2 + min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+                } else {
+                    longValue = new BigDecimal((ale * (max + min / 2))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+                }
+            } else {
+                longValue = new BigDecimal((ale * (max + min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+            }
             if (longValue > 0) {
                 numero = min + longValue;
             } else {
-                numero = min - longValue;
+                numero = max + longValue;
             }
         } else {
             numero = min + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
