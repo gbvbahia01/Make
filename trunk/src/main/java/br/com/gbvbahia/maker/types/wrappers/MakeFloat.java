@@ -33,13 +33,13 @@ public class MakeFloat {
                     new Object[]{min, max}));
         }
         double ale = r.nextDouble();
-        float numero = (float) (min + ( (ale * (max - min))));
+        float numero = (float) (min + ((ale * (max - min))));
         return numero;
     }
 
     /**
      * Retorna um número aleatório limitado ao max passado.
-
+     *
      * @param max Minimo 1.
      * @return Double limitado ao max.
      */
@@ -47,7 +47,7 @@ public class MakeFloat {
         if (max <= 0) {
             throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
         }
-        
+
         return getIntervalo(0, max);
     }
 
@@ -56,6 +56,4 @@ public class MakeFloat {
      */
     private MakeFloat() {
     }
-    
-    
 }

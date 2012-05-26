@@ -6,7 +6,6 @@ package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Random;
 
 /**

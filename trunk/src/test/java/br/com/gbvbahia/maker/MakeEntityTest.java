@@ -5,7 +5,6 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.entityes.*;
-import java.math.BigDecimal;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -14,7 +13,8 @@ import javax.validation.ValidatorFactory;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -52,7 +52,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeDigits() throws Exception {
         logger.info("Maker :: Entity - MakeDigits");
         for (int i = 0; i < 50; i++) {
-            EntityDigits test = MakeEntity.makeEntity(EntityDigits.class);
+            EntityDigitsTest test = MakeEntity.makeEntity(EntityDigitsTest.class);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("IntegerObjeto nulo", test.getBigDecimal());
