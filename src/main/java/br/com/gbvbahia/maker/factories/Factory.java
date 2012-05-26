@@ -4,10 +4,7 @@
  */
 package br.com.gbvbahia.maker.factories;
 
-import br.com.gbvbahia.maker.factories.types.DateFactory;
-import br.com.gbvbahia.maker.factories.types.DefaultFactory;
-import br.com.gbvbahia.maker.factories.types.NumberFactory;
-import br.com.gbvbahia.maker.factories.types.TrueFalseFactory;
+import br.com.gbvbahia.maker.factories.types.*;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import java.lang.reflect.Field;
 import javax.validation.constraints.*;
@@ -23,6 +20,9 @@ public final class Factory {
     private static Log logger = LogFactory.getLog("Factory");
 
     public static ValueFactory makeFactory(Field f) {
+        if (f.isAnnotationPresent(Size.class)){
+            return new SizeFactory();
+        }
         if (f.isAnnotationPresent(Min.class)
                 || f.isAnnotationPresent(Max.class)
                 || f.isAnnotationPresent(DecimalMin.class)

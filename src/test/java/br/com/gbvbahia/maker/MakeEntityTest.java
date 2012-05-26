@@ -37,6 +37,18 @@ public class MakeEntityTest extends TestCase {
     }
 
     @Test
+    public void testMakeSizeString() throws Exception {
+        logger.info("Maker :: Entity - MakeSizeString");
+        for (int i = 0; i < 50; i++) {
+            EntitySizeTest test = MakeEntity.makeEntity(EntitySizeTest.class);
+            logger.info(test);
+            assertNotNull("Test é nulo.", test);
+            assertNotNull("LimiteDefault nula", test.getLimiteDefault());
+            validarJSR303(test);
+        }
+    }
+    
+    @Test
     public void testMakeDate() throws Exception {
         logger.info("Maker :: Entity - MakeDate");
         for (int i = 0; i < 50; i++) {

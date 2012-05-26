@@ -6,6 +6,7 @@ package br.com.gbvbahia.maker.factories.types;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.types.string.MakeCharacter;
+import br.com.gbvbahia.maker.types.string.MakeString;
 import br.com.gbvbahia.maker.types.wrappers.MakeBoolean;
 import java.lang.reflect.Field;
 import java.util.Calendar;
@@ -24,6 +25,13 @@ public class DefaultFactory extends NumberFactory {
     @Override
     public <T> void makeValue(Field f, T entity)
             throws IllegalAccessException, IllegalArgumentException {
+        if (f.getType().equals(String.class)) {
+            LogInfo.logDefaultValue(entity, f, "DefaultFactory");
+            f.set(entity,
+                    MakeString.getString(MakeString.MIN_LENGTH_DEFAULT,
+                    MakeString.MAX_LENGTH_DEFAULT));
+            return;
+        }
         try {
             super.makeValue(f, entity);
         } catch (IllegalArgumentException ex) {
@@ -50,6 +58,7 @@ public class DefaultFactory extends NumberFactory {
 
     /**
      * Verifica se o field é do tipo Date ou Calendar.
+     *
      * @param f Atributo da classe.
      * @return True para Calendar ou Date, false se não for.
      */

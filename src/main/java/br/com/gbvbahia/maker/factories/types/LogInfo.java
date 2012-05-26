@@ -7,6 +7,8 @@ package br.com.gbvbahia.maker.factories.types;
 import br.com.gbvbahia.i18n.I18N;
 import java.lang.reflect.Field;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DurationFormatUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -65,5 +67,35 @@ public class LogInfo {
         Log logger = LogFactory.getLog(StringUtils.rightPad(logFor,
                 SPACE, " "));
         return logger;
+    }
+    
+    /**
+     * Log para duração da execução do método.
+     * @param clazz Classe utilizadora.
+     * @param method Método a ser "timerizado".
+     * @param timeWatch Contabilizador do tempo.
+     */
+    public static void logTimeDuration(String clazz, String method,
+            StopWatch timeWatch){
+        Log logger = getLog(clazz);
+        String time = DurationFormatUtils.formatDuration(
+                    timeWatch.getTime(), "HH:mm:ss");
+            logger.info("Método: " + method
+                    + " Duração: " + time);
+    }
+    
+    /**
+     * Log para vizualização de parâmetros.
+     * @param clazz CLasse utilizadora.
+     * @param method  Informações a serem logadas.
+     */
+    public static void logInfoParameter(String clazz, String method) {
+        Log logger = getLog(clazz);
+            logger.info("Método: " + method);
+    }
+    
+    public static void logWarnInformation(String clazz, String info) {
+        Log logger = getLog(clazz);
+        logger.warn(info);
     }
 }

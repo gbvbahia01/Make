@@ -25,6 +25,24 @@ public class MakeStringTest extends TestCase {
         super("Maker :: String");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testStringLenghtSuport() throws Exception {
+        logger.info("Maker :: String - StringLenghtSuport");
+        try {
+            MakeString.getString(MakeString.MAX_LENGTH_SUPPORTS + 1,
+                    MakeString.StringType.ALL);
+            fail("Uma IllegalArgumentException era esperada!");
+        } catch (IllegalArgumentException ie) {
+            assertTrue("Exceção lançada!", true);
+        }
+        try {
+            MakeString.getPassword(MakeString.MAX_LENGTH_SUPPORTS + 1);
+            fail("Uma IllegalArgumentException era esperada!");
+        } catch (IllegalArgumentException ie) {
+            assertTrue("Exceção lançada!", true);
+        }
+    }
+
     /**
      * Test of getString method, of class MakeString.
      */
