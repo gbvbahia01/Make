@@ -26,8 +26,8 @@ public final class MakeString {
     public enum StringType {
 
         /**
-         * LETTER: Somente caracter tipo letrra a-zA-Z <b>incluindo</b>
-         * espaço.
+         * LETTER: Somente caracter tipo letrra a-zA-Z
+         * <b>incluindo</b> espaço.
          */
         LETTER,
         /**
@@ -53,20 +53,24 @@ public final class MakeString {
      * desenvolvedor.
      */
     public static final int MIN_LENGTH_DEFAULT = 1;
+    /**
+     * Se a solicitação de criação de String for maior que este valor
+     * uma IllergalArgumentException será lançada.
+     */
+    public static final int MAX_LENGTH_SUPPORTS = 4000;
 
     /**
-     * Gera uma String no tamanho limitado solicidato. Alterando de
-     * Upper para Lower case entre as letras. Todo tipo de caracteres
-     * poderá ser incluído na String gerada, utilize:<br>
-     * getString(int caracteres, StringType type) para controlar os
-     * tipos de caracteres.
+     * Gera uma String (Upper ou Lower) no tamanho limitado
+     * solicidato. Todo tipo de caracter poderá ser incluído na String
+     * gerada, utilize:<br> getString(int caracteres, StringType type)
+     * para controlar os tipos de caracter se desejado.
      *
      * @param max Máximo de caracteres
      * @param min Minimo de caracteres
      * @return A sring no tamanho solicitado.
      */
     public static String getString(final int min, final int max) {
-        if (min < 1) {
+        if (min < 0) {
             throw new IllegalArgumentException(
                     I18N.getMsg("caractereToStringErro",
                     new Integer(min)));
@@ -85,7 +89,7 @@ public final class MakeString {
      * <code>(!,#,@,&,$)</code>
      */
     public static String getPassword(final int min, final int max) {
-        if (min < 1) {
+        if (min < 0) {
             throw new IllegalArgumentException(
                     I18N.getMsg("caractereToStringErro",
                     new Integer(min)));
@@ -103,10 +107,8 @@ public final class MakeString {
      */
     public static String getString(final int caracteres,
             final StringType type) {
-        if (caracteres < 1) {
-            throw new IllegalArgumentException(
-                    I18N.getMsg("caractereToStringErro",
-                    new Integer(caracteres)));
+        if (checkCaracters(caracteres)) {
+            return "";
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < caracteres; i++) {
@@ -173,10 +175,8 @@ public final class MakeString {
      * <code>(!,#,@,&,$)</code>
      */
     public static String getPassword(final int caracteres) {
-        if (caracteres <= 0) {
-            throw new IllegalArgumentException(
-                    I18N.getMsg("caractereToStringErro",
-                    new Integer(caracteres)));
+        if (checkCaracters(caracteres)) {
+            return "";
         }
         String toReturn = "";
         for (int i = 0; i < caracteres; i++) {
@@ -219,6 +219,32 @@ public final class MakeString {
         int emailFim = MakeInteger.getMax(emails.length - 1);
         return StringUtils.replace(StringUtils.lowerCase(builder.toString()),
                 " ", "_") + emails[emailFim];
+    }
+
+    /**
+     * Valida o tamanho da String podendo lançar uma
+     * IllegalArgumentException se a String for muito grande ou se a
+     * solicitação for muito grande.
+     *
+     * @param caracteres Quantidade de caracteres que a String deve
+     * ter.
+     * @return True para String vazia, false para uma String válida
+     * não vazia.
+     * @throws IllegalArgumentException Se a quantidade solicitada for
+     * inválida.
+     */
+    private static boolean checkCaracters(final int caracteres) throws IllegalArgumentException {
+        if (caracteres > MAX_LENGTH_SUPPORTS) {
+            throw new IllegalArgumentException(I18N.getMsg("sizeLenghFatal",
+                    MAX_LENGTH_SUPPORTS));
+        } else if (caracteres < 0) {
+            throw new IllegalArgumentException(
+                    I18N.getMsg("caractereToStringErro",
+                    new Integer(caracteres)));
+        } else if (caracteres == 0) {
+            return true;
+        }
+        return false;
     }
 
     /**
