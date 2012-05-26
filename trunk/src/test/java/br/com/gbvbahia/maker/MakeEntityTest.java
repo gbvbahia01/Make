@@ -41,7 +41,7 @@ public class MakeEntityTest extends TestCase {
         logger.info("Maker :: Entity - MakeSizeString");
         for (int i = 0; i < 50; i++) {
             EntitySizeTest test = MakeEntity.makeEntity(EntitySizeTest.class);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("LimiteDefault nula", test.getLimiteDefault());
             validarJSR303(test);
