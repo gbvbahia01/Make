@@ -52,7 +52,7 @@ public class MakeCalendar {
      * Cria um calendar no futuro ou passado, podendo ser até 1800
      * dias para frente ou 1800 dias para traz.
      *
-     * @return Calendar passdo ou futuro.
+     * @return Calendar passado ou futuro.
      */
     public static Calendar getCalendar() {
         Calendar calendar = Calendar.getInstance();
