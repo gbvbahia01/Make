@@ -18,7 +18,7 @@ public class MakeFloat {
     /**
      * Gerador de números aleatórios.
      */
-    private static Random r = new Random();
+    public static Random r = new Random();
 
     /**
      * Gera um número entre os valores solicitados.

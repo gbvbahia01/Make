@@ -37,6 +37,18 @@ public class MakeEntityTest extends TestCase {
     }
 
     @Test
+    public void testMakePattern() throws Exception {
+        logger.info("Maker :: Entity - MakePattern");
+        for (int i = 0; i < 50; i++) {
+            EntityPattern test = MakeEntity.makeEntity(EntityPattern.class);
+            logger.info(test);
+            assertNotNull("Test é nulo.", test);
+            assertNotNull("az nula", test.getAz());
+            validarJSR303(test);
+        }
+    }
+
+    @Test
     public void testMakeSizeString() throws Exception {
         logger.info("Maker :: Entity - MakeSizeString");
         for (int i = 0; i < 50; i++) {
@@ -47,7 +59,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeDate() throws Exception {
         logger.info("Maker :: Entity - MakeDate");

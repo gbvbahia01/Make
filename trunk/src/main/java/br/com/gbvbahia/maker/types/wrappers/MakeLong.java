@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
@@ -20,7 +21,7 @@ public class MakeLong {
     /**
      * Gerador de números aleatórios.
      */
-    private static Random r = new Random();
+    public static final Random RANDOM = new Random();
 
     /**
      * Gera um número entre os valores solicitados.
@@ -37,12 +38,12 @@ public class MakeLong {
         if (min == max) {
             return min;
         }
-        double ale = r.nextDouble();
-        long numero = 0L;
+        double ale = RANDOM.nextDouble();
+        long numero;
         if (min < 0 && max > 0) {
             long longValue;
             if (max + min == 0) {
-                if (r.nextInt() % 2 == 0) {
+                if (RANDOM.nextInt() % 2 == 0) {
                     longValue = new BigDecimal((ale * (max / 2 + min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
                 } else {
                     longValue = new BigDecimal((ale * (max + min / 2))).setScale(0, RoundingMode.HALF_EVEN).longValue();
@@ -56,7 +57,12 @@ public class MakeLong {
                 numero = max + longValue;
             }
         } else {
+            try {
             numero = min + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+            } catch (StackOverflowError s){
+                LogInfo.logWarnInformation("MakeLong", I18N.getMsg("bigErroStack", max, min, ale));
+                throw s;
+            }
         }
         return numero;
     }

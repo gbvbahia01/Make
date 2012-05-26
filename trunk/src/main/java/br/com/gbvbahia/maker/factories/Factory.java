@@ -20,6 +20,9 @@ public final class Factory {
     private static Log logger = LogFactory.getLog("Factory");
 
     public static ValueFactory makeFactory(Field f) {
+        if(f.isAnnotationPresent(Pattern.class)){
+            return new PatternFactory();
+        }
         if (f.isAnnotationPresent(Size.class)){
             return new SizeFactory();
         }
