@@ -6,7 +6,6 @@ package br.com.gbvbahia.entityes;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 

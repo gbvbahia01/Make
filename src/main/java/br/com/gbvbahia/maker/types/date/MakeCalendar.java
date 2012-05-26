@@ -4,7 +4,6 @@
  */
 package br.com.gbvbahia.maker.types.date;
 
-import br.com.gbvbahia.maker.types.wrappers.MakeBoolean;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import java.util.Calendar;
 
