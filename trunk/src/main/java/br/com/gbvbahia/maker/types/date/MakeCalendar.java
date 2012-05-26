@@ -19,13 +19,19 @@ import java.util.Calendar;
 public class MakeCalendar {
 
     /**
+     * Quantidade maxima de dias no intervalo.
+     */
+    public static final int MAX_DAYS = 1800;
+
+    /**
      * Cria um Calendar no futuro, a partir de um dia a mais de hoje
      * até 1800 dias a frente.
+     *
      * @return Calendar no futuro.
      */
     public static Calendar getInFuture() {
         Calendar calendar = Calendar.getInstance();
-        int days = MakeInteger.getIntervalo(1, 1800);
+        int days = MakeInteger.getIntervalo(1, MAX_DAYS);
         calendar.add(Calendar.DAY_OF_MONTH, days);
         return calendar;
     }
@@ -33,11 +39,12 @@ public class MakeCalendar {
     /**
      * Cria um Calendar no passado, a aprtir de um dia a menos de hoje
      * até 1800 dias para traz.
+     *
      * @return Calendar no passado.
      */
     public static Calendar getInPast() {
         Calendar calendar = Calendar.getInstance();
-        int days = MakeInteger.getIntervalo(1, 1800);
+        int days = MakeInteger.getIntervalo(1, MAX_DAYS);
         calendar.add(Calendar.DAY_OF_MONTH, -days);
         return calendar;
     }
@@ -45,13 +52,13 @@ public class MakeCalendar {
     /**
      * Cria um calendar no futuro ou passado, podendo ser até 1800
      * dias para frente ou 1800 dias para traz.
+     *
      * @return Calendar passdo ou futuro.
      */
     public static Calendar getCalendar() {
-        if (MakeBoolean.getBoolean()) {
-            return getInFuture();
-        } else {
-            return getInPast();
-        }
+        Calendar calendar = Calendar.getInstance();
+        int days = MakeInteger.getIntervalo(-MAX_DAYS, MAX_DAYS);
+        calendar.add(Calendar.DAY_OF_MONTH, days);
+        return calendar;
     }
 }
