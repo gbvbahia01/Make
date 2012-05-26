@@ -48,12 +48,12 @@ public class MakeDateTest {
     }
 
     /**
-     * Test of getCalendar method, of class MakeDate.
+     * Test of getDate method, of class MakeDate.
      */
     @Test
     public void testGetCalendar() {
         logger.info("Maker :: Date - GetCalendar");
-        Date result = MakeDate.getCalendar();
+        Date result = MakeDate.getDate();
         assertNotNull("Data Aeatória nula", result);
         Date now = Calendar.getInstance().getTime();
         assertTrue("Now é agora",

@@ -4,22 +4,15 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
-import br.com.gbvbahia.maker.types.wrappers.MakeFloat;
-import br.com.gbvbahia.maker.types.wrappers.MakeLong;
-import br.com.gbvbahia.maker.types.wrappers.MakeShort;
-import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
-import br.com.gbvbahia.maker.types.wrappers.MakeByte;
-import br.com.gbvbahia.maker.types.wrappers.MakeDouble;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.types.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import javax.validation.constraints.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Factory para classes anotadas com @Min e/ou @Max da JSR303.
@@ -30,13 +23,14 @@ import org.apache.commons.logging.LogFactory;
 public class NumberFactory implements ValueFactory {
 
     /**
-     * Logger para depuração.
+     * Nome da entidade que está tendo um atributo fabricado.
      */
-    private static Log logger = LogFactory.getLog("NumberFactory");
+    private String entityName;
 
     @Override
     public <T> void makeValue(final Field f, final T entity)
             throws IllegalAccessException, IllegalArgumentException {
+        this.entityName = entity.getClass().getSimpleName();
         insertValue(f, entity);
     }
 
@@ -115,8 +109,7 @@ public class NumberFactory implements ValueFactory {
         } else if (f.isAnnotationPresent(Digits.class)) {
             toReturn[0] = 0.0;
         } else {
-            logger.debug(I18N.getMsg("defaultValue",
-                    f.getType().getSimpleName()));
+            LogInfo.logDefaultValue(entityName, f, "NumberFactory");
             toReturn[0] = minValue.doubleValue();
         }
         if (f.isAnnotationPresent(Max.class)) {
@@ -126,8 +119,7 @@ public class NumberFactory implements ValueFactory {
         } else if (f.isAnnotationPresent(Digits.class)) {
             toReturn[1] = maxDigits(f.getAnnotation(Digits.class).integer());
         } else {
-            logger.debug(I18N.getMsg("defaultValue",
-                    f.getType().getSimpleName()));
+            LogInfo.logDefaultValue(entityName, f, "NumberFactory");
             toReturn[1] = maxValue.doubleValue();
         }
         return toReturn;
@@ -225,13 +217,14 @@ public class NumberFactory implements ValueFactory {
     }
 
     /**
-     * Verifica se existe a anotação Digits no field, se existir garante
-     * que o valor a ser definido esteja dentro da qantidade máxima
-     * delimitada.
+     * Verifica se existe a anotação Digits no field, se existir
+     * garante que o valor a ser definido esteja dentro da qantidade
+     * máxima delimitada.
+     *
      * @param f Field que terá o valor determinado.
      * @param valor Valor que será inserido no field.
-     * @return O valor passado se não houver @Digits, se houver o valor
-     * será alterado para se encaixar na necessidade.
+     * @return O valor passado se não houver @Digits, se houver o
+     * valor será alterado para se encaixar na necessidade.
      */
     private Number maxDecimal(Field f, Number valor) {
         if (f.isAnnotationPresent(Digits.class)) {
