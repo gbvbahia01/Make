@@ -41,7 +41,7 @@ public class MakeEntityTest extends TestCase {
         logger.info("Maker :: Entity - MakeDate");
         for (int i = 0; i < 50; i++) {
             EntityDateTest test = MakeEntity.makeEntity(EntityDateTest.class);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("NoNullDate nula", test.getNoNullDate());
             validarJSR303(test);
