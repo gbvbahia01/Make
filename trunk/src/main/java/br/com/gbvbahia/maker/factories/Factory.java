@@ -28,6 +28,10 @@ public final class Factory {
                 || f.isAnnotationPresent(DecimalMax.class)) {
             return new NumberFactory();
         }
+        if (f.isAnnotationPresent(Future.class)
+                || f.isAnnotationPresent(Past.class)){
+            
+        }
         if (f.isAnnotationPresent(AssertTrue.class)
                 || f.isAnnotationPresent(AssertFalse.class)) {
             return new TrueFalseFactory();

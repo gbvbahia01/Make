@@ -10,8 +10,6 @@ import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import java.lang.reflect.Field;
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.AssertTrue;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Factory para classes anotadas com @AssertTrue e/ou @AssertFalse da
@@ -22,11 +20,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TrueFalseFactory implements ValueFactory {
 
-    private static Log logger = LogFactory.getLog("TrueFalseFactory");
+    /**
+     * Nome da entidade que está tendo um atributo fabricado.
+     */
+    private String entityName;
 
     @Override
     public <T> void makeValue(Field f, T entity)
             throws IllegalAccessException, IllegalArgumentException {
+        this.entityName = entity.getClass().getSimpleName();
         if (f.getType().equals(Boolean.class)) {
             f.set(entity, valueToBoolean(f));
         } else if (f.getType().equals(boolean.class)) {
@@ -36,15 +38,14 @@ public class TrueFalseFactory implements ValueFactory {
         }
     }
 
-    private static Boolean valueToBoolean(Field f) {
+    private Boolean valueToBoolean(Field f) {
         if (f.isAnnotationPresent(AssertTrue.class)) {
             return true;
         }
         if (f.isAnnotationPresent(AssertFalse.class)) {
             return false;
         }
-        logger.debug(I18N.getMsg("defaultValue",
-                f.getType().getSimpleName()));
+        LogInfo.logDefaultValue(entityName, f, "TrueFalseFactory");
         return MakeInteger.getMax(2) == 2;
     }
 }
