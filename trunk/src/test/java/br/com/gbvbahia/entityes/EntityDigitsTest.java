@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author Guilherme
  */
-public class EntityDigits {
+public class EntityDigitsTest {
     
     @NotNull
     @Digits(integer=3, fraction=5)
