@@ -20,8 +20,8 @@ import java.util.Date;
 public class MakeDate {
 
     /**
-     * Cria um Date no futuro, a partir de um dia a mais de hoje
-     * até 1800 dias a frente.
+     * Cria um Date no futuro, a partir de um dia a mais de hoje até
+     * 1800 dias a frente.
      *
      * @return Date no futuro.
      */
@@ -30,8 +30,8 @@ public class MakeDate {
     }
 
     /**
-     * Cria um Date no passado, a aprtir de um dia a menos de hoje
-     * até 1800 dias para traz.
+     * Cria um Date no passado, a aprtir de um dia a menos de hoje até
+     * 1800 dias para traz.
      *
      * @return Date no passado.
      */
@@ -40,16 +40,12 @@ public class MakeDate {
     }
 
     /**
-     * Cria um Date no futuro ou passado, podendo ser até 1800
-     * dias para frente ou 1800 dias para traz.
+     * Cria um Date no futuro ou passado, podendo ser até 1800 dias
+     * para frente ou 1800 dias para traz.
      *
      * @return Date passdo ou futuro.
      */
-    public static Date getCalendar() {
-        if (MakeBoolean.getBoolean()) {
-            return getInFuture();
-        } else {
-            return getInPast();
-        }
+    public static Date getDate() {
+        return MakeCalendar.getCalendar().getTime();
     }
 }
