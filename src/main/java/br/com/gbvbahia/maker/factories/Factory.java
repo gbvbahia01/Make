@@ -4,6 +4,7 @@
  */
 package br.com.gbvbahia.maker.factories;
 
+import br.com.gbvbahia.maker.factories.types.DateFactory;
 import br.com.gbvbahia.maker.factories.types.DefaultFactory;
 import br.com.gbvbahia.maker.factories.types.NumberFactory;
 import br.com.gbvbahia.maker.factories.types.TrueFalseFactory;
@@ -30,7 +31,7 @@ public final class Factory {
         }
         if (f.isAnnotationPresent(Future.class)
                 || f.isAnnotationPresent(Past.class)){
-            
+            return new DateFactory();
         }
         if (f.isAnnotationPresent(AssertTrue.class)
                 || f.isAnnotationPresent(AssertFalse.class)) {

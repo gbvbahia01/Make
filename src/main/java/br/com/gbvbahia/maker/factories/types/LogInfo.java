@@ -16,6 +16,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogInfo {
 
+    /**
+     * Espaço nas colunas de informação do log.
+     */
     private static final int SPACE = 20;
 
     /**
@@ -29,7 +32,7 @@ public class LogInfo {
     protected static <T> void logDefaultValue(T entity, Field f,
             String logFor) {
         Log logger = getLog(logFor);
-        logger.info(I18N.getMsg("defaultValue",
+        logger.debug(I18N.getMsg("defaultValue",
                 StringUtils.rightPad(entity.getClass().getSimpleName(),
                 SPACE, " "),
                 StringUtils.rightPad(f.getType().getSimpleName(),
@@ -47,7 +50,7 @@ public class LogInfo {
     protected static <T> void logDefaultValue(String entity, Field f,
             String logFor) {
         Log logger = getLog(logFor);
-        logger.info(I18N.getMsg("defaultValue",
+        logger.debug(I18N.getMsg("defaultValue",
                 StringUtils.rightPad(entity, SPACE, " "),
                 StringUtils.rightPad(f.getType().getSimpleName(),
                 SPACE, " "), f.getName()));

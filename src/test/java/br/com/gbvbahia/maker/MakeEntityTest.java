@@ -37,14 +37,26 @@ public class MakeEntityTest extends TestCase {
     }
 
     @Test
+    public void testMakeDate() throws Exception {
+        logger.info("Maker :: Entity - MakeDate");
+        for (int i = 0; i < 50; i++) {
+            EntityDateTest test = MakeEntity.makeEntity(EntityDateTest.class);
+            logger.info(test);
+            assertNotNull("Test é nulo.", test);
+            assertNotNull("NoNullDate nula", test.getNoNullDate());
+            validarJSR303(test);
+        }
+    }
+
+    @Test
     public void testMakeDigits() throws Exception {
         logger.info("Maker :: Entity - MakeDigits");
         for (int i = 0; i < 50; i++) {
-        EntityDigits test = MakeEntity.makeEntity(EntityDigits.class);
-        logger.debug(test);
-        assertNotNull("Test é nulo.", test);
-        assertNotNull("IntegerObjeto nulo", test.getBigDecimal());
-        validarJSR303(test);
+            EntityDigits test = MakeEntity.makeEntity(EntityDigits.class);
+            logger.debug(test);
+            assertNotNull("Test é nulo.", test);
+            assertNotNull("IntegerObjeto nulo", test.getBigDecimal());
+            validarJSR303(test);
         }
     }
 
