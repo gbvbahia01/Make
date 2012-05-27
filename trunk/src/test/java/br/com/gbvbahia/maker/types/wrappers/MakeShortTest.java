@@ -4,9 +4,9 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 /**
@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class MakeShortTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeShortTest");
+    private static Log logger = LogInfo.getLog("Test :: MakeShortTest");
 
     public MakeShortTest() {
         super("Maker :: Short");
@@ -26,7 +26,7 @@ public class MakeShortTest extends TestCase {
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Short - GetIntervalo");
+        logger.info("Short - GetIntervalo");
         for (short min = 32666; min < Short.MAX_VALUE; min++) {
             for (short max = (short) (min + 1); max < Short.MAX_VALUE; max++) {
                 Short result = MakeShort.getIntervalo(min, max);
@@ -46,7 +46,7 @@ public class MakeShortTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Short - GetMax");
+        logger.info("Short - GetMax");
         for (short i = 32666; i < Short.MAX_VALUE; i++) {
             Short result = MakeShort.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);

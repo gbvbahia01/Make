@@ -60,42 +60,57 @@ public class LogInfo {
 
     /**
      * Cria log padrão para padronizar log.
+     *
      * @param logFor Nome da classe que utiliza o log.
      * @return Log para ser utilizado.
      */
-    private static Log getLog(String logFor) {
-        Log logger = LogFactory.getLog(StringUtils.rightPad(logFor,
-                SPACE, " "));
+    public static Log getLog(String logFor) {
+        Log logger = LogFactory.getLog("Make :: " 
+                + StringUtils.rightPad(logFor, SPACE, " "));
         return logger;
     }
-    
+
     /**
      * Log para duração da execução do método.
+     *
      * @param clazz Classe utilizadora.
      * @param method Método a ser "timerizado".
      * @param timeWatch Contabilizador do tempo.
      */
     public static void logTimeDuration(String clazz, String method,
-            StopWatch timeWatch){
+            StopWatch timeWatch) {
         Log logger = getLog(clazz);
         String time = DurationFormatUtils.formatDuration(
-                    timeWatch.getTime(), "HH:mm:ss");
-            logger.info("Método: " + method
-                    + " Duração: " + time);
+                timeWatch.getTime(), "HH:mm:ss");
+        logger.info("Método: " + method
+                + " Duração: " + time);
     }
-    
+
     /**
      * Log para vizualização de parâmetros.
+     *
      * @param clazz CLasse utilizadora.
-     * @param method  Informações a serem logadas.
+     * @param method Informações a serem logadas.
      */
     public static void logInfoParameter(String clazz, String method) {
         Log logger = getLog(clazz);
-            logger.info("Método: " + method);
+        logger.info("Método: " + method);
     }
-    
+
     public static void logWarnInformation(String clazz, String info) {
         Log logger = getLog(clazz);
         logger.warn(info);
+    }
+
+    /**
+     * Gera um log de erro.
+     * @param clazz Classe solicitante.
+     * @param info informação a ser inserida no log.
+     * @param t Causador do erro.
+     */
+    public static void logErrorInformation(final String clazz,
+            final String info, final Throwable t) {
+        Log logger = getLog(clazz);
+        logger.error(info, t);
     }
 }

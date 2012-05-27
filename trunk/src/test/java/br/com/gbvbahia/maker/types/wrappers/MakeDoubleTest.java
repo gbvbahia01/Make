@@ -4,9 +4,9 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 /**
@@ -15,17 +15,18 @@ import org.junit.Test;
  */
 public class MakeDoubleTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeDoubleTest");
+    private static Log logger = LogInfo.getLog("Test :: MakeDoubleTest");
 
     public MakeDoubleTest() {
         super("Maker :: Double");
     }
+
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Double - GetIntervalo");
+        logger.info("Double - GetIntervalo");
         for (double min = 10.1; min < 20.1; min++) {
             for (double max = min + 0.1; max < 20.1; max += 0.1) {
                 Double result = MakeDouble.getIntervalo(min, max);
@@ -45,7 +46,7 @@ public class MakeDoubleTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Double - GetMax");
+        logger.info("Double - GetMax");
         for (double i = 1000000000.11111; i <= 1000000020.22; i += 0.1) {
             Double result = MakeDouble.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);

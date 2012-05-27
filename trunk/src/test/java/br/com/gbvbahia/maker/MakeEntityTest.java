@@ -5,6 +5,13 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.entityes.*;
+import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.types.string.MakeCharacter;
+import br.com.gbvbahia.maker.types.string.MakeString;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -12,7 +19,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,36 +27,49 @@ import org.junit.Test;
  * @author Guilherme
  */
 public class MakeEntityTest extends TestCase {
-
-    private Log logger = LogFactory.getLog("MakeEntityTest");
+    
+    private static Log logger = LogInfo.getLog("Test :: MakeEntityTest");
     private Validator validator;
-
+    
     @Before
     @Override
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
-
+    
     public MakeEntityTest() {
         super("Make Entity");
     }
-
+    
     @Test
     public void testMakePattern() throws Exception {
-        logger.info("Maker :: Entity - MakePattern");
+        logger.info("Entity - MakePattern");
+        List<String> listEmail = new ArrayList<String>();
+        List<String> listAzAZ = new ArrayList<String>();
+        List<String> listNum = new ArrayList<String>();
+        for (int i = 0; i < 10; i++) {
+            listEmail.add(MakeString.getEmail());
+            listAzAZ.add(MakeCharacter.getLetter().toString());
+            listNum.add(MakeCharacter.getNumber().toString());
+        }
+        Map<String, List<String>> patterns = new HashMap<String, List<String>>();
+        patterns.put("EntityPatternTest.email", listEmail);
+        patterns.put("EntityPatternTest.azAZ", listAzAZ);
+        patterns.put("EntityPatternTest.num", listNum);
         for (int i = 0; i < 50; i++) {
-            EntityPattern test = MakeEntity.makeEntity(EntityPattern.class);
-            logger.info(test);
+            EntityPatternTest test =
+                    MakeEntity.makeEntity(EntityPatternTest.class,
+                    patterns);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
-            assertNotNull("az nula", test.getAz());
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeSizeString() throws Exception {
-        logger.info("Maker :: Entity - MakeSizeString");
+        logger.info("Entity - MakeSizeString");
         for (int i = 0; i < 50; i++) {
             EntitySizeTest test = MakeEntity.makeEntity(EntitySizeTest.class);
             logger.debug(test);
@@ -59,10 +78,10 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeDate() throws Exception {
-        logger.info("Maker :: Entity - MakeDate");
+        logger.info("Entity - MakeDate");
         for (int i = 0; i < 50; i++) {
             EntityDateTest test = MakeEntity.makeEntity(EntityDateTest.class);
             logger.debug(test);
@@ -71,10 +90,10 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeDigits() throws Exception {
-        logger.info("Maker :: Entity - MakeDigits");
+        logger.info("Entity - MakeDigits");
         for (int i = 0; i < 50; i++) {
             EntityDigitsTest test = MakeEntity.makeEntity(EntityDigitsTest.class);
             logger.debug(test);
@@ -83,10 +102,10 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeDecimalEntity() throws Exception {
-        logger.info("Maker :: Entity - MakeDecimalEntity");
+        logger.info("Entity - MakeDecimalEntity");
         for (int i = 0; i < 50; i++) {
             EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class);
             logger.debug(test);
@@ -108,10 +127,10 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeBoolaenEntity() throws Exception {
-        logger.info("Maker :: Entity - MakeBoolaenEntity");
+        logger.info("Entity - MakeBoolaenEntity");
         EntityBooleanTest test = MakeEntity.makeEntity(EntityBooleanTest.class);
         logger.debug(test);
         assertNotNull("Test é nulo.", test);
@@ -127,10 +146,10 @@ public class MakeEntityTest extends TestCase {
                 test.getBooleanTrueOrFalse());
         validarJSR303(test);
     }
-
+    
     @Test
     public void testMakeMinMaxEntity() throws Exception {
-        logger.info("Maker :: Entity - MakeMinMaxEntity");
+        logger.info("Entity - MakeMinMaxEntity");
         for (int i = 0; i < 100; i++) {
             EntityMinMaxTest test = MakeEntity.makeEntity(EntityMinMaxTest.class);
             logger.debug(test);
@@ -192,10 +211,10 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeMinEntity() throws Exception {
-        logger.info("Maker :: Entity - MakeMinEntity");
+        logger.info("Entity - MakeMinEntity");
         for (int i = 0; i < 100; i++) {
             EntityMinTest test = MakeEntity.makeEntity(EntityMinTest.class);
             logger.debug(test);
@@ -238,10 +257,10 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeMaxEntity() throws Exception {
-        logger.info("Maker :: Entity - MakeMaxEntity");
+        logger.info("Entity - MakeMaxEntity");
         for (int i = 0; i < 100; i++) {
             EntityMaxTest test = MakeEntity.makeEntity(EntityMaxTest.class);
             logger.debug(test);
@@ -284,10 +303,10 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     @Test
     public void testMakeNotNullEntity() throws Exception {
-        logger.info("Maker :: Entity - MakeNotNullEntity");
+        logger.info("Entity - MakeNotNullEntity");
         for (int i = 0; i < 100; i++) {
             EntityNotNullTest test = MakeEntity.makeEntity(EntityNotNullTest.class);
             logger.debug(test);
@@ -306,7 +325,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-
+    
     private void validarJSR303(Object test) {
         Set<ConstraintViolation<Object>> erros =
                 validator.validate(test);
