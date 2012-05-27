@@ -65,7 +65,7 @@ public class LogInfo {
      * @return Log para ser utilizado.
      */
     public static Log getLog(String logFor) {
-        Log logger = LogFactory.getLog("Make :: " 
+        Log logger = LogFactory.getLog("Make :: "
                 + StringUtils.rightPad(logFor, SPACE, " "));
         return logger;
     }
@@ -104,6 +104,7 @@ public class LogInfo {
 
     /**
      * Gera um log de erro.
+     *
      * @param clazz Classe solicitante.
      * @param info informação a ser inserida no log.
      * @param t Causador do erro.
@@ -112,5 +113,23 @@ public class LogInfo {
             final String info, final Throwable t) {
         Log logger = getLog(clazz);
         logger.error(info, t);
+    }
+
+    public static void logMakeStartInfo(final String clazz, Class ob) {
+        Log logger = LogFactory.getLog(clazz);
+        logger.info("--------------------//--------------------");
+        logger.info(I18N.getMsg("makeclass",
+                ob.getSimpleName()));
+    }
+
+    public static <T> void logFieldInfo(final String clazz, Field f,
+            T entity) throws IllegalArgumentException, IllegalAccessException {
+        Log logger = LogFactory.getLog(clazz);
+        logger.info("Field: " + StringUtils.rightPad(f.getName(), SPACE, " ")
+                + " Type: " + StringUtils.rightPad(f.getType().getSimpleName(), SPACE, " ")
+                + " Enum: " + f.isEnumConstant()
+                + " Synthetic: " + f.isSynthetic()
+                + " Valor Definido: " + f.get(entity)
+                );
     }
 }

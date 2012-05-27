@@ -51,7 +51,8 @@ public class MakeStringTest extends TestCase {
         logger.info("String - GetString_int_int");
         for (int min = 1; min < 50; min++) {
             for (int max = min + 1; max < 100; max++) {
-                String result = MakeString.getString(min, max);
+                String result = MakeString.getString(min, max,
+                        MakeString.StringType.ALL);
                 assertTrue("String erro: Max: " + max
                         + " Min:" + min + " Result: " + result.length(),
                         result.length() >= min

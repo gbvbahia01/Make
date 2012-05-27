@@ -32,7 +32,8 @@ public class SizeFactory implements ValueFactory {
             max = MAX_LENGTH_SUPPORTS;
         }
         if (f.getType().equals(String.class)) {
-            f.set(entity, MakeString.getString(min, max));
+            f.set(entity, MakeString.getString(min, max,
+                    MakeString.StringType.LETTER));
         }
     }
 }

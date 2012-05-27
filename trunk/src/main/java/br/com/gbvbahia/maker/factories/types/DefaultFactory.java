@@ -29,7 +29,8 @@ public class DefaultFactory extends NumberFactory {
             LogInfo.logDefaultValue(entity, f, "DefaultFactory");
             f.set(entity,
                     MakeString.getString(MakeString.MIN_LENGTH_DEFAULT,
-                    MakeString.MAX_LENGTH_DEFAULT));
+                    MakeString.MAX_LENGTH_DEFAULT,
+                    MakeString.StringType.LETTER));
             return;
         }
         try {
