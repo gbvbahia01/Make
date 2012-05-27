@@ -4,12 +4,12 @@
  */
 package br.com.gbvbahia.maker.types.string;
 
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ import org.junit.Test;
  */
 public class MakeStringTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeStringTest");
+    private static Log logger = LogInfo.getLog("Test :: MakeStringTest");
 
     public MakeStringTest() {
         super("Maker :: String");
@@ -27,7 +27,7 @@ public class MakeStringTest extends TestCase {
 
     @Test(expected = IllegalArgumentException.class)
     public void testStringLenghtSuport() throws Exception {
-        logger.info("Maker :: String - StringLenghtSuport");
+        logger.info("String - StringLenghtSuport");
         try {
             MakeString.getString(MakeString.MAX_LENGTH_SUPPORTS + 1,
                     MakeString.StringType.ALL);
@@ -48,7 +48,7 @@ public class MakeStringTest extends TestCase {
      */
     @Test
     public void testGetString_int_int() {
-        logger.info("Maker :: String - GetString_int_int");
+        logger.info("String - GetString_int_int");
         for (int min = 1; min < 50; min++) {
             for (int max = min + 1; max < 100; max++) {
                 String result = MakeString.getString(min, max);
@@ -69,7 +69,7 @@ public class MakeStringTest extends TestCase {
      */
     @Test
     public void testGerarSenha_int_int() {
-        logger.info("Maker :: String - GerarSenha_int_int");
+        logger.info("String - GerarSenha_int_int");
         for (int min = 1; min < 50; min++) {
             for (int max = min + 1; max < 100; max++) {
                 String result = MakeString.getPassword(min, max);
@@ -90,7 +90,7 @@ public class MakeStringTest extends TestCase {
      */
     @Test
     public void testGetString_int_all() {
-        logger.info("Maker :: String - GetString_int_all");
+        logger.info("String - GetString_int_all");
         for (int i = 1; i < 100; i++) {
             String result = MakeString.getString(i,
                     MakeString.StringType.ALL);
@@ -106,7 +106,7 @@ public class MakeStringTest extends TestCase {
 
     @Test
     public void testGetString_int_letter() {
-        logger.info("Maker :: String - GetString_int_letter");
+        logger.info("String - GetString_int_letter");
         for (int i = 1; i < 100; i++) {
             String result = MakeString.getString(i,
                     MakeString.StringType.LETTER);
@@ -126,7 +126,7 @@ public class MakeStringTest extends TestCase {
 
     @Test
     public void testGetString_int_number() {
-        logger.info("Maker :: String - GetString_int_number");
+        logger.info("String - GetString_int_number");
         for (int i = 1; i < 100; i++) {
             String result = MakeString.getString(i,
                     MakeString.StringType.NUMBER);
@@ -146,7 +146,7 @@ public class MakeStringTest extends TestCase {
 
     @Test
     public void testGetString_int_symbols() throws Exception {
-        logger.info("Maker :: String - GetString_int_symbols");
+        logger.info("String - GetString_int_symbols");
         List<Character> character = Arrays.asList(MakeCharacter.SYMBOLS);
         for (int i = 1; i < 100; i++) {
             String result = MakeString.getString(i, MakeString.StringType.SYMBOL);
@@ -164,7 +164,7 @@ public class MakeStringTest extends TestCase {
      */
     @Test
     public void testGerarSenha_int() {
-        logger.info("Maker :: String - GerarSenha_int");
+        logger.info("String - GerarSenha_int");
         for (int i = 1; i < 100; i++) {
             String result = MakeString.getPassword(i);
             assertTrue(result.length() <= i);
@@ -178,7 +178,7 @@ public class MakeStringTest extends TestCase {
 
     @Test
     public void testGerarEmail() {
-        logger.info("Maker :: String - GerarEmail");
+        logger.info("String - GerarEmail");
         for (int i = 0; i < 100; i++) {
             String email = MakeString.getEmail();
             String inicio = StringUtils.substringBefore(email, "@");

@@ -4,11 +4,11 @@
  */
 package br.com.gbvbahia.maker.types.string;
 
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 /**
@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class MakeCharacterTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeCharacterTest");
+    private static Log logger = LogInfo.getLog("Test :: MakeCharacterTest");
 
     public MakeCharacterTest() {
         super("Maker :: Character");
@@ -25,7 +25,7 @@ public class MakeCharacterTest extends TestCase {
 
     @Test
     public void testGetNumber() throws Exception {
-        logger.info("Maker :: Character - GetNumber");
+        logger.info("Character - GetNumber");
         for (int i = 0; i < 1000; i++) {
             Character test = MakeCharacter.getNumber();
             logger.debug("MakeCharacter.getNumber retornou: " + test);
@@ -48,7 +48,7 @@ public class MakeCharacterTest extends TestCase {
 
     @Test
     public void testGetLetter() throws Exception {
-        logger.info("Maker :: Character - GetLetter");
+        logger.info("Character - GetLetter");
         for (int i = 0; i < 1000; i++) {
             Character test = MakeCharacter.getLetter();
             logger.debug("MakeCharacter.getLetter retornou: " + test);
@@ -64,7 +64,7 @@ public class MakeCharacterTest extends TestCase {
 
     @Test
     public void testGetSymbols() throws Exception {
-        logger.info("Maker :: Character - GetSymbols");
+        logger.info("Character - GetSymbols");
         List<Character> character = Arrays.asList(MakeCharacter.SYMBOLS);
         for (int i = 0; i < 100; i++) {
             Character test = MakeCharacter.getSymbols();
@@ -81,7 +81,7 @@ public class MakeCharacterTest extends TestCase {
 
     @Test
     public void testGetCharacter() throws Exception {
-        logger.info("Maker :: Character - GetCharacter");
+        logger.info("Character - GetCharacter");
         List<Character> character = Arrays.asList(MakeCharacter.SYMBOLS);
         for (int i = 0; i < 1000; i++) {
             Character test = MakeCharacter.getCharacter();

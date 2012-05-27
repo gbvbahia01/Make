@@ -4,9 +4,9 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 /**
@@ -15,18 +15,18 @@ import org.junit.Test;
  */
 public class MakeByteTest extends TestCase {
 
-    private Log logger = LogFactory.getLog("MakeByteTest");
+    private static Log logger = LogInfo.getLog("Test :: MakeByteTest");
 
     public MakeByteTest() {
         super("Maker :: Byte");
     }
-    
+
     /**
      * Test of getIntervalo method, of class MakeInteger.
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Byte - GetIntervalo");
+        logger.info("Byte - GetIntervalo");
         for (byte min = 1; min < Byte.MAX_VALUE - 100; min++) {
             for (byte max = (byte) (min + 1); max < Byte.MAX_VALUE; max++) {
                 Byte result = MakeByte.getIntervalo(min, max);
@@ -46,7 +46,7 @@ public class MakeByteTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Byte - GetMax");
+        logger.info("Byte - GetMax");
         for (byte i = 1; i < Byte.MAX_VALUE; i++) {
             Byte result = MakeByte.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);

@@ -4,8 +4,8 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class MakeBooleanTest {
 
-    private Log logger = LogFactory.getLog("MakeBooleanTest");
+    private static Log logger = LogInfo.getLog("Test :: MakeBooleanTest");
 
     public MakeBooleanTest() {
     }
@@ -26,7 +26,7 @@ public class MakeBooleanTest {
      */
     @Test
     public void testGetBoolean() {
-        logger.info("Maker :: Boolean - GetBoolean");
+        logger.info("Boolean - GetBoolean");
         boolean trueCheck = false, falseCheck = false;
         for (int i = 0; i < 100; i++) {
             Boolean b = MakeBoolean.getBoolean();

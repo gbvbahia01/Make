@@ -4,9 +4,9 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 /**
@@ -14,8 +14,7 @@ import org.junit.Test;
  * @author Guilherme
  */
 public class MakeFloatTest extends TestCase {
-
-    private Log logger = LogFactory.getLog("MakeFloatTest");
+    private static Log logger = LogInfo.getLog("Test :: MakeFloatTest");
 
     public MakeFloatTest() {
         super("Maker :: Float");
@@ -25,7 +24,7 @@ public class MakeFloatTest extends TestCase {
      */
     @Test
     public void testGetIntervalo() {
-        logger.info("Maker :: Float - GetIntervalo");
+        logger.info("Float - GetIntervalo");
         for (float min = -10.1f; min < 0.1f; min++) {
             for (float max = min + 0.1f; max < 0.1f; max += 0.1f) {
                 Double result = MakeDouble.getIntervalo(min, max);
@@ -45,7 +44,7 @@ public class MakeFloatTest extends TestCase {
      */
     @Test
     public void testGetMax() {
-        logger.info("Maker :: Float - GetMax");
+        logger.info("Float - GetMax");
         for (float i = 1.11111f; i <= 20.22f; i += 0.1f) {
             Float result = MakeFloat.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);

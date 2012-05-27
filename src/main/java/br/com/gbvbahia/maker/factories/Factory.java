@@ -9,7 +9,6 @@ import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import java.lang.reflect.Field;
 import javax.validation.constraints.*;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  *
@@ -17,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public final class Factory {
 
-    private static Log logger = LogFactory.getLog("Factory");
+    private static Log logger = LogInfo.getLog("Factory");
 
     public static ValueFactory makeFactory(Field f) {
         if(f.isAnnotationPresent(Pattern.class)){

@@ -10,7 +10,7 @@ import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Null;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -27,10 +27,7 @@ public class MakeEntity {
      * expressão regular é disponibilizado uma forma de passar várias
      * strings que atendam um field.<br> key: NomeClasse.nomeFiled
      * valor: Uma lista com várias possibilidades para o field. Minimo
-     * de uma possibilidade deve ser inserida.<br> O map tem
-     * preferência, se for informado o Make não irá tentar gerar a
-     * String que se encaixa, se não for passado o Make tentará gerar
-     * a string e erros podem ocorrer.
+     * de uma possibilidade deve ser inserida.
      */
     public static Map<String, List<String>> patternsList;
 

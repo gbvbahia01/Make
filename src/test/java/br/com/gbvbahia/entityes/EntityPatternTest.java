@@ -11,31 +11,30 @@ import javax.validation.constraints.Pattern;
  *
  * @author Guilherme
  */
-public class EntityPattern {
+public class EntityPatternTest {
 
     @NotNull
-    @Pattern(regexp = "[a-z]")
-    private String az;
+    @Pattern(regexp = "[0-9]")
+    private String num;
     @NotNull
     @Pattern(regexp = "[a-zA-Z]")
     private String azAZ;
-    @Pattern(regexp = "[a-zA-z0-9]+[@][a-z]+")
-    private String letrarNumeros;
-
-    public String getAz() {
-        return az;
-    }
-
-    public void setAz(String az) {
-        this.az = az;
-    }
+    @NotNull
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`"
+    + "{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:"
+    + "[a-z0-9-]*[a-z0-9])?")
+    private String email;
+    
+    @Pattern(regexp="[2-4]")
+    private String nulo;
 
     @Override
     public String toString() {
         return "EntityPattern{"
-                + " az=" + az
+                + " num=" + num
                 + " azAZ=" + azAZ
-                + " letrarNumeros=" + letrarNumeros
+                + " email=" + email
+                + " nulo=" + nulo
                 + '}';
     }
 }
