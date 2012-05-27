@@ -69,14 +69,15 @@ public final class MakeString {
      * @param min Minimo de caracteres
      * @return A sring no tamanho solicitado.
      */
-    public static String getString(final int min, final int max) {
+    public static String getString(final int min, final int max,
+            StringType type) {
         if (min < 0) {
             throw new IllegalArgumentException(
                     I18N.getMsg("caractereToStringErro",
                     new Integer(min)));
         }
         int numero = MakeInteger.getIntervalo(min, max);
-        return getString(numero, StringType.ALL);
+        return getString(numero, type);
     }
 
     /**

@@ -6,6 +6,7 @@ package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.factories.types.LogInfo;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import java.lang.reflect.Field;
 import java.util.List;
@@ -54,9 +55,10 @@ public class MakeEntity {
 
     public static <T> T makeEntity(Class<T> entity) {
         try {
+            LogInfo.logMakeStartInfo("MakeEntity", entity);
             T toReturn = entity.newInstance();
+            
             for (Field f : toReturn.getClass().getDeclaredFields()) {
-                logger.debug("Type: " + f.getType().toString());
                 boolean accessField = f.isAccessible();
                 try {
                     f.setAccessible(true);
@@ -64,14 +66,12 @@ public class MakeEntity {
                         ValueFactory valueFactory = Factory.makeFactory(f);
                         valueFactory.makeValue(f, toReturn);
                     }
-                    logger.debug("GenericString: "
-                            + f.toGenericString()
-                            + " value: "
-                            + f.get(toReturn));
+                    LogInfo.logFieldInfo("MakeEntity", f, toReturn);
                 } finally {
                     f.setAccessible(accessField);
                 }
             }
+            logger.info("********************//********************");
             return toReturn;
         } catch (InstantiationException ex) {
             logger.error(I18N.getMsg("instantiationException",
