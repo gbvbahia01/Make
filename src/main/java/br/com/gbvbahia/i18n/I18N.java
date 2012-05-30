@@ -5,6 +5,7 @@
 package br.com.gbvbahia.i18n;
 
 import java.io.File;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
  * Classe responsável para manter todas as mensagens que serão
  * enviadas ao usuário.<br> Nenhum código deverá conter mensagens que
  * vão diretamente ao usuário.
+ *
  * @since 21/04/2012
  * @author Guilherme
  */
@@ -38,14 +40,13 @@ public class I18N {
      */
     public static String getMsg(final String chave) {
         try {
-            return ResourceBundle.getBundle("br" + File.separator
-                    + "com" + File.separator + "gbvbahia"
-                    + File.separator + "i18n" + File.separator
-                    + "msg").getString(chave);
+            return ResourceBundle.getBundle("msg", Locale.getDefault(),
+                    I18N.class.getClassLoader()).getString(chave);
         } catch (Exception e) {
-            Logger.getLogger(I18N.class.getName()).log(Level.INFO,
-                    "Maker: Menssagem não encontrada para {0}", new Object[]{chave});
-            return chave;
+            e.printStackTrace();
+                Logger.getLogger(I18N.class.getName()).log(Level.INFO,
+                        "Maker: Menssagem não encontrada para {0}", new Object[]{chave});
+                return chave;
         }
     }
 
