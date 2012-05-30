@@ -127,7 +127,6 @@ public class LogInfo {
         Log logger = LogFactory.getLog(clazz);
         logger.info("Field: " + StringUtils.rightPad(f.getName(), SPACE, " ")
                 + " Type: " + StringUtils.rightPad(f.getType().getSimpleName(), SPACE, " ")
-                + " Enum: " + f.isEnumConstant()
                 + " Synthetic: " + f.isSynthetic()
                 + " Valor Definido: " + f.get(entity)
                 );

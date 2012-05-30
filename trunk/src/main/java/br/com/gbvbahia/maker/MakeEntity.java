@@ -11,7 +11,7 @@ import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.NotNull;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -57,12 +57,12 @@ public class MakeEntity {
         try {
             LogInfo.logMakeStartInfo("MakeEntity", entity);
             T toReturn = entity.newInstance();
-            
+
             for (Field f : toReturn.getClass().getDeclaredFields()) {
                 boolean accessField = f.isAccessible();
                 try {
                     f.setAccessible(true);
-                    if (!f.isAnnotationPresent(Null.class)) {
+                    if (f.isAnnotationPresent(NotNull.class)) {
                         ValueFactory valueFactory = Factory.makeFactory(f);
                         valueFactory.makeValue(f, toReturn);
                     }

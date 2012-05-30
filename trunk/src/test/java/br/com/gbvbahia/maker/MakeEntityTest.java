@@ -27,21 +27,37 @@ import org.junit.Test;
  * @author Guilherme
  */
 public class MakeEntityTest extends TestCase {
-    
+
     private static Log logger = LogInfo.getLog("Test :: MakeEntityTest");
     private Validator validator;
-    
+
     @Before
     @Override
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
-    
+
     public MakeEntityTest() {
         super("Make Entity");
     }
-    
+
+    @Test
+    public void testMakeEnum() throws Exception {
+        logger.info("Entity - MakeEnum");
+        EntityEnumTest test = MakeEntity.makeEntity(EntityEnumTest.class);
+        assertNotNull("Test é nulo.", test);
+        assertNotNull("EnumExternalTest nula", test.getEnumExternalTest());
+        validarJSR303(test);
+        try {
+        EntityEnumTest2 test2 = MakeEntity.makeEntity(EntityEnumTest2.class);
+        } catch (IllegalArgumentException e){
+            assertTrue("IllegalArgumentException lançada", true);
+            return;
+        }
+        fail("Enum Clean deveria ter uma IllegalArgumentException");
+    }
+
     @Test
     public void testMakePattern() throws Exception {
         logger.info("Entity - MakePattern");
@@ -66,7 +82,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeSizeString() throws Exception {
         logger.info("Entity - MakeSizeString");
@@ -78,7 +94,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeDate() throws Exception {
         logger.info("Entity - MakeDate");
@@ -90,7 +106,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeDigits() throws Exception {
         logger.info("Entity - MakeDigits");
@@ -102,7 +118,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeDecimalEntity() throws Exception {
         logger.info("Entity - MakeDecimalEntity");
@@ -127,7 +143,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeBoolaenEntity() throws Exception {
         logger.info("Entity - MakeBoolaenEntity");
@@ -146,7 +162,7 @@ public class MakeEntityTest extends TestCase {
                 test.getBooleanTrueOrFalse());
         validarJSR303(test);
     }
-    
+
     @Test
     public void testMakeMinMaxEntity() throws Exception {
         logger.info("Entity - MakeMinMaxEntity");
@@ -211,7 +227,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeMinEntity() throws Exception {
         logger.info("Entity - MakeMinEntity");
@@ -257,7 +273,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeMaxEntity() throws Exception {
         logger.info("Entity - MakeMaxEntity");
@@ -303,7 +319,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     @Test
     public void testMakeNotNullEntity() throws Exception {
         logger.info("Entity - MakeNotNullEntity");
@@ -325,7 +341,7 @@ public class MakeEntityTest extends TestCase {
             validarJSR303(test);
         }
     }
-    
+
     private void validarJSR303(Object test) {
         Set<ConstraintViolation<Object>> erros =
                 validator.validate(test);
