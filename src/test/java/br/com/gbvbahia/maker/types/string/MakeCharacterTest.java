@@ -4,7 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.string;
 
-import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.log.LogInfo;
 import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;

@@ -6,7 +6,7 @@ package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import java.lang.reflect.Field;
 import java.util.List;

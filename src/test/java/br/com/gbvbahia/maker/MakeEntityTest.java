@@ -5,7 +5,7 @@
 package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.entityes.*;
-import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.string.MakeCharacter;
 import br.com.gbvbahia.maker.types.string.MakeString;
 import java.util.ArrayList;

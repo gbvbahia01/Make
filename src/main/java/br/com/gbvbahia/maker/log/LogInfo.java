@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.factories.types;
+package br.com.gbvbahia.maker.log;
 
 import br.com.gbvbahia.i18n.I18N;
 import java.lang.reflect.Field;
@@ -31,7 +31,7 @@ public class LogInfo {
      * @param f Campo que está sendo determinado.
      * @param logFor Nome da classe que está utilizando o log.
      */
-    protected static <T> void logDefaultValue(T entity, Field f,
+    public static <T> void logDefaultValue(T entity, Field f,
             String logFor) {
         Log logger = getLog(logFor);
         logger.debug(I18N.getMsg("defaultValue",
@@ -49,7 +49,7 @@ public class LogInfo {
      * @param f Campo que está sendo determinado.
      * @param logFor Nome da classe que está utilizando o log.
      */
-    protected static <T> void logDefaultValue(String entity, Field f,
+    public static <T> void logDefaultValue(String entity, Field f,
             String logFor) {
         Log logger = getLog(logFor);
         logger.debug(I18N.getMsg("defaultValue",
