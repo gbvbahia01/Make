@@ -23,14 +23,7 @@ import org.apache.commons.logging.LogFactory;
 public class MakeEntity {
 
     private static Log logger = LogFactory.getLog("MakeEntity");
-    /**
-     * Devido a complexidade de gerar uma string com base em uma
-     * expressão regular é disponibilizado uma forma de passar várias
-     * strings que atendam um field.<br> key: NomeClasse.nomeFiled
-     * valor: Uma lista com várias possibilidades para o field. Minimo
-     * de uma possibilidade deve ser inserida.
-     */
-    public static Map<String, List<String>> patternsList;
+
 
     /**
      * Utilize para passar possibilidades para serem inseridas nos
@@ -49,12 +42,7 @@ public class MakeEntity {
      */
     public static <T> T makeEntity(Class<T> entity,
             Map<String, List<String>> patterns) {
-        patternsList = patterns;
-        return makeEntity(entity);
-    }
-
-    public static <T> T makeEntity(Class<T> entity) {
-        try {
+         try {
             LogInfo.logMakeStartInfo("MakeEntity", entity);
             T toReturn = entity.newInstance();
 
@@ -63,7 +51,8 @@ public class MakeEntity {
                 try {
                     f.setAccessible(true);
                     if (f.isAnnotationPresent(NotNull.class)) {
-                        ValueFactory valueFactory = Factory.makeFactory(f);
+                        ValueFactory valueFactory =
+                                Factory.makeFactory(f, patterns);
                         valueFactory.makeValue(f, toReturn);
                     }
                     LogInfo.logFieldInfo("MakeEntity", f, toReturn);
@@ -82,5 +71,9 @@ public class MakeEntity {
                     entity.getName()), ex);
             throw new RuntimeException(ex);
         }
+    }
+
+    public static <T> T makeEntity(Class<T> entity) {
+       return makeEntity(entity, null);
     }
 }
