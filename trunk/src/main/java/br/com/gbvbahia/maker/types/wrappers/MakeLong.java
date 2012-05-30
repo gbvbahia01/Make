@@ -5,7 +5,7 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.log.LogInfo;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;

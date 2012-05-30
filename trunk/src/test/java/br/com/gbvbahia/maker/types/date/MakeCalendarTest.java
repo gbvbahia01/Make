@@ -4,7 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.date;
 
-import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.log.LogInfo;
 import java.util.Calendar;
 import org.apache.commons.logging.Log;
 import static org.junit.Assert.assertNotNull;

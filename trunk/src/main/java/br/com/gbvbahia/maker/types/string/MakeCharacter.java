@@ -5,7 +5,7 @@
 package br.com.gbvbahia.maker.types.string;
 
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import org.apache.commons.logging.Log;
 

@@ -4,7 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
-import br.com.gbvbahia.maker.factories.types.LogInfo;
+import br.com.gbvbahia.maker.log.LogInfo;
 import org.apache.commons.logging.Log;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
