@@ -39,6 +39,9 @@ public final class Factory {
                 || f.isAnnotationPresent(AssertFalse.class)) {
             return new TrueFalseFactory();
         }
+        if (f.getType().isEnum()){
+            return new EnumFactory();
+        }
         return new DefaultFactory();
     }
 }
