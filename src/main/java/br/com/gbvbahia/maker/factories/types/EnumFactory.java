@@ -18,8 +18,8 @@ public class EnumFactory implements ValueFactory {
     public <T> void makeValue(Field f, T entity) throws IllegalAccessException, IllegalArgumentException {
         Object[] enumConstants = f.getType().getEnumConstants();
         int enumSize = enumConstants.length;
-        if (enumSize < 0){
-            throw new IllegalArgumentException(I18N.getMsg("enumInvalida", f.getType().getSimpleName()));
+        if (enumSize <= 0){
+            throw new UnsupportedOperationException(I18N.getMsg("enumInvalida", f.getType().getSimpleName()));
         }
         f.set(entity,
                 enumConstants[MakeInteger.getMax(enumSize) - 1]);

@@ -24,7 +24,6 @@ public class MakeEntity {
 
     private static Log logger = LogFactory.getLog("MakeEntity");
 
-
     /**
      * Utilize para passar possibilidades para serem inseridas nos
      * campos anotados com javax.validation.constraints.Pattern.<br> O
@@ -42,25 +41,27 @@ public class MakeEntity {
      */
     public static <T> T makeEntity(Class<T> entity,
             Map<String, List<String>> patterns) {
-         try {
+        try {
             LogInfo.logMakeStartInfo("MakeEntity", entity);
             T toReturn = entity.newInstance();
-
             for (Field f : toReturn.getClass().getDeclaredFields()) {
                 boolean accessField = f.isAccessible();
                 try {
                     f.setAccessible(true);
                     if (f.isAnnotationPresent(NotNull.class)) {
-                        ValueFactory valueFactory =
-                                Factory.makeFactory(f, patterns);
-                        valueFactory.makeValue(f, toReturn);
+                        try {
+                            ValueFactory valueFactory =
+                                    Factory.makeFactory(f, patterns);
+                            valueFactory.makeValue(f, toReturn);
+                        } catch (IllegalArgumentException e) {
+                            LogInfo.logFieldNull("MakeEntity", f);
+                        }
+                        LogInfo.logFieldInfo("MakeEntity", f, toReturn);
                     }
-                    LogInfo.logFieldInfo("MakeEntity", f, toReturn);
                 } finally {
                     f.setAccessible(accessField);
                 }
             }
-            logger.info("********************//********************");
             return toReturn;
         } catch (InstantiationException ex) {
             logger.error(I18N.getMsg("instantiationException",
@@ -74,6 +75,6 @@ public class MakeEntity {
     }
 
     public static <T> T makeEntity(Class<T> entity) {
-       return makeEntity(entity, null);
+        return makeEntity(entity, null);
     }
 }

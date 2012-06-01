@@ -51,11 +51,11 @@ public class MakeEntityTest extends TestCase {
         validarJSR303(test);
         try {
         EntityEnumTest2 test2 = MakeEntity.makeEntity(EntityEnumTest2.class);
-        } catch (IllegalArgumentException e){
-            assertTrue("IllegalArgumentException lançada", true);
+        } catch (UnsupportedOperationException e){
+            assertTrue("UnsupportedOperationException lançada", true);
             return;
         }
-        fail("Enum Clean deveria ter uma IllegalArgumentException");
+        fail("Enum Clean deveria ter uma UnsupportedOperationException");
     }
 
     @Test
