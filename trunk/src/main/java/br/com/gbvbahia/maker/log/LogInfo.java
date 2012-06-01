@@ -131,4 +131,11 @@ public class LogInfo {
                 + " Valor Definido: " + f.get(entity)
                 );
     }
+    
+    public static <T> void logFieldNull(final String clazz, Field f) {
+        Log logger = LogFactory.getLog(clazz);
+        logger.warn(I18N.getMsg("fieldSettedNull", f.getName(),
+                f.getType().getSimpleName()));
+    }
+    
 }
