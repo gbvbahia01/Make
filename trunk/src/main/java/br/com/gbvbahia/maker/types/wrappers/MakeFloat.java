@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
  * @since 11/05/2012
  * @author Guilherme
  */
-public class MakeFloat {
+public final class MakeFloat {
 
     /**
      * Gera um número entre os valores solicitados.

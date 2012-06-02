@@ -4,7 +4,6 @@
  */
 package br.com.gbvbahia.i18n;
 
-import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 21/04/2012
  * @author Guilherme
  */
-public class I18N {
+public final  class I18N {
 
     /**
      * Construtor privado, classe não pode ser instânciada.
