@@ -26,7 +26,6 @@ public class EntitySyntheticTest {
     private EntityNotNullTest notNullTest;
     @NotNull
     private List<EntityBooleanTest> listBooleanTests;
-    @NotNull
     private Set<EntityDateTest> setDateTest;
     @NotNull
     private Map<String, Double> mapTest;
