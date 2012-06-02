@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * @since v.1 20/05/2012
  * @author Guilherme
  */
-public class MakeBoolean {
+public final class MakeBoolean {
 
     /**
      * Devolve um valor booleano, true ou false.
@@ -36,5 +36,11 @@ public class MakeBoolean {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Não pode ser instânciado.
+     */
+    private MakeBoolean() {
     }
 }

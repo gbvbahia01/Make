@@ -14,7 +14,7 @@ import org.apache.commons.logging.Log;
  *
  * @author Guilherme
  */
-public class MakeCharacter {
+public final class MakeCharacter {
 
     /**
      * Logger para depuração.
@@ -95,12 +95,13 @@ public class MakeCharacter {
                 return getLetter();
         }
     }
-    
-        /**
+
+    /**
      * Retorna True para tipos Character ou char.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Character ou char, False para outros tipos.
+     * @return True para tipos Character ou char, False para outros
+     * tipos.
      */
     public static boolean isCharacter(Field f) {
         if (f.getType().equals(Character.class)
@@ -108,5 +109,11 @@ public class MakeCharacter {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Não pode ser instânciado.
+     */
+    private MakeCharacter() {
     }
 }

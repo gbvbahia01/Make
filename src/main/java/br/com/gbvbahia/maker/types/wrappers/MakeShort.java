@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  * @since v.1 11/05/2012
  * @author Guilherme
  */
-public class MakeShort {
+public final class MakeShort {
 
     /**
      * Retorna um número aleatório limitado ao max passado.

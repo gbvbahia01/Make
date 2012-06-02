@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Guilherme
  */
-public class LogInfo {
+public final class LogInfo {
 
     /**
      * Espaço nas colunas de informação do log.

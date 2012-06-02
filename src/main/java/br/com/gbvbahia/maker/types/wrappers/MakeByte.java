@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  * @since v.1 11/05/2012
  * @author Guilherme
  */
-public class MakeByte {
+public final class MakeByte {
 
     /**
      * Retorna um número aleatório limitado ao max passado.
@@ -32,13 +32,12 @@ public class MakeByte {
     public static Byte getIntervalo(final byte min, final byte max) {
         return MakeLong.getIntervalo(min, max).byteValue();
     }
-    
-        /**
+
+    /**
      * Retorna True para tipos Byte ou byte.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Byte ou byte, False para outros
-     * tipos.
+     * @return True para tipos Byte ou byte, False para outros tipos.
      */
     public static boolean isByte(Field f) {
         if (f.getType().equals(Byte.class)
@@ -46,5 +45,11 @@ public class MakeByte {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Não pode ser instânciado.
+     */
+    private MakeByte() {
     }
 }

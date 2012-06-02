@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  * @since v.1 01/05/2012
  * @author Guilherme
  */
-public class MakeEntity {
+public final class MakeEntity {
 
     /**
      * Logger de informações ao desenvolvedor.

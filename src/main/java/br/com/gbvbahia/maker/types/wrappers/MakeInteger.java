@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * @since 21/04/2012
  * @author Guilherme
  */
-public class MakeInteger {
+public final class MakeInteger {
 
     /**
      * Gera um número entre os valores solicitados.

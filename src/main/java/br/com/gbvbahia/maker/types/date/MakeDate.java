@@ -14,7 +14,7 @@ import java.util.Date;
  * @since v.1 24/05/2012
  * @author Guilherme
  */
-public class MakeDate {
+public final class MakeDate {
 
     /**
      * Cria um Date no futuro, a partir de um dia a mais de hoje até
@@ -44,5 +44,11 @@ public class MakeDate {
      */
     public static Date getDate() {
         return MakeCalendar.getCalendar().getTime();
+    }
+
+    /**
+     * Não pode ser instânciado.
+     */
+    private MakeDate() {
     }
 }

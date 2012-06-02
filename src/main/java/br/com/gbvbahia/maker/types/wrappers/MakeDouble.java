@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * @since 11/05/2012
  * @author Guilherme
  */
-public class MakeDouble {
+public final class MakeDouble {
 
 
     /**

@@ -15,7 +15,7 @@ import java.util.Calendar;
  * @since v.1 24/05/2012
  * @author Guilherme
  */
-public class MakeCalendar {
+public final class MakeCalendar {
 
     /**
      * Quantidade maxima de dias no intervalo.
@@ -59,5 +59,11 @@ public class MakeCalendar {
         int days = MakeInteger.getIntervalo(-MAX_DAYS, MAX_DAYS);
         calendar.add(Calendar.DAY_OF_MONTH, days);
         return calendar;
+    }
+
+    /**
+     * Não pode ser instânciado.
+     */
+    private MakeCalendar() {
     }
 }
