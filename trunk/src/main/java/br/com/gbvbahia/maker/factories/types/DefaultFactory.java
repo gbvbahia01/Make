@@ -33,6 +33,11 @@ public class DefaultFactory extends NumberFactory {
      * em relacionamentos.
      */
     private static Map<Class, Object> criados = new HashMap<Class, Object>();
+    /**
+     * Garante a quantidade de recursividade, se passar de 5 irá
+     * reaproveitar objetos.
+     */
+    private static int recursiveCount = 0;
     private String className = this.getClass().getSimpleName();
 
     @Override
@@ -60,6 +65,7 @@ public class DefaultFactory extends NumberFactory {
             } else if (makeRelationships
                     && f.getType().isAnnotationPresent(Entity.class)) {
                 avoidCyclicReference(f, entity, makeRelationships);
+                recursiveCount--;
             } else {
                 throw new IllegalArgumentException(I18N.getMsg("tipoDesconhecidoDefault"));
             }
@@ -102,17 +108,18 @@ public class DefaultFactory extends NumberFactory {
     private <T> void avoidCyclicReference(Field f, T entity,
             boolean makeRelationships) throws IllegalAccessException,
             IllegalArgumentException {
-        if (criados.containsKey(f.getType())) {
-            f.set(entity, criados.get(f.getType()));
-        } else {
-            criados.put(f.getType(),
-                    MakeEntity.makeEntity(f.getType(),
-                    makeRelationships));
+        if (recursiveCount > 3 && criados.containsKey(f.getType())) {
             f.set(entity, criados.get(f.getType()));
             LogInfo.logWarnInformation("DefaultFactory",
                     I18N.getMsg("possivelReferenciaCiclica",
                     f.getType().getSimpleName(),
                     entity.getClass().getSimpleName()));
+        } else {
+            recursiveCount++;
+            criados.put(f.getType(),
+                    MakeEntity.makeEntity(f.getType(),
+                    makeRelationships));
+            f.set(entity, criados.get(f.getType()));
         }
     }
 
