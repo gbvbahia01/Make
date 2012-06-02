@@ -28,6 +28,14 @@ public class EntityBooleanTest {
     private Boolean booleanPrimitiveTrue;
     @NotNull
     private Boolean booleanTrueOrFalse;
+    @NotNull
+    private boolean primitiveBoolean;
+    @NotNull
+    @AssertTrue
+    private boolean primitiveTrueBoolean;
+    @NotNull
+    @AssertFalse
+    private boolean primitiveFalseBoolean;
 
     public Boolean getBooleanObjectFalse() {
         return booleanObjectFalse;
@@ -77,6 +85,9 @@ public class EntityBooleanTest {
                 + ", booleanPrimitiveFalse=" + booleanPrimitiveFalse
                 + ", booleanPrimitiveTrue=" + booleanPrimitiveTrue
                 + ", booleanTrueOrFalse=" + booleanTrueOrFalse
+                + ", primitiveBoolean=" + primitiveBoolean
+                + ", primitiveTrueBoolean=" + primitiveTrueBoolean
+                + ", primitiveFalseBoolean=" + primitiveFalseBoolean
                 + '}';
     }
 }
