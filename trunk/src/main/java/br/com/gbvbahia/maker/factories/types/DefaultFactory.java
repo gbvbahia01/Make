@@ -27,14 +27,20 @@ import javax.persistence.Entity;
  */
 public class DefaultFactory extends NumberFactory {
 
+    /**
+     * Representa um map com chave class para a classe de objetos
+     * criados e os objetos criados como valor, podendo reaproveitar
+     * em relacionamentos.
+     */
     private static Map<Class, Object> criados = new HashMap<Class, Object>();
+    private String className = this.getClass().getSimpleName();
 
     @Override
     public <T> void makeValue(Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         criados.put(entity.getClass(), entity);
         if (f.getType().equals(String.class)) {
-            LogInfo.logDefaultValue(entity, f, "DefaultFactory");
+            LogInfo.logDefaultValue(entity, f, className);
             f.set(entity,
                     MakeString.getString(MakeString.MIN_LENGTH_DEFAULT,
                     MakeString.MAX_LENGTH_DEFAULT,
@@ -44,20 +50,12 @@ public class DefaultFactory extends NumberFactory {
         try {
             super.makeValue(f, entity, makeRelationships);
         } catch (IllegalArgumentException ex) {
-            if (f.getType().equals(Character.class)) {
-                LogInfo.logDefaultValue(entity, f, "DefaultFactory");
-                f.set(entity, MakeCharacter.getCharacter());
-            } else if (f.getType().equals(char.class)) {
-                LogInfo.logDefaultValue(entity, f, "DefaultFactory");
-                f.set(entity, MakeCharacter.getCharacter().charValue());
-            } else if (f.getType().equals(Boolean.class)) {
-                LogInfo.logDefaultValue(entity, f, "DefaultFactory");
-                f.set(entity, MakeBoolean.getBoolean());
-            } else if (f.getType().equals(boolean.class)) {
-                LogInfo.logDefaultValue(entity, f, "DefaultFactory");
-                f.set(entity, MakeBoolean.getBoolean().booleanValue());
+            if (MakeCharacter.isCharacter(f)) {
+                valueToCharacter(f, entity);
+            } else if (MakeBoolean.isBoolean(f)) {
+                valueToBoolean(f, entity);
             } else if (isDate(f)) {
-                LogInfo.logDefaultValue(entity, f, "DateFactory");
+                LogInfo.logDefaultValue(entity, f, className);
                 new DateFactory().makeValue(f, entity, makeRelationships);
             } else if (makeRelationships
                     && f.getType().isAnnotationPresent(Entity.class)) {
@@ -65,6 +63,26 @@ public class DefaultFactory extends NumberFactory {
             } else {
                 throw new IllegalArgumentException(I18N.getMsg("tipoDesconhecidoDefault"));
             }
+        }
+    }
+
+    private <T> void valueToBoolean(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
+        LogInfo.logDefaultValue(entity, f, className);
+        if (f.getType().equals(Boolean.class)) {
+            f.set(entity, MakeBoolean.getBoolean());
+        } else {
+            f.set(entity, MakeBoolean.getBoolean().booleanValue());
+        }
+    }
+
+    private <T> void valueToCharacter(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
+        LogInfo.logDefaultValue(entity, f, className);
+        if (f.getType().equals(Character.class)) {
+            f.set(entity, MakeCharacter.getCharacter());
+        } else {
+            f.set(entity, MakeCharacter.getCharacter().charValue());
         }
     }
 

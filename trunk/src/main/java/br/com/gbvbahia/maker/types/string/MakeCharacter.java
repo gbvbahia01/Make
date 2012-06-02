@@ -7,6 +7,7 @@ package br.com.gbvbahia.maker.types.string;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
+import java.lang.reflect.Field;
 import org.apache.commons.logging.Log;
 
 /**
@@ -93,5 +94,19 @@ public class MakeCharacter {
             default:
                 return getLetter();
         }
+    }
+    
+        /**
+     * Retorna True para tipos Character ou char.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para tipos Character ou char, False para outros tipos.
+     */
+    public static boolean isCharacter(Field f) {
+        if (f.getType().equals(Character.class)
+                || f.getType().equals(char.class)) {
+            return true;
+        }
+        return false;
     }
 }

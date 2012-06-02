@@ -22,7 +22,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MakeEntity {
 
-    private static Log logger = LogFactory.getLog("MakeEntity");
+    /**
+     * Logger de informações ao desenvolvedor.
+     */
+    private static Log logger = LogFactory.getLog(MakeEntity.class.getSimpleName());
 
     /**
      * Utilize para passar possibilidades para serem inseridas nos
@@ -45,7 +48,7 @@ public class MakeEntity {
     public static <T> T makeEntity(Class<T> entity, boolean makeRelationships,
             Map<String, List<String>> patterns) {
         try {
-            LogInfo.logMakeStartInfo("MakeEntity", entity);
+            LogInfo.logMakeStartInfo(MakeEntity.class.getSimpleName(), entity);
             T toReturn = entity.newInstance();
             for (Field f : toReturn.getClass().getDeclaredFields()) {
                 boolean accessField = f.isAccessible();
@@ -55,17 +58,19 @@ public class MakeEntity {
                         try {
                             ValueFactory valueFactory =
                                     Factory.makeFactory(f, patterns);
-                            valueFactory.makeValue(f, toReturn, makeRelationships);
+                            valueFactory.makeValue(f, toReturn,
+                                    makeRelationships);
                         } catch (IllegalArgumentException e) {
-                            LogInfo.logFieldNull("MakeEntity", f);
+                            LogInfo.logFieldNull(MakeEntity.class.getSimpleName(), f);
                         }
-                        LogInfo.logFieldInfo("MakeEntity", f, toReturn);
+                        LogInfo.logFieldInfo(MakeEntity.class.getSimpleName(), f, toReturn);
                     }
                 } finally {
                     f.setAccessible(accessField);
                 }
             }
-            LogInfo.logMakeEndInfo("MakeEntity", entity);
+            LogInfo.logMakeEndInfo(MakeEntity.class.getSimpleName(),
+                    entity);
             return toReturn;
         } catch (InstantiationException ex) {
             logger.error(I18N.getMsg("instantiationException",
@@ -94,5 +99,11 @@ public class MakeEntity {
      */
     public static <T> T makeEntity(Class<T> entity, boolean makeRelationships) {
         return makeEntity(entity, makeRelationships, null);
+    }
+
+    /**
+     * Não pode ser instânciado.
+     */
+    private MakeEntity() {
     }
 }
