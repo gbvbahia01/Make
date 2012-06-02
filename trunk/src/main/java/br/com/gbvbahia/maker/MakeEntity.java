@@ -9,6 +9,7 @@ import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.validation.constraints.NotNull;
@@ -99,6 +100,54 @@ public final class MakeEntity {
      */
     public static <T> T makeEntity(Class<T> entity, boolean makeRelationships) {
         return makeEntity(entity, makeRelationships, null);
+    }
+
+    /**
+     * Utilize para criar uma lista de entidades.
+     *
+     * @param <T> Tipo da entidade solicitada.
+     * @param entity Classe da entidade solicitada.
+     * @param amount Quantidade de entidades criadas dentro da lista.
+     * @param makeRelationships Se entidades relacionadas devem ser
+     * criados
+     * @param patterns Map com o nome da classe e do campo a ser
+     * definido. E uma lista de possibilidades.
+     * @return Lista com a quantidade de entidades solicitadas em
+     * amount.
+     */
+    public static <T> List<T> makeEntitys(Class<T> entity, int amount,
+            boolean makeRelationships, Map<String, List<String>> patterns) {
+        if (amount < 1) {
+            throw new IllegalArgumentException(I18N.getMsg("qutdadeEntityInvalida", amount));
+        }
+        List<T> toReturn = new ArrayList<T>();
+        for (int i = 0; i < amount; i++) {
+            toReturn.add(makeEntity(entity, makeRelationships, patterns));
+        }
+        return toReturn;
+    }
+
+    /**
+     * Utilize para criar uma lista de entidades.
+     *
+     * @param <T> Tipo da entidade solicitada.
+     * @param entity Classe da entidade solicitada.
+     * @param amount Quantidade de entidades criadas dentro da lista.
+     * @param makeRelationships Se entidades relacionadas devem ser
+     * criados
+     * @return Lista com a quantidade de entidades solicitadas em
+     * amount.
+     */
+    public static <T> List<T> makeEntitys(Class<T> entity, int amount,
+            boolean makeRelationships) {
+        if (amount < 1) {
+            throw new IllegalArgumentException(I18N.getMsg("qutdadeEntityInvalida", amount));
+        }
+        List<T> toReturn = new ArrayList<T>();
+        for (int i = 0; i < amount; i++) {
+            toReturn.add(makeEntity(entity, makeRelationships, null));
+        }
+        return toReturn;
     }
 
     /**
