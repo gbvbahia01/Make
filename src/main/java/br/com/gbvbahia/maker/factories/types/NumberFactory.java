@@ -30,7 +30,7 @@ public class NumberFactory implements ValueFactory {
 
     @Override
     public <T> void makeValue(final Field f, final T entity,
-    boolean makeRelationships)
+            boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         this.entityName = entity.getClass().getSimpleName();
         insertValue(f, entity);
@@ -51,30 +51,18 @@ public class NumberFactory implements ValueFactory {
      */
     private <T> void insertValue(Field f, T entity)
             throws IllegalAccessException, IllegalArgumentException {
-        if (f.getType().equals(Integer.class)) {
-            f.set(entity, valueToInteger(f));
-        } else if (f.getType().equals(int.class)) {
-            f.set(entity, valueToInteger(f).intValue());
-        } else if (f.getType().equals(Long.class)) {
-            f.set(entity, valueToLong(f));
-        } else if (f.getType().equals(long.class)) {
-            f.set(entity, valueToLong(f).longValue());
-        } else if (f.getType().equals(Byte.class)) {
-            f.set(entity, valueToByte(f));
-        } else if (f.getType().equals(byte.class)) {
-            f.set(entity, valueToByte(f).byteValue());
-        } else if (f.getType().equals(Short.class)) {
-            f.set(entity, valueToShort(f));
-        } else if (f.getType().equals(short.class)) {
-            f.set(entity, valueToShort(f).shortValue());
-        } else if (f.getType().equals(Double.class)) {
-            f.set(entity, valueToDouble(f));
-        } else if (f.getType().equals(double.class)) {
-            f.set(entity, valueToDouble(f).doubleValue());
-        } else if (f.getType().equals(Float.class)) {
-            f.set(entity, valueToFloat(f));
-        } else if (f.getType().equals(float.class)) {
-            f.set(entity, valueToFloat(f).floatValue());
+        if (MakeInteger.isInteger(f)) {
+            valueToInteger(f, entity);
+        } else if (MakeLong.isLong(f)) {
+            valueToLong(f, entity);
+        } else if (MakeByte.isByte(f)) {
+            valueToByte(f, entity);
+        } else if (MakeShort.isShort(f)) {
+            valueToShort(f, entity);
+        } else if (MakeDouble.isDouble(f)) {
+            valueToDouble(f, entity);
+        } else if (MakeFloat.isFloat(f)) {
+            valueToFloat(f, entity);
         } else if (f.getType().equals(BigInteger.class)) {
             f.set(entity, valueToBigInteger(f));
         } else if (f.getType().equals(BigDecimal.class)) {
@@ -127,20 +115,31 @@ public class NumberFactory implements ValueFactory {
         return toReturn;
     }
 
-    private Integer valueToInteger(Field f) {
+    private <T> void valueToInteger(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
         Number[] minMax = getMinMaxValues(f, Integer.MIN_VALUE,
                 Integer.MAX_VALUE);
         int min = minMax[0].intValue();
         int max = minMax[1].intValue();
-        return MakeInteger.getIntervalo(min, max);
+        if (f.getType().equals(Integer.class)) {
+            f.set(entity, MakeInteger.getIntervalo(min, max));
+        } else {
+            f.set(entity, MakeInteger.getIntervalo(min, max).intValue());
+        }
     }
 
-    private Number valueToLong(Field f) {
+    private <T> void valueToLong(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
         Number[] minMax = getMinMaxValues(f, Long.MIN_VALUE,
                 Long.MAX_VALUE);
         long min = minMax[0].longValue();
         long max = minMax[1].longValue();
-        return MakeLong.getIntervalo(min, max);
+        if (f.getType().equals(Integer.class)) {
+            f.set(entity, MakeLong.getIntervalo(min, max));
+        } else {
+            f.set(entity, MakeLong.getIntervalo(min, max).longValue());
+        }
+
     }
 
     private String valueToString(Field f) {
@@ -170,37 +169,58 @@ public class NumberFactory implements ValueFactory {
         return new BigDecimal(maxDecimal(f, intervalo).toString());
     }
 
-    private Double valueToDouble(Field f) {
+    private <T> void valueToDouble(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
         Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
                 Double.MAX_VALUE);
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
         Double intervalo = MakeDouble.getIntervalo(min, max);
-        return maxDecimal(f, intervalo).doubleValue();
+        if (f.getType().equals(Double.class)) {
+            f.set(entity, new Double(maxDecimal(f, intervalo).doubleValue()));
+        } else {
+            f.set(entity, maxDecimal(f, intervalo).doubleValue());
+        }
     }
 
-    private Float valueToFloat(Field f) {
+    private <T> void valueToFloat(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
         Number[] minMax = getMinMaxValues(f, -Float.MAX_VALUE,
                 Float.MAX_VALUE);
         float min = minMax[0].floatValue();
         float max = minMax[1].floatValue();
-        return MakeFloat.getIntervalo(min, max).floatValue();
+        Float intervalo = MakeFloat.getIntervalo(min, max);
+        if (f.getType().equals(Double.class)) {
+            f.set(entity, new Float(maxDecimal(f, intervalo).floatValue()));
+        } else {
+            f.set(entity, maxDecimal(f, intervalo).floatValue());
+        }
     }
 
-    private Byte valueToByte(Field f) {
+    private <T> void valueToByte(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
         Number[] minMax = getMinMaxValues(f, Byte.MIN_VALUE,
                 Byte.MAX_VALUE);
         byte min = minMax[0].byteValue();
         byte max = minMax[1].byteValue();
-        return MakeByte.getIntervalo(min, max);
+        if (f.getType().equals(Byte.class)) {
+            f.set(entity, MakeByte.getIntervalo(min, max));
+        } else {
+            f.set(entity, MakeByte.getIntervalo(min, max).byteValue());
+        }
     }
 
-    private Short valueToShort(Field f) {
+    private <T> void valueToShort(Field f, T entity)
+            throws IllegalArgumentException, IllegalAccessException {
         Number[] minMax = getMinMaxValues(f, Short.MIN_VALUE,
                 Short.MAX_VALUE);
         short min = minMax[0].shortValue();
         short max = minMax[1].shortValue();
-        return MakeShort.getIntervalo(min, max);
+        if (f.getType().equals(Short.class)) {
+            f.set(entity, MakeShort.getIntervalo(min, max));
+        } else {
+            f.set(entity, MakeShort.getIntervalo(min, max).shortValue());
+        }
     }
 
     /**

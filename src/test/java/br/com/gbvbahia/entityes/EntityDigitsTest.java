@@ -15,21 +15,29 @@ import javax.validation.constraints.NotNull;
  * @author Guilherme
  */
 public class EntityDigitsTest {
-    
-    @NotNull
-    @Digits(integer=3, fraction=5)
-    private BigDecimal bigDecimal;
 
     @NotNull
-    @Digits(integer=5, fraction=3)
+    @Digits(integer = 3, fraction = 5)
+    private BigDecimal bigDecimal;
+    @NotNull
+    @Digits(integer = 5, fraction = 3)
     private Integer integerObjeto;
-    
     @NotNull
     @Max(10)
     @Min(0)
-    @Digits(integer=2, fraction=1)
-    private Double misturado;
-    
+    @Digits(integer = 2, fraction = 1)
+    private Double positivo;
+    @NotNull
+    @Max(100)
+    @Min(-150)
+    @Digits(integer = 3, fraction = 2)
+    private Float misturado;
+    @NotNull
+    @Max(-100)
+    @Min(-150)
+    @Digits(integer = 3, fraction = 2)
+    private Float negativo;
+
     public BigDecimal getBigDecimal() {
         return bigDecimal;
     }
@@ -47,18 +55,20 @@ public class EntityDigitsTest {
     }
 
     public Double getMisturado() {
-        return misturado;
+        return positivo;
     }
 
     public void setMisturado(Double misturado) {
-        this.misturado = misturado;
+        this.positivo = misturado;
     }
 
     @Override
     public String toString() {
-        return "EntityDigits{" 
+        return "EntityDigits{"
                 + " integerObjeto=" + integerObjeto
+                + " misturado=" + positivo
                 + " misturado=" + misturado
+                + " negativo=" + negativo
                 + " bigDecimal=" + bigDecimal + '}';
     }
 }

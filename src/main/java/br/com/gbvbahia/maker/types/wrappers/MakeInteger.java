@@ -4,6 +4,8 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import java.lang.reflect.Field;
+
 /**
  * Gerador de números inteiros aleatório.
  *
@@ -38,6 +40,19 @@ public class MakeInteger {
      */
     private MakeInteger() {
     }
-    
-    
+
+    /**
+     * Retorna True para tipos Integer ou int.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para tipos Integer ou int, False para outros
+     * tipos.
+     */
+    public static boolean isInteger(Field f) {
+        if (f.getType().equals(Integer.class)
+                || f.getType().equals(int.class)) {
+            return true;
+        }
+        return false;
+    }
 }
