@@ -141,4 +141,12 @@ public class LogInfo {
         logger.warn(I18N.getMsg("fieldSettedNull", f.getName(),
                 f.getType().getSimpleName()));
     }
+
+    /**
+     * Não pode ser instânciado.
+     */
+    private LogInfo() {
+    }
+    
+    
 }
