@@ -122,19 +122,23 @@ public class LogInfo {
                 ob.getSimpleName()));
     }
 
+    public static void logMakeEndInfo(final String clazz, Class ob) {
+        Log logger = LogFactory.getLog(clazz);
+        logger.info(I18N.getMsg("makeEnd", ob.getSimpleName()));
+        logger.info("********************//********************");
+    }
+
     public static <T> void logFieldInfo(final String clazz, Field f,
             T entity) throws IllegalArgumentException, IllegalAccessException {
         Log logger = LogFactory.getLog(clazz);
         logger.info("Field: " + StringUtils.rightPad(f.getName(), SPACE, " ")
                 + " Type: " + StringUtils.rightPad(f.getType().getSimpleName(), SPACE, " ")
-                + " Valor Definido: " + f.get(entity)
-                );
+                + " Valor Definido: " + f.get(entity));
     }
-    
+
     public static <T> void logFieldNull(final String clazz, Field f) {
         Log logger = LogFactory.getLog(clazz);
         logger.warn(I18N.getMsg("fieldSettedNull", f.getName(),
                 f.getType().getSimpleName()));
     }
-    
 }
