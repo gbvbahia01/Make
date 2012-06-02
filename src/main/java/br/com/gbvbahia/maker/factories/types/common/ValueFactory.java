@@ -21,11 +21,13 @@ public interface ValueFactory {
      * rodas e T seria a classe Carro que terá o campo definido.
      * @param f O campo que terá o valor definido.
      * @param toReturn Objeto que contém o Field.
+     * @param makeRelationships True irá criar objetos para ManyToOne
+     * ou OneToOne <b>que tenha anotação</b> javax.persistence.Entity.
      * @throws IllegalAccessException se no momento de execução não
      * houver acesso ao campo.
      * @throws IllegalArgumentException Se algum argumento anotado não
      * for válido.
      */
-    <T> void makeValue(Field f, T entity)
+    <T> void makeValue(Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException;
 }

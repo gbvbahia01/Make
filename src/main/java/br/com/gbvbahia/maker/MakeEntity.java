@@ -35,11 +35,13 @@ public class MakeEntity {
      *
      * @param <T> Tipo da entidade a se populada.
      * @param entity Classe da entidade a ser populada.
+     * @param makeRelationships True irá criar objetos para ManyToOne
+     * ou OneToOne <b>que tenha anotação</b> javax.persistence.Entity.
      * @param patterns Map com o nome da classe e do campo a ser
      * definido. E uma lista de possibilidades.
      * @return Uma entidade populada com base na JSR303.
      */
-    public static <T> T makeEntity(Class<T> entity,
+    public static <T> T makeEntity(Class<T> entity, boolean makeRelationships,
             Map<String, List<String>> patterns) {
         try {
             LogInfo.logMakeStartInfo("MakeEntity", entity);
@@ -52,7 +54,7 @@ public class MakeEntity {
                         try {
                             ValueFactory valueFactory =
                                     Factory.makeFactory(f, patterns);
-                            valueFactory.makeValue(f, toReturn);
+                            valueFactory.makeValue(f, toReturn, makeRelationships);
                         } catch (IllegalArgumentException e) {
                             LogInfo.logFieldNull("MakeEntity", f);
                         }
@@ -74,7 +76,7 @@ public class MakeEntity {
         }
     }
 
-    public static <T> T makeEntity(Class<T> entity) {
-        return makeEntity(entity, null);
+    public static <T> T makeEntity(Class<T> entity, boolean makeRelationships) {
+        return makeEntity(entity, makeRelationships, null);
     }
 }

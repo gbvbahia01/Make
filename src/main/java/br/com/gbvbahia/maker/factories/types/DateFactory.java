@@ -18,7 +18,7 @@ import javax.validation.constraints.Past;
  */
 public class DateFactory implements ValueFactory {
 
-    public <T> void makeValue(Field f, T entity)
+    public <T> void makeValue(Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         if (f.getType().equals(Date.class)) {
             f.set(entity, valueTime(f).getTime());

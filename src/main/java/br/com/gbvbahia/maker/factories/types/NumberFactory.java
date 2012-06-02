@@ -4,9 +4,9 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
-import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -29,7 +29,8 @@ public class NumberFactory implements ValueFactory {
     private String entityName;
 
     @Override
-    public <T> void makeValue(final Field f, final T entity)
+    public <T> void makeValue(final Field f, final T entity,
+    boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         this.entityName = entity.getClass().getSimpleName();
         insertValue(f, entity);
