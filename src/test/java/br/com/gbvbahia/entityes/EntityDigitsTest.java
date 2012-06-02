@@ -37,6 +37,10 @@ public class EntityDigitsTest {
     @Min(-150)
     @Digits(integer = 3, fraction = 2)
     private Float negativo;
+    @NotNull
+    @Min(0)
+    @Digits(fraction = 2, integer = 17)
+    private Double saldo = 0.00;
 
     public BigDecimal getBigDecimal() {
         return bigDecimal;
@@ -68,6 +72,7 @@ public class EntityDigitsTest {
                 + " integerObjeto=" + integerObjeto
                 + " misturado=" + positivo
                 + " misturado=" + misturado
+                + " saldo=" + saldo
                 + " negativo=" + negativo
                 + " bigDecimal=" + bigDecimal + '}';
     }

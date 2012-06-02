@@ -114,7 +114,7 @@ public class MakeEntityTest extends TestCase {
             EntityDigitsTest test = MakeEntity.makeEntity(EntityDigitsTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
-            assertNotNull("IntegerObjeto nulo", test.getBigDecimal());
+            assertNotNull("BigDecimal nulo", test.getBigDecimal());
             validarJSR303(test);
         }
     }
