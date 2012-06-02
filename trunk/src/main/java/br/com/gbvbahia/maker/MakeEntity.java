@@ -64,6 +64,7 @@ public class MakeEntity {
                     f.setAccessible(accessField);
                 }
             }
+            LogInfo.logMakeEndInfo("MakeEntity", entity);
             return toReturn;
         } catch (InstantiationException ex) {
             logger.error(I18N.getMsg("instantiationException",
