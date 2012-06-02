@@ -17,7 +17,7 @@ import java.util.Random;
  * @since 11/05/2012
  * @author Guilherme
  */
-public class MakeLong {
+public final class MakeLong {
 
     /**
      * Gerador de números aleatórios.
