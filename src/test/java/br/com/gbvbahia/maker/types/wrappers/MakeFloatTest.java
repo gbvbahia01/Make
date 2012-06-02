@@ -45,12 +45,12 @@ public class MakeFloatTest extends TestCase {
     @Test
     public void testGetMax() {
         logger.info("Float - GetMax");
-        for (float i = 1.11111f; i <= 20.22f; i += 0.1f) {
+        for (float i = 1.11111f; i <= 1120.22f; i += 0.1f) {
             Float result = MakeFloat.getMax(i);
             logger.debug("Max: " + i + " Result: " + result);
             assertTrue("Intervalo incorreta", result <= i);
         }
-        Float result2 = MakeFloat.getMax(1l);
+        Float result2 = MakeFloat.getMax(1f);
         logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }
