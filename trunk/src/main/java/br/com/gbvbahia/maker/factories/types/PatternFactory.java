@@ -24,6 +24,7 @@ import org.apache.commons.logging.Log;
  * @author Guilherme
  */
 public class PatternFactory implements ValueFactory {
+
     /**
      * Devido a complexidade de gerar uma string com base em uma
      * expressão regular é disponibilizado uma forma de passar várias
@@ -42,7 +43,8 @@ public class PatternFactory implements ValueFactory {
      */
     private Log logger = LogInfo.getLog("PatternFactory");
 
-    public <T> void makeValue(Field f, T entity) throws IllegalAccessException, IllegalArgumentException {
+    public <T> void makeValue(Field f, T entity, boolean makeRelationships)
+            throws IllegalAccessException, IllegalArgumentException {
         if (patternsList == null) {
             LogInfo.logWarnInformation("PatternFactory",
                     I18N.getMsg("regexListNull",

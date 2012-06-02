@@ -6,6 +6,7 @@ package br.com.gbvbahia.entityes;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.Null;
  *
  * @author Guilherme
  */
+@Entity
 public class EntityNotNullTest {
 
     @Null

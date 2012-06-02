@@ -46,6 +46,7 @@ public final class Factory {
         if (f.getType().isEnum()) {
             return new EnumFactory();
         }
+        
         return new DefaultFactory();
     }
 }

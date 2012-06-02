@@ -15,7 +15,9 @@ import java.lang.reflect.Field;
  */
 public class EnumFactory implements ValueFactory {
 
-    public <T> void makeValue(Field f, T entity) throws IllegalAccessException, IllegalArgumentException {
+    public <T> void makeValue(Field f, T entity,
+            boolean makeRelationships) throws IllegalAccessException,
+            IllegalArgumentException {
         Object[] enumConstants = f.getType().getEnumConstants();
         int enumSize = enumConstants.length;
         if (enumSize <= 0){
