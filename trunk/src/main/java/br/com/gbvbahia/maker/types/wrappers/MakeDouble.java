@@ -5,8 +5,8 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.util.Random;
 
 /**
  * Gerador de números inteiros aleatório.
@@ -16,10 +16,6 @@ import java.util.Random;
  */
 public class MakeDouble {
 
-    /**
-     * Gerador de números aleatórios.
-     */
-    private static Random r = new Random();
 
     /**
      * Gera um número entre os valores solicitados.
@@ -33,14 +29,13 @@ public class MakeDouble {
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
-        double ale = r.nextDouble();
-        double numero = 0D;
+        double ale = MakeLong.RANDOM.nextDouble();
+        double numero;
         if (min < 0 && max > 0) {
-            double doubleValue = new BigDecimal((ale * (max + min))).doubleValue();
-            if (doubleValue > 0) {
-                numero = min + doubleValue;
-            } else {
-                numero = min - doubleValue;
+            if (MakeLong.RANDOM.nextInt() % 2 == 0) {
+                numero = new BigDecimal((ale * (max + 0))).doubleValue();
+            }else {
+                numero = new BigDecimal((ale * (0 + min))).doubleValue();
             }
         } else {
             numero = min + new BigDecimal((ale * (max - min))).doubleValue();
@@ -66,5 +61,20 @@ public class MakeDouble {
      * Não pode ser instânciada.
      */
     private MakeDouble() {
+    }
+
+    /**
+     * Retorna True para tipos Double ou double.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para tipos Double ou double, False para outros
+     * tipos.
+     */
+    public static boolean isDouble(Field f) {
+        if (f.getType().equals(Double.class)
+                || f.getType().equals(double.class)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -6,8 +6,8 @@ package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.log.LogInfo;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +36,8 @@ public class MakeEntity {
      * @param <T> Tipo da entidade a se populada.
      * @param entity Classe da entidade a ser populada.
      * @param makeRelationships True irá criar objetos para ManyToOne
-     * ou OneToOne <b>que tenha anotação</b> javax.persistence.Entity.
+     * ou OneToOne <b>que tenham anotação</b>
+     * javax.persistence.Entity.
      * @param patterns Map com o nome da classe e do campo a ser
      * definido. E uma lista de possibilidades.
      * @return Uma entidade populada com base na JSR303.
@@ -77,6 +78,20 @@ public class MakeEntity {
         }
     }
 
+    /**
+     * Cria a entidade com atributos populados, somente os que tiverem
+     * a anotação javax.validation.constraints.NotNull, Coleções, Set,
+     * List e Map não serão criados. Relacionamentos com outras
+     * classes, somente terão objetos criados se a classe relacionada
+     * contiver a anotação javax.persistence.Entity.
+     *
+     * @param <T> Tipo da entidade a se populada.
+     * @param entity Classe da entidade a ser populada.
+     * @param makeRelationships True irá criar objetos para ManyToOne
+     * ou OneToOne <b>que tenham anotação</b>
+     * javax.persistence.Entity.
+     * @return Uma entidade populada com base na JSR303.
+     */
     public static <T> T makeEntity(Class<T> entity, boolean makeRelationships) {
         return makeEntity(entity, makeRelationships, null);
     }

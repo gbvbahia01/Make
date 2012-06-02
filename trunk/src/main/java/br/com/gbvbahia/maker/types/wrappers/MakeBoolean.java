@@ -4,6 +4,8 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import java.lang.reflect.Field;
+
 /**
  * Cria um valor booleano aleatório.
  *
@@ -19,5 +21,20 @@ public class MakeBoolean {
      */
     public static Boolean getBoolean() {
         return MakeInteger.getMax(2) == 2;
+    }
+
+    /**
+     * Retorna True para tipos Boolean ou boolean.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para tipos Boolean ou boolean, False para outros
+     * tipos.
+     */
+    public static boolean isBoolean(Field f) {
+        if (f.getType().equals(Boolean.class)
+                || f.getType().equals(boolean.class)) {
+            return true;
+        }
+        return false;
     }
 }

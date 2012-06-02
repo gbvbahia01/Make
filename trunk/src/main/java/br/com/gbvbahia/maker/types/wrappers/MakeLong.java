@@ -6,6 +6,7 @@ package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
@@ -86,5 +87,19 @@ public class MakeLong {
      * Não pode ser instânciada.
      */
     private MakeLong() {
+    }
+    
+    /**
+     * Retorna True para tipos Long ou long.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para tipos Long ou long, False para outros tipos.
+     */
+    public static boolean isLong(Field f) {
+        if (f.getType().equals(Long.class)
+                || f.getType().equals(long.class)) {
+            return true;
+        }
+        return false;
     }
 }

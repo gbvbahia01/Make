@@ -5,7 +5,7 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
-import java.util.Random;
+import java.lang.reflect.Field;
 
 /**
  * Gerador de números inteiros aleatório.
@@ -16,24 +16,19 @@ import java.util.Random;
 public class MakeFloat {
 
     /**
-     * Gerador de números aleatórios.
-     */
-    public static Random r = new Random();
-
-    /**
      * Gera um número entre os valores solicitados.
      *
      * @param min Número minimo aceitavel.
      * @param max Número máximo aceitavel.
      * @return Número aleatório.
      */
-    public static Float getIntervalo(final double min, final double max) {
+    public static Float getIntervalo(final float min, final float max) {
         if (min > max) {
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
-        double ale = r.nextDouble();
-        float numero = (float) (min + ((ale * (max - min))));
+        float numero = MakeDouble.getIntervalo(new Float(min).doubleValue(),
+                new Float(max).floatValue()).floatValue();
         return numero;
     }
 
@@ -43,7 +38,7 @@ public class MakeFloat {
      * @param max Minimo 1.
      * @return Double limitado ao max.
      */
-    public static Float getMax(final double max) {
+    public static Float getMax(final float max) {
         if (max <= 0) {
             throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
         }
@@ -55,5 +50,20 @@ public class MakeFloat {
      * Não pode ser instânciada.
      */
     private MakeFloat() {
+    }
+
+    /**
+     * Retorna True para tipos Float ou float.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para tipos Float ou float, False para outros
+     * tipos.
+     */
+    public static boolean isFloat(Field f) {
+        if (f.getType().equals(Float.class)
+                || f.getType().equals(float.class)) {
+            return true;
+        }
+        return false;
     }
 }
