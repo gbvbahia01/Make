@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker.types.string;
 
 import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.works.MakePassword;
 import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
@@ -36,7 +37,7 @@ public class MakeStringTest extends TestCase {
             assertTrue("Exceção lançada!", true);
         }
         try {
-            MakeString.getPassword(MakeString.MAX_LENGTH_SUPPORTS + 1);
+            MakePassword.getPassword(MakePassword.MAX_LENGTH_SUPPORTS + 1);
             fail("Uma IllegalArgumentException era esperada!");
         } catch (IllegalArgumentException ie) {
             assertTrue("Exceção lançada!", true);
@@ -72,8 +73,8 @@ public class MakeStringTest extends TestCase {
     public void testGerarSenha_int_int() {
         logger.info("String - GerarSenha_int_int");
         for (int min = 1; min < 50; min++) {
-            for (int max = min + 1; max < 100; max++) {
-                String result = MakeString.getPassword(min, max);
+            for (int max = min + 1; max <= MakePassword.MAX_LENGTH_SUPPORTS; max++) {
+                String result = MakePassword.getPassword(min, max);
                 assertTrue("Senha erro: Max: " + max
                         + " Min:" + min + " Result: " + result.length(),
                         result.length() >= min
@@ -166,8 +167,8 @@ public class MakeStringTest extends TestCase {
     @Test
     public void testGerarSenha_int() {
         logger.info("String - GerarSenha_int");
-        for (int i = 1; i < 100; i++) {
-            String result = MakeString.getPassword(i);
+        for (int i = 1; i < MakePassword.MAX_LENGTH_SUPPORTS; i++) {
+            String result = MakePassword.getPassword(i);
             assertTrue(result.length() <= i);
             assertTrue("Senha erro: Resultado" + result.length()
                     + " Esperado: " + i, result.length() <= i);
