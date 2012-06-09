@@ -9,7 +9,11 @@ import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * Cria e-mails com formatos válidos, após @ existe uma lista de
+ * possibilidades, antes do @ uma String entre 3 a 8 caracteres é
+ * fabricada.
  *
+ * @since v.1 09/06/2012
  * @author Guilherme
  */
 public class MakeEmail {
@@ -25,8 +29,8 @@ public class MakeEmail {
      * @return Uma string no formato de email.
      */
     public static String getEmail() {
-        String[] emails = {"@hotmail.com","@ig.com.br",
-            "@amazon.com","@mycompany.com","@aol.com",
+        String[] emails = {"@hotmail.com", "@ig.com.br",
+            "@amazon.com", "@mycompany.com", "@aol.com",
             "@gmail.com", "@yahoo.com", "@bol.com.br", "@globo.com",
             "@nikko.jp", "@uol.com.br", "@saber.com.br"};
         int tamanho = MakeInteger.getIntervalo(3, 8);

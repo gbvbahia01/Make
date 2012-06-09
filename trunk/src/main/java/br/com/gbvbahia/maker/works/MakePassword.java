@@ -8,6 +8,8 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 
 /**
+ * Cria uma senha, uma String contendo letras, números e caracteres
+ * especiais,{ "!", "#", "@", "&", "$",}.
  *
  * @since v.1 09/06/2012
  * @author Guilherme
@@ -25,7 +27,8 @@ public class MakePassword {
      * solicitado.
      *
      * @param min Quantidade minima de caracteres solicitado.
-     * @param max Quantidade maxima de caracteres solicitado.
+     * @param max Quantidade maxima de caracteres solicitado. Esse
+     * valor é limitado a 100 caractres.
      * @return Senha com numeros, letras e caracteres especiais
      * <code>(!,#,@,&,$)</code>
      */
@@ -42,7 +45,8 @@ public class MakePassword {
     /**
      * Gera uma senha com a quantidade de caracteres solicitado.
      *
-     * @param caracteres Quantidade de caracteres solicitado.
+     * @param caracteres Quantidade de caracteres solicitado. Esse
+     * valor é limitado a 100 caractres.
      * @return Senha com numeros, letras e caracteres especiais
      * <code>(!,#,@,&,$)</code>
      */
@@ -62,8 +66,12 @@ public class MakePassword {
                 "A", "a", "B", "b", "C", "c", "D", "d", "E",
                 "e", "F", "f", "G", "g", "H", "h", "I", "i", "J", "j",
                 "K", "k", "L", "l", "Z", "z",
+                "!", "#", "@", "&", "$",
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
                 "K", "k", "L", "l", "M", "m", "N", "n", "O",
                 "o", "P", "p", "Q", "q", "R", "r", "S", "s", "T", "t",
+                "!", "#", "@", "&", "$",
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
                 "U", "u", "V", "v", "X", "x", "Z", "z"};
             int letra1 = MakeInteger.getMax(a.length - 1);
             toReturn += a[letra1];
