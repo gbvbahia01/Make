@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker.types.string;
 
 import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.works.MakeEmail;
 import br.com.gbvbahia.maker.works.MakePassword;
 import java.util.Arrays;
 import java.util.List;
@@ -182,7 +183,7 @@ public class MakeStringTest extends TestCase {
     public void testGerarEmail() {
         logger.info("String - GerarEmail");
         for (int i = 0; i < 100; i++) {
-            String email = MakeString.getEmail();
+            String email = MakeEmail.getEmail();
             String inicio = StringUtils.substringBefore(email, "@");
             String fim = StringUtils.substringAfter(email, "@");
             logger.debug("Email - Inicio: " + inicio
