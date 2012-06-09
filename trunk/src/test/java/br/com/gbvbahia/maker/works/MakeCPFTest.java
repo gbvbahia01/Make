@@ -7,8 +7,7 @@ package br.com.gbvbahia.maker.works;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
