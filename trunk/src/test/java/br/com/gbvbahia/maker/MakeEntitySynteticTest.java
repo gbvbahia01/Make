@@ -44,7 +44,7 @@ public class MakeEntitySynteticTest extends TestCase {
         assertNotNull("Ref Ciclica nula.", test.getCicleTest());
         assertNotNull("Entidade NotNullTest nula", test.getNotNullTest());
         assertNull("NotEntity não é nula.", test.getNoEntity());
-        logger.info(test);
+        logger.debug(test);
     }
 
     private void validarJSR303(Object test) {
