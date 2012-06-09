@@ -150,33 +150,6 @@ public final class MakeString {
     }
 
     /**
-     * Gera um e-mail válido aleatoriamente. O texto após @ é fixo em
-     * algumas possibilidades.
-     * <code>{"@hotmail.com", "@gmail.com",
-     * "@yahoo.com", "@bol.com.br", "@globo.com", "@nikko.jp",
-     * "@uol.com.br"};</code>
-     *
-     * @return
-     */
-    public static String getEmail() {
-        String[] emails = {"@hotmail.com",
-            "@gmail.com", "@yahoo.com", "@bol.com.br", "@globo.com",
-            "@nikko.jp", "@uol.com.br", "@saber.com.br"};
-        int tamanho = MakeInteger.getIntervalo(3, 8);
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < tamanho; i++) {
-            if (MakeInteger.getMax(2) % 2 == 0) {
-                builder.append(MakeCharacter.getLetter());
-            } else {
-                builder.append(MakeCharacter.getNumber());
-            }
-        }
-        int emailFim = MakeInteger.getMax(emails.length - 1);
-        return StringUtils.replace(StringUtils.lowerCase(builder.toString()),
-                " ", "_") + emails[emailFim];
-    }
-
-    /**
      * Valida o tamanho da String podendo lançar uma
      * IllegalArgumentException se a String for muito grande ou se a
      * solicitação for muito grande.

@@ -9,6 +9,7 @@ import br.com.gbvbahia.entityes.EntityPatternTest;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.string.MakeCharacter;
 import br.com.gbvbahia.maker.types.string.MakeString;
+import br.com.gbvbahia.maker.works.MakeEmail;
 import java.util.*;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -74,7 +75,7 @@ public class MakeEntitysTest extends TestCase {
         List<String> listAzAZ = new ArrayList<String>();
         List<String> listNum = new ArrayList<String>();
         for (int i = 0; i < 10; i++) {
-            listEmail.add(MakeString.getEmail());
+            listEmail.add(MakeEmail.getEmail());
             listAzAZ.add(MakeCharacter.getLetter().toString());
             listNum.add(MakeCharacter.getNumber().toString());
         }

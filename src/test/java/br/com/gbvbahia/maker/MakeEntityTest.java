@@ -8,6 +8,7 @@ import br.com.gbvbahia.entityes.*;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.string.MakeCharacter;
 import br.com.gbvbahia.maker.types.string.MakeString;
+import br.com.gbvbahia.maker.works.MakeEmail;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,7 @@ public class MakeEntityTest extends TestCase {
         List<String> listAzAZ = new ArrayList<String>();
         List<String> listNum = new ArrayList<String>();
         for (int i = 0; i < 10; i++) {
-            listEmail.add(MakeString.getEmail());
+            listEmail.add(MakeEmail.getEmail());
             listAzAZ.add(MakeCharacter.getLetter().toString());
             listNum.add(MakeCharacter.getNumber().toString());
         }
