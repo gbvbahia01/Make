@@ -122,18 +122,39 @@ public final class LogInfo {
                 ob.getSimpleName()));
     }
 
-    public static void logMakeEndInfo(final String clazz, Class ob) {
-        Log logger = LogFactory.getLog(clazz);
-        logger.info(I18N.getMsg("makeEnd", ob.getSimpleName()));
-        logger.info("********************//********************");
-    }
-
     public static <T> void logFieldInfo(final String clazz, Field f,
             T entity) throws IllegalArgumentException, IllegalAccessException {
         Log logger = LogFactory.getLog(clazz);
         logger.info("Field: " + StringUtils.rightPad(f.getName(), SPACE, " ")
                 + " Type: " + StringUtils.rightPad(f.getType().getSimpleName(), SPACE, " ")
                 + " Valor Definido: " + f.get(entity));
+    }
+
+    public static void logMakeEndInfo(final String clazz, Class ob) {
+        Log logger = LogFactory.getLog(clazz);
+        logger.info(I18N.getMsg("makeEnd", ob.getSimpleName()));
+        logger.info("********************//********************");
+    }
+
+    public static void logMakeStartDebug(final String clazz, Class ob) {
+        Log logger = LogFactory.getLog(clazz);
+        logger.debug("--------------------//--------------------");
+        logger.debug(I18N.getMsg("makeclass",
+                ob.getSimpleName()));
+    }
+
+    public static <T> void logFieldDebug(final String clazz, Field f,
+            T entity) throws IllegalArgumentException, IllegalAccessException {
+        Log logger = LogFactory.getLog(clazz);
+        logger.debug("Field: " + StringUtils.rightPad(f.getName(), SPACE, " ")
+                + " Type: " + StringUtils.rightPad(f.getType().getSimpleName(), SPACE, " ")
+                + " Valor Definido: " + f.get(entity));
+    }
+
+    public static void logMakeEndDebug(final String clazz, Class ob) {
+        Log logger = LogFactory.getLog(clazz);
+        logger.debug(I18N.getMsg("makeEnd", ob.getSimpleName()));
+        logger.debug("********************//********************");
     }
 
     public static <T> void logFieldNull(final String clazz, Field f) {
@@ -147,6 +168,4 @@ public final class LogInfo {
      */
     private LogInfo() {
     }
-    
-    
 }
