@@ -15,7 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * Deve ser utilizado como <b>Factory Padrão</b>, para atributos
@@ -108,12 +108,20 @@ public class DefaultFactory extends NumberFactory {
     private <T> void avoidCyclicReference(Field f, T entity,
             boolean makeRelationships) throws IllegalAccessException,
             IllegalArgumentException {
-        if (recursiveCount > 3 && criados.containsKey(f.getType())) {
+        if (recursiveCount > 3
+                && criados.containsKey(f.getType())) {
             f.set(entity, criados.get(f.getType()));
-            LogInfo.logWarnInformation("DefaultFactory",
+            LogInfo.logWarnInformation(className,
                     I18N.getMsg("possivelReferenciaCiclica",
                     f.getType().getSimpleName(),
                     entity.getClass().getSimpleName()));
+        } else if (isMappedBy(f) && criados.containsKey(f.getType())) {
+            f.set(entity, criados.get(f.getType()));
+            LogInfo.logInfoInformation(className,
+                    I18N.getMsg("mappedByDetected",
+                    entity.getClass().getSimpleName(),
+                    f.getName(),
+                    criados.get(f.getType()).getClass().getSimpleName()));
         } else {
             recursiveCount++;
             criados.put(f.getType(),
@@ -135,5 +143,21 @@ public class DefaultFactory extends NumberFactory {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Verifica se existe o mapeamento mappedBy da JPA, que significa
+     * que o objeto do outro lado que é proprietário do
+     * relacionamento.
+     *
+     * @param f Field a ser populado.
+     * @return True para se tiver atributo mappedBy false para não.
+     */
+    private boolean isMappedBy(Field f) {
+        if (f.isAnnotationPresent(OneToOne.class)) {
+            return f.getAnnotation(OneToOne.class).mappedBy() != null;
+        } else {
+            return false;
+        }
     }
 }

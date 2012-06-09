@@ -34,7 +34,6 @@ public class EntitySyntheticTest {
     public String toString() {
         return "EntitySyntheticTest{"
                 + "notNullTest=" + notNullTest
-                + " cicleTest=" + cicleTest
                 + ", listBooleanTests=" + listBooleanTests
                 + ", setDateTest=" + setDateTest
                 + ", mapTest=" + mapTest

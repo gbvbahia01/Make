@@ -97,6 +97,11 @@ public final class LogInfo {
         logger.info("Método: " + method);
     }
 
+    public static void logInfoInformation(String clazz, String info) {
+        Log logger = getLog(clazz);
+        logger.info(info);
+    }
+
     public static void logWarnInformation(String clazz, String info) {
         Log logger = getLog(clazz);
         logger.warn(info);

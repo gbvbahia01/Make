@@ -5,6 +5,7 @@
 package br.com.gbvbahia.entityes;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -19,11 +20,16 @@ public class EntitySyntheticCicleTest {
     
     @NotNull
     private EntitySyntheticTest cicle;
+    
+    @NotNull
+    @OneToOne(mappedBy="cicleTest")
+    private EntitySyntheticTest mapped;
 
     @Override
     public String toString() {
         return "EntitySyntheticCicleTest{"
                 + "nome=" + nome
+                + "mapped=" + mapped
                 + '}';
     }
     
