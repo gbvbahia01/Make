@@ -97,11 +97,34 @@ public final class LogInfo {
         logger.info("Método: " + method);
     }
 
+    /**
+     * Lança a informação em log modo info.
+     *
+     * @param clazz Nome da classe que chama.
+     * @param info Informação a ser escrita no log.
+     */
     public static void logInfoInformation(String clazz, String info) {
         Log logger = getLog(clazz);
         logger.info(info);
     }
 
+    /**
+     * Lança a informação em log modo debug.
+     *
+     * @param clazz Nome da classe que chama.
+     * @param info Informação a ser escrita no log.
+     */
+    public static void logDebugInformation(String clazz, String info) {
+        Log logger = getLog(clazz);
+        logger.debug(info);
+    }
+
+    /**
+     * Lança a informação em log modo warn.
+     *
+     * @param clazz Nome da classe que chama.
+     * @param info Informação a ser escrita no log.
+     */
     public static void logWarnInformation(String clazz, String info) {
         Log logger = getLog(clazz);
         logger.warn(info);
@@ -120,6 +143,13 @@ public final class LogInfo {
         logger.error(info, t);
     }
 
+    /**
+     * Log de criação de entidade, exibe separador inicial e nome da
+     * classe que está sendo criada. Modo info.
+     *
+     * @param clazz Classe solicitante.
+     * @param ob informação a ser inserida no log.
+     */
     public static void logMakeStartInfo(final String clazz, Class ob) {
         Log logger = LogFactory.getLog(clazz);
         logger.info("--------------------//--------------------");
@@ -127,6 +157,14 @@ public final class LogInfo {
                 ob.getSimpleName()));
     }
 
+    /**
+     * Log que exibe informações sobre o field a ser criado, nome,
+     * tipo e valor inserido. Modo info.
+     *
+     * @param clazz Classe solicitante.
+     * @param f field a ter valor definido.
+     * @param entity Entidade que possiu o field a ser populado.
+     */
     public static <T> void logFieldInfo(final String clazz, Field f,
             T entity) throws IllegalArgumentException, IllegalAccessException {
         Log logger = LogFactory.getLog(clazz);
@@ -135,12 +173,26 @@ public final class LogInfo {
                 + " Valor Definido: " + f.get(entity));
     }
 
+    /**
+     * Log que exibe o fechamento da criação da entidade, exibe no da
+     * entidade que foi criada e fechamento da criação. Modo info.
+     *
+     * @param clazz Classe solicitante.
+     * @param ob Classe da entidade que foi criada.
+     */
     public static void logMakeEndInfo(final String clazz, Class ob) {
         Log logger = LogFactory.getLog(clazz);
         logger.info(I18N.getMsg("makeEnd", ob.getSimpleName()));
         logger.info("********************//********************");
     }
 
+    /**
+     * Log de criação de entidade, exibe separador inicial e nome da
+     * classe que está sendo criada. Modo debug.
+     *
+     * @param clazz Classe solicitante.
+     * @param ob informação a ser inserida no log.
+     */
     public static void logMakeStartDebug(final String clazz, Class ob) {
         Log logger = LogFactory.getLog(clazz);
         logger.debug("--------------------//--------------------");
@@ -148,6 +200,14 @@ public final class LogInfo {
                 ob.getSimpleName()));
     }
 
+    /**
+     * Log que exibe informações sobre o field a ser criado, nome,
+     * tipo e valor inserido. Modo debug.
+     *
+     * @param clazz Classe solicitante.
+     * @param f field a ter valor definido.
+     * @param entity Entidade que possiu o field a ser populado.
+     */
     public static <T> void logFieldDebug(final String clazz, Field f,
             T entity) throws IllegalArgumentException, IllegalAccessException {
         Log logger = LogFactory.getLog(clazz);
@@ -156,13 +216,27 @@ public final class LogInfo {
                 + " Valor Definido: " + f.get(entity));
     }
 
+    /**
+     * Log que exibe o fechamento da criação da entidade, exibe no da
+     * entidade que foi criada e fechamento da criação. Modo debug.
+     *
+     * @param clazz Classe solicitante.
+     * @param ob Classe da entidade que foi criada.
+     */
     public static void logMakeEndDebug(final String clazz, Class ob) {
         Log logger = LogFactory.getLog(clazz);
         logger.debug(I18N.getMsg("makeEnd", ob.getSimpleName()));
         logger.debug("********************//********************");
     }
 
-    public static <T> void logFieldNull(final String clazz, Field f) {
+    /**
+     * Utilizado em fields que não tiveram valor definido, utiliza
+     * warn.
+     *
+     * @param clazz Nome da classe que utiliza o log.
+     * @param f Field que não teve valor definido.
+     */
+    public static void logFieldNull(final String clazz, Field f) {
         Log logger = LogFactory.getLog(clazz);
         logger.warn(I18N.getMsg("fieldSettedNull", f.getName(),
                 f.getType().getSimpleName()));
