@@ -42,12 +42,13 @@ public class MakeEntitysTest extends TestCase {
 
     @Test
     public void testEntitysError() throws Exception {
+        logger.info("Entity - EntitysError");
         boolean excecao = false;
         try {
             List<EntityNotNullTest> test = MakeEntity.makeEntitys(EntityNotNullTest.class, -10, false);
         } catch (IllegalArgumentException e) {
             excecao = true;
-            logger.info(e.getMessage());
+            logger.debug(e.getMessage());
         }
         assertTrue("Esperado IllegalArgumentException", excecao);
         excecao = false;
@@ -55,13 +56,14 @@ public class MakeEntitysTest extends TestCase {
             List<EntityNotNullTest> test = MakeEntity.makeEntitys(EntityNotNullTest.class, -1, false, null);
         } catch (IllegalArgumentException e) {
             excecao = true;
-            logger.info(e.getMessage());
+            logger.debug(e.getMessage());
         }
         assertTrue("Esperado IllegalArgumentException", excecao);
     }
 
     @Test
     public void testEntitysList() throws Exception {
+        logger.info("Entity - EntitysList");
         List<EntityNotNullTest> tests = MakeEntity.makeEntitys(EntityNotNullTest.class, 10, false);
         for (EntityNotNullTest test : tests) {
             validarJSR303(test);
