@@ -13,6 +13,8 @@ import br.com.gbvbahia.maker.types.date.MakeDateTest;
 import br.com.gbvbahia.maker.types.string.MakeCharacterTest;
 import br.com.gbvbahia.maker.types.string.MakeStringTest;
 import br.com.gbvbahia.maker.types.wrappers.*;
+import br.com.gbvbahia.maker.works.MakeCNPJTest;
+import br.com.gbvbahia.maker.works.MakeCPFTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -34,6 +36,8 @@ import org.junit.runners.Suite;
     MakeStringTest.class,
     MakeCalendarTest.class,
     MakeDateTest.class,
+    MakeCPFTest.class,
+    MakeCNPJTest.class,
     MakeEntityTest.class,
     MakeEntitySynteticTest.class,
     MakeEntitysTest.class
