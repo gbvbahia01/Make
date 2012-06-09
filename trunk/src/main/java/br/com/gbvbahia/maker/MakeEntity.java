@@ -49,7 +49,7 @@ public final class MakeEntity {
     public static <T> T makeEntity(Class<T> entity, boolean makeRelationships,
             Map<String, List<String>> patterns) {
         try {
-            LogInfo.logMakeStartInfo(MakeEntity.class.getSimpleName(), entity);
+            LogInfo.logMakeStartDebug(MakeEntity.class.getSimpleName(), entity);
             T toReturn = entity.newInstance();
             for (Field f : toReturn.getClass().getDeclaredFields()) {
                 boolean accessField = f.isAccessible();
@@ -64,13 +64,13 @@ public final class MakeEntity {
                         } catch (IllegalArgumentException e) {
                             LogInfo.logFieldNull(MakeEntity.class.getSimpleName(), f);
                         }
-                        LogInfo.logFieldInfo(MakeEntity.class.getSimpleName(), f, toReturn);
+                        LogInfo.logFieldDebug(MakeEntity.class.getSimpleName(), f, toReturn);
                     }
                 } finally {
                     f.setAccessible(accessField);
                 }
             }
-            LogInfo.logMakeEndInfo(MakeEntity.class.getSimpleName(),
+            LogInfo.logMakeEndDebug(MakeEntity.class.getSimpleName(),
                     entity);
             return toReturn;
         } catch (InstantiationException ex) {
