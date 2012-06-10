@@ -40,7 +40,7 @@ public class MakeCPFTest extends TestCase {
      * @return Boolean True para válido e false para inválido
      * @since 29/12/2006
      */
-    private boolean validarCPF(String cpf) {
+    public static boolean validarCPF(String cpf) {
         cpf = cpf.replace(".", "").replace("-", "").replace(" ", "");
         if (cpf.length() != 11) {
             return false;

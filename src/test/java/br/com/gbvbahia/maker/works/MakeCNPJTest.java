@@ -43,7 +43,7 @@ public class MakeCNPJTest extends TestCase {
      * @return retorna verdadeiro (true) para CNPJ válido e falso
      * (false) para CNPJ inválido
      */
-    private boolean validarCNPJ(String str_cnpj) {
+    public static boolean validarCNPJ(String str_cnpj) {
         if (str_cnpj == null) {
             return false;
         }

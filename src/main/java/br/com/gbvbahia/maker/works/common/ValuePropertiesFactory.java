@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.properties;
+package br.com.gbvbahia.maker.works.common;
 
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 

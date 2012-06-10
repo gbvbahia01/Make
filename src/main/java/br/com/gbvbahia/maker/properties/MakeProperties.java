@@ -7,6 +7,7 @@ package br.com.gbvbahia.maker.properties;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,8 +62,8 @@ public class MakeProperties implements ValueFactory {
         try {
             for (String key : ResourceBundle.getBundle("make").keySet()) {
                 if (StringUtils.substringBefore(key, ".").equals(testName)) {
-                    LogInfo.logInfoInformation("MakeProperties", I18N.getMsg("intTest", key));
-                    inserirValueFactory(StringUtils.substringAfter(key, "."),
+                    LogInfo.logDebugInformation("MakeProperties", I18N.getMsg("intTest", key));
+                    insertValueFactory(StringUtils.substringAfter(key, "."),
                             ResourceBundle.getBundle("make").getString(key));
                 } else {
                     LogInfo.logDebugInformation("MakeProperties", I18N.getMsg("outTest", key));
@@ -83,16 +84,16 @@ public class MakeProperties implements ValueFactory {
      * propriedade registrada no arquivo make.properties.
      *
      * @param key Chave no arquivo make.properties.
-     * @param valor Valor no arquivo make.properties.
+     * @param value Valor no arquivo make.properties.
      */
-    private void inserirValueFactory(final String key, final String valor) {
+    private void insertValueFactory(final String key, final String value) {
         ValuePropertiesFactory fac =
-                MakePropertiesDefaultFactories.getPropertiesFactory(valor);
+                MakePropertiesDefaultFactories.getPropertiesFactory(value);
         if (fac != null) {
             valueFactories.put(key, fac);
         } else {
             LogInfo.logWarnInformation("MakeProperties",
-                    I18N.getMsg("notFactoryWork", valor));
+                    I18N.getMsg("notFactoryWork", value));
         }
     }
 

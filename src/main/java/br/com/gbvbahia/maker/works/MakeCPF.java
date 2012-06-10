@@ -6,21 +6,25 @@ package br.com.gbvbahia.maker.works;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.properties.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import br.com.gbvbahia.maker.types.string.MakeString;
 import java.lang.reflect.Field;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Cria uma String que passa no teste de validação de CPF, nove
- * caracteres mais dois digitos verificadores.
+ * caracteres mais dois digitos verificadores.<br> Para que funcione
+ * deve ter o valor isCPF no arquivo make.properties
  *
  * @since v.1 09/06/2012
  * @author Guilherme
  */
 public class MakeCPF implements ValuePropertiesFactory {
 
-    public static final String keyPropertie = "isCPF";
+    /**
+     * Como o propertie deve estár definido no valor: "isCPF".
+     */
+    public static final String KEY_PROPERTIE = "isCPF";
 
     /**
      * Construtor padrão.
@@ -53,13 +57,13 @@ public class MakeCPF implements ValuePropertiesFactory {
 
     @Override
     public boolean workValue(final String value) {
-        LogInfo.logInfoInformation("MakeCPF",
-                I18N.getMsg("workValueMakeCPF", value));
-        if (keyPropertie.equals(StringUtils.trim(value))) {
+        LogInfo.logDebugInformation("MakeCPF",
+                I18N.getMsg("workValueMake", value));
+        if (KEY_PROPERTIE.equals(StringUtils.trim(value))) {
             return true;
         }
-        LogInfo.logInfoInformation("MakeCPF",
-                I18N.getMsg("notIsCPF", value));
+        LogInfo.logDebugInformation("MakeCPF",
+                I18N.getMsg("notIsWork", "CPF", value));
         return false;
     }
 
