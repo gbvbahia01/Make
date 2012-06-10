@@ -4,6 +4,8 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import java.lang.reflect.Field;
 
 /**
@@ -12,7 +14,26 @@ import java.lang.reflect.Field;
  * @since 21/04/2012
  * @author Guilherme
  */
-public final class MakeInteger {
+public class MakeInteger extends MakeNumber {
+
+    @Override
+    public <T> void insertValue(final Field f, final T entity)
+            throws IllegalArgumentException, IllegalAccessException {
+        Number[] minMax = getMinMaxValues(f, Integer.MIN_VALUE,
+                Integer.MAX_VALUE);
+        int min = minMax[0].intValue();
+        int max = minMax[1].intValue();
+        if (f.getType().equals(Integer.class)) {
+            f.set(entity, MakeInteger.getIntervalo(min, max));
+        } else {
+            f.set(entity, MakeInteger.getIntervalo(min, max).intValue());
+        }
+    }
+
+    @Override
+    public boolean isMyType(final Field f) {
+        return isInteger(f);
+    }
 
     /**
      * Gera um número entre os valores solicitados.
@@ -32,13 +53,10 @@ public final class MakeInteger {
      * @return Integer limitado ao max.
      */
     public static Integer getMax(final int max) {
-        return MakeLong.getIntervalo(1, max).intValue();
-    }
-
-    /**
-     * Não pode ser instânciada.
-     */
-    private MakeInteger() {
+        if (max <= 0) {
+            throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
+        }
+        return MakeLong.getIntervalo(0, max).intValue();
     }
 
     /**
@@ -48,7 +66,7 @@ public final class MakeInteger {
      * @return True para tipos Integer ou int, False para outros
      * tipos.
      */
-    public static boolean isInteger(Field f) {
+    public static boolean isInteger(final Field f) {
         if (f.getType().equals(Integer.class)
                 || f.getType().equals(int.class)) {
             return true;

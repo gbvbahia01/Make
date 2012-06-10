@@ -25,7 +25,7 @@ public class EnumFactory implements ValueFactory {
             throw new UnsupportedOperationException(I18N.getMsg("enumInvalida", f.getType().getSimpleName()));
         }
         f.set(entity,
-                enumConstants[MakeInteger.getMax(enumSize) - 1]);
+                enumConstants[MakeInteger.getIntervalo(0, enumSize - 1)]);
     }
 
     public <T> boolean isWorkWith(Field f, T entity) {

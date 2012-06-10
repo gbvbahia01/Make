@@ -5,7 +5,10 @@
 package br.com.gbvbahia.maker.types.string;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
+import java.lang.reflect.Field;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -175,64 +178,6 @@ public final class MakeString {
         return false;
     }
 
-    /**
-     * import dk.brics.automaton.Automaton; import
-     * dk.brics.automaton.RegExp; import dk.brics.automaton.State;
-     * import dk.brics.automaton.Transition; import java.util.List;
-     * DESAFIO PARA UMA VERSÃO POSTERIOR. Gera a String com base na
-     * regex passada. <br>http://code.google.com/p/xeger/<br> <b>Este
-     * método não funciona para todas as expressões regulares,</b> ele
-     * causa algumas exceções dependendo da Regex, caso a expressão do
-     * seu Pattern não consiga ser gerada, utilize o método MakeEntity
-     * &lt;T> T makeEntity(Class&lt;T> entity, Map&lt;String,
-     * List&lt;String>> patterns) para gerar suas classes.<br> Alguns
-     * erros podem ser lançados dependendo da expressão:<br>
-     * java.lang.StackOverflowError<br>
-     * java.lang.ArithmeticException<br>
-     * javax.validation.ConstraintViolationException (Alguma vezes a
-     * String gerada em nada tem a ver com o padrão regex passado)
-     *
-     * @param regex Expressão regular
-     * @return String dentro do padrão Regex passado.
-     */
-//    public static String getRegex(String regex) throws Throwable {
-//        Automaton automaton = new RegExp(regex).toAutomaton();
-//        StringBuilder builder = new StringBuilder();
-//        generate(builder, automaton.getInitialState());
-//        return builder.toString();
-//    }
-    /**
-     * <br>http://code.google.com/p/xeger/<br>
-     *
-     * @param builder
-     * @param state
-     */
-//    private static void generate(StringBuilder builder, State state) {
-//        List<Transition> transitions = state.getSortedTransitions(true);
-//        if (transitions.isEmpty()) {
-//            return;
-//        }
-//        int nroptions = state.isAccept() ? transitions.size() : transitions.size() - 1;
-//        int option = MakeInteger.getIntervalo(0, nroptions);
-//        if (state.isAccept() && option == 0) {
-//            return;
-//        }
-//        Transition transition = transitions.get(option - (state.isAccept() ? 1 : 0));
-//        appendChoice(builder, transition);
-//        generate(builder, transition.getDest());
-//    }
-    /**
-     * <br>http://code.google.com/p/xeger/<br>
-     *
-     * @param builder
-     * @param transition
-     */
-//    private static void appendChoice(StringBuilder builder,
-//            Transition transition) {
-//        char c = (char) MakeInteger.getIntervalo(transition.getMin(),
-//                transition.getMax()).intValue();
-//        builder.append(c);
-//    }
     /**
      * Não pode ser instanciada.
      */

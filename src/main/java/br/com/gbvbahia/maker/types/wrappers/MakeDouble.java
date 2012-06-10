@@ -5,17 +5,37 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
 /**
- * Gerador de números inteiros aleatório.
+ * Gerador de números decimais aleatório.
  *
  * @since 11/05/2012
  * @author Guilherme
  */
-public final class MakeDouble {
+public class MakeDouble extends MakeNumber {
 
+    @Override
+    public <T> void insertValue(final Field f, final T entity)
+            throws IllegalArgumentException, IllegalAccessException {
+        Number[] minMax = getMinMaxValues(f, -Double.MAX_VALUE,
+                Double.MAX_VALUE);
+        double min = minMax[0].doubleValue();
+        double max = minMax[1].doubleValue();
+        Double intervalo = MakeDouble.getIntervalo(min, max);
+        if (f.getType().equals(Double.class)) {
+            f.set(entity, new Double(maxDecimal(f, intervalo).doubleValue()));
+        } else {
+            f.set(entity, maxDecimal(f, intervalo).doubleValue());
+        }
+    }
+
+    @Override
+    public boolean isMyType(Field f) {
+        return isDouble(f);
+    }
 
     /**
      * Gera um número entre os valores solicitados.
@@ -34,7 +54,7 @@ public final class MakeDouble {
         if (min < 0 && max > 0) {
             if (MakeLong.RANDOM.nextInt() % 2 == 0) {
                 numero = new BigDecimal((ale * (max + 0))).doubleValue();
-            }else {
+            } else {
                 numero = new BigDecimal((ale * (0 + min))).doubleValue();
             }
         } else {
@@ -58,19 +78,13 @@ public final class MakeDouble {
     }
 
     /**
-     * Não pode ser instânciada.
-     */
-    private MakeDouble() {
-    }
-
-    /**
      * Retorna True para tipos Double ou double.
      *
      * @param f Field a ser avaliado.
      * @return True para tipos Double ou double, False para outros
      * tipos.
      */
-    public static boolean isDouble(Field f) {
+    public static boolean isDouble(final Field f) {
         if (f.getType().equals(Double.class)
                 || f.getType().equals(double.class)) {
             return true;
