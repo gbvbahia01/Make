@@ -44,7 +44,7 @@ public class MakeEntitysTest extends TestCase {
         logger.info("Entity - EntitysError");
         boolean excecao = false;
         try {
-            List<EntityNotNullTest> test = MakeEntity.makeEntitys(EntityNotNullTest.class, -10, false);
+            List<EntityNotNullTest> test = MakeEntity.makeEntitys(null, EntityNotNullTest.class, -10, false);
         } catch (IllegalArgumentException e) {
             excecao = true;
             logger.debug(e.getMessage());
@@ -52,7 +52,7 @@ public class MakeEntitysTest extends TestCase {
         assertTrue("Esperado IllegalArgumentException", excecao);
         excecao = false;
         try {
-            List<EntityNotNullTest> test = MakeEntity.makeEntitys(EntityNotNullTest.class, -1, false, null);
+            List<EntityNotNullTest> test = MakeEntity.makeEntitys(null, EntityNotNullTest.class, -1, false);
         } catch (IllegalArgumentException e) {
             excecao = true;
             logger.debug(e.getMessage());
@@ -63,32 +63,8 @@ public class MakeEntitysTest extends TestCase {
     @Test
     public void testEntitysList() throws Exception {
         logger.info("Entity - EntitysList");
-        List<EntityNotNullTest> tests = MakeEntity.makeEntitys(EntityNotNullTest.class, 10, false);
+        List<EntityNotNullTest> tests = MakeEntity.makeEntitys(null, EntityNotNullTest.class, 10, false);
         for (EntityNotNullTest test : tests) {
-            validarJSR303(test);
-        }
-    }
-
-    @Test
-    public void testMakePatternList() throws Exception {
-        logger.info("Entity - MakePattern");
-        List<String> listEmail = new ArrayList<String>();
-        List<String> listAzAZ = new ArrayList<String>();
-        List<String> listNum = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
-            listEmail.add(MakeEmail.getEmail());
-            listAzAZ.add(MakeCharacter.getLetter().toString());
-            listNum.add(MakeCharacter.getNumber().toString());
-        }
-        Map<String, List<String>> patterns = new HashMap<String, List<String>>();
-        patterns.put("EntityPatternTest.email", listEmail);
-        patterns.put("EntityPatternTest.azAZ", listAzAZ);
-        patterns.put("EntityPatternTest.num", listNum);
-        List<EntityPatternTest> tests =
-                MakeEntity.makeEntitys(EntityPatternTest.class, 50,
-                false, patterns);
-        for (EntityPatternTest test : tests) {
-            assertNotNull("Test é nulo.", test);
             validarJSR303(test);
         }
     }

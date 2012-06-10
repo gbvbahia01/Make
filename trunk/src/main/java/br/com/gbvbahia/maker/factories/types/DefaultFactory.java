@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Deve ser utilizado como <b>Factory Padrão</b>, para atributos
@@ -27,6 +28,20 @@ import javax.persistence.*;
  */
 public class DefaultFactory extends NumberFactory {
 
+    /**
+     * Necessário para recursividade.
+     */
+    private String testName;
+
+    /**
+     * O nome do teste não é obrigatório, se não informado será
+     * utilizado as propriedades da JSR303 e as default do Make.
+     *
+     * @param testName Nome do testes no properties.
+     */
+    public DefaultFactory(String testName) {
+        this.testName = testName;
+    }
     /**
      * Representa um map com chave class para a classe de objetos
      * criados e os objetos criados como valor, podendo reaproveitar
@@ -43,6 +58,14 @@ public class DefaultFactory extends NumberFactory {
     @Override
     public <T> void makeValue(Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
+        if (!f.isAnnotationPresent(NotNull.class)) {
+            if (testName != null) {
+                LogInfo.logWarnInformation(className,
+                        I18N.getMsg("fieldSettedNull", f.getName(),
+                        f.getDeclaringClass().toString()));
+            }
+            return;
+        }
         criados.put(entity.getClass(), entity);
         if (f.getType().equals(String.class)) {
             LogInfo.logDefaultValue(entity, f, className);
@@ -125,7 +148,7 @@ public class DefaultFactory extends NumberFactory {
         } else {
             recursiveCount++;
             criados.put(f.getType(),
-                    MakeEntity.makeEntity(f.getType(),
+                    MakeEntity.makeEntity(testName, f.getType(),
                     makeRelationships));
             f.set(entity, criados.get(f.getType()));
         }

@@ -28,11 +28,40 @@ public class NumberFactory implements ValueFactory {
      */
     private String entityName;
 
+    @Override
     public <T> void makeValue(final Field f, final T entity,
             boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         this.entityName = entity.getClass().getSimpleName();
         insertValue(f, entity);
+    }
+
+    @Override
+    public <T> boolean isWorkWith(Field f, T entity) {
+        if (f.isAnnotationPresent(NotNull.class)) {
+            if (isNumber(f)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se o field é tratado com anotações numéricas da
+     * JSR303.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para possui anotação numérica False para não
+     * possui.
+     */
+    private static boolean isNumber(Field f) {
+        if (f.isAnnotationPresent(Min.class)
+                || f.isAnnotationPresent(Max.class)
+                || f.isAnnotationPresent(DecimalMin.class)
+                || f.isAnnotationPresent(DecimalMax.class)) {
+            return true;
+        }
+        return false;
     }
 
     /**

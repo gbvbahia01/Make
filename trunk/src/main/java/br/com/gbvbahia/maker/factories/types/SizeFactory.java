@@ -10,6 +10,7 @@ import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.types.string.MakeString;
 import static br.com.gbvbahia.maker.types.string.MakeString.MAX_LENGTH_SUPPORTS;
 import java.lang.reflect.Field;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -36,5 +37,15 @@ public class SizeFactory implements ValueFactory {
             f.set(entity, MakeString.getString(min, max,
                     MakeString.StringType.LETTER));
         }
+    }
+
+    @Override
+    public <T> boolean isWorkWith(Field f, T entity) {
+        if (f.isAnnotationPresent(NotNull.class)) {
+            if (f.isAnnotationPresent(Size.class)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

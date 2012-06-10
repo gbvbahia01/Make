@@ -46,13 +46,13 @@ public class MakeEntityTest extends TestCase {
     @Test
     public void testMakeEnum() throws Exception {
         logger.info("Entity - MakeEnum");
-        EntityEnumTest test = MakeEntity.makeEntity(EntityEnumTest.class, false);
+        EntityEnumTest test = MakeEntity.makeEntity(null, EntityEnumTest.class, false);
         assertNotNull("Test é nulo.", test);
         assertNotNull("EnumExternalTest nula", test.getEnumExternalTest());
         validarJSR303(test);
         try {
-        EntityEnumTest2 test2 = MakeEntity.makeEntity(EntityEnumTest2.class, false);
-        } catch (UnsupportedOperationException e){
+            EntityEnumTest2 test2 = MakeEntity.makeEntity(null, EntityEnumTest2.class, false);
+        } catch (UnsupportedOperationException e) {
             assertTrue("UnsupportedOperationException lançada", true);
             return;
         }
@@ -60,35 +60,10 @@ public class MakeEntityTest extends TestCase {
     }
 
     @Test
-    public void testMakePattern() throws Exception {
-        logger.info("Entity - MakePattern");
-        List<String> listEmail = new ArrayList<String>();
-        List<String> listAzAZ = new ArrayList<String>();
-        List<String> listNum = new ArrayList<String>();
-        for (int i = 0; i < 10; i++) {
-            listEmail.add(MakeEmail.getEmail());
-            listAzAZ.add(MakeCharacter.getLetter().toString());
-            listNum.add(MakeCharacter.getNumber().toString());
-        }
-        Map<String, List<String>> patterns = new HashMap<String, List<String>>();
-        patterns.put("EntityPatternTest.email", listEmail);
-        patterns.put("EntityPatternTest.azAZ", listAzAZ);
-        patterns.put("EntityPatternTest.num", listNum);
-        for (int i = 0; i < 50; i++) {
-            EntityPatternTest test =
-                    MakeEntity.makeEntity(EntityPatternTest.class, false,
-                    patterns);
-            logger.debug(test);
-            assertNotNull("Test é nulo.", test);
-            validarJSR303(test);
-        }
-    }
-
-    @Test
     public void testMakeSizeString() throws Exception {
         logger.info("Entity - MakeSizeString");
         for (int i = 0; i < 50; i++) {
-            EntitySizeTest test = MakeEntity.makeEntity(EntitySizeTest.class, false);
+            EntitySizeTest test = MakeEntity.makeEntity(null, EntitySizeTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("LimiteDefault nula", test.getLimiteDefault());
@@ -100,7 +75,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeDate() throws Exception {
         logger.info("Entity - MakeDate");
         for (int i = 0; i < 50; i++) {
-            EntityDateTest test = MakeEntity.makeEntity(EntityDateTest.class, false);
+            EntityDateTest test = MakeEntity.makeEntity(null, EntityDateTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("NoNullDate nula", test.getNoNullDate());
@@ -112,7 +87,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeDigits() throws Exception {
         logger.info("Entity - MakeDigits");
         for (int i = 0; i < 50; i++) {
-            EntityDigitsTest test = MakeEntity.makeEntity(EntityDigitsTest.class, false);
+            EntityDigitsTest test = MakeEntity.makeEntity(null, EntityDigitsTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("BigDecimal nulo", test.getBigDecimal());
@@ -124,7 +99,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeDecimalEntity() throws Exception {
         logger.info("Entity - MakeDecimalEntity");
         for (int i = 0; i < 50; i++) {
-            EntityDecimalTest test = MakeEntity.makeEntity(EntityDecimalTest.class, false);
+            EntityDecimalTest test = MakeEntity.makeEntity(null, EntityDecimalTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNotNull("IntegerObjeto nulo", test.getIntegerObjeto());
@@ -148,7 +123,7 @@ public class MakeEntityTest extends TestCase {
     @Test
     public void testMakeBoolaenEntity() throws Exception {
         logger.info("Entity - MakeBoolaenEntity");
-        EntityBooleanTest test = MakeEntity.makeEntity(EntityBooleanTest.class, false);
+        EntityBooleanTest test = MakeEntity.makeEntity(null, EntityBooleanTest.class, false);
         logger.debug(test);
         assertNotNull("Test é nulo.", test);
         assertTrue("BooleanObjectTrue nao true",
@@ -168,7 +143,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeMinMaxEntity() throws Exception {
         logger.info("Entity - MakeMinMaxEntity");
         for (int i = 0; i < 100; i++) {
-            EntityMinMaxTest test = MakeEntity.makeEntity(EntityMinMaxTest.class, false);
+            EntityMinMaxTest test = MakeEntity.makeEntity(null, EntityMinMaxTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNull("Nulo não nulo", test.getInteiro());
@@ -233,7 +208,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeMinEntity() throws Exception {
         logger.info("Entity - MakeMinEntity");
         for (int i = 0; i < 100; i++) {
-            EntityMinTest test = MakeEntity.makeEntity(EntityMinTest.class, false);
+            EntityMinTest test = MakeEntity.makeEntity(null, EntityMinTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertTrue("Valor Integer inesperado",
@@ -279,7 +254,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeMaxEntity() throws Exception {
         logger.info("Entity - MakeMaxEntity");
         for (int i = 0; i < 100; i++) {
-            EntityMaxTest test = MakeEntity.makeEntity(EntityMaxTest.class, false);
+            EntityMaxTest test = MakeEntity.makeEntity(null, EntityMaxTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertTrue("Valor: " + test.getInteiroObjeto() + " maior que 4",
@@ -325,7 +300,7 @@ public class MakeEntityTest extends TestCase {
     public void testMakeNotNullEntity() throws Exception {
         logger.info("Entity - MakeNotNullEntity");
         for (int i = 0; i < 100; i++) {
-            EntityNotNullTest test = MakeEntity.makeEntity(EntityNotNullTest.class, false);
+            EntityNotNullTest test = MakeEntity.makeEntity(null, EntityNotNullTest.class, false);
             logger.debug(test);
             assertNotNull("Test é nulo.", test);
             assertNull("Nulo não nulo", test.getInteiro());

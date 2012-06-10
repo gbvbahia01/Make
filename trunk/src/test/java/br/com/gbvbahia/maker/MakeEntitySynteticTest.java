@@ -39,7 +39,7 @@ public class MakeEntitySynteticTest extends TestCase {
     @Test
     public void testMakeSyntetic() throws Exception {
         logger.info("Entity - MakeSyntetic");
-        EntitySyntheticTest test = MakeEntity.makeEntity(EntitySyntheticTest.class, true);
+        EntitySyntheticTest test = MakeEntity.makeEntity(null,EntitySyntheticTest.class, true);
         assertNotNull("Test é nulo.", test);
         assertNotNull("Ref Ciclica nula.", test.getCicleTest());
         assertNotNull("Entidade NotNullTest nula", test.getNotNullTest());

@@ -6,10 +6,10 @@ package br.com.gbvbahia.maker.factories;
 
 import br.com.gbvbahia.maker.factories.types.*;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.properties.MakeProperties;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import javax.validation.constraints.*;
 
 /**
  *
@@ -17,76 +17,52 @@ import javax.validation.constraints.*;
  */
 public final class Factory {
 
-    public static ValueFactory makeFactory(Field f,
-            Map<String, List<String>> patternsList) {
-        if (f.isAnnotationPresent(Pattern.class)) {
-            return new PatternFactory(patternsList);
-        }
-        if (f.isAnnotationPresent(Size.class)) {
-            return new SizeFactory();
-        }
-        if (isNumber(f)) {
-            return new NumberFactory();
-        }
-        if (isDate(f)) {
-            return new DateFactory();
-        }
-        if (isBoolean(f)) {
-            return new TrueFalseFactory();
-        }
-        if (f.getType().isEnum()) {
-            return new EnumFactory();
-        }
-        return new DefaultFactory();
+    /**
+     * Configura o nome do teste para recuperar informações no arquivo
+     * make.properties.
+     */
+    private static String testName;
+    /**
+     * Contém uma lista das Factories para cada tipo, ao ser
+     * solicitado uma será retornada.
+     */
+    public final static List<ValueFactory> defaultFactories =
+            new ArrayList<ValueFactory>();
+
+    /**
+     * Carrega todas as Factories para a respectiva lista
+     */
+    static {
+        defaultFactories.add(new SizeFactory());
+        defaultFactories.add(new NumberFactory());
+        defaultFactories.add(new DateFactory());
+        defaultFactories.add(new TrueFalseFactory());
+        defaultFactories.add(new EnumFactory());
     }
 
     /**
-     * Verifica se o field é tratado com anotações de tempo da JSR303.
+     * Utilize para configurar informações do teste.
      *
-     * @param f Field a ser avaliado.
-     * @return True para possui anotação de tempo False para não
-     * possui.
+     * @param testNameProprerties nome do teste configurado no arquivo
+     * make.properties: Exemplo: test1.Usuario.email Onde test1 é o
+     * nome do teste, Usuario a classe e email o field.
      */
-    private static boolean isDate(Field f) {
-        if (f.isAnnotationPresent(Future.class)
-                || f.isAnnotationPresent(Past.class)) {
-            return true;
+    public static void configureProperties(String testNameProprerties) {
+        if(defaultFactories.get(0).equals(new MakeProperties(testName))){
+            defaultFactories.remove(0);
         }
-        return false;
+        Factory.testName = testNameProprerties;
+        MakeProperties makeProperties = new MakeProperties(testName);
+        defaultFactories.add(0, makeProperties);
     }
 
-    /**
-     * Verifica se o field é tratado com anotações booleanas da
-     * JSR303.
-     *
-     * @param f Field a ser avaliado.
-     * @return True para possui anotação booleana False para não
-     * possui.
-     */
-    private static boolean isBoolean(Field f) {
-        if (f.isAnnotationPresent(AssertTrue.class)
-                || f.isAnnotationPresent(AssertFalse.class)) {
-            return true;
+    public static <T> ValueFactory makeFactory(Field f, T entity) {
+        for (ValueFactory vf : defaultFactories) {
+            if (vf.isWorkWith(f, entity)) {
+                return vf;
+            }
         }
-        return false;
-    }
-
-    /**
-     * Verifica se o field é tratado com anotações numéricas da
-     * JSR303.
-     *
-     * @param f Field a ser avaliado.
-     * @return True para possui anotação numérica False para não
-     * possui.
-     */
-    private static boolean isNumber(Field f) {
-        if (f.isAnnotationPresent(Min.class)
-                || f.isAnnotationPresent(Max.class)
-                || f.isAnnotationPresent(DecimalMin.class)
-                || f.isAnnotationPresent(DecimalMax.class)) {
-            return true;
-        }
-        return false;
+        return new DefaultFactory(testName);
     }
 
     /**
