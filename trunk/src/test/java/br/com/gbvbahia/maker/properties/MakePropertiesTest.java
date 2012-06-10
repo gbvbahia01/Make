@@ -30,8 +30,9 @@ public class MakePropertiesTest extends TestCase {
      */
     @Test
     public void testFactoryProperties() {
-        System.out.println("FactoryProperties");
-        EntityPropertiesTest test = MakeEntity.makeEntity("test1", EntityPropertiesTest.class, true);
+        logger.info("FactoryProperties");
+        EntityPropertiesTest test = MakeEntity.makeEntity("test1",
+                EntityPropertiesTest.class, true);
         assertTrue("Sem erros", true);
         assertNotNull("EntityPropertiesTest não pode ser nula", test);
         assertNotNull("EntityPropertiesTest.cpf não pode ser nulo",
