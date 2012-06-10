@@ -53,7 +53,7 @@ public final class MakeCharacter {
      * @return 0-9.
      */
     public static Character getNumber() {
-        char toReturn = NUMBERS[MakeInteger.getMax(NUMBERS.length) - 1];
+        char toReturn = NUMBERS[MakeInteger.getIntervalo(0, NUMBERS.length - 1)];
         logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geNumber", toReturn));
         return toReturn;
     }
@@ -64,7 +64,7 @@ public final class MakeCharacter {
      * @return a-z.
      */
     public static Character getLetter() {
-        char toReturn = LETTERS[MakeInteger.getMax(LETTERS.length) - 1];
+        char toReturn = LETTERS[MakeInteger.getIntervalo(0, LETTERS.length - 1)];
         logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geLetter", toReturn));
         return toReturn;
     }
@@ -75,7 +75,7 @@ public final class MakeCharacter {
      * @return !, @, #, $, &, %, ?, -, +
      */
     public static Character getSymbols() {
-        Character toReturn = SYMBOLS[MakeInteger.getMax(SYMBOLS.length) - 1];
+        Character toReturn = SYMBOLS[MakeInteger.getIntervalo(0, SYMBOLS.length - 1)];
         logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geSymbols", toReturn));
         return toReturn;
     }

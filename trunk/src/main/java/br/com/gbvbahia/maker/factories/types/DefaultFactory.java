@@ -131,20 +131,13 @@ public class DefaultFactory extends NumberFactory {
     private <T> void avoidCyclicReference(Field f, T entity,
             boolean makeRelationships) throws IllegalAccessException,
             IllegalArgumentException {
-        if (recursiveCount > 3
+        if ((recursiveCount > 3 || isMappedBy(f))
                 && criados.containsKey(f.getType())) {
             f.set(entity, criados.get(f.getType()));
-            LogInfo.logWarnInformation(className,
+            LogInfo.logInfoInformation(className,
                     I18N.getMsg("possivelReferenciaCiclica",
                     f.getType().getSimpleName(),
                     entity.getClass().getSimpleName()));
-        } else if (isMappedBy(f) && criados.containsKey(f.getType())) {
-            f.set(entity, criados.get(f.getType()));
-            LogInfo.logInfoInformation(className,
-                    I18N.getMsg("mappedByDetected",
-                    entity.getClass().getSimpleName(),
-                    f.getName(),
-                    criados.get(f.getType()).getClass().getSimpleName()));
         } else {
             recursiveCount++;
             criados.put(f.getType(),
