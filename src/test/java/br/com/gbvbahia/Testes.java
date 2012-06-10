@@ -8,6 +8,7 @@ import br.com.gbvbahia.i18n.I18NTest;
 import br.com.gbvbahia.maker.MakeEntitySynteticTest;
 import br.com.gbvbahia.maker.MakeEntityTest;
 import br.com.gbvbahia.maker.MakeEntitysTest;
+import br.com.gbvbahia.maker.properties.MakePropertiesTest;
 import br.com.gbvbahia.maker.types.date.MakeCalendarTest;
 import br.com.gbvbahia.maker.types.date.MakeDateTest;
 import br.com.gbvbahia.maker.types.string.MakeCharacterTest;
@@ -40,7 +41,8 @@ import org.junit.runners.Suite;
     MakeCNPJTest.class,
     MakeEntityTest.class,
     MakeEntitySynteticTest.class,
-    MakeEntitysTest.class
+    MakeEntitysTest.class,
+    MakePropertiesTest.class,
 })
 public class Testes {
 }
