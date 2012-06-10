@@ -4,14 +4,15 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
-import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.apache.commons.logging.Log;
 
 /**
@@ -36,6 +37,18 @@ public class PatternFactory implements ValueFactory {
 
     public PatternFactory(Map<String, List<String>> patternsList) {
         this.patternsList = patternsList;
+    }
+
+    public <T> boolean isWorkWith(Field f, T entity) {
+        if (f.isAnnotationPresent(NotNull.class)) {
+            if (f.isAnnotationPresent(Pattern.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public PatternFactory() {
     }
     /**
      * Log local, devido a complexidade de informações esse é

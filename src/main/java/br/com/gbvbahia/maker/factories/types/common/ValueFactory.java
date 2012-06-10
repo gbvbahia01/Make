@@ -8,8 +8,9 @@ import java.lang.reflect.Field;
 
 /**
  * Para cada anotação de validação uma Classe deverá ser criada e
- * implementar ValueFactory, tendo sua regra de negócio de acordo
- * com a anotação JSR303.
+ * implementar ValueFactory, tendo sua regra de negócio de acordo com
+ * a anotação JSR303.
+ *
  * @since v.1 20/5/2012
  * @author Guilherme
  */
@@ -30,4 +31,13 @@ public interface ValueFactory {
      */
     <T> void makeValue(Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException;
+
+    /**
+     * Perguta ao factory especifico se ele trabalha com o field
+     * passado.
+     *
+     * @param f Field a ter o valor definido.
+     * @return true para se trabalha e false para não.
+     */
+    <T> boolean isWorkWith(Field f, T entity);
 }

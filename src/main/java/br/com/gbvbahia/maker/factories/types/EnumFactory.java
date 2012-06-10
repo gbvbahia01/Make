@@ -8,6 +8,7 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import java.lang.reflect.Field;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -20,10 +21,19 @@ public class EnumFactory implements ValueFactory {
             IllegalArgumentException {
         Object[] enumConstants = f.getType().getEnumConstants();
         int enumSize = enumConstants.length;
-        if (enumSize <= 0){
+        if (enumSize <= 0) {
             throw new UnsupportedOperationException(I18N.getMsg("enumInvalida", f.getType().getSimpleName()));
         }
         f.set(entity,
                 enumConstants[MakeInteger.getMax(enumSize) - 1]);
+    }
+
+    public <T> boolean isWorkWith(Field f, T entity) {
+        if (f.isAnnotationPresent(NotNull.class)) {
+            if (f.getType().isEnum()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

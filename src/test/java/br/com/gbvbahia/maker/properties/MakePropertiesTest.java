@@ -4,6 +4,8 @@
  */
 package br.com.gbvbahia.maker.properties;
 
+import br.com.gbvbahia.entityes.EntityPropertiesTest;
+import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
@@ -28,8 +30,11 @@ public class MakePropertiesTest extends TestCase {
      */
     @Test
     public void testFactoryProperties() {
-        System.out.println("factoryProperties");
-        MakeProperties.factoryProperties("testProperties");
+        System.out.println("FactoryProperties");
+        EntityPropertiesTest test = MakeEntity.makeEntity("test1", EntityPropertiesTest.class, true);
         assertTrue("Sem erros", true);
+        assertNotNull("EntityPropertiesTest não pode ser nula", test);
+        assertNotNull("EntityPropertiesTest.cpf não pode ser nulo",
+                test.getCpf());
     }
 }

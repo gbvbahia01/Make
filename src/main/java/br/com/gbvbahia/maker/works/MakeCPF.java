@@ -4,7 +4,12 @@
  */
 package br.com.gbvbahia.maker.works;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.properties.ValuePropertiesFactory;
 import br.com.gbvbahia.maker.types.string.MakeString;
+import java.lang.reflect.Field;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Cria uma String que passa no teste de validação de CPF, nove
@@ -13,7 +18,15 @@ import br.com.gbvbahia.maker.types.string.MakeString;
  * @since v.1 09/06/2012
  * @author Guilherme
  */
-public class MakeCPF {
+public class MakeCPF implements ValuePropertiesFactory {
+
+    public static final String keyPropertie = "isCPF";
+
+    /**
+     * Construtor padrão.
+     */
+    public MakeCPF() {
+    }
 
     /**
      * Retorna uma string no formato de um CPF válido, em relação a
@@ -31,8 +44,40 @@ public class MakeCPF {
         return noveDigitos + calcularDigitoVerificador(noveDigitos);
     }
 
+    @Override
+    public <T> void makeValue(final Field f, final T entity,
+            final boolean makeRelationships)
+            throws IllegalAccessException, IllegalArgumentException {
+        f.set(entity, getCPF());
+    }
+
+    @Override
+    public boolean workValue(final String value) {
+        LogInfo.logInfoInformation("MakeCPF",
+                I18N.getMsg("workValueMakeCPF", value));
+        if (keyPropertie.equals(StringUtils.trim(value))) {
+            return true;
+        }
+        LogInfo.logInfoInformation("MakeCPF",
+                I18N.getMsg("notIsCPF", value));
+        return false;
+    }
+
+    /**
+     * Irá avaliar se o tipo do Field é trabalhado pelo mesmo, aqui
+     * deve ser String.
+     *
+     * @param f Field a ter o valor definido.
+     * @return True para String False para o resto.
+     */
+    @Override
+    public <T> boolean isWorkWith(Field f, T entity) {
+        return f.getType().equals(String.class);
+    }
+
     /**
      * Com base no cpf passado é calculado o dígito verificador.
+     *
      * @param cpf Somente números.
      * @return duas Strings numéricas referente ao dígito verificador.
      */

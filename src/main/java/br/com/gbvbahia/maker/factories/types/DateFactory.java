@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 /**
@@ -34,5 +35,29 @@ public class DateFactory implements ValueFactory {
             return MakeCalendar.getInPast();
         }
         return MakeCalendar.getCalendar();
+    }
+
+    public <T> boolean isWorkWith(Field f, T entity) {
+        if (f.isAnnotationPresent(NotNull.class)) {
+            if (isDate(f)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se o field é tratado com anotações de tempo da JSR303.
+     *
+     * @param f Field a ser avaliado.
+     * @return True para possui anotação de tempo False para não
+     * possui.
+     */
+    private boolean isDate(Field f) {
+        if (f.isAnnotationPresent(Future.class)
+                || f.isAnnotationPresent(Past.class)) {
+            return true;
+        }
+        return false;
     }
 }
