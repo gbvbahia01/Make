@@ -12,15 +12,30 @@ public class EntityPropertiesTest {
     
     
     private String cpf;
+    
+    private String cnpj;
+    
+    private String nome;
+
+    public String getCnpj() {
+        return cnpj;
+    }
 
     public String getCpf() {
         return cpf;
     }
 
+    public String getNome() {
+        return nome;
+    }
+    
+
     @Override
     public String toString() {
         return "EnityPropertiesTest{"
-                + "cpf=" + cpf
+                + " cpf=" + cpf
+                + " cnpj=" + cnpj
+                + " nome=" + nome
                 + '}';
     }
     

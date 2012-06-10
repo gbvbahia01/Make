@@ -6,14 +6,17 @@ package br.com.gbvbahia.maker.properties;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.works.MakeCNPJ;
 import br.com.gbvbahia.maker.works.MakeCPF;
-import java.lang.reflect.Field;
+import br.com.gbvbahia.maker.works.MakeName;
+import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Todas as classes default devem ser declaradas aqui, adicionadas
- * na lista defaultPropertiesFactories no corpo estático
+ * Todas as classes default devem ser declaradas aqui, adicionadas na
+ * lista defaultPropertiesFactories no corpo estático
+ *
  * @since v.1 09/06/2012
  * @author Guilherme
  */
@@ -24,6 +27,8 @@ public class MakePropertiesDefaultFactories {
 
     static {
         defaultPropertiesFactories.add(MakeCPF.class);
+        defaultPropertiesFactories.add(MakeCNPJ.class);
+        defaultPropertiesFactories.add(MakeName.class);
     }
 
     public static ValuePropertiesFactory getPropertiesFactory(String value) {
