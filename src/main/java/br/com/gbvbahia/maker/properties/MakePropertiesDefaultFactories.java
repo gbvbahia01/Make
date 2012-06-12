@@ -15,14 +15,14 @@ import java.util.List;
 
 /**
  * Todas as classes default devem ser declaradas aqui, adicionadas na
- * lista defaultPropertiesFactories no corpo estático
+ * lista defaultPropertiesFactories no corpo estático.
  *
  * @since v.1 09/06/2012
  * @author Guilherme
  */
 public class MakePropertiesDefaultFactories {
 
-    public final static List<Class<? extends ValuePropertiesFactory>> defaultPropertiesFactories =
+    final static List<Class<? extends ValuePropertiesFactory>> defaultPropertiesFactories =
             new ArrayList<Class<? extends ValuePropertiesFactory>>();
 
     static {
@@ -31,7 +31,16 @@ public class MakePropertiesDefaultFactories {
         defaultPropertiesFactories.add(MakeName.class);
     }
 
-    public static ValuePropertiesFactory getPropertiesFactory(String value) {
+    /**
+     * Verifica se os default são necessários ao teste, carrega
+     * somente se houver necessidade.<br> Os implementados pelo
+     * desenvolvedor tem preferência sobre os default.
+     *
+     * @param value Valor declarado no properties pelo usuário.
+     * @return A fabrica personalizada de valores, implementada pelo
+     * desenvolvedor ou default do Make.
+     */
+    static ValuePropertiesFactory getPropertiesFactory(String value) {
         for (Class<? extends ValuePropertiesFactory> clazz :
                 defaultPropertiesFactories) {
             try {
@@ -62,5 +71,25 @@ public class MakePropertiesDefaultFactories {
             }
         }
         return null;
+    }
+
+    /**
+     * Carrega as classes da fabricas personalizadas implementadas
+     * pelo desenvolvedor.
+     *
+     * @param key
+     * @param value
+     */
+    static void insertImplFactory(final String key, final String value) {
+        try {
+            Class<? extends ValuePropertiesFactory> fac =
+                    (Class<? extends ValuePropertiesFactory>) Class.forName(value);
+            if (!defaultPropertiesFactories.contains(fac)) {
+                defaultPropertiesFactories.add(0, fac);
+            }
+        } catch (ClassNotFoundException ex) {
+            LogInfo.logErrorInformation("MakePropertiesDefaultFactories",
+                    I18N.getMsg("workUserNotFound", value), ex);
+        }
     }
 }

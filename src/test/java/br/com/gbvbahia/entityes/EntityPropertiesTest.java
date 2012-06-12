@@ -17,6 +17,8 @@ public class EntityPropertiesTest {
     
     private String nome;
 
+    private String cep;
+    
     public String getCnpj() {
         return cnpj;
     }
@@ -28,6 +30,10 @@ public class EntityPropertiesTest {
     public String getNome() {
         return nome;
     }
+
+    public String getCep() {
+        return cep;
+    }
     
 
     @Override
@@ -36,6 +42,7 @@ public class EntityPropertiesTest {
                 + " cpf=" + cpf
                 + " cnpj=" + cnpj
                 + " nome=" + nome
+                + " cep=" + cep
                 + '}';
     }
     
