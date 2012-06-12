@@ -33,7 +33,7 @@ public interface ValueFactory {
             throws IllegalAccessException, IllegalArgumentException;
 
     /**
-     * Perguta ao factory especifico se ele trabalha com o field
+     * Perguta do factory especifico se ele trabalha com o field
      * passado.
      *
      * @param f Field a ter o valor definido.

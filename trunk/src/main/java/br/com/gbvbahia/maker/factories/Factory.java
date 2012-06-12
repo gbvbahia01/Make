@@ -4,12 +4,14 @@
  */
 package br.com.gbvbahia.maker.factories;
 
+import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.*;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.properties.MakeProperties;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -26,38 +28,66 @@ public final class Factory {
      * Contém uma lista das Factories para cada tipo, ao ser
      * solicitado uma será retornada.
      */
-    public final static List<ValueFactory> defaultFactories =
+    public static final List<ValueFactory> DEFAULT_FACTORIES =
             new ArrayList<ValueFactory>();
 
     /**
      * Carrega todas as Factories para a respectiva lista
      */
     static {
-        defaultFactories.add(new SizeFactory());
-        defaultFactories.add(new NumberFactory());
-        defaultFactories.add(new DateFactory());
-        defaultFactories.add(new TrueFalseFactory());
-        defaultFactories.add(new EnumFactory());
+        DEFAULT_FACTORIES.add(new SizeFactory());
+        DEFAULT_FACTORIES.add(new NumberFactory());
+        DEFAULT_FACTORIES.add(new DateFactory());
+        DEFAULT_FACTORIES.add(new TrueFalseFactory());
+        DEFAULT_FACTORIES.add(new EnumFactory());
     }
 
     /**
      * Utilize para configurar informações do teste.
      *
-     * @param testNameProprerties nome do teste configurado no arquivo
+     * @param testNameProp nome do teste configurado no arquivo
      * make.properties: Exemplo: test1.Usuario.email Onde test1 é o
      * nome do teste, Usuario a classe e email o field.
      */
-    public static void configureProperties(String testNameProprerties) {
-        if(defaultFactories.get(0).equals(new MakeProperties(testName))){
-            defaultFactories.remove(0);
+    public static void configureProperties(final String testNameProp) {
+        if (isReservedName(testNameProp)) {
+            throw new IllegalArgumentException(I18N.getMsg("workReserved",
+                    MakeProperties.WORK_USER_IMPL));
         }
-        Factory.testName = testNameProprerties;
+
+        if (DEFAULT_FACTORIES.get(0).equals(new MakeProperties(testName))) {
+            DEFAULT_FACTORIES.remove(0);
+        }
+        Factory.testName = testNameProp;
         MakeProperties makeProperties = new MakeProperties(testName);
-        defaultFactories.add(0, makeProperties);
+        DEFAULT_FACTORIES.add(0, makeProperties);
     }
 
-    public static <T> ValueFactory makeFactory(Field f, T entity) {
-        for (ValueFactory vf : defaultFactories) {
+    /**
+     * Verifica se foi utilizado nome resenvado do make no nome do
+     * teste.
+     *
+     * @param testN nome do teste.
+     * @return true se for reservado false se não.
+     */
+    private static boolean isReservedName(final String testN) {
+        return StringUtils.equalsIgnoreCase(MakeProperties.WORK_USER_IMPL,
+                StringUtils.substring(testN, 0,
+                MakeProperties.WORK_USER_IMPL.length()));
+    }
+
+    /**
+     * Percorre as factories até encontrar uma que trabalha com o
+     * field passado, retornando a mesma, como ultima tentativa
+     * retorna a DefaultFactory.
+     *
+     * @param <T> Tipo da entidade.
+     * @param f Field a ser populado.
+     * @param entity Entidade que contém o field.
+     * @return ValueFactory capaz de popular o field.
+     */
+    public static <T> ValueFactory makeFactory(final Field f, final T entity) {
+        for (ValueFactory vf : DEFAULT_FACTORIES) {
             if (vf.isWorkWith(f, entity)) {
                 return vf;
             }

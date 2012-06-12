@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class MakeProperties implements ValueFactory {
 
+    public static final String WORK_USER_IMPL = "work";
     /**
      * Armazena o nome do teste configurado, podendo ser recuperado
      * durante o teste se necessário.
@@ -50,23 +51,28 @@ public class MakeProperties implements ValueFactory {
         valueFactories.get(keyExp).makeValue(f, entity, makeRelationships);
     }
 
-    /** 
+    /**
      * Lê o arquivo make.properties, preparando os valores das classes
      * para os testes.
      *
      * @param testName java.lang.String chave da mensagem que será
      * enviada.
      */
-    public MakeProperties(String testName) {
+    public MakeProperties(final String testName) {
         this.testName = testName;
         try {
             for (String key : ResourceBundle.getBundle("make").keySet()) {
-                if (StringUtils.substringBefore(key, ".").equals(testName)) {
-                    LogInfo.logDebugInformation("MakeProperties", I18N.getMsg("intTest", key));
+                if (getFactoriesImpl(key)) {
+                    MakePropertiesDefaultFactories.insertImplFactory(StringUtils.substringAfter(key, "."),
+                            ResourceBundle.getBundle("make").getString(key));
+
+                } else if (checkSameTest(key, testName)) {
                     insertValueFactory(StringUtils.substringAfter(key, "."),
                             ResourceBundle.getBundle("make").getString(key));
+
                 } else {
-                    LogInfo.logDebugInformation("MakeProperties", I18N.getMsg("outTest", key));
+                    LogInfo.logDebugInformation("MakeProperties",
+                            I18N.getMsg("outTest", key));
                 }
             }
         } catch (Exception e) {
@@ -75,6 +81,42 @@ public class MakeProperties implements ValueFactory {
         }
     }
 
+    /**
+     * Verifica se o teste atual é o mesmo que está declarado no
+     * arquivo make.properties.
+     *
+     * @param key Chave no make.properties.
+     * @param testName Nome do teste passado.
+     * @return True para o mesmo, false para não.
+     */
+    private boolean checkSameTest(String key, String testName) {
+        boolean toReturn = StringUtils.substringBefore(key, ".").equals(testName);
+        if (toReturn) {
+            LogInfo.logDebugInformation("MakeProperties", I18N.getMsg("intTest", key));
+        }
+        return toReturn;
+
+    }
+
+    /**
+     * Verifica se a propriedade é uma propriedade referente a uma
+     * fabrica desenvolvida pelo desenvolvedor.
+     *
+     * @param key Chave no arquivo make.properties
+     * @return true se for uma work false se não for.
+     */
+    private boolean getFactoriesImpl(final String key) {
+        return StringUtils.equalsIgnoreCase(MakeProperties.WORK_USER_IMPL,
+                StringUtils.substring(key, 0,
+                MakeProperties.WORK_USER_IMPL.length()));
+    }
+
+    /**
+     * Retorna o nome do teste declarado pelo desenvolvedor no arquivo
+     * make.properties.
+     *
+     * @return nome do teste se houver, null se não foi declarado.
+     */
     public String getTestName() {
         return testName;
     }
@@ -98,8 +140,9 @@ public class MakeProperties implements ValueFactory {
     }
 
     /**
-     * Retira o nome completo da classe mais o nome do parâmetro
-     * que deverá estar declarado no propertie.
+     * Retira o nome completo da classe mais o nome do parâmetro que
+     * deverá estar declarado no propertie.
+     *
      * @param f field a ter o valor definido.
      * @return Nome esperado no make.properties.
      */

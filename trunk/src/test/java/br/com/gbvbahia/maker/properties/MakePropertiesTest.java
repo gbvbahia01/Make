@@ -44,8 +44,23 @@ public class MakePropertiesTest extends TestCase {
             assertTrue("CNPJ não válido!", MakeCNPJTest.validarCNPJ(test.getCnpj()));
             assertNotNull("EntityPropertiesTest.nome não pode ser nulo",
                     test.getNome());
+            assertNotNull("EntityPropertiesTest.cep não pode ser nulo",
+                    test.getCep());
 
-            logger.info(test);
+            logger.debug(test);
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testNameReservedException() throws Exception {
+        logger.info("NameReservedException");
+        try {
+            EntityPropertiesTest test = MakeEntity.makeEntity(MakeProperties.WORK_USER_IMPL + "_1",
+                    EntityPropertiesTest.class, true);
+            fail("Uma IllegalArgumentException era esperada.");
+        } catch (IllegalArgumentException e) {
+            //e.printStackTrace();
+            assertTrue("OK exeção esperada", true);
         }
     }
 }
