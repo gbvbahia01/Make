@@ -9,6 +9,7 @@ import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import java.lang.reflect.Field;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,9 +68,9 @@ public class MakeName implements ValuePropertiesFactory {
      */
     private static String getMsg(final int posicao) {
         try {
-            return ResourceBundle.getBundle("nomes").getString("nome"
+            return ResourceBundle.getBundle("nomes_make").getString("nome"
                     + posicao);
-        } catch (Exception e) {
+        } catch (MissingResourceException e) {
             e.printStackTrace();
             Logger.getLogger(I18N.class.getName()).log(Level.SEVERE,
                     "Maker: Nome não encontrada para {0}",
