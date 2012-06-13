@@ -8,6 +8,7 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.MakeCNPJ;
 import br.com.gbvbahia.maker.works.MakeCPF;
+import br.com.gbvbahia.maker.works.MakeEmail;
 import br.com.gbvbahia.maker.works.MakeName;
 import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class MakePropertiesDefaultFactories {
         defaultPropertiesFactories.add(MakeCPF.class);
         defaultPropertiesFactories.add(MakeCNPJ.class);
         defaultPropertiesFactories.add(MakeName.class);
+        defaultPropertiesFactories.add(MakeEmail.class);
     }
 
     /**

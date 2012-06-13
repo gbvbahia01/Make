@@ -6,13 +6,6 @@ package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.entityes.*;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.string.MakeCharacter;
-import br.com.gbvbahia.maker.types.string.MakeString;
-import br.com.gbvbahia.maker.works.MakeEmail;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
