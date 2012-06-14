@@ -9,6 +9,10 @@ import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import java.lang.reflect.Field;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -47,10 +51,30 @@ public final class MakeString {
         ALL
     };
     /**
+     * O arquivo loren.properties possui uma quantidade limitada de
+     * linhas loren, essa variável armazena o limite.
+     */
+    private static final int MAX_PROPERTIES_LOREN = 206;
+    /**
+     * Representa a quantidade de caracteres por linha no arquivo
+     * loren.properties.
+     */
+    private static final int CARACTERES_LINE_LOREN = 100;
+    /**
+     * Quantidade maxima default de linhas buscadas no Loren, 2000
+     * caracteres.
+     */
+    private static final int MAX_CARACTERES_LOREN = 20;
+    /**
+     * Quantidade minna default de linhas buscadas no Loren, 2000
+     * caracteres.
+     */
+    private static final int MIN_CARACTERES_LOREN = 1;
+    /**
      * Quantidade máxima de caracteres quando não informado pelo
      * desenvolvedor.
      */
-    public static final int MAX_LENGTH_DEFAULT = 255;
+    public static final int MAX_LENGTH_DEFAULT = 50;
     /**
      * Quantidade minina de caracteres quando não informado pelo
      * desenvolvedor.
@@ -84,8 +108,8 @@ public final class MakeString {
     }
 
     /**
-     * Gera uma String no tamanho limitado solicidato. Alterando de
-     * Upper para Lower case entre as letras.
+     * Gera uma String no tamanho limitado solicidato. Se for somente
+     * texto, LETTER, um texto Lorem ipsum será retornado.
      *
      * @param caracteres Quantidade de caracteres.
      * @return A sring no tamanho solicitado.
@@ -96,11 +120,11 @@ public final class MakeString {
             return "";
         }
         StringBuilder sb = new StringBuilder();
+        if (StringType.LETTER.equals(type)) {
+            return getLoren(caracteres);
+        }
         for (int i = 0; i < caracteres; i++) {
             switch (type) {
-                case LETTER:
-                    letter(sb);
-                    break;
                 case NUMBER:
                     sb.append(MakeCharacter.getNumber());
                     break;
@@ -176,6 +200,72 @@ public final class MakeString {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Retira dois valores do arquivo: nomes.properties, onde todos os
+     * nomes ficam armazenados.
+     *
+     * @param posicao indica qual posição deverá ser trazido o nome,
+     * de 0 até 1281.
+     * @return java.lang.String referente a um nome.
+     */
+    private static String getMsg(final int posicao) {
+        try {
+            return ResourceBundle.getBundle("loren_make").getString("loren"
+                    + posicao);
+        } catch (MissingResourceException e) {
+            e.printStackTrace();
+            Logger.getLogger(I18N.class.getName()).log(Level.SEVERE,
+                    "Maker: Loren não encontrada para {0}",
+                    new Object[]{"loren" + posicao});
+            return "loren" + posicao;
+        }
+    }
+
+    /**
+     * Retorna as strings solicitadas utilizando trechos do Lorem
+     * ipsum, simulação de texto da indústria tipográfica e de
+     * impressos. O trecho será aleatório, por ser utilizado partes de
+     * 100 caracteres, a cada 100 caractres poderá haver repetição.
+     *
+     * @param caracteres Quantidade de caracteres. Se menor ou igual a
+     * 0 será utilizado default, 50.
+     * @return String tipo Lorem ipsum de no máximo
+     */
+    public static String getLoren(final int caracteres) {
+        int linhas = setLines(caracteres);
+        StringBuilder sb = new StringBuilder();
+        for (; linhas > 0; linhas--) {
+            sb.append(getMsg(MakeInteger.getMax(MAX_PROPERTIES_LOREN)));
+        }
+        return StringUtils.substring(sb.toString(), 0, caracteres);
+    }
+
+    /**
+     * Define a quantidade de linhas que devem ser buscadas do arquivo
+     * loren.properties.
+     *
+     * @param maxCaracteres Qantidade máxima de caracteres.
+     * @return Quantidade de linhas necessárias.
+     */
+    private static int setLines(final int maxCaracteres) {
+        int linhas;
+        if (maxCaracteres <= 0) {
+            linhas = MIN_CARACTERES_LOREN;
+            LogInfo.logWarnInformation("MakeString", I18N.getMsg("minLorenError",
+                    maxCaracteres, MIN_CARACTERES_LOREN));
+        } else if (maxCaracteres > MAX_LENGTH_SUPPORTS) {
+            linhas = MAX_CARACTERES_LOREN;
+            LogInfo.logWarnInformation("MakeString", I18N.getMsg("minLorenError",
+                    maxCaracteres, MAX_CARACTERES_LOREN * CARACTERES_LINE_LOREN));
+        } else {
+            linhas = maxCaracteres / CARACTERES_LINE_LOREN;
+            if (linhas == 0) {
+                linhas = 1;
+            }
+        }
+        return linhas;
     }
 
     /**
