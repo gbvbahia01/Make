@@ -120,11 +120,16 @@ public class MakeStringTest extends TestCase {
             logger.debug("String - Max: " + i
                     + " Lenght: " + result.length()
                     + " Result: " + result);
-            for (char c : result.toCharArray()) {
-                assertTrue("String contém um caracter inválido",
-                        Character.isLetter(c) || Character.isSpaceChar(c));
-            }
         }
+        String result = MakeString.getLoren(-50);
+        logger.debug("String - Max: " + -50
+                    + " Lenght: " + result.length()
+                    + " Result: " + result);
+        result = MakeString.getLoren(5000);
+        logger.debug("String - Max: " + 5000
+                    + " Lenght: " + result.length()
+                    + " Result: " + result);
+        
     }
 
     @Test
