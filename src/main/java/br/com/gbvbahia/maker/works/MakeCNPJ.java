@@ -93,47 +93,55 @@ public class MakeCNPJ implements ValuePropertiesFactory {
      * @return retorna Strings no formato de CNPJ válidas.
      */
     private static String digitCalculate(String str_cnpj) {
-        int soma = 0, aux, dig;
-        String cnpjCalc = str_cnpj.substring(0, 12);
+        final int four = 4;
+        final int five = 5;
+        final int six = 6;
+        final int seven = 7;
+        final int eight = 8;
+        final int nine = 9;
+        final int ten = 10;
+        final int cpfCaracteres = 11;
+        final int twelve = 12;
+        final int fourEight = 48;
+        int soma = 0, dig;
+        String cnpjCalc = str_cnpj.substring(0, twelve);
         char[] chrCnpj = new char[str_cnpj.length() + 2];
-        //char[] chr_cnpj = str_cnpj.toCharArray();
         System.arraycopy(str_cnpj.toCharArray(), 0, chrCnpj, 0,
                 str_cnpj.toCharArray().length);
+
         /*
          * Primeira parte
          */
-        for (int i = 0; i < 4; i++) {
-            if (chrCnpj[i] - 48 >= 0 && chrCnpj[i] - 48 <= 9) {
-                soma += (chrCnpj[i] - 48) * (6 - (i + 1));
+        for (int i = 0; i < four; i++) {
+            if (chrCnpj[i] - fourEight >= 0 && chrCnpj[i] - fourEight <= nine) {
+                soma += (chrCnpj[i] - fourEight) * (six - (i + 1));
             }
         }
-        for (int i = 0; i < 8; i++) {
-            if (chrCnpj[i + 4] - 48 >= 0 && chrCnpj[i + 4] - 48 <= 9) {
-                soma += (chrCnpj[i + 4] - 48) * (10 - (i + 1));
+        for (int i = 0; i < eight; i++) {
+            if (chrCnpj[i + four] - fourEight >= 0 && chrCnpj[i + four] - fourEight <= nine) {
+                soma += (chrCnpj[i + four] - fourEight) * (ten - (i + 1));
             }
         }
-        dig = 11 - (soma % 11);
-
-        cnpjCalc += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);
+        dig = cpfCaracteres - (soma % cpfCaracteres);
+        cnpjCalc += (dig == ten || dig == cpfCaracteres) ? "0" : Integer.toString(dig);
 
         /*
          * Segunda parte
          */
-        chrCnpj[12] = cnpjCalc.charAt(cnpjCalc.length() - 1);
+        chrCnpj[twelve] = cnpjCalc.charAt(cnpjCalc.length() - 1);
         soma = 0;
-        for (int i = 0; i < 5; i++) {
-            if (chrCnpj[i] - 48 >= 0 && chrCnpj[i] - 48 <= 9) {
-                soma += (chrCnpj[i] - 48) * (7 - (i + 1));
+        for (int i = 0; i < five; i++) {
+            if (chrCnpj[i] - fourEight >= 0 && chrCnpj[i] - fourEight <= nine) {
+                soma += (chrCnpj[i] - fourEight) * (seven - (i + 1));
             }
         }
-        for (int i = 0; i < 8; i++) {
-            if (chrCnpj[i + 5] - 48 >= 0 && chrCnpj[i + 5] - 48 <= 9) {
-                soma += (chrCnpj[i + 5] - 48) * (10 - (i + 1));
+        for (int i = 0; i < eight; i++) {
+            if (chrCnpj[i + five] - fourEight >= 0 && chrCnpj[i + five] - fourEight <= nine) {
+                soma += (chrCnpj[i + five] - fourEight) * (ten - (i + 1));
             }
         }
-        dig = 11 - (soma % 11);
-        cnpjCalc += (dig == 10 || dig == 11) ? "0" : Integer.toString(dig);
-
-        return StringUtils.substring(cnpjCalc, 12);
+        dig = cpfCaracteres - (soma % cpfCaracteres);
+        cnpjCalc += (dig == ten || dig == cpfCaracteres) ? "0" : Integer.toString(dig);
+        return StringUtils.substring(cnpjCalc, twelve);
     }
 }
