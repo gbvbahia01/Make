@@ -35,6 +35,24 @@ public class MakeProperties implements ValueFactory {
     private Map<String, ValueFactory> valueFactories =
             new HashMap<String, ValueFactory>();
 
+    /**
+     * Perguta do factory especifico se ele trabalha com o field
+     * passado.<br> Para works o tipo não é suficiente, é necessário o
+     * nome da classe do objeto que contém do field juntamente com o
+     * nome do field declarado no make.properties se é igual com o
+     * nome da classe do objeto que contém o field juntamnete com o
+     * nome do field passado.<br> Ex: No properties está:<br>
+     * teste2.br.com.meuprojeto.MinhaClasse.cpf = isCPF<br> Quando
+     * <code>isWorkWith</code> for chamado, ele irá verificar se no
+     * field passado, a classe que o contém, ou seja, se a classe de
+     * entity tem o nome: <i>br.com.meuprojeto.MinhaClasse</i> e se o
+     * nome do field é <i>cpf</i>.
+     *
+     * @param <T> Tipo do objeto que contém o field.
+     * @param f fieald que irá receber o valor.
+     * @param entity Entidade que contém o field,
+     * @return True para trabalha com, false para não trabalha.
+     */
     @Override
     public <T> boolean isWorkWith(final Field f, final T entity) {
         String keyExp = getExpectKey(f);
