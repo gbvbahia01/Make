@@ -40,8 +40,8 @@ public class NumberFactory implements ValueFactory {
     }
 
     @Override
-    public <T> void makeValue(final Field f, final T entity,
-            boolean makeRelationships)
+    public <T> void makeValue(final String testName, final Field f,
+            final T entity, final boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         for (MakeNumber makeNumber : NUMBERS_FACTORYS) {
             if (makeNumber.isMyType(f)) {
@@ -53,7 +53,7 @@ public class NumberFactory implements ValueFactory {
     }
 
     @Override
-    public <T> boolean isWorkWith(Field f, T entity) {
+    public <T> boolean isWorkWith(final Field f, final T entity) {
         if (f.isAnnotationPresent(NotNull.class)) {
             if (isNumber(f)) {
                 return true;
@@ -70,7 +70,7 @@ public class NumberFactory implements ValueFactory {
      * @return True para possui anotação numérica False para não
      * possui.
      */
-    private boolean isNumber(Field f) {
+    private boolean isNumber(final Field f) {
         if (f.isAnnotationPresent(Min.class)
                 || f.isAnnotationPresent(Max.class)
                 || f.isAnnotationPresent(DecimalMin.class)

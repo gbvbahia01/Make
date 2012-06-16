@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
  */
 public class SizeFactory implements ValueFactory {
 
-    public <T> void makeValue(Field f, T entity, boolean makeRelationships)
+    public <T> void makeValue(String testName, Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         int min = f.getAnnotation(Size.class).min();
         int max = f.getAnnotation(Size.class).max();

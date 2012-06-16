@@ -17,11 +17,16 @@ import java.lang.reflect.Field;
 public interface ValueFactory {
 
     /**
+     * Executa a ção de criar valor(es) para ser(em) inseridos no
+     * field.
+     *
      * @param <T> Generic que representa proprietário do campo. Por
      * exemplo: Classe carro tem um campo int rodas, o Field f seria
      * rodas e T seria a classe Carro que terá o campo definido.
+     * @param testName Nome do teste declarado no properties. Pode ser
+     * utilizado caso haja recursão, chamar MakeEntity novamente.
      * @param f O campo que terá o valor definido.
-     * @param toReturn Objeto que contém o Field.
+     * @param entity Objeto que contém o Field.
      * @param makeRelationships True irá criar objetos para ManyToOne
      * ou OneToOne <b>que tenha anotação</b> javax.persistence.Entity.
      * @throws IllegalAccessException se no momento de execução não
@@ -29,7 +34,8 @@ public interface ValueFactory {
      * @throws IllegalArgumentException Se algum argumento anotado não
      * for válido.
      */
-    <T> void makeValue(Field f, T entity, boolean makeRelationships)
+    <T> void makeValue(String testName, Field f, T entity,
+            boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException;
 
     /**

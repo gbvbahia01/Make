@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 21/04/2012
  * @author Guilherme
  */
-public final  class I18N {
+public final class I18N {
 
     /**
      * Construtor privado, classe não pode ser instânciada.
@@ -39,13 +39,13 @@ public final  class I18N {
      */
     public static String getMsg(final String chave) {
         try {
-            return ResourceBundle.getBundle("msg", Locale.getDefault(),
+            return ResourceBundle.getBundle("msg_make", Locale.getDefault(),
                     I18N.class.getClassLoader()).getString(chave);
         } catch (Exception e) {
             e.printStackTrace();
-                Logger.getLogger(I18N.class.getName()).log(Level.INFO,
-                        "Maker: Menssagem não encontrada para {0}", new Object[]{chave});
-                return chave;
+            Logger.getLogger(I18N.class.getName()).log(Level.INFO,
+                    "Maker: Menssagem não encontrada para {0}", new Object[]{chave});
+            return chave;
         }
     }
 
@@ -70,5 +70,19 @@ public final  class I18N {
             }
         }
         return toReturn;
+    }
+
+    /**
+     * Retira o valor do arquivo:
+     * br.com.convergeti.solida.utils.I18n.properties, onde todas as
+     * mensagens que são enviadas ao usuário ficam armazenadas. Este
+     * substitui todos {*} pela posição correspondente no vararg.
+     *
+     * @param msg Messagem do Resource.
+     * @param var Variações da mensagem.
+     * @return Menssagem formada.
+     */
+    public static String getMsg(final String msg, final String[] var) {
+        return getMsg(msg, var);
     }
 }

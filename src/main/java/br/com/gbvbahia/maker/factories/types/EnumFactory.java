@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
  */
 public class EnumFactory implements ValueFactory {
 
-    public <T> void makeValue(Field f, T entity,
+    public <T> void makeValue(String testName, Field f, T entity,
             boolean makeRelationships) throws IllegalAccessException,
             IllegalArgumentException {
         Object[] enumConstants = f.getType().getEnumConstants();
