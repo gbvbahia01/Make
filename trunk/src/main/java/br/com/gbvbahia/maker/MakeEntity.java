@@ -59,7 +59,7 @@ public final class MakeEntity {
                     try {
                         ValueFactory valueFactory =
                                 Factory.makeFactory(f, entity);
-                        valueFactory.makeValue(f, toReturn,
+                        valueFactory.makeValue(testName, f, toReturn,
                                 makeRelationships);
                     } catch (IllegalArgumentException e) {
                         LogInfo.logFieldNull(MakeEntity.class.getSimpleName(), f);

@@ -27,7 +27,7 @@ public class TrueFalseFactory implements ValueFactory {
      */
     private String entityName;
 
-    public <T> void makeValue(Field f, T entity, boolean makeRelationships)
+    public <T> void makeValue(String testName, Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         this.entityName = entity.getClass().getSimpleName();
         if (f.getType().equals(Boolean.class)) {

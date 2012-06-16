@@ -9,8 +9,10 @@ import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.MakeCNPJ;
 import br.com.gbvbahia.maker.works.MakeCPF;
 import br.com.gbvbahia.maker.works.MakeEmail;
+import br.com.gbvbahia.maker.works.MakeList;
 import br.com.gbvbahia.maker.works.MakeName;
 import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class MakePropertiesDefaultFactories {
         defaultPropertiesFactories.add(MakeCNPJ.class);
         defaultPropertiesFactories.add(MakeName.class);
         defaultPropertiesFactories.add(MakeEmail.class);
+        defaultPropertiesFactories.add(MakeList.class);
     }
 
     /**
@@ -50,6 +53,11 @@ public class MakePropertiesDefaultFactories {
                 if (vpf.workValue(value)) {
                     return vpf;
                 }
+            } catch (MakeWorkException ex) {
+                LogInfo.logErrorInformation(ex.getClassOrigem(),
+                        I18N.getMsg(ex.getMsgProperties(),
+                        ex.getVariations()), ex.getCause());
+                throw ex;
             } catch (InstantiationException ex) {
                 LogInfo.logWarnInformation("MakeDefaultFactories",
                         I18N.getMsg("propertiesFactoryInstantiationException",

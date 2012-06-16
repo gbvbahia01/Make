@@ -56,7 +56,8 @@ public class PatternFactory implements ValueFactory {
      */
     private Log logger = LogInfo.getLog("PatternFactory");
 
-    public <T> void makeValue(Field f, T entity, boolean makeRelationships)
+    public <T> void makeValue(final String testName, final Field f,
+            final T entity, final boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         if (patternsList == null) {
             LogInfo.logWarnInformation("PatternFactory",

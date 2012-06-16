@@ -56,7 +56,7 @@ public class DefaultFactory extends NumberFactory {
     private String className = this.getClass().getSimpleName();
 
     @Override
-    public <T> void makeValue(Field f, T entity, boolean makeRelationships)
+    public <T> void makeValue(String testName, Field f, T entity, boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         if (!f.isAnnotationPresent(NotNull.class)) {
             if (testName != null) {
@@ -76,7 +76,7 @@ public class DefaultFactory extends NumberFactory {
             return;
         }
         try {
-            super.makeValue(f, entity, makeRelationships);
+            super.makeValue(testName, f, entity, makeRelationships);
         } catch (IllegalArgumentException ex) {
             if (MakeCharacter.isCharacter(f)) {
                 valueToCharacter(f, entity);
@@ -84,7 +84,7 @@ public class DefaultFactory extends NumberFactory {
                 valueToBoolean(f, entity);
             } else if (isDate(f)) {
                 LogInfo.logDefaultValue(entity, f, className);
-                new DateFactory().makeValue(f, entity, makeRelationships);
+                new DateFactory().makeValue(testName, f, entity, makeRelationships);
             } else if (makeRelationships
                     && f.getType().isAnnotationPresent(Entity.class)) {
                 avoidCyclicReference(f, entity, makeRelationships);

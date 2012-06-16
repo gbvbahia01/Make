@@ -46,7 +46,7 @@ public class MakeEmailTest extends TestCase {
         for (int i = 0; i < 50; i++) {
             EntityPatternTest test =
                     MakeEntity.makeEntity("test2", EntityPatternTest.class, false);
-            logger.info(test);
+            logger.debug(test);
             assertNotNull("Test é nulo.", test);
             validarJSR303(test);
         }

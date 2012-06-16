@@ -55,8 +55,8 @@ public class MakeEmail implements ValuePropertiesFactory {
     }
 
     @Override
-    public <T> void makeValue(final Field f, final T entity,
-            final boolean makeRelationships)
+    public <T> void makeValue(final String testName, final Field f,
+    final T entity, final boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
         f.set(entity, getEmail());
     }

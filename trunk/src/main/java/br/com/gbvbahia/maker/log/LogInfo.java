@@ -135,12 +135,16 @@ public final class LogInfo {
      *
      * @param clazz Classe solicitante.
      * @param info informação a ser inserida no log.
-     * @param t Causador do erro.
+     * @param t Causador do erro, não obrigatório.
      */
     public static void logErrorInformation(final String clazz,
             final String info, final Throwable t) {
         Log logger = getLog(clazz);
-        logger.error(info, t);
+        if (t != null) {
+            logger.error(info, t);
+        } else {
+            logger.error(info);
+        }
     }
 
     /**
