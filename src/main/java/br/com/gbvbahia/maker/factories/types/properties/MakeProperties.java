@@ -94,8 +94,9 @@ public class MakeProperties implements ValueFactory {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             Logger.getLogger(MakeProperties.class.getName()).log(Level.WARNING,
-                    I18N.getMsg("makePropertiesNotFound"));
+                    I18N.getMsg("makePropertiesNotFound", testName));
         }
     }
 

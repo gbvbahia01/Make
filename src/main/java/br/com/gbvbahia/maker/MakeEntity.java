@@ -73,10 +73,12 @@ public final class MakeEntity {
                     entity);
             return toReturn;
         } catch (InstantiationException ex) {
+            ex.printStackTrace();
             logger.error(I18N.getMsg("instantiationException",
                     entity.getName()), ex);
             throw new RuntimeException(ex);
         } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
             logger.error(I18N.getMsg("illegalAccessException",
                     entity.getName()), ex);
             throw new RuntimeException(ex);
