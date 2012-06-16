@@ -89,10 +89,10 @@ public class MakeCNPJ implements ValuePropertiesFactory {
      * Cria os dígitos verificadores do CNPJ com base nos 12
      * caracteres passados.
      *
-     * @param str_cnpj 12 caractres numéricos do CNPJ
+     * @param strCnpj 12 caractres numéricos do CNPJ
      * @return retorna Strings no formato de CNPJ válidas.
      */
-    private static String digitCalculate(String str_cnpj) {
+    private static String digitCalculate(final String strCnpj) {
         final int four = 4;
         final int five = 5;
         final int six = 6;
@@ -104,10 +104,10 @@ public class MakeCNPJ implements ValuePropertiesFactory {
         final int twelve = 12;
         final int fourEight = 48;
         int soma = 0, dig;
-        String cnpjCalc = str_cnpj.substring(0, twelve);
-        char[] chrCnpj = new char[str_cnpj.length() + 2];
-        System.arraycopy(str_cnpj.toCharArray(), 0, chrCnpj, 0,
-                str_cnpj.toCharArray().length);
+        String cnpjCalc = strCnpj.substring(0, twelve);
+        char[] chrCnpj = new char[strCnpj.length() + 2];
+        System.arraycopy(strCnpj.toCharArray(), 0, chrCnpj, 0,
+                strCnpj.toCharArray().length);
 
         /*
          * Primeira parte
