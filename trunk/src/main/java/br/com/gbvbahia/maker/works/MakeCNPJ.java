@@ -82,7 +82,7 @@ public class MakeCNPJ implements ValuePropertiesFactory {
         } else {
             cnpj += "0001";
         }
-        return cnpj + calcularDigitoVerificador(cnpj);
+        return cnpj + digitCalculate(cnpj);
     }
 
     /**
@@ -92,7 +92,7 @@ public class MakeCNPJ implements ValuePropertiesFactory {
      * @param str_cnpj 12 caractres numéricos do CNPJ
      * @return retorna Strings no formato de CNPJ válidas.
      */
-    private static String calcularDigitoVerificador(String str_cnpj) {
+    private static String digitCalculate(String str_cnpj) {
         int soma = 0, aux, dig;
         String cnpj_calc = str_cnpj.substring(0, 12);
         char[] chr_cnpj = new char[str_cnpj.length() + 2];
