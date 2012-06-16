@@ -98,7 +98,7 @@ public class MakeListTest extends TestCase {
     public void testPopularLista() throws Exception {
         EntityListTest test = MakeEntity.makeEntity("testList1",
                 EntityListTest.class, false);
-        logger.info(test);
+        logger.debug(test);
         assertNotNull("Test 1: test não pode ser nulo.", test);
         assertNotNull("Test 1: List de test não pode ser nula.", test.getListPattern());
         assertTrue("Test 1: List de test não pode ser menor que 3.", test.getListPattern().size() >= 3);
