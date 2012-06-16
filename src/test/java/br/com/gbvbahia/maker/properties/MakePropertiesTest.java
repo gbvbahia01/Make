@@ -4,6 +4,7 @@
  */
 package br.com.gbvbahia.maker.properties;
 
+import br.com.gbvbahia.maker.factories.types.properties.MakeProperties;
 import br.com.gbvbahia.entityes.EntityPropertiesTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;

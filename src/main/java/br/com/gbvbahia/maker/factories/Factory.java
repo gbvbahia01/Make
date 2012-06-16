@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker.factories;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.*;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.properties.MakeProperties;
+import br.com.gbvbahia.maker.factories.types.properties.MakeProperties;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
