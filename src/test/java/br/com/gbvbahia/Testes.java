@@ -16,6 +16,7 @@ import br.com.gbvbahia.maker.types.string.MakeStringTest;
 import br.com.gbvbahia.maker.types.wrappers.*;
 import br.com.gbvbahia.maker.works.MakeCNPJTest;
 import br.com.gbvbahia.maker.works.MakeCPFTest;
+import br.com.gbvbahia.maker.works.MakeListTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -43,6 +44,7 @@ import org.junit.runners.Suite;
     MakeEntitySynteticTest.class,
     MakeEntitysTest.class,
     MakePropertiesTest.class,
+    MakeListTest.class
 })
 public class Testes {
 }
