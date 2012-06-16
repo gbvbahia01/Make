@@ -80,6 +80,7 @@ public class MakeLong extends MakeNumber {
             try {
                 numero = min + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
             } catch (StackOverflowError s) {
+                s.printStackTrace();
                 LogInfo.logWarnInformation("MakeLong", I18N.getMsg("bigErroStack", max, min, ale));
                 throw s;
             }

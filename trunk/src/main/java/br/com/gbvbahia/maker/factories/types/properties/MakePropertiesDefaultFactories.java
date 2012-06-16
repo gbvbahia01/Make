@@ -6,11 +6,7 @@ package br.com.gbvbahia.maker.factories.types.properties;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.works.MakeCNPJ;
-import br.com.gbvbahia.maker.works.MakeCPF;
-import br.com.gbvbahia.maker.works.MakeEmail;
-import br.com.gbvbahia.maker.works.MakeList;
-import br.com.gbvbahia.maker.works.MakeName;
+import br.com.gbvbahia.maker.works.*;
 import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 import java.util.ArrayList;
@@ -18,22 +14,23 @@ import java.util.List;
 
 /**
  * Todas as classes default devem ser declaradas aqui, adicionadas na
- * lista defaultPropertiesFactories no corpo estático.
+ * lista WORK_FACTORIES no corpo estático.
  *
  * @since v.1 09/06/2012
  * @author Guilherme
  */
 public class MakePropertiesDefaultFactories {
 
-    final static List<Class<? extends ValuePropertiesFactory>> defaultPropertiesFactories =
+    final static List<Class<? extends ValuePropertiesFactory>> WORK_FACTORIES =
             new ArrayList<Class<? extends ValuePropertiesFactory>>();
 
     static {
-        defaultPropertiesFactories.add(MakeCPF.class);
-        defaultPropertiesFactories.add(MakeCNPJ.class);
-        defaultPropertiesFactories.add(MakeName.class);
-        defaultPropertiesFactories.add(MakeEmail.class);
-        defaultPropertiesFactories.add(MakeList.class);
+        WORK_FACTORIES.add(MakeCPF.class);
+        WORK_FACTORIES.add(MakeCNPJ.class);
+        WORK_FACTORIES.add(MakeName.class);
+        WORK_FACTORIES.add(MakeEmail.class);
+        WORK_FACTORIES.add(MakeList.class);
+        WORK_FACTORIES.add(MakeSet.class);
     }
 
     /**
@@ -46,10 +43,9 @@ public class MakePropertiesDefaultFactories {
      * desenvolvedor ou default do Make.
      */
     static ValuePropertiesFactory getPropertiesFactory(String value) {
-        for (Class<? extends ValuePropertiesFactory> clazz :
-                defaultPropertiesFactories) {
+        for (int i = 0; i < WORK_FACTORIES.size(); i++) {
             try {
-                ValuePropertiesFactory vpf = clazz.newInstance();
+                ValuePropertiesFactory vpf = WORK_FACTORIES.get(i).newInstance();
                 if (vpf.workValue(value)) {
                     return vpf;
                 }
@@ -57,26 +53,27 @@ public class MakePropertiesDefaultFactories {
                 LogInfo.logErrorInformation(ex.getClassOrigem(),
                         I18N.getMsg(ex.getMsgProperties(),
                         ex.getVariations()), ex.getCause());
+                ex.printStackTrace();
                 throw ex;
             } catch (InstantiationException ex) {
                 LogInfo.logWarnInformation("MakeDefaultFactories",
                         I18N.getMsg("propertiesFactoryInstantiationException",
-                        clazz.getSimpleName()));
+                        WORK_FACTORIES.get(i).getSimpleName()));
                 ex.printStackTrace();
             } catch (IllegalAccessException ex) {
                 LogInfo.logWarnInformation("MakeDefaultFactories",
                         I18N.getMsg("propertiesFactoryIllegalAccessException",
-                        clazz.getSimpleName()));
+                        WORK_FACTORIES.get(i).getSimpleName()));
                 ex.printStackTrace();
             } catch (IllegalArgumentException ex) {
                 LogInfo.logWarnInformation("MakeDefaultFactories",
                         I18N.getMsg("propertiesFactoryIllegalArgumentException",
-                        clazz.getSimpleName(), value));
+                        WORK_FACTORIES.get(i).getSimpleName(), value));
                 ex.printStackTrace();
             } catch (SecurityException ex) {
                 LogInfo.logWarnInformation("MakeDefaultFactories",
                         I18N.getMsg("propertiesFactorySecurityException",
-                        clazz.getSimpleName()));
+                        WORK_FACTORIES.get(i).getSimpleName()));
                 ex.printStackTrace();
             }
         }
@@ -94,10 +91,11 @@ public class MakePropertiesDefaultFactories {
         try {
             Class<? extends ValuePropertiesFactory> fac =
                     (Class<? extends ValuePropertiesFactory>) Class.forName(value);
-            if (!defaultPropertiesFactories.contains(fac)) {
-                defaultPropertiesFactories.add(0, fac);
+            if (!WORK_FACTORIES.contains(fac)) {
+                WORK_FACTORIES.add(0, fac);
             }
         } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
             LogInfo.logErrorInformation("MakePropertiesDefaultFactories",
                     I18N.getMsg("workUserNotFound", value), ex);
         }

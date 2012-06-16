@@ -50,16 +50,15 @@ public final class Factory {
      * nome do teste, Usuario a classe e email o field.
      */
     public static void configureProperties(final String testNameProp) {
+        Factory.testName = testNameProp;
         if (isReservedName(testNameProp)) {
             throw new IllegalArgumentException(I18N.getMsg("workReserved",
                     MakeProperties.WORK_USER_IMPL));
         }
-
-        if (DEFAULT_FACTORIES.get(0).equals(new MakeProperties(testName))) {
+        if (DEFAULT_FACTORIES.get(0).equals(new MakeProperties(testNameProp))) {
             DEFAULT_FACTORIES.remove(0);
         }
-        Factory.testName = testNameProp;
-        MakeProperties makeProperties = new MakeProperties(testName);
+        MakeProperties makeProperties = new MakeProperties(testNameProp);
         DEFAULT_FACTORIES.add(0, makeProperties);
     }
 
