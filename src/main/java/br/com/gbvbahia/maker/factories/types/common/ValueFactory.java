@@ -37,6 +37,7 @@ public interface ValueFactory {
      * passado.
      *
      * @param f Field a ter o valor definido.
+     * @param entity Entidade que contém o field que receberá o valor.
      * @return true para se trabalha e false para não.
      */
     <T> boolean isWorkWith(Field f, T entity);
