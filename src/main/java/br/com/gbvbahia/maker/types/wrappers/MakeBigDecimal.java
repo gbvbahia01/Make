@@ -23,8 +23,13 @@ public class MakeBigDecimal extends MakeNumber {
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
         Double intervalo = new Double(MakeDouble.getIntervalo(min, max));
-         f.set(entity,
-                 new BigDecimal(maxDecimal(f, intervalo).toString()));
+        insertValue(f, entity, maxDecimal(f, intervalo).toString());
+    }
+
+    @Override
+    public <T> void insertValue(Field f, T entity, String value)
+            throws IllegalArgumentException, IllegalAccessException {
+        f.set(entity, new BigDecimal(value));
     }
 
     @Override
@@ -61,8 +66,7 @@ public class MakeBigDecimal extends MakeNumber {
      * Retorna True para tipos Float ou float.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Float ou float, False para outros
-     * tipos.
+     * @return True para tipos Float ou float, False para outros tipos.
      */
     public static boolean isBigDecimal(final Field f) {
         if (f.getType().equals(BigDecimal.class)) {

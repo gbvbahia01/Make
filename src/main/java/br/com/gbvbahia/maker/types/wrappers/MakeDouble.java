@@ -25,10 +25,17 @@ public class MakeDouble extends MakeNumber {
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
         Double intervalo = MakeDouble.getIntervalo(min, max);
-        if (f.getType().equals(Double.class)) {
-            f.set(entity, new Double(maxDecimal(f, intervalo).doubleValue()));
+        insertValue(f, entity, new Double(maxDecimal(f,
+                intervalo).doubleValue()).toString());
+    }
+
+    @Override
+    public <T> void insertValue(final Field f, final T entity, final String value)
+            throws IllegalArgumentException, IllegalAccessException {
+         if (f.getType().equals(Double.class)) {
+            f.set(entity, new Double(value));
         } else {
-            f.set(entity, maxDecimal(f, intervalo).doubleValue());
+            f.set(entity, new Double(value).doubleValue());
         }
     }
 
@@ -81,8 +88,7 @@ public class MakeDouble extends MakeNumber {
      * Retorna True para tipos Double ou double.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Double ou double, False para outros
-     * tipos.
+     * @return True para tipos Double ou double, False para outros tipos.
      */
     public static boolean isDouble(final Field f) {
         if (f.getType().equals(Double.class)

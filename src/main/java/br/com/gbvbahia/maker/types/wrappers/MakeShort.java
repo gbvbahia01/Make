@@ -20,10 +20,17 @@ public class MakeShort extends MakeNumber {
                 Short.MAX_VALUE);
         short min = minMax[0].shortValue();
         short max = minMax[1].shortValue();
+        insertValue(f, entity, MakeShort.getIntervalo(min, max).toString());
+    }
+
+    @Override
+    public <T> void insertValue(final Field f, final T entity,
+            final String value)
+            throws IllegalArgumentException, IllegalAccessException {
         if (f.getType().equals(Short.class)) {
-            f.set(entity, MakeShort.getIntervalo(min, max));
+            f.set(entity, new Short(value));
         } else {
-            f.set(entity, MakeShort.getIntervalo(min, max).shortValue());
+            f.set(entity, new Short(value).shortValue());
         }
     }
 
@@ -57,8 +64,7 @@ public class MakeShort extends MakeNumber {
      * Retorna True para tipos Short ou short.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Short ou short, False para outros
-     * tipos.
+     * @return True para tipos Short ou short, False para outros tipos.
      */
     public static boolean isShort(final Field f) {
         if (f.getType().equals(Short.class)

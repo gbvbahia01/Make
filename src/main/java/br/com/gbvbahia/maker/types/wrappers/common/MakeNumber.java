@@ -20,9 +20,9 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class MakeNumber {
 
     /**
-     * Se o field tiver o tipo que o produtor trabalha retorna true,
-     * caso contrario false. Por exemplo, se o Field for String,
-     * MakeLong retorna false e MakeString retornaria true.
+     * Se o field tiver o tipo que o produtor trabalha retorna true, caso
+     * contrario false. Por exemplo, se o Field for String, MakeLong
+     * retorna false e MakeString retornaria true.
      *
      * @param f O field que terá o valor definido.
      * @return True para se trabalha com e false se não trabalha.
@@ -31,8 +31,7 @@ public abstract class MakeNumber {
 
     /**
      * Insere o valor no field da entidade passada, o valor deverá ser
-     * fabricado de acordo com a anotação da JSR303 que houver no
-     * field.
+     * fabricado de acordo com a anotação da JSR303 que houver no field.
      *
      * @param <T> Tipo da entidade passada.
      * @param f Field da entidade a ser populado
@@ -42,19 +41,30 @@ public abstract class MakeNumber {
             throws IllegalArgumentException, IllegalAccessException;
 
     /**
+     * Insere o valor passado no field da entidade passada, o valor será
+     * convertido para o tipo do field.
+     *
+     * @param <T> Tipo da entidade passada.
+     * @param f Field da entidade a ser populado
+     * @param value Valor a ser inserido no field da entidade a ser
+     * populado.
+     * @param entity Entidade a ter um field populado.
+     */
+    public abstract <T> void insertValue(Field f, T entity, String value)
+            throws IllegalArgumentException, IllegalAccessException;
+
+    /**
      * Cria um valor entre os valores anotados com
-     * javax.validation.constraints.Min ou
-     * javax.validation.constraints.Max da especificação JSR303.<br>
-     * Se não encontrar os valores irá utilizar os determinados nos
-     * parâmetros minValue e/ou MaxValue
+     * javax.validation.constraints.Min ou javax.validation.constraints.Max
+     * da especificação JSR303.<br> Se não encontrar os valores irá
+     * utilizar os determinados nos parâmetros minValue e/ou MaxValue
      *
      * @param f Campo a ter o valor determinado.
-     * @param minValue Mínimo aceitavel, será utilizado se não houver
-     * a anotação @Min da JSR303.
-     * @param maxValue Máximo aceitavel, será utilizado se não houver
-     * a anotação @Max da JSR303.
-     * @return Array de duas posições, [0] será o minimo e [1] o
-     * máximo.
+     * @param minValue Mínimo aceitavel, será utilizado se não houver a
+     * anotação @Min da JSR303.
+     * @param maxValue Máximo aceitavel, será utilizado se não houver a
+     * anotação @Max da JSR303.
+     * @return Array de duas posições, [0] será o minimo e [1] o máximo.
      */
     protected Number[] getMinMaxValues(
             final Field f,
@@ -88,10 +98,9 @@ public abstract class MakeNumber {
 
     /**
      * Cria um número maior possivel com a quantidade de digitos
-     * informado.<br> Máximo Long é 9,223,372,036,854,775,807L,
-     * utilizo 8 porque 9 teria problema em:
-     * 9,999,999,999,999,999,999L NOK, oito aguenta uma casa decimal a
-     * mais: 8,888,888,888,888,888,888L OK
+     * informado.<br> Máximo Long é 9,223,372,036,854,775,807L, utilizo 8
+     * porque 9 teria problema em: 9,999,999,999,999,999,999L NOK, oito
+     * aguenta uma casa decimal a mais: 8,888,888,888,888,888,888L OK
      *
      * @param integer Representa a quantidade de números.
      * @return Se integer fo 2, retorna 88, se for 3, 888...
@@ -102,14 +111,14 @@ public abstract class MakeNumber {
     }
 
     /**
-     * Verifica se existe a anotação Digits no field, se existir
-     * garante que o valor a ser definido esteja dentro da qantidade
-     * máxima delimitada.
+     * Verifica se existe a anotação Digits no field, se existir garante
+     * que o valor a ser definido esteja dentro da qantidade máxima
+     * delimitada.
      *
      * @param f Field que terá o valor determinado.
      * @param valor Valor que será inserido no field.
-     * @return O valor passado se não houver @Digits, se houver o
-     * valor será alterado para se encaixar na necessidade.
+     * @return O valor passado se não houver @Digits, se houver o valor
+     * será alterado para se encaixar na necessidade.
      */
     protected Number maxDecimal(final Field f, final Number valor) {
         if (f.isAnnotationPresent(Digits.class)) {

@@ -4,9 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.wrappers;
 
-import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
-import br.com.gbvbahia.maker.types.string.MakeString;
 import java.lang.reflect.Field;
 
 /**
@@ -23,7 +21,14 @@ public class MakeStringNumber extends MakeNumber {
         double min = minMax[0].doubleValue();
         double max = minMax[1].doubleValue();
         Double intervalo = MakeDouble.getIntervalo(min, max);
-        f.set(entity, maxDecimal(f, intervalo).toString());
+        insertValue(f, entity, maxDecimal(f, intervalo).toString());
+    }
+
+    @Override
+    public <T> void insertValue(final Field f, final T entity,
+            final String value)
+            throws IllegalArgumentException, IllegalAccessException {
+        f.set(entity, value);
     }
 
     @Override

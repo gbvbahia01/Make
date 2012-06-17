@@ -27,10 +27,17 @@ public class MakeLong extends MakeNumber {
                 Long.MAX_VALUE);
         long min = minMax[0].longValue();
         long max = minMax[1].longValue();
-        if (f.getType().equals(Integer.class)) {
-            f.set(entity, MakeLong.getIntervalo(min, max));
+        insertValue(f, entity, MakeLong.getIntervalo(min, max).toString());
+    }
+
+    @Override
+    public <T> void insertValue(final Field f, final T entity,
+            final String value)
+            throws IllegalArgumentException, IllegalAccessException {
+        if (f.getType().equals(Long.class)) {
+            f.set(entity, new Long(value));
         } else {
-            f.set(entity, MakeLong.getIntervalo(min, max).longValue());
+            f.set(entity, new Long(value).longValue());
         }
     }
 
@@ -89,9 +96,9 @@ public class MakeLong extends MakeNumber {
     }
 
     /**
-     * Retorna um número aleatório limitado ao max passado. Este
-     * método embora receba long como parámetro trabalha com Inteiro e
-     * o maior número a retornar será o Integer.MAX_VALUE.
+     * Retorna um número aleatório limitado ao max passado. Este método
+     * embora receba long como parámetro trabalha com Inteiro e o maior
+     * número a retornar será o Integer.MAX_VALUE.
      *
      * @param max Minimo 1.
      * @return Long limitado ao max, minimo é zero.

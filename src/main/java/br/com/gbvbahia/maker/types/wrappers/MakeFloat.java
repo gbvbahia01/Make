@@ -24,10 +24,18 @@ public class MakeFloat extends MakeNumber {
         float min = minMax[0].floatValue();
         float max = minMax[1].floatValue();
         Float intervalo = MakeFloat.getIntervalo(min, max);
-        if (f.getType().equals(Double.class)) {
-            f.set(entity, new Float(maxDecimal(f, intervalo).floatValue()));
+        insertValue(f, entity, new Float(maxDecimal(f,
+                intervalo).floatValue()).toString());
+    }
+
+    @Override
+    public <T> void insertValue(final Field f, final T entity,
+            final String value)
+            throws IllegalArgumentException, IllegalAccessException {
+        if (f.getType().equals(Float.class)) {
+            f.set(entity, new Float(value));
         } else {
-            f.set(entity, maxDecimal(f, intervalo).floatValue());
+            f.set(entity, new Float(value).floatValue());
         }
     }
 
@@ -67,8 +75,7 @@ public class MakeFloat extends MakeNumber {
      * Retorna True para tipos Float ou float.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Float ou float, False para outros
-     * tipos.
+     * @return True para tipos Float ou float, False para outros tipos.
      */
     public static boolean isFloat(final Field f) {
         if (f.getType().equals(Float.class)
