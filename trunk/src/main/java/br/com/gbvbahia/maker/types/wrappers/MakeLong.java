@@ -59,6 +59,8 @@ public class MakeLong extends MakeNumber {
      */
     public static Long getIntervalo(final long min, final long max) {
         if (min > max) {
+            LogInfo.logErrorInformation("MakeLong", I18N.getMsg("nimMaiormax",
+                    min, max), null);
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
