@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -32,7 +33,7 @@ public class MakeDouble extends MakeNumber {
     @Override
     public <T> void insertValue(final Field f, final T entity, final String value)
             throws IllegalArgumentException, IllegalAccessException {
-         if (f.getType().equals(Double.class)) {
+        if (f.getType().equals(Double.class)) {
             f.set(entity, new Double(value));
         } else {
             f.set(entity, new Double(value).doubleValue());
@@ -53,6 +54,8 @@ public class MakeDouble extends MakeNumber {
      */
     public static Double getIntervalo(final double min, final double max) {
         if (min > max) {
+            LogInfo.logErrorInformation("MakeLong", I18N.getMsg("nimMaiormax",
+                    min, max), null);
             throw new IllegalArgumentException(I18N.getMsg("nimMaiormax",
                     new Object[]{min, max}));
         }
