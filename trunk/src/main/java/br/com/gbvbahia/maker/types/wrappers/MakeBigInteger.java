@@ -24,8 +24,13 @@ public class MakeBigInteger extends MakeNumber {
                 Long.MAX_VALUE);
         long min = minMax[0].longValue();
         long max = minMax[1].longValue();
-        f.set(entity, new BigInteger((MakeLong.getIntervalo(min,
-                max)).toString()));
+        insertValue(f, entity, MakeLong.getIntervalo(min, max).toString());
+    }
+
+    @Override
+    public <T> void insertValue(Field f, T entity, String value)
+            throws IllegalArgumentException, IllegalAccessException {
+        f.set(entity, new BigInteger(value));
     }
 
     @Override
@@ -61,8 +66,7 @@ public class MakeBigInteger extends MakeNumber {
      * Retorna True para tipos Integer ou int.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Integer ou int, False para outros
-     * tipos.
+     * @return True para tipos Integer ou int, False para outros tipos.
      */
     public static boolean isBigInteger(final Field f) {
         if (f.getType().equals(BigInteger.class)) {

@@ -24,7 +24,7 @@ public class NumberFactory implements ValueFactory {
     /**
      * Contém as fabricas que trabalham com números.
      */
-    private static final List<MakeNumber> NUMBERS_FACTORYS =
+    public static final List<MakeNumber> NUMBERS_FACTORYS =
             new ArrayList<MakeNumber>();
 
     static {

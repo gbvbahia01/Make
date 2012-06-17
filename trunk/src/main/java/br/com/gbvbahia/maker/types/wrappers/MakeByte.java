@@ -16,14 +16,21 @@ public class MakeByte extends MakeNumber {
     @Override
     public <T> void insertValue(final Field f, final T entity)
             throws IllegalArgumentException, IllegalAccessException {
-           Number[] minMax = getMinMaxValues(f, Byte.MIN_VALUE,
+        Number[] minMax = getMinMaxValues(f, Byte.MIN_VALUE,
                 Byte.MAX_VALUE);
         byte min = minMax[0].byteValue();
         byte max = minMax[1].byteValue();
+        insertValue(f, entity, MakeByte.getIntervalo(min, max).toString());
+    }
+
+    @Override
+    public <T> void insertValue(final Field f, final T entity,
+            final String value)
+            throws IllegalArgumentException, IllegalAccessException {
         if (f.getType().equals(Byte.class)) {
-            f.set(entity, MakeByte.getIntervalo(min, max));
+            f.set(entity, new Byte(value));
         } else {
-            f.set(entity, MakeByte.getIntervalo(min, max).byteValue());
+            f.set(entity, new Byte(value).byteValue());
         }
     }
 

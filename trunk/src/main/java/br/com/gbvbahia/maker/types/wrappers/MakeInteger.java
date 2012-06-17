@@ -23,10 +23,16 @@ public class MakeInteger extends MakeNumber {
                 Integer.MAX_VALUE);
         int min = minMax[0].intValue();
         int max = minMax[1].intValue();
+        insertValue(f, entity, MakeInteger.getIntervalo(min, max).toString());
+    }
+
+    @Override
+    public <T> void insertValue(Field f, T entity, String value)
+            throws IllegalArgumentException, IllegalAccessException {
         if (f.getType().equals(Integer.class)) {
-            f.set(entity, MakeInteger.getIntervalo(min, max));
+            f.set(entity, new Integer(value));
         } else {
-            f.set(entity, MakeInteger.getIntervalo(min, max).intValue());
+            f.set(entity, new Integer(value).intValue());
         }
     }
 
@@ -63,8 +69,7 @@ public class MakeInteger extends MakeNumber {
      * Retorna True para tipos Integer ou int.
      *
      * @param f Field a ser avaliado.
-     * @return True para tipos Integer ou int, False para outros
-     * tipos.
+     * @return True para tipos Integer ou int, False para outros tipos.
      */
     public static boolean isInteger(final Field f) {
         if (f.getType().equals(Integer.class)
