@@ -8,7 +8,6 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.NumberFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
-import br.com.gbvbahia.maker.works.common.CollectionsHelper;
 import br.com.gbvbahia.maker.works.common.NumberHelper;
 import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
@@ -38,7 +37,7 @@ public class MakeBetween implements ValuePropertiesFactory {
      * between[-10.33,100.40] between[1,10.20]<br> Se o segundo número for
      * menor que o primeiro um erro será gerado.
      */
-    public static final String KEY_PROPERTIE = "between\\[[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\]";
+    public static final String KEY_PROPERTIE = "between\\{[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\}";
     /**
      * Compilador regex que realiza a comparação.
      */
@@ -46,17 +45,17 @@ public class MakeBetween implements ValuePropertiesFactory {
 
     @Override
     public boolean workValue(final String value) {
-        LogInfo.logInfoInformation("MakeBetween",
+        LogInfo.logDebugInformation("MakeBetween",
                 I18N.getMsg("workValueMake", value));
         Matcher matcher = PATTERN.matcher(value);
         if (matcher.find()) {
-            LogInfo.logInfoInformation("MakeBetween",
+            LogInfo.logDebugInformation("MakeBetween",
                     I18N.getMsg("isWork", "Between", value));
-            LogInfo.logInfoInformation("MakeBetween", matcher.group());
+            LogInfo.logDebugInformation("MakeBetween", matcher.group());
             popularInfo(value);
             return true;
         } else {
-            LogInfo.logInfoInformation("MakeBetween",
+            LogInfo.logDebugInformation("MakeBetween",
                     I18N.getMsg("notIsWork", "Between", value));
             return false;
         }
@@ -97,10 +96,10 @@ public class MakeBetween implements ValuePropertiesFactory {
      * properties ou conversão numérica não for possível.
      */
     private void popularInfo(final String value) {
-        String minMax = StringUtils.substringBetween(value, "[", "]");
+        String minMax = StringUtils.substringBetween(value, "{", "}");
         String min = minMax.split(",")[0];
         String max = minMax.split(",")[1];
-        LogInfo.logInfoInformation("MakeBetween", "min:" + min
+        LogInfo.logDebugInformation("MakeBetween", "min:" + min
                 + " max: " + max);
         info = new NumberHelper(min, max);
     }
