@@ -17,6 +17,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * Utilizada para criar valores limitados a um intervalo:<br>
+ * testBetween1.br.com.gbvbahia.entityes.EntityBetweenTest.valor =
+ * between{5,10}<br> A propriedade valor será definida entre 5 e 10.
+ * Sendo os dois valores inclusos, podendo ser utilizados.
  *
  * @author Guilherme
  */
@@ -30,12 +34,13 @@ public class MakeBetween implements ValuePropertiesFactory {
      * No arquivo make.properties deve estár definido no valor para o
      * field:
      * "between\\[[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\]".<br>
-     * Regex: deve iniciar com <i>between[</i> conter números positivos ou
-     * negativos (-) o caractere "." (ponto) separando as casas decimais,
-     * se houver. Fecha com <i>]</i> .<br> Ex: Inteiros: between[1,1],
-     * between[10,100], between[-10,10]<br> Fracionádos: between[1.12,1.22]
-     * between[-10.33,100.40] between[1,10.20]<br> Se o segundo número for
-     * menor que o primeiro um erro será gerado.
+     * Regex: deve iniciar com <i>between[</i> conter números
+     * positivos ou negativos (-) o caractere "." (ponto) separando as
+     * casas decimais, se houver. Fecha com <i>]</i> .<br> Ex:
+     * Inteiros: between[1,1], between[10,100], between[-10,10]<br>
+     * Fracionádos: between[1.12,1.22] between[-10.33,100.40]
+     * between[1,10.20]<br> Se o segundo número for menor que o
+     * primeiro um erro será gerado.
      */
     public static final String KEY_PROPERTIE = "between\\{[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\}";
     /**
@@ -88,12 +93,12 @@ public class MakeBetween implements ValuePropertiesFactory {
     }
 
     /**
-     * Popula info (CollectionsHelper) com informações necessárias para
-     * criar e popular o List.
+     * Popula info (CollectionsHelper) com informações necessárias
+     * para criar e popular o List.
      *
      * @param value Valor declarado no make.properties.
-     * @throws MakeWorkException Se não encontrar a classe informada no
-     * properties ou conversão numérica não for possível.
+     * @throws MakeWorkException Se não encontrar a classe informada
+     * no properties ou conversão numérica não for possível.
      */
     private void popularInfo(final String value) {
         String minMax = StringUtils.substringBetween(value, "{", "}");
