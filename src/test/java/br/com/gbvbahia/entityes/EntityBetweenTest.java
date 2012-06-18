@@ -5,18 +5,34 @@
 package br.com.gbvbahia.entityes;
 
 import java.math.BigDecimal;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
  *
  * @author Guilherme
  */
 public class EntityBetweenTest {
+    @Min(-100)
+    @Max(100)
     private int entre5_10;
+    @Min(-100)
+    @Max(100)
     private Integer entre10_20;
+    @Min(-100)
+    @Max(100)
     private BigDecimal entre_M5V40_5V56;
+    @Min(-100)
+    @Max(100)
     private double entre_M50V13_M20V15;
+    @Min(-100)
+    @Max(100)
     private Long entre_M50_50;
+    @Min(-100)
+    @Max(100)
     private Short entre5_23;
+    @Min(-100)
+    @Max(100)
     private byte entre_M5_5;
 
     public Integer getEntre10_20() {

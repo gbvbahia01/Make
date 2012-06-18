@@ -31,6 +31,7 @@ public class MakePropertiesDefaultFactories {
         WORK_FACTORIES.add(MakeEmail.class);
         WORK_FACTORIES.add(MakeList.class);
         WORK_FACTORIES.add(MakeSet.class);
+        WORK_FACTORIES.add(MakeBetween.class);
     }
 
     /**

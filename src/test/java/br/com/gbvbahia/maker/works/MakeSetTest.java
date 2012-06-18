@@ -45,6 +45,7 @@ public class MakeSetTest extends TestCase {
 
     @Test
     public void testRegexSet() throws Exception {
+        logger.info("String - GetRegexSet");
         Matcher matcher = pattern.matcher("isSet{br.com.compre}[1,1]");
         boolean test = matcher.find();
         assertTrue("Primeiro: deveria ser true.", test);
@@ -95,7 +96,8 @@ public class MakeSetTest extends TestCase {
     }
 
     @Test
-    public void testPopularLista() throws Exception {
+    public void testPopularSet() throws Exception {
+        logger.info("String - GetPopularSet");
         EntitySetTest test = MakeEntity.makeEntity("testSet1",
                 EntitySetTest.class, false);
         logger.debug(test);

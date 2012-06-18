@@ -14,10 +14,7 @@ import br.com.gbvbahia.maker.types.date.MakeDateTest;
 import br.com.gbvbahia.maker.types.string.MakeCharacterTest;
 import br.com.gbvbahia.maker.types.string.MakeStringTest;
 import br.com.gbvbahia.maker.types.wrappers.*;
-import br.com.gbvbahia.maker.works.MakeCNPJTest;
-import br.com.gbvbahia.maker.works.MakeCPFTest;
-import br.com.gbvbahia.maker.works.MakeListTest;
-import br.com.gbvbahia.maker.works.MakeSetTest;
+import br.com.gbvbahia.maker.works.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -46,7 +43,8 @@ import org.junit.runners.Suite;
     MakeEntitysTest.class,
     MakePropertiesTest.class,
     MakeListTest.class,
-    MakeSetTest.class
+    MakeSetTest.class,
+    MakeBetweenTest.class
 })
 public class Testes {
 }

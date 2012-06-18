@@ -45,6 +45,7 @@ public class MakeListTest extends TestCase {
 
     @Test
     public void testRegexList() throws Exception {
+        logger.info("String - GetRegexList");
         Matcher matcher = pattern.matcher("isList{br.com.compre}[1,1]");
         boolean test = matcher.find();
         assertTrue("Primeiro: deveria ser true.", test);
@@ -100,6 +101,7 @@ public class MakeListTest extends TestCase {
 
     @Test
     public void testPopularLista() throws Exception {
+         logger.info("String - GetPopularLista");
         EntityListTest test = MakeEntity.makeEntity("testList1",
                 EntityListTest.class, false);
         logger.debug(test);
