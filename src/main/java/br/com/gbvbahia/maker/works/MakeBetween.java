@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  * between{5,10}<br> A propriedade valor será definida entre 5 e 10.
  * Sendo os dois valores inclusos, podendo ser utilizados.
  *
+ * @since v.1 18/06/2012
  * @author Guilherme
  */
 public class MakeBetween implements ValuePropertiesFactory {
@@ -33,13 +34,13 @@ public class MakeBetween implements ValuePropertiesFactory {
     /**
      * No arquivo make.properties deve estár definido no valor para o
      * field:
-     * "between\\[[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\]".<br>
-     * Regex: deve iniciar com <i>between[</i> conter números
+     * "between\\{[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\}".<br>
+     * Regex: deve iniciar com <i>between{</i> conter números
      * positivos ou negativos (-) o caractere "." (ponto) separando as
-     * casas decimais, se houver. Fecha com <i>]</i> .<br> Ex:
-     * Inteiros: between[1,1], between[10,100], between[-10,10]<br>
-     * Fracionádos: between[1.12,1.22] between[-10.33,100.40]
-     * between[1,10.20]<br> Se o segundo número for menor que o
+     * casas decimais, se houver. Fecha com <i>}</i> .<br> Ex:
+     * Inteiros: between{1,1}, between{10,100}, between{-10,10}<br>
+     * Fracionádos: between{1.12,1.22} between{-10.33,100.40}
+     * between{1,10.20}<br> Se o segundo número for menor que o
      * primeiro um erro será gerado.
      */
     public static final String KEY_PROPERTIE = "between\\{[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\}";
