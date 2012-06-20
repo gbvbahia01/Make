@@ -4,7 +4,11 @@
  */
 package br.com.gbvbahia.maker.works;
 
+import br.com.gbvbahia.entityes.EntityInTest;
+import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.validation.Validation;
@@ -104,5 +108,59 @@ public class MakeInTest extends TestCase {
                     "in{10|018}[|a]".equals(matcher.group()));
         }
         assertTrue("Oitavo: deveria ser true: " + matcher.group(), test8);
+    }
+
+    @Test
+    public void testInValues() throws Exception {
+        logger.info("String - InValues");
+        for (int i = 0; i < 50; i++) {
+            EntityInTest test = MakeEntity.makeEntity("testIn1", EntityInTest.class, false);
+            logger.debug(test);
+            assertNotNull("Test não pode ser nulo", test);
+            assertTrue("in_1_2_5 error: " + test.getIn_1_2_5(),
+                    test.getIn_1_2_5().equals(1)
+                    || test.getIn_1_2_5().equals(2)
+                    || test.getIn_1_2_5().equals(5));
+
+            assertTrue("in_10V30_10V50_10V80 error: " + test.getIn_10V30_10V50_10V80(),
+                    test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.30"))
+                    || test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.50"))
+                    || test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.80")));
+
+            assertTrue("in_3000_5000_6000 error: " + test.getIn_3000_5000_6000(),
+                    test.getIn_3000_5000_6000().equals(3000L)
+                    || test.getIn_3000_5000_6000().equals(5000L)
+                    || test.getIn_3000_5000_6000().equals(6000L));
+
+            assertTrue("in_45V80_M45V80_100V10: " + test.getIn_45V80_M45V80_100V10(),
+                    test.getIn_45V80_M45V80_100V10().equals(45.80F)
+                    || test.getIn_45V80_M45V80_100V10().equals(-45.80F)
+                    || test.getIn_45V80_M45V80_100V10().equals(100.10F));
+
+            assertTrue("in_500_5000_50000_500000_5000000: " + test.getIn_500_5000_50000_500000_5000000(),
+                    test.getIn_500_5000_50000_500000_5000000().equals(new BigInteger("500"))
+                    || test.getIn_500_5000_50000_500000_5000000().equals(new BigInteger("5000"))
+                    || test.getIn_500_5000_50000_500000_5000000().equals(new BigInteger("50000"))
+                    || test.getIn_500_5000_50000_500000_5000000().equals(new BigInteger("500000"))
+                    || test.getIn_500_5000_50000_500000_5000000().equals(new BigInteger("5000000")));
+
+            assertTrue("in_200_300_400 error: " + test.getIn_200_300_400(),
+                    test.getIn_200_300_400().equals("200")
+                    || test.getIn_200_300_400().equals("300")
+                    || test.getIn_200_300_400().equals("400"));
+
+            assertTrue("in_A_B_C error: " + test.getIn_A_B_C(),
+                    test.getIn_A_B_C().equals("A")
+                    || test.getIn_A_B_C().equals("B")
+                    || test.getIn_A_B_C().equals("C"));
+
+            assertTrue("in_Virgula_Arroba_Percentual error: " + test.getIn_Virgula_Arroba_Percentual(),
+                    test.getIn_Virgula_Arroba_Percentual().equals(",")
+                    || test.getIn_Virgula_Arroba_Percentual().equals("@")
+                    || test.getIn_Virgula_Arroba_Percentual().equals("%"));
+
+            assertTrue("only_30 error: " + test.getOnly_30(),
+                    test.getOnly_30() == 30);
+        }
     }
 }
