@@ -44,7 +44,8 @@ import org.junit.runners.Suite;
     MakePropertiesTest.class,
     MakeListTest.class,
     MakeSetTest.class,
-    MakeBetweenTest.class
+    MakeBetweenTest.class,
+    MakeInTest.class
 })
 public class Testes {
 }
