@@ -32,6 +32,7 @@ public class MakePropertiesDefaultFactories {
         WORK_FACTORIES.add(MakeList.class);
         WORK_FACTORIES.add(MakeSet.class);
         WORK_FACTORIES.add(MakeBetween.class);
+        WORK_FACTORIES.add(MakeIn.class);
     }
 
     /**
