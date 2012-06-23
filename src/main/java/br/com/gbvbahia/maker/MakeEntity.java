@@ -30,6 +30,63 @@ public final class MakeEntity {
      * Cria a entidade com atributos populados, somente os que tiverem
      * a anotação javax.validation.constraints.NotNull, Coleções, Set,
      * List e Map não serão criados. Relacionamentos com outras
+     * classes serão ignorados, testes configurados no arquivo
+     * make.properties serão ignorados.
+     *
+     * @param entity Classe a ter os atributos gerados.
+     */
+    public static <T> T makeEntity(final Class<T> entity) {
+        return makeEntity(null, entity, false);
+    }
+
+    /**
+     * Cria a entidade com atributos populados, somente os que tiverem
+     * a anotação javax.validation.constraints.NotNull, Coleções, Set,
+     * List e Map não serão criados. Relacionamentos com outras
+     * classes serão criados se relationships for true, somente terão
+     * objetos criados se a classe relacionada contiver a anotação
+     * javax.persistence.Entity, testes configurados no arquivo
+     * make.properties serão ignorados.
+     *
+     *
+     * @param <T> Tipo de retorno, é o mesmo tipo da classe que foi
+     * criada.
+     * @param entity Classe da entidade a ser populada.
+     * @param makeRelationships True irá criar objetos para ManyToOne
+     * @return
+     */
+    public static <T> T makeEntity(final Class<T> entity,
+            final boolean makeRelationships) {
+        return makeEntity(entity, makeRelationships);
+    }
+
+    /**
+     * Cria a entidade com atributos populados, somente os que tiverem
+     * a anotação javax.validation.constraints.NotNull, Coleções, Set,
+     * List e Map não serão criados. Relacionamentos com outras
+     * classes serão criados se relationships for true, somente terão
+     * objetos criados se a classe relacionada contiver a anotação
+     * javax.persistence.Entity, testes configurados no arquivo
+     * make.properties serão utilizados com base no nome do atributo
+     * testName.
+     *
+     * @param <T>
+     * @param testName representa o nome do teste, não é obrigatório,
+     * mas deve ser utilizado se for ler propriedades do arquivo
+     * make.properties.
+     * @param entity Entidade a ser gerada.
+     * @return Uma entidade populada com base na JSR303 e no arquivo
+     * Entity.properties.
+     */
+    public static <T> T makeEntity(final String testName,
+            final Class<T> entity) {
+        return makeEntity(testName, entity, false);
+    }
+
+    /**
+     * Cria a entidade com atributos populados, somente os que tiverem
+     * a anotação javax.validation.constraints.NotNull, Coleções, Set,
+     * List e Map não serão criados. Relacionamentos com outras
      * classes, somente terão objetos criados se a classe relacionada
      * contiver a anotação javax.persistence.Entity.
      *
