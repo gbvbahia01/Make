@@ -5,7 +5,7 @@
 package br.com.gbvbahia.maker.works;
 
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
+import br.com.gbvbahia.maker.types.primitives.MakeInteger;
 
 /**
  * Cria uma senha, uma String contendo letras, números e caracteres
