@@ -4,12 +4,10 @@
  */
 package br.com.gbvbahia.maker.types.complex;
 
-import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
-import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
-import java.lang.reflect.Field;
+import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
+import br.com.gbvbahia.maker.types.primitives.MakeInteger;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;

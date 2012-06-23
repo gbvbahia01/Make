@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker.factories.types;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
+import br.com.gbvbahia.maker.types.primitives.MakeInteger;
 import java.lang.reflect.Field;
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.AssertTrue;

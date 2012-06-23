@@ -4,9 +4,9 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
-import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import static br.com.gbvbahia.maker.types.complex.MakeString.MAX_LENGTH_SUPPORTS;
 import java.lang.reflect.Field;

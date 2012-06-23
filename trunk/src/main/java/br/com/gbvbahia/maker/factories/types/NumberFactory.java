@@ -4,12 +4,12 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
-import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
-import br.com.gbvbahia.maker.types.complex.MakeStringNumber;
-import br.com.gbvbahia.maker.types.complex.MakeBigInteger;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.types.wrappers.*;
+import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
+import br.com.gbvbahia.maker.types.complex.MakeBigInteger;
+import br.com.gbvbahia.maker.types.complex.MakeStringNumber;
+import br.com.gbvbahia.maker.types.primitives.*;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

@@ -9,7 +9,7 @@ import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.maker.types.complex.MakeString;
-import br.com.gbvbahia.maker.types.wrappers.MakeBoolean;
+import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;

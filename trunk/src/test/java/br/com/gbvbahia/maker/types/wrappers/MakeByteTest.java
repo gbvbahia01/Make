@@ -5,6 +5,7 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
 import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.MakeByte;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.junit.Test;

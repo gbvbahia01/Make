@@ -4,7 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.complex;
 
-import br.com.gbvbahia.maker.types.wrappers.MakeDouble;
+import br.com.gbvbahia.maker.types.primitives.MakeDouble;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import java.lang.reflect.Field;
 
