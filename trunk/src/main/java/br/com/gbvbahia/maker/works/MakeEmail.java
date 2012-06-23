@@ -6,8 +6,8 @@ package br.com.gbvbahia.maker.works;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.string.MakeCharacter;
-import br.com.gbvbahia.maker.types.string.MakeString;
+import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
+import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
 import java.lang.reflect.Field;

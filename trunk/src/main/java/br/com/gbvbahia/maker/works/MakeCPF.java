@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker.works;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
-import br.com.gbvbahia.maker.types.string.MakeString;
+import br.com.gbvbahia.maker.types.complex.MakeString;
 import java.lang.reflect.Field;
 import org.apache.commons.lang3.StringUtils;
 

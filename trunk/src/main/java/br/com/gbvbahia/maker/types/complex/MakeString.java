@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.types.string;
+package br.com.gbvbahia.maker.types.complex;
 
+import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.types.date;
+package br.com.gbvbahia.maker.types.complex;
 
 import br.com.gbvbahia.maker.types.wrappers.MakeInteger;
 import java.util.Calendar;

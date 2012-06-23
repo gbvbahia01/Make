@@ -4,6 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.date;
 
+import br.com.gbvbahia.maker.types.complex.MakeCalendar;
 import br.com.gbvbahia.maker.log.LogInfo;
 import java.util.Calendar;
 import org.apache.commons.logging.Log;
