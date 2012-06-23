@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.types.wrappers;
+package br.com.gbvbahia.maker.types.complex;
 
+import br.com.gbvbahia.maker.types.wrappers.MakeDouble;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import java.lang.reflect.Field;
 

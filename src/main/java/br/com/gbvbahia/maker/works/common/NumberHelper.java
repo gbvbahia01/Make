@@ -4,7 +4,7 @@
  */
 package br.com.gbvbahia.maker.works.common;
 
-import br.com.gbvbahia.maker.types.wrappers.MakeBigDecimal;
+import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
 import br.com.gbvbahia.maker.types.wrappers.MakeLong;
 import java.math.RoundingMode;
 import org.apache.commons.lang3.StringUtils;

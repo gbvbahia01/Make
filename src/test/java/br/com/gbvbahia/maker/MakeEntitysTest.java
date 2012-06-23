@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker;
 import br.com.gbvbahia.entityes.EntityNotNullTest;
 import br.com.gbvbahia.entityes.EntityPatternTest;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.string.MakeCharacter;
+import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.maker.works.MakeEmail;
 import java.util.*;
 import javax.validation.ConstraintViolation;

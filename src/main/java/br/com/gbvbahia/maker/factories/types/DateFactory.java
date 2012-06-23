@@ -5,7 +5,7 @@
 package br.com.gbvbahia.maker.factories.types;
 
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.types.date.MakeCalendar;
+import br.com.gbvbahia.maker.types.complex.MakeCalendar;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;

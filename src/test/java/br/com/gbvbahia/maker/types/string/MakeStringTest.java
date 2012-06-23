@@ -4,6 +4,8 @@
  */
 package br.com.gbvbahia.maker.types.string;
 
+import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
+import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.MakeEmail;
 import br.com.gbvbahia.maker.works.MakePassword;
