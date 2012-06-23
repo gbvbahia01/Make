@@ -4,6 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.primitives;
 
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import java.lang.reflect.Field;

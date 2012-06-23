@@ -4,6 +4,12 @@
  */
 package br.com.gbvbahia.maker.factories.types;
 
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeShort;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeByte;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
