@@ -4,7 +4,7 @@
  */
 package br.com.gbvbahia.maker.types.complex;
 
-import br.com.gbvbahia.maker.types.primitives.MakeInteger;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import java.util.Calendar;
 
 /**
