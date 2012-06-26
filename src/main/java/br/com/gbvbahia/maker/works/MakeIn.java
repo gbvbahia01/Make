@@ -9,7 +9,7 @@ import br.com.gbvbahia.maker.factories.types.NumberFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 18/06/2012
  * @author Guilherme
  */
-public class MakeIn implements ValuePropertiesFactory {
+public class MakeIn implements ValueSpecializedFactory {
 
     /**
      * Guarda informações que serão necessárias para popular o field.

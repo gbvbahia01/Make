@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker.factories.types.properties;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -141,14 +141,14 @@ public class MakeProperties implements ValueFactory {
     }
 
     /**
-     * Procura um ValuePropertiesFactory registrado para tratar a
+     * Procura um ValueSpecializedFactory registrado para tratar a
      * propriedade registrada no arquivo make.properties.
      *
      * @param key Chave no arquivo make.properties.
      * @param value Valor no arquivo make.properties.
      */
     private void insertValueFactory(final String key, final String value) {
-        ValuePropertiesFactory fac =
+        ValueSpecializedFactory fac =
                 MakePropertiesDefaultFactories.getPropertiesFactory(value);
         if (fac != null) {
             valueFactories.put(key, fac);

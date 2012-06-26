@@ -9,7 +9,7 @@ import br.com.gbvbahia.maker.factories.types.NumberFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
 import br.com.gbvbahia.maker.works.common.NumberHelper;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;
@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since v.1 18/06/2012
  * @author Guilherme
  */
-public class MakeBetween implements ValuePropertiesFactory {
+public class MakeBetween implements ValueSpecializedFactory {
 
     /**
      * Guarda informações que serão necessárias para popular o field.

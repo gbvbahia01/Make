@@ -9,7 +9,7 @@ import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import java.lang.reflect.Field;
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since v.1 09/06/2012
  * @author Guilherme
  */
-public class MakeCNPJ implements ValuePropertiesFactory {
+public class MakeCNPJ implements ValueSpecializedFactory {
 
     /**
      * Como o propertie deve estár definido no valor: "isCNPJ".

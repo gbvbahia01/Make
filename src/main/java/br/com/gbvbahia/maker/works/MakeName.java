@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker.works;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import java.lang.reflect.Field;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since v.1 10/06/2012
  * @author Guilherme
  */
-public class MakeName implements ValuePropertiesFactory {
+public class MakeName implements ValueSpecializedFactory {
 
     /**
      * Como o propertie deve estár definido no valor: "isName".
