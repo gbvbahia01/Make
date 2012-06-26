@@ -68,7 +68,7 @@ public class MakeName implements ValueSpecializedFactory {
      */
     private static String getMsg(final int posicao) {
         try {
-            return ResourceBundle.getBundle("nomes_make").getString("nome"
+            return ResourceBundle.getBundle("names_make").getString("nome"
                     + posicao);
         } catch (MissingResourceException e) {
             e.printStackTrace();
