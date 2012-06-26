@@ -6,7 +6,7 @@ package br.com.gbvbahia.maker.works;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import java.lang.reflect.Field;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since v.1 09/06/2012
  * @author Guilherme
  */
-public class MakeCPF implements ValuePropertiesFactory {
+public class MakeCPF implements ValueSpecializedFactory {
 
     /**
      * Como o propertie deve estár definido no valor: "isCPF".

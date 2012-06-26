@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker.factories.types.properties;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.*;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class MakePropertiesDefaultFactories {
 
-    final static List<Class<? extends ValuePropertiesFactory>> WORK_FACTORIES =
-            new ArrayList<Class<? extends ValuePropertiesFactory>>();
+    final static List<Class<? extends ValueSpecializedFactory>> WORK_FACTORIES =
+            new ArrayList<Class<? extends ValueSpecializedFactory>>();
 
     static {
         WORK_FACTORIES.add(MakeCPF.class);
@@ -44,10 +44,10 @@ public class MakePropertiesDefaultFactories {
      * @return A fabrica personalizada de valores, implementada pelo
      * desenvolvedor ou default do Make.
      */
-    static ValuePropertiesFactory getPropertiesFactory(String value) {
+    static ValueSpecializedFactory getPropertiesFactory(String value) {
         for (int i = 0; i < WORK_FACTORIES.size(); i++) {
             try {
-                ValuePropertiesFactory vpf = WORK_FACTORIES.get(i).newInstance();
+                ValueSpecializedFactory vpf = WORK_FACTORIES.get(i).newInstance();
                 if (vpf.workValue(value)) {
                     return vpf;
                 }
@@ -91,8 +91,8 @@ public class MakePropertiesDefaultFactories {
      */
     static void insertImplFactory(final String key, final String value) {
         try {
-            Class<? extends ValuePropertiesFactory> fac =
-                    (Class<? extends ValuePropertiesFactory>) Class.forName(value);
+            Class<? extends ValueSpecializedFactory> fac =
+                    (Class<? extends ValueSpecializedFactory>) Class.forName(value);
             if (!WORK_FACTORIES.contains(fac)) {
                 WORK_FACTORIES.add(0, fac);
             }

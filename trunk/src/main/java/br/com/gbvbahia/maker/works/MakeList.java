@@ -9,7 +9,7 @@ import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import br.com.gbvbahia.maker.works.common.CollectionsHelper;
-import br.com.gbvbahia.maker.works.common.ValuePropertiesFactory;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since v.1 16/06/2012
  * @author Guilherme
  */
-public class MakeList implements ValuePropertiesFactory {
+public class MakeList implements ValueSpecializedFactory {
 
     /**
      * Guarda informações que serão necessárias para popular a lista;

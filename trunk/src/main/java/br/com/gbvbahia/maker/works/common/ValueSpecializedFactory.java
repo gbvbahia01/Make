@@ -14,7 +14,7 @@ import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
  * @since 09/06/2012
  * @author Guilherme
  */
-public interface ValuePropertiesFactory extends ValueFactory {
+public interface ValueSpecializedFactory extends ValueFactory {
 
     /**
      * Recebe o valor declarado no propertie e responde se trabalha
