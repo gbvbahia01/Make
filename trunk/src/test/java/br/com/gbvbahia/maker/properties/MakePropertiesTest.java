@@ -4,7 +4,7 @@
  */
 package br.com.gbvbahia.maker.properties;
 
-import br.com.gbvbahia.maker.factories.types.properties.MakeProperties;
+import br.com.gbvbahia.maker.factories.types.properties.MakeWorks;
 import br.com.gbvbahia.entityes.EntityPropertiesTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
@@ -27,7 +27,7 @@ public class MakePropertiesTest extends TestCase {
     }
 
     /**
-     * Test of factoryProperties method, of class MakeProperties.
+     * Test of factoryProperties method, of class MakeWorks.
      */
     @Test
     public void testFactoryPropertiesMultiplos() {
@@ -56,7 +56,7 @@ public class MakePropertiesTest extends TestCase {
     public void testNameReservedException() throws Exception {
         logger.info("NameReservedException");
         try {
-            EntityPropertiesTest test = MakeEntity.makeEntity(MakeProperties.WORK_USER_IMPL + "_1",
+            EntityPropertiesTest test = MakeEntity.makeEntity(MakeWorks.WORK_USER_IMPL + "_1",
                     EntityPropertiesTest.class, true);
             fail("Uma IllegalArgumentException era esperada.");
         } catch (IllegalArgumentException e) {

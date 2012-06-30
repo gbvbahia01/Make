@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Guilherme
  */
-public class MakeProperties implements ValueFactory {
+public class MakeWorks implements ValueFactory {
 
     public static final String WORK_USER_IMPL = "work";
     /**
@@ -76,12 +76,12 @@ public class MakeProperties implements ValueFactory {
      * @param testName java.lang.String chave da mensagem que será
      * enviada.
      */
-    public MakeProperties(final String testName) {
+    public MakeWorks(final String testName) {
         this.testName = testName;
         try {
             for (String key : ResourceBundle.getBundle("make").keySet()) {
                 if (getFactoriesImpl(key)) {
-                    MakePropertiesDefaultFactories.insertImplFactory(StringUtils.substringAfter(key, "."),
+                    MakeWorksDefaultFactories.insertImplFactory(StringUtils.substringAfter(key, "."),
                             ResourceBundle.getBundle("make").getString(key));
 
                 } else if (checkSameTest(key, testName)) {
@@ -95,7 +95,7 @@ public class MakeProperties implements ValueFactory {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getLogger(MakeProperties.class.getName()).log(Level.WARNING,
+            Logger.getLogger(MakeWorks.class.getName()).log(Level.WARNING,
                     I18N.getMsg("makePropertiesNotFound", testName));
         }
     }
@@ -125,9 +125,9 @@ public class MakeProperties implements ValueFactory {
      * @return true se for uma work false se não for.
      */
     private boolean getFactoriesImpl(final String key) {
-        return StringUtils.equalsIgnoreCase(MakeProperties.WORK_USER_IMPL,
+        return StringUtils.equalsIgnoreCase(MakeWorks.WORK_USER_IMPL,
                 StringUtils.substring(key, 0,
-                MakeProperties.WORK_USER_IMPL.length()));
+                MakeWorks.WORK_USER_IMPL.length()));
     }
 
     /**
@@ -149,7 +149,7 @@ public class MakeProperties implements ValueFactory {
      */
     private void insertValueFactory(final String key, final String value) {
         ValueSpecializedFactory fac =
-                MakePropertiesDefaultFactories.getPropertiesFactory(value);
+                MakeWorksDefaultFactories.getPropertiesFactory(value);
         if (fac != null) {
             valueFactories.put(key, fac);
         } else {
@@ -178,7 +178,7 @@ public class MakeProperties implements ValueFactory {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MakeProperties other = (MakeProperties) obj;
+        final MakeWorks other = (MakeWorks) obj;
         if ((this.testName == null) ? (other.testName != null) : !this.testName.equals(other.testName)) {
             return false;
         }
