@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Guilherme
  */
-public class MakeWorks implements ValueFactory {
+public class MakeWorksFactory implements ValueFactory {
 
     public static final String WORK_USER_IMPL = "work";
     /**
@@ -76,7 +76,7 @@ public class MakeWorks implements ValueFactory {
      * @param testName java.lang.String chave da mensagem que será
      * enviada.
      */
-    public MakeWorks(final String testName) {
+    public MakeWorksFactory(final String testName) {
         this.testName = testName;
         try {
             for (String key : ResourceBundle.getBundle("make").keySet()) {
@@ -95,7 +95,7 @@ public class MakeWorks implements ValueFactory {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.getLogger(MakeWorks.class.getName()).log(Level.WARNING,
+            Logger.getLogger(MakeWorksFactory.class.getName()).log(Level.WARNING,
                     I18N.getMsg("makePropertiesNotFound", testName));
         }
     }
@@ -125,9 +125,9 @@ public class MakeWorks implements ValueFactory {
      * @return true se for uma work false se não for.
      */
     private boolean getFactoriesImpl(final String key) {
-        return StringUtils.equalsIgnoreCase(MakeWorks.WORK_USER_IMPL,
+        return StringUtils.equalsIgnoreCase(MakeWorksFactory.WORK_USER_IMPL,
                 StringUtils.substring(key, 0,
-                MakeWorks.WORK_USER_IMPL.length()));
+                MakeWorksFactory.WORK_USER_IMPL.length()));
     }
 
     /**
@@ -178,7 +178,7 @@ public class MakeWorks implements ValueFactory {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MakeWorks other = (MakeWorks) obj;
+        final MakeWorksFactory other = (MakeWorksFactory) obj;
         if ((this.testName == null) ? (other.testName != null) : !this.testName.equals(other.testName)) {
             return false;
         }

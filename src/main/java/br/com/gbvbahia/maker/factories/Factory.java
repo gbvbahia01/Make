@@ -7,7 +7,7 @@ package br.com.gbvbahia.maker.factories;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.*;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.factories.types.properties.MakeWorks;
+import br.com.gbvbahia.maker.factories.types.properties.MakeWorksFactory;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,12 +53,12 @@ public final class Factory {
         Factory.testName = testNameProp;
         if (isReservedName(testNameProp)) {
             throw new IllegalArgumentException(I18N.getMsg("workReserved",
-                    MakeWorks.WORK_USER_IMPL));
+                    MakeWorksFactory.WORK_USER_IMPL));
         }
-        if (DEFAULT_FACTORIES.get(0).equals(new MakeWorks(testNameProp))) {
+        if (DEFAULT_FACTORIES.get(0).equals(new MakeWorksFactory(testNameProp))) {
             DEFAULT_FACTORIES.remove(0);
         }
-        MakeWorks makeProperties = new MakeWorks(testNameProp);
+        MakeWorksFactory makeProperties = new MakeWorksFactory(testNameProp);
         DEFAULT_FACTORIES.add(0, makeProperties);
     }
 
@@ -70,9 +70,9 @@ public final class Factory {
      * @return true se for reservado false se não.
      */
     private static boolean isReservedName(final String testN) {
-        return StringUtils.equalsIgnoreCase(MakeWorks.WORK_USER_IMPL,
+        return StringUtils.equalsIgnoreCase(MakeWorksFactory.WORK_USER_IMPL,
                 StringUtils.substring(testN, 0,
-                MakeWorks.WORK_USER_IMPL.length()));
+                MakeWorksFactory.WORK_USER_IMPL.length()));
     }
 
     /**
