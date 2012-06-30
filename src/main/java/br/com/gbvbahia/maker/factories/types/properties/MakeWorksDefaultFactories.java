@@ -19,7 +19,7 @@ import java.util.List;
  * @since v.1 09/06/2012
  * @author Guilherme
  */
-public class MakePropertiesDefaultFactories {
+public class MakeWorksDefaultFactories {
 
     final static List<Class<? extends ValueSpecializedFactory>> WORK_FACTORIES =
             new ArrayList<Class<? extends ValueSpecializedFactory>>();
