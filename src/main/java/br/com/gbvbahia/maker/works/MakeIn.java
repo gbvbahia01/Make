@@ -42,11 +42,11 @@ public class MakeIn implements ValueSpecializedFactory {
      * in{abc|abg}[|] <br>Se o segundo número for menor que o primeiro
      * um erro será gerado.
      */
-    public static final String KEY_PROPERTIE = "in\\{.*\\}(\\[.+\\])?";
+    public static final String KEY_PROPERTY = "in\\{.*\\}(\\[.+\\])?";
     /**
      * Compilador regex que realiza a comparação.
      */
-    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTIE);
+    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
     @Override
     public boolean workValue(final String value) {

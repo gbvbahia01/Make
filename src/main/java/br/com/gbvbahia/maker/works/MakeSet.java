@@ -36,11 +36,11 @@ public class MakeSet implements ValueSpecializedFactory {
      * Fecha com <i>}</i> e deve terminar com <i>[</i> qualquer número
      * "," (virgula) qualquer número <i>]</i>.
      */
-    public static final String KEY_PROPERTIE = "isSet\\{[a-zA-Z0-9\\.]+\\}[\\[][\\d]+,[\\d]+[\\]]";
+    public static final String KEY_PROPERTY = "isSet\\{[a-zA-Z0-9\\.]+\\}[\\[][\\d]+,[\\d]+[\\]]";
     /**
      * Compilador regex que realiza a comparação.
      */
-    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTIE);
+    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
     @Override
     public boolean workValue(final String value) {
@@ -69,7 +69,7 @@ public class MakeSet implements ValueSpecializedFactory {
     public <T> void makeValue(final String testName, final Field f,
             final T entity, final boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
-        Set toSet = new HashSet(MakeEntity.makeEntitys(testName,
+        Set toSet = new HashSet(MakeEntity.makeEntities(testName,
                 info.getClazz(),
                 MakeInteger.getIntervalo(info.getMin(), info.getMax()),
                 makeRelationships));

@@ -43,11 +43,11 @@ public class MakeBetween implements ValueSpecializedFactory {
      * between{1,10.20}<br> Se o segundo número for menor que o
      * primeiro um erro será gerado.
      */
-    public static final String KEY_PROPERTIE = "between\\{[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\}";
+    public static final String KEY_PROPERTY = "between\\{[-\\d]+[\\.\\d]?[\\d]*,[-\\d]+[\\.\\d]?[\\d]*\\}";
     /**
      * Compilador regex que realiza a comparação.
      */
-    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTIE);
+    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
     @Override
     public boolean workValue(final String value) {

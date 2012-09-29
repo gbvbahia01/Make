@@ -40,7 +40,7 @@ public class MakeSetTest extends TestCase {
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        pattern = Pattern.compile(MakeSet.KEY_PROPERTIE);
+        pattern = Pattern.compile(MakeSet.KEY_PROPERTY);
     }
 
     @Test

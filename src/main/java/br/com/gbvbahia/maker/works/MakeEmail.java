@@ -35,13 +35,13 @@ public class MakeEmail implements ValueSpecializedFactory {
     /**
      * Como o propertie deve estár definido no valor: "isEmail".
      */
-    public static final String KEY_PROPERTIE = "isEmail";
+    public static final String KEY_PROPERTY = "isEmail";
 
     @Override
     public boolean workValue(final String value) {
         LogInfo.logDebugInformation("MakeEmail",
                 I18N.getMsg("workValueMake", value));
-        if (KEY_PROPERTIE.equals(StringUtils.trim(value))) {
+        if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
             return true;
         }
         LogInfo.logDebugInformation("MakeEmail",

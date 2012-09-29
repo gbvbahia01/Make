@@ -24,7 +24,7 @@ public class MakeCPF implements ValueSpecializedFactory {
     /**
      * Como o propertie deve estár definido no valor: "isCPF".
      */
-    public static final String KEY_PROPERTIE = "isCPF";
+    public static final String KEY_PROPERTY = "isCPF";
 
     /**
      * Construtor padrão.
@@ -59,7 +59,7 @@ public class MakeCPF implements ValueSpecializedFactory {
     public boolean workValue(final String value) {
         LogInfo.logDebugInformation("MakeCPF",
                 I18N.getMsg("workValueMake", value));
-        if (KEY_PROPERTIE.equals(StringUtils.trim(value))) {
+        if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
             return true;
         }
         LogInfo.logDebugInformation("MakeCPF",

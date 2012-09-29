@@ -54,11 +54,11 @@ public class MakeList implements ValueSpecializedFactory {
      * Fecha com <i>}</i> e deve terminar com <i>[</i> qualquer número
      * "," (virgula) qualquer número <i>]</i>.
      */
-    public static final String KEY_PROPERTIE = "isList\\{[a-zA-Z0-9\\.]+\\}[\\[][\\d]+,[\\d]+[\\]]";
+    public static final String KEY_PROPERTY = "isList\\{[a-zA-Z0-9\\.]+\\}[\\[][\\d]+,[\\d]+[\\]]";
     /**
      * Compilador regex que realiza a comparação.
      */
-    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTIE);
+    private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
     @Override
     public boolean workValue(final String value) {

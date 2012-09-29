@@ -27,7 +27,7 @@ public class MakeName implements ValueSpecializedFactory {
     /**
      * Como o propertie deve estár definido no valor: "isName".
      */
-    public static final String KEY_PROPERTIE = "isName";
+    public static final String KEY_PROPERTY = "isName";
     /**
      * O arquivo nomes.properties possui uma quantidade limitada de
      * nomes, essa variável armazena o limite.
@@ -38,7 +38,7 @@ public class MakeName implements ValueSpecializedFactory {
     public boolean workValue(final String value) {
         LogInfo.logDebugInformation("MakeName",
                 I18N.getMsg("workValueMake", value));
-        if (KEY_PROPERTIE.equals(StringUtils.trim(value))) {
+        if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
             return true;
         }
         LogInfo.logDebugInformation("MakeName",

@@ -40,7 +40,7 @@ public class MakeBetweenTest extends TestCase {
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        pattern = Pattern.compile(MakeBetween.KEY_PROPERTIE);
+        pattern = Pattern.compile(MakeBetween.KEY_PROPERTY);
     }
 
     @Test
