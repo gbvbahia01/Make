@@ -153,7 +153,7 @@ public final class MakeEntity {
      * @return Lista com a quantidade de entidades solicitadas em
      * amount.
      */
-    public static <T> List<T> makeEntitys(
+    public static <T> List<T> makeEntities(
             final String testName,
             final Class<T> entity,
             final int amount,
