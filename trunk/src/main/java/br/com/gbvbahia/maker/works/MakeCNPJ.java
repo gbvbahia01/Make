@@ -30,7 +30,7 @@ public class MakeCNPJ implements ValueSpecializedFactory {
     /**
      * Como o propertie deve estár definido no valor: "isCNPJ".
      */
-    public static final String KEY_PROPERTIE = "isCNPJ";
+    public static final String KEY_PROPERTY = "isCNPJ";
 
     /**
      * Construtor padrão.
@@ -42,7 +42,7 @@ public class MakeCNPJ implements ValueSpecializedFactory {
     public boolean workValue(final String value) {
         LogInfo.logDebugInformation("MakeCNPJ",
                 I18N.getMsg("workValueMake", value));
-        if (KEY_PROPERTIE.equals(StringUtils.trim(value))) {
+        if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
             return true;
         }
         LogInfo.logDebugInformation("MakeCNPJ",

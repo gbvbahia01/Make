@@ -38,7 +38,7 @@ public class MakeInTest extends TestCase {
     public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-        pattern = Pattern.compile(MakeIn.KEY_PROPERTIE);
+        pattern = Pattern.compile(MakeIn.KEY_PROPERTY);
     }
 
     @Test
