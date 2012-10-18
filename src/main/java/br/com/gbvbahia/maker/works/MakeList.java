@@ -87,7 +87,7 @@ public class MakeList implements ValueSpecializedFactory {
     public <T> void makeValue(final String testName, final Field f,
             final T entity, final boolean makeRelationships)
             throws IllegalAccessException, IllegalArgumentException {
-        List toSet = new ArrayList(MakeEntity.makeEntitys(testName,
+        List toSet = new ArrayList(MakeEntity.makeEntities(testName,
                 info.getClazz(),
                 MakeInteger.getIntervalo(info.getMin(), info.getMax()),
                 makeRelationships));
