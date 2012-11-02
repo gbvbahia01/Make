@@ -8,7 +8,7 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.NumberFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
+import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 import java.lang.reflect.Field;
