@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.types.wrappers.common;
+package br.com.gbvbahia.maker.types.primitives.common;
 
 import br.com.gbvbahia.maker.log.LogInfo;
 import java.lang.reflect.Field;

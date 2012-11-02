@@ -6,7 +6,7 @@ package br.com.gbvbahia.maker.types.complex;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
-import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
+import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 

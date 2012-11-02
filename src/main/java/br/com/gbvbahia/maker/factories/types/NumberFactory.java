@@ -10,7 +10,7 @@ import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
 import br.com.gbvbahia.maker.types.complex.MakeBigInteger;
 import br.com.gbvbahia.maker.types.complex.MakeStringNumber;
 import br.com.gbvbahia.maker.types.primitives.numbers.*;
-import br.com.gbvbahia.maker.types.wrappers.common.MakeNumber;
+import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
