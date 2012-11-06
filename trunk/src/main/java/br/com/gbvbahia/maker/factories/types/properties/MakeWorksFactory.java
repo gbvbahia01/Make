@@ -24,29 +24,28 @@ public class MakeWorksFactory implements ValueFactory {
 
     public static final String WORK_USER_IMPL = "work";
     /**
-     * Armazena o nome do teste configurado, podendo ser recuperado
-     * durante o teste se necessário.
+     * Armazena o nome do teste configurado, podendo ser recuperado durante o
+     * teste se necessário.
      */
     private String testName = "";
     /**
-     * Armazena as fábricas de que executam trabalho com base no
-     * arquivo make.properties.
+     * Armazena as fábricas de que executam trabalho com base no arquivo
+     * make.properties.
      */
     private Map<String, ValueFactory> valueFactories =
             new HashMap<String, ValueFactory>();
 
     /**
-     * Perguta do factory especifico se ele trabalha com o field
-     * passado.<br> Para works o tipo não é suficiente, é necessário o
-     * nome da classe do objeto que contém do field juntamente com o
-     * nome do field declarado no make.properties se é igual com o
-     * nome da classe do objeto que contém o field juntamnete com o
-     * nome do field passado.<br> Ex: No properties está:<br>
-     * teste2.br.com.meuprojeto.MinhaClasse.cpf = isCPF<br> Quando
-     * <code>isWorkWith</code> for chamado, ele irá verificar se no
-     * field passado, a classe que o contém, ou seja, se a classe de
-     * entity tem o nome: <i>br.com.meuprojeto.MinhaClasse</i> e se o
-     * nome do field é <i>cpf</i>.
+     * Perguta do factory especifico se ele trabalha com o field passado.<br>
+     * Para works o tipo não é suficiente, é necessário o nome da classe do
+     * objeto que contém do field juntamente com o nome do field declarado no
+     * make.properties se é igual com o nome da classe do objeto que contém o
+     * field juntamnete com o nome do field passado.<br> Ex: No properties
+     * está:<br> teste2.br.com.meuprojeto.MinhaClasse.cpf = isCPF<br> Quando
+     * <code>isWorkWith</code> for chamado, ele irá verificar se no field
+     * passado, a classe que o contém, ou seja, se a classe de entity tem o
+     * nome: <i>br.com.meuprojeto.MinhaClasse</i> e se o nome do field é
+     * <i>cpf</i>.
      *
      * @param <T> Tipo do objeto que contém o field.
      * @param f fieald que irá receber o valor.
@@ -70,11 +69,10 @@ public class MakeWorksFactory implements ValueFactory {
     }
 
     /**
-     * Lê o arquivo make.properties, preparando os valores das classes
-     * para os testes.
+     * Lê o arquivo make.properties, preparando os valores das classes para os
+     * testes.
      *
-     * @param testName java.lang.String chave da mensagem que será
-     * enviada.
+     * @param testName java.lang.String chave da mensagem que será enviada.
      */
     public MakeWorksFactory(final String testName) {
         this.testName = testName;
@@ -101,8 +99,8 @@ public class MakeWorksFactory implements ValueFactory {
     }
 
     /**
-     * Verifica se o teste atual é o mesmo que está declarado no
-     * arquivo make.properties.
+     * Verifica se o teste atual é o mesmo que está declarado no arquivo
+     * make.properties.
      *
      * @param key Chave no make.properties.
      * @param testName Nome do teste passado.
@@ -118,14 +116,14 @@ public class MakeWorksFactory implements ValueFactory {
     }
 
     /**
-     * Verifica se a propriedade é uma propriedade referente a uma
-     * fabrica desenvolvida pelo desenvolvedor.
+     * Verifica se a propriedade é uma propriedade referente a uma fabrica
+     * desenvolvida pelo desenvolvedor.
      *
      * @param key Chave no arquivo make.properties
      * @return true se for uma work false se não for.
      */
     private boolean getFactoriesImpl(final String key) {
-     final boolean found = StringUtils.equalsIgnoreCase(MakeWorksFactory.WORK_USER_IMPL,
+        final boolean found = StringUtils.equalsIgnoreCase(MakeWorksFactory.WORK_USER_IMPL,
                 StringUtils.substring(key, 0,
                 MakeWorksFactory.WORK_USER_IMPL.length()));
         if (!StringUtils.startsWith(key, MakeWorksFactory.WORK_USER_IMPL)) {
@@ -149,8 +147,8 @@ public class MakeWorksFactory implements ValueFactory {
     }
 
     /**
-     * Procura um ValueSpecializedFactory registrado para tratar a
-     * propriedade registrada no arquivo make.properties.
+     * Procura um ValueSpecializedFactory registrado para tratar a propriedade
+     * registrada no arquivo make.properties.
      *
      * @param key Chave no arquivo make.properties.
      * @param value Valor no arquivo make.properties.
@@ -168,8 +166,8 @@ public class MakeWorksFactory implements ValueFactory {
     }
 
     /**
-     * Retira o nome completo da classe mais o nome do parâmetro que
-     * deverá estar declarado no propertie.
+     * Retira o nome completo da classe mais o nome do parâmetro que deverá
+     * estar declarado no propertie.
      *
      * @param f field a ter o valor definido.
      * @return Nome esperado no make.properties.
