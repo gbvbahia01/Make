@@ -71,18 +71,4 @@ public final class I18N {
         }
         return toReturn;
     }
-
-    /**
-     * Retira o valor do arquivo:
-     * br.com.convergeti.solida.utils.I18n.properties, onde todas as
-     * mensagens que são enviadas ao usuário ficam armazenadas. Este
-     * substitui todos {*} pela posição correspondente no vararg.
-     *
-     * @param msg Messagem do Resource.
-     * @param var Variações da mensagem.
-     * @return Menssagem formada.
-     */
-    public static String getMsg(final String msg, final String[] var) {
-        return getMsg(msg, var);
-    }
 }
