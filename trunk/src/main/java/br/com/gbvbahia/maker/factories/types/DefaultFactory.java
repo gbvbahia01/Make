@@ -60,7 +60,7 @@ public class DefaultFactory extends NumberFactory {
             throws IllegalAccessException, IllegalArgumentException {
         if (!f.isAnnotationPresent(NotNull.class)) {
             if (testName != null) {
-                LogInfo.logInfoInformation(className,
+                LogInfo.logDebugInformation(className,
                         I18N.getMsg("fieldSettedNull", f.getName(),
                         f.getDeclaringClass().toString()));
             }
