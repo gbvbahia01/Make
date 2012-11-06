@@ -156,7 +156,6 @@ public class MakeWorksFactory implements ValueFactory {
             final String errorMsg = I18N.getMsg("notFactoryWork", value);
             IllegalArgumentException error = new IllegalArgumentException(errorMsg);
             LogInfo.logErrorInformation("MakeProperties", errorMsg, error);
-            throw error;
         }
     }
 
