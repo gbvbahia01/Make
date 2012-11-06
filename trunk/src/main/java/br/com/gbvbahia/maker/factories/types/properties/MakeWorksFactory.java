@@ -129,7 +129,7 @@ public class MakeWorksFactory implements ValueFactory {
         if (!StringUtils.startsWith(key, MakeWorksFactory.WORK_USER_IMPL)) {
             LogInfo.logDebugInformation("MakeWorksFactory", I18N.getMsg("notWorkAcknowledged", key));
         } else if(found){
-            LogInfo.logInfoInformation("MakeWorksFactory", I18N.getMsg("workFound", key));
+            LogInfo.logDebugInformation("MakeWorksFactory", I18N.getMsg("workFound", key));
         }else{
             LogInfo.logErrorInformation("MakeWorksFactory", I18N.getMsg("workNotFound", key), null);
         }
