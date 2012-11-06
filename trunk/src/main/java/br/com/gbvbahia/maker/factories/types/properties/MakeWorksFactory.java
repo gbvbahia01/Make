@@ -125,13 +125,15 @@ public class MakeWorksFactory implements ValueFactory {
      * @return true se for uma work false se não for.
      */
     private boolean getFactoriesImpl(final String key) {
-        final boolean found = StringUtils.equalsIgnoreCase(MakeWorksFactory.WORK_USER_IMPL,
-                               StringUtils.substring(key, 0,
-                               MakeWorksFactory.WORK_USER_IMPL.length()));
-        if(found || !StringUtils.startsWith(key, MakeWorksFactory.WORK_USER_IMPL)){
-           LogInfo.logDebugInformation("MakeWorksFactory", I18N.getMsg("workFound", key)); 
-        }else {
-            LogInfo.logErrorInformation("MakeWorksFactory", I18N.getMsg("workNotFound", key), null); 
+     final boolean found = StringUtils.equalsIgnoreCase(MakeWorksFactory.WORK_USER_IMPL,
+                StringUtils.substring(key, 0,
+                MakeWorksFactory.WORK_USER_IMPL.length()));
+        if (!StringUtils.startsWith(key, MakeWorksFactory.WORK_USER_IMPL)) {
+            LogInfo.logDebugInformation("MakeWorksFactory", I18N.getMsg("notWorkAcknowledged", key));
+        } else if(found){
+            LogInfo.logInfoInformation("MakeWorksFactory", I18N.getMsg("workFound", key));
+        }else{
+            LogInfo.logErrorInformation("MakeWorksFactory", I18N.getMsg("workNotFound", key), null);
         }
         return found;
     }
