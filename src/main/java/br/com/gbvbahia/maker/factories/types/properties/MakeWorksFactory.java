@@ -82,7 +82,10 @@ public class MakeWorksFactory implements ValueFactory {
                     MakeWorksDefaultFactories.insertImplFactory(StringUtils.substringAfter(key, "."),
                             ResourceBundle.getBundle("make").getString(key));
 
-                } else if (checkSameTest(key, testName)) {
+                }
+            }
+            for (String key : ResourceBundle.getBundle("make").keySet()) {
+                 if (checkSameTest(key, testName)) {
                     insertValueFactory(StringUtils.substringAfter(key, "."),
                             ResourceBundle.getBundle("make").getString(key));
 
