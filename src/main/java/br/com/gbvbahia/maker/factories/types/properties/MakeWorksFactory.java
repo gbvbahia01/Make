@@ -153,8 +153,10 @@ public class MakeWorksFactory implements ValueFactory {
         if (fac != null) {
             valueFactories.put(key, fac);
         } else {
-            LogInfo.logErrorInformation("MakeProperties",
-                    I18N.getMsg("notFactoryWork", value), null);
+            final String errorMsg = I18N.getMsg("notFactoryWork", value);
+            IllegalArgumentException error = new IllegalArgumentException(errorMsg);
+            LogInfo.logErrorInformation("MakeProperties", errorMsg, error);
+            throw error;
         }
     }
 
