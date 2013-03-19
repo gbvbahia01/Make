@@ -57,4 +57,15 @@ public class MakeDoubleTest extends TestCase {
         logger.debug("Max: 1 Result: " + result2);
         assertTrue("Teste minimo incorreto", result2 <= 1);
     }
+
+    @Test
+    public void testIntervalo() {
+        logger.info("Double - Intervalo");
+        for (int i = 0; i < 200; i++) {
+            final Double intervalo = MakeDouble.getIntervalo(0.0001, 0.0002);
+            System.out.println(intervalo);
+            assertFalse("Teste minimo incorreto", intervalo < 0.0001);
+            assertFalse("Teste maximo incorreto", intervalo > 0.0002);
+        }
+    }
 }
