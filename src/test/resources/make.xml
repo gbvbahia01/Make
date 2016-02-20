@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<make>
+	<setup>
+		<JSR303 value="read" /><!-- read or ignore -->
+		<Null value="never" /><!-- never some all -->
+	</setup>
+	<factories>
+		<factory>br.com.gvt.maker.testes.factory.CEPWorkTest</factory>
+		<factory>br.com.gvt.maker.testes.factory.FactoryCustomerService</factory>
+	</factories>
+	<tests>
+		<test>
+			<names>
+				<name>MakeEntityTest_entityFieldString</name>
+				<name>MakeEntityTest_entityFieldInteger</name>
+				<name>MakeEntityTest_entityFieldAll</name>
+			</names>
+			<entities>
+				<entity class="br.com.gvt.testes.MockEntities.enities.Employee">
+					<field name="name">isName</field>
+					<field name="age">between{18,69}</field>
+				</entity>
+			</entities>
+		</test>
+		<test>
+			<names>
+				<name>MakeEntityTest_entityFieldStringAdress</name>
+				<name>MakeEntityTest_entityFieldAll</name>
+			</names>
+			<entities>
+				<entity class="br.com.gvt.testes.MockEntities.enities.Employee">
+					<field name="adress">between{10,100}</field>
+				</entity>
+			</entities>
+		</test>
+		<test>
+			<names>
+				<name>MakeEntityTest_must_be_ignored</name>
+			</names>
+			<entities>
+				<entity class="br.com.gvt.testes.MockEntities.enities.Employee">
+					<field name="born">between{10,100}</field>
+				</entity>
+			</entities>
+		</test>
+		<test>
+			<names>
+				<name>MakeEntityTest_factoryLoadTest</name>
+			</names>
+			<entities>
+				<entity class="br.com.gvt.testes.MockEntities.enities.Address">
+					<field name="cep">isCEP</field>
+				</entity>
+			</entities>
+		</test>
+	</tests>
+</make>
