@@ -7,6 +7,9 @@ import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import br.com.gbvbahia.maker.factories.types.DefaultFactory;
 import br.com.gbvbahia.maker.factories.types.DefaultValuesFactory;
 import br.com.gbvbahia.maker.factories.types.EnumFactory;
@@ -20,38 +23,56 @@ import br.com.gbvbahia.maker.factories.types.properties.XMLoader;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 /**
+ * This class will call the XML loader to read the xml setup and prepare all values factories to
+ * create the values.
+ * 
  * @since v.1 01/05/2012
  * @author Guilherme
  */
 public final class Factory {
 
   /**
+   * For logging changes edit the log4j.properties inside src/test/resources
+   */
+  private static Log logger = LogFactory.getLog(Factory.class.getSimpleName());
+  /**
    * Configura o nome do teste para recuperar informações no arquivo make.properties.
    */
   private static String[] testName;
-  public static final Setup SETUP;
+  public static Setup SETUP;
   /**
    * Contém uma lista das Factories para cada tipo, ao ser solicitado uma será retornada.
    */
   public static final Set<ValueFactory> FACTORIES = new LinkedHashSet<ValueFactory>();
 
-  static {
-    SETUP = new Setup(XMLoader.getLoader().loadSetup());
-  }
-
-  private static MakeWorksFactory makeProperties = null;
+  private static MakeWorksFactory workFactories = null;
 
   /**
-   * Utilize para configurar informações do teste.
+   * If you need another xml file for setup or you want rename make.xml you need clall this method
+   * before start tests.
    * 
-   * @param testNameProp nome do teste configurado no arquivo make.properties: Exemplo:
-   *        test1.Usuario.email Onde test1 é o nome do teste, Usuario a classe e email o field.
+   * @param xmlSetupFile the xml setup file to load all test setup.
    */
-  public static void configureProperties(final String... testNameProp) {
+  public static void loadSetup(String xmlSetupFile) {
+    SETUP = new Setup(XMLoader.getLoader(xmlSetupFile).loadSetup());
+  }
+
+
+  /**
+   * Start to read the xml to setup all factories that will be used in the test.
+   * 
+   * @param testNameProp all tests that will be loaded.
+   */
+  public static void configureFactories(final String... testNameProp) {
+    if (SETUP == null) {
+      Factory.logger.info("Factory.loadSetup was not called, using make.xml for setup.");
+      Factory.logger.info("Use the method Factory.loadSetup to load another setup xml file.");
+      loadSetup(null);
+    }
     Factory.testName = testNameProp;
-    Factory.makeProperties = new MakeWorksFactory(testNameProp);
+    Factory.workFactories = new MakeWorksFactory(testNameProp);
     // This order is important do not change.
-    FACTORIES.add(Factory.makeProperties);
+    FACTORIES.add(Factory.workFactories);
     FACTORIES.add(new SizeFactory());
     FACTORIES.add(new MaxMinFactory());
     FACTORIES.add(new FuturePastFactory());
@@ -60,46 +81,29 @@ public final class Factory {
   }
 
   /**
-   * Percorre as factories até encontrar uma que trabalha com o field passado, retornando a mesma,
-   * como ultima tentativa retorna a DefaultFactory.
+   * Run all factories looking for the one that works with the field. If no one factory works with
+   * then DefaultFactory will be used.<br>
+   * Keep attention in xml file setup test like make.xml. The values created will be reflection from
+   * this file.
    *
    * @param <T> Tipo da entidade.
-   * @param f Field a ser populado.
+   * @param field Field a ser populado.
    * @param entity Entidade que contém o field.
    * @return ValueFactory capaz de popular o field.
    */
-  public static <T> ValueFactory makeFactory(final Field f, final T entity) {
-    if (useDefaultValuesFactory(f, entity)) {
+  public static <T> ValueFactory makeFactory(final Field field, final T entity) {
+    if (SETUP.useDefaultValuesFactory(field, entity)) {
       return new DefaultValuesFactory();
     }
     for (ValueFactory vf : FACTORIES) {
-      if (vf.isWorkWith(f, entity)) {
+      if (vf.isWorkWith(field, entity)) {
         return vf;
       }
     }
     return new DefaultFactory(testName);
   }
 
-  private static <T> boolean useDefaultValuesFactory(final Field f, final T entity) {
-    if (SETUP.neverNull() || isKeyField(f)) {
-      return false;
-    }
-    if (SETUP.readJSR303()) {
-      if (!f.isAnnotationPresent(NotNull.class)) {
-        return true;
-      }
-      return false;
-    }
-    if (SETUP.alwaysNull()) {
-      return true;
-    }
-    if (SETUP.someNull()) {
-      if (MakeInteger.getIntervalo(1, 6) == 3) {
-        return true;
-      }
-    }
-    return false;
-  }
+
 
   /**
    * br.com.gvt.testes.MockEntities.enities.Employee.age class
@@ -110,7 +114,7 @@ public final class Factory {
    */
   private static boolean isKeyField(Field f) {
     String key = f.getDeclaringClass().getName() + "." + f.getName();
-    return Factory.makeProperties.isFieldMapped(key);
+    return Factory.workFactories.isFieldMapped(key);
   }
 
   /**
@@ -118,18 +122,58 @@ public final class Factory {
    */
   private Factory() {}
 
+  /**
+   * Where xml setup is kept for all tests.
+   * 
+   * @author guilhermebraga
+   *
+   */
   public final static class Setup {
     private static final String JSR303_READ = "read";
     private static final String JSR303_IGNORE = "ignore";
     private static final String NULL_ALWAYS = "all";
     private static final String NULL_SOME = "some";
     private static final String NULL_NEVER = "never";
-    private final String JSR303;
-    private final String NULL_FIELDS;
+    private String JSR303;
+    private String NULL_FIELDS;
 
     public Setup(Map<String, String> setupMap) {
+      this.changeSetup(setupMap);
+    }
+
+    private void changeSetup(Map<String, String> setupMap) {
       this.JSR303 = setupMap.get("JSR303");
       this.NULL_FIELDS = setupMap.get("Null");
+    }
+
+    /**
+     * Engine that defines the behavior of the test reading the setup test information.<br>
+     * 
+     */
+    private <T> boolean useDefaultValuesFactory(final Field field, final T entity) {
+      if (this.neverNull() || isKeyField(field)) {
+        return false;
+      }
+      if (this.readJSR303()) {
+        if (!field.isAnnotationPresent(NotNull.class)) {
+          if (this.alwaysNull()) {
+            return true;
+          }
+          if (this.someNull() && (MakeInteger.getIntervalo(1, 6) == 3)) {
+            return true;
+          }
+        }
+        return false;
+      }
+      if (this.alwaysNull()) {
+        return true;
+      }
+      if (this.someNull()) {
+        if (MakeInteger.getIntervalo(1, 6) == 3) {
+          return true;
+        }
+      }
+      return false;
     }
 
     public boolean readJSR303() {

@@ -19,7 +19,7 @@ import br.com.gbvbahia.maker.log.LogInfo;
 public class MakeEntity {
 
   /**
-   * Logger de informações ao desenvolvedor.
+   * For logging changes edit the log4j.properties inside src/test/resources
    */
   private static Log logger = LogFactory.getLog(MakeEntity.class.getSimpleName());
 
@@ -36,7 +36,7 @@ public class MakeEntity {
   public static <T> T makeEntity(final Class<T> entityParam, String... testName) {
     LogInfo.logMakeStartDebug(MakeEntity.class.getSimpleName(), entityParam);
     try {
-      Factory.configureProperties(testName);
+      Factory.configureFactories(testName);
       T entityReturn = entityParam.newInstance();
       prepareValue(entityParam, entityReturn, testName);
       LogInfo.logMakeEndDebug(MakeEntity.class.getSimpleName(), entityParam);

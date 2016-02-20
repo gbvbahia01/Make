@@ -22,34 +22,49 @@ import org.xml.sax.SAXException;
 
 import br.com.gbvbahia.maker.factories.types.properties.exception.XMLoaderException;
 
+/**
+ * This class reads the xml tests setup for executing the tests.
+ * 
+ * @author guilhermebraga
+ * @since v2.0 Jan/2016
+ */
 public class XMLoader {
 
-  private String xmlMakeFile = "make.xml";
+  private String xmlSetupTestFile = "make.xml";
 
   private Document document = null;
 
   private static XMLoader loader = null;
 
   /**
-   * Singleton class.
+   * This is a singleton class for xml file. If you send another xml a new XMLoader will be created,
+   * if the XML is the same keeps the same instance.
    * 
-   * @return Reader
+   * @param xmlName if you will use make.xml (name default) you can pass null.
+   * @return a reader for xml configurations of tests.
    */
-  public static XMLoader getLoader() {
+  public static XMLoader getLoader(String xmlName) {
+    boolean load = false;
     if (loader == null) {
       loader = new XMLoader();
+      load = true;
+    }
+    if (!StringUtils.isBlank(xmlName) && !StringUtils.equals(loader.xmlSetupTestFile, xmlName)) {
+      loader.xmlSetupTestFile = xmlName;
+      load = true;
+    }
+    if (load) {
+      loader.loadDocument();
     }
     return loader;
   }
 
   /**
-   * Carrega as informações do make.xml
+   * Loads the informations from make.xml or other xml setup.
    * 
-   * @throws XMLoaderException se não conseguir encontrar o make.xml
+   * @throws XMLoaderException if cannot read any xml setup.
    */
-  private XMLoader() {
-    this.loadDocument();
-  }
+  private XMLoader() {}
 
   /**
    * Load the document that represents XML with SQLs.
@@ -72,7 +87,7 @@ public class XMLoader {
       throw new XMLoaderException(ioE, "IO Error got when tried to read xml file.");
     } catch (SAXException saxE) {
       throw new XMLoaderException(saxE,
-          "SAXException got when tried to read " + this.xmlMakeFile + " file.");
+          "SAXException got when tried to read " + this.xmlSetupTestFile + " file.");
     }
   }
 
@@ -85,7 +100,7 @@ public class XMLoader {
   private File loadFile() throws XMLoaderException {
     try {
       File xmlFile = null;
-      String path = "/" + this.xmlMakeFile;
+      String path = "/" + this.xmlSetupTestFile;
       xmlFile = new File(this.getClass().getResource(path).toURI());
       if (!xmlFile.exists()) {
         throw new IOException("File make xml doesn't exist.");
@@ -93,16 +108,21 @@ public class XMLoader {
       return xmlFile;
     } catch (IOException ioE) {
       throw new XMLoaderException(ioE,
-          "IO Error got when tried to read xml file.\nFile: " + this.xmlMakeFile);
+          "IO Error got when tried to read xml file.\nFile: " + this.xmlSetupTestFile);
     } catch (URISyntaxException uriE) {
-      throw new XMLoaderException(uriE, "URI wrong in jar file for " + this.xmlMakeFile + " file.");
+      throw new XMLoaderException(uriE,
+          "URI wrong in jar file for " + this.xmlSetupTestFile + " file.");
     }
   }
 
   /**
-   * Retorna todas as factories dentro do make.xml
+   * Returns all factories informed at xml setup file.<br>
+   * <factories><br>
+   * <factory>br.com.gvt.maker.testes.factory.CEPWorkTest</factory><br>
+   * <factory>br.com.gvt.maker.testes.factory.FactoryCustomerService</factory><br>
+   * </factories><br>
    * 
-   * @return
+   * @return a list with the names of all factories class declared in xml file setup.
    */
   public List<String> getFactories() {
     List<String> factories = new ArrayList<String>();
@@ -121,14 +141,16 @@ public class XMLoader {
   }
 
   /**
-   * Retorna um map mapeado da seguinte forma: key <> value<br>
+   * Returns a map with: key <> value<br>
    * br.com.gvt.testes.MockEntities.enities.Employee.age <> between{18,69}
-   * br.com.gvt.testes.MockEntities.enities.Employee.name <> isName Todos os testes serão incluidos,
-   * a busca ira comecar pelo primeiro teste do array e caso a mesma classe for utilizada em dois ou
-   * mais testes a do primeiro teste será mantida.
+   * br.com.gvt.testes.MockEntities.enities.Employee.name <> isName<br>
+   * All tests with the testName will be loaded. If the same class is founded in more the one test
+   * the first will be kept.<br>
+   * If a class in two tests with different fields in each test the class will be loaded with both
+   * fields.
    * 
-   * @param testName
-   * @return
+   * @param testName The names of all tests to be loaded.
+   * @return The map with class and fields with rules
    */
   public Map<String, Map<String, String>> getMapRulesFieldsByTestName(String... testName) {
     Map<String, Map<String, String>> testsParans = new HashMap<String, Map<String, String>>();
@@ -154,30 +176,29 @@ public class XMLoader {
   }
 
   /**
-   * Faz o trabaho unitário para o metodo chamador.
+   * Works with each test, unit work.
    * 
-   * @param testName
-   * @return
+   * @param testName The names of all tests to be loaded.
+   * @return The map with class and fields with rules
    */
   private Map<String, Map<String, String>> getMapFielsByTestName(String testName) {
     Map<String, Map<String, String>> testsParans = new HashMap<String, Map<String, String>>();
-    NodeList nTests = this.document.getElementsByTagName("test");// <test>
-    for (int i = 0; i < nTests.getLength(); i++) {
-      NodeList nTestChilds = nTests.item(i).getChildNodes();// names||entities
-      List<NodeList> testList = this.recoverTestNodeByName(testName, nTestChilds);
-      List<Node> entityList = this.recoverEntityNodes(nTestChilds, testList);
+    NodeList nodeTests = this.document.getElementsByTagName("test");// <test>
+    for (int i = 0; i < nodeTests.getLength(); i++) {
+      NodeList nodeTestChilds = nodeTests.item(i).getChildNodes();// names||entities
+      List<NodeList> testList = this.recoverTestNodeByName(testName, nodeTestChilds);
+      List<Node> entityList = this.recoverEntityNodes(testList);
       this.populateMapWithEntityRules(testsParans, entityList);
     }
     return testsParans;
   }
 
   /**
-   * Irá retornar todas os nodes <test> que contenham o nome especificado dentro do node <name> de
-   * <names>
+   * Returns all NodeList <test> thats contains the testName in the node <names>
    * 
-   * @param testName
-   * @param nodeTestChilds
-   * @return
+   * @param testName the name of the test
+   * @param nodeTestChilds all nodes test, where the name will be searched for.
+   * @return List of the test nodes thats contains the name of the test in the tag names.
    */
   private List<NodeList> recoverTestNodeByName(String testName, NodeList nodeTestChilds) {
     List<NodeList> testList = new ArrayList<NodeList>();
@@ -199,17 +220,16 @@ public class XMLoader {
   }
 
   /**
-   * Recupera todos os nodes <entity> de uma lista de node <test>
+   * Gets all nodes entity from a list of test node.
    * 
-   * @param nodeTestChilds
-   * @param testList
-   * @return
+   * @param testList only test with name in test.
+   * @return a list with all entity node founded at testList.
    */
-  private List<Node> recoverEntityNodes(NodeList nodeTestChilds, List<NodeList> testList) {
+  private List<Node> recoverEntityNodes(List<NodeList> testList) {
     List<Node> entityList = new ArrayList<Node>();
     for (NodeList test : testList) {
       for (int ii = 0; ii < test.getLength(); ii++) {
-        NodeList entitiesNodes = nodeTestChilds.item(ii).getChildNodes();
+        NodeList entitiesNodes = test.item(ii).getChildNodes();
         for (int iii = 0; iii < entitiesNodes.getLength(); iii++) {
           if (StringUtils.equals(entitiesNodes.item(iii).getNodeName(), "entity")) { // <entity>
             entityList.add(entitiesNodes.item(iii));
@@ -221,10 +241,10 @@ public class XMLoader {
   }
 
   /**
-   * Insere no map as regras do teste encontradas na tag <entity>.
+   * Populate a map with entities founded.
    * 
-   * @param testsParans
-   * @param entityList
+   * @param testsParans a map that will be populated.
+   * @param entityList a list with entities used to populate the map.
    */
   private void populateMapWithEntityRules(Map<String, Map<String, String>> testsParans,
       List<Node> entityList) {
@@ -254,9 +274,9 @@ public class XMLoader {
   }
 
   /**
-   * Recupera as informacoes de setup do framework dentro do node <setup>
+   * Gets all information in tag setup.
    * 
-   * @return
+   * @return a map with setup node information
    */
   public Map<String, String> loadSetup() {
     Map<String, String> setupMap = new HashMap<String, String>();

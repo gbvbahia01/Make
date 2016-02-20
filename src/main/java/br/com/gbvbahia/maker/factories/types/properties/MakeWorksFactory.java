@@ -38,7 +38,7 @@ public class MakeWorksFactory implements ValueFactory {
   public MakeWorksFactory(final String... testName) {
     this.testName = testName;
     try {
-      XMLoader loader = XMLoader.getLoader();
+      XMLoader loader = XMLoader.getLoader(null);
       List<String> factories = loader.getFactories();
       for (String factory : factories) {
         MakeWorksDefaultFactories.insertImplFactory(factory);
