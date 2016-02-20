@@ -11,17 +11,17 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.gbvbahia.entityes.EntityBooleanTest;
-import br.com.gbvbahia.entityes.EntityDateTest;
-import br.com.gbvbahia.entityes.EntityDecimalTest;
-import br.com.gbvbahia.entityes.EntityDigitsTest;
-import br.com.gbvbahia.entityes.EntityEnumTest;
-import br.com.gbvbahia.entityes.EntityEnumTest2;
-import br.com.gbvbahia.entityes.EntityMaxTest;
-import br.com.gbvbahia.entityes.EntityMinMaxTest;
-import br.com.gbvbahia.entityes.EntityMinTest;
-import br.com.gbvbahia.entityes.EntityNotNullTest;
-import br.com.gbvbahia.entityes.EntitySizeTest;
+import br.com.gbvbahia.entities.EntityBooleanTest;
+import br.com.gbvbahia.entities.EntityDateTest;
+import br.com.gbvbahia.entities.EntityDecimalTest;
+import br.com.gbvbahia.entities.EntityDigitsTest;
+import br.com.gbvbahia.entities.EntityEnumTest;
+import br.com.gbvbahia.entities.EntityEnumTest2;
+import br.com.gbvbahia.entities.EntityMaxTest;
+import br.com.gbvbahia.entities.EntityMinMaxTest;
+import br.com.gbvbahia.entities.EntityMinTest;
+import br.com.gbvbahia.entities.EntityNotNullTest;
+import br.com.gbvbahia.entities.EntitySizeTest;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
 

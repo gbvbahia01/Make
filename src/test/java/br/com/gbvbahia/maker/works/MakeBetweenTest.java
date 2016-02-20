@@ -13,7 +13,7 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.gbvbahia.entityes.EntityBetweenTest;
+import br.com.gbvbahia.entities.EntityBetweenTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
@@ -93,27 +93,28 @@ public class MakeBetweenTest extends TestCase {
       logger.debug(test);
       assertNotNull("Test 0: test não pode ser nulo.", test);
 
-      assertTrue("Test 1: Entre 5 e 10: " + test.getEntre5_10(),
-          (test.getEntre5_10() >= 5) && (test.getEntre5_10() <= 10));
+      assertTrue("Test 1: Entre 5 e 10: " + test.getBetween5_10(),
+          (test.getBetween5_10() >= 5) && (test.getBetween5_10() <= 10));
 
-      assertTrue("Test 2: Entre 10 e 20: " + test.getEntre10_20(),
-          (test.getEntre10_20() >= 10) && (test.getEntre10_20() <= 20));
+      assertTrue("Test 2: Entre 10 e 20: " + test.getBetween10_20(),
+          (test.getBetween10_20() >= 10) && (test.getBetween10_20() <= 20));
 
-      assertTrue("Test 3: Entre -5.40 e 5.56: " + test.getEntre_M5V40_5V56(),
-          (test.getEntre_M5V40_5V56().doubleValue() >= -5.40)
-              && (test.getEntre_M5V40_5V56().doubleValue() <= 5.56));
+      assertTrue("Test 3: Entre -5.40 e 5.56: " + test.getBetween_M5V40_5V56(),
+          (test.getBetween_M5V40_5V56().doubleValue() >= -5.40)
+              && (test.getBetween_M5V40_5V56().doubleValue() <= 5.56));
 
-      assertTrue("Test 4: Entre -50.13 e -20.15: " + test.getEntre_M50V13_M20V15(),
-          (test.getEntre_M50V13_M20V15() >= -50.13) && (test.getEntre_M50V13_M20V15() <= -20.15));
+      assertTrue("Test 4: Entre -50.13 e -20.15: " + test.getBetween_M50V13_M20V15(),
+          (test.getBetween_M50V13_M20V15() >= -50.13)
+              && (test.getBetween_M50V13_M20V15() <= -20.15));
 
-      assertTrue("Test 5: Entre -50 e 50: " + test.getEntre_M50_50(),
-          (test.getEntre_M50_50() >= -50) && (test.getEntre_M50_50() <= 50));
+      assertTrue("Test 5: Entre -50 e 50: " + test.getBetween_M50_50(),
+          (test.getBetween_M50_50() >= -50) && (test.getBetween_M50_50() <= 50));
 
-      assertTrue("Test 6: Entre 5 e 23: " + test.getEntre5_23(),
-          (test.getEntre5_23() >= 5) && (test.getEntre5_23() <= 23));
+      assertTrue("Test 6: Entre 5 e 23: " + test.getBetween5_23(),
+          (test.getBetween5_23() >= 5) && (test.getBetween5_23() <= 23));
 
-      assertTrue("Test 7: Entre -5 e 5: " + test.getEntre_M5_5(),
-          (test.getEntre_M5_5() >= -5) && (test.getEntre_M5_5() <= 5));
+      assertTrue("Test 7: Entre -5 e 5: " + test.getBetween_M5_5(),
+          (test.getBetween_M5_5() >= -5) && (test.getBetween_M5_5() <= 5));
 
       this.validarJSR303(test);
     }

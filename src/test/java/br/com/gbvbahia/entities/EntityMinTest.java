@@ -1,72 +1,70 @@
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.entityes;
+package br.com.gbvbahia.entities;
 
-//~--- JDK imports ------------------------------------------------------------
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Guilherme
  */
-public class EntityMaxTest {
+public class EntityMinTest {
 
     @NotNull
-    @Max(1)
-    private BigDecimal bigDecimal;
-    @NotNull
-    @Max(320500000)
-    private BigInteger bigInteger;
-    @NotNull
-    @Max(126)
-    private Byte byteObjeto;
-    @NotNull
-    @Max(-2)
-    private Integer inteiroNegativoObjeto;
-    @NotNull
-    @Max(4)
+    @Min(4)
     private Integer inteiroObjeto;
     @NotNull
-    @Max(-1000000000)
-    private Long longObjeto;
+    @Min(-2)
+    private Integer inteiroNegativoObjeto;
     @NotNull
-    @Max(22)
-    private byte primitivoByte;
-    @NotNull
-    @Max(100)
+    @Min(100)
     private int primitivoInt;
     @NotNull
-    @Max(2000000000)
+    @Min(-1000000000)
+    private Long longObjeto;
+    @NotNull
+    @Min(2000000000)
     private long primitivoLong;
     @NotNull
-    @Max(32050)
+    @Min(126)
+    private Byte byteObjeto;
+    @NotNull
+    @Min(22)
+    private byte primitivoByte;
+    @NotNull
+    @Min(32000)
+    private Short shortObjeto;
+    @NotNull
+    @Min(32050)
     private short primitivoShort;
     @NotNull
-    @Max(32000)
-    private Short shortObjeto;
-    @Max(10)
+    @Min(320500000)
+    private BigInteger bigInteger;
+    @NotNull
+    @Min(1)
+    private BigDecimal bigDecimal;
+    @Min(10)
     @NotNull
     private String string;
-    @Max(-10)
+    @Min(-500)
     @NotNull
     private Double doubleObjeto;
-    @Max(-15)
+    @Min(512)
     @NotNull
     private double primitivoDouble;
     @NotNull
-    @Max(5000)
+    @Min(5000)
     private Float floatObjeto;
     @NotNull
-    @Max(1)
+    @Min(1)
     private float primitivoFloat;
     @NotNull
-    @Max(Long.MIN_VALUE + 1)
+    @Min(Long.MAX_VALUE - 1)
     private Long longObjetoMinMaxValue;
 
     public int getPrimitivoInt() {
@@ -207,17 +205,17 @@ public class EntityMaxTest {
 
     @Override
     public String toString() {
-        return "EntityMaxTest{" + "bigDecimal=" + bigDecimal
-                + ", bigInteger=" + bigInteger
-                + ", byteObjeto=" + byteObjeto
+        return "EntityMinTest{" + "inteiroObjeto=" + inteiroObjeto
                 + ", inteiroNegativoObjeto=" + inteiroNegativoObjeto
-                + ", inteiroObjeto=" + inteiroObjeto
-                + ", longObjeto=" + longObjeto
-                + ", primitivoByte=" + primitivoByte
                 + ", primitivoInt=" + primitivoInt
+                + ", longObjeto=" + longObjeto
                 + ", primitivoLong=" + primitivoLong
-                + ", primitivoShort=" + primitivoShort
+                + ", byteObjeto=" + byteObjeto
+                + ", primitivoByte=" + primitivoByte
                 + ", shortObjeto=" + shortObjeto
+                + ", primitivoShort=" + primitivoShort
+                + ", bigInteger=" + bigInteger
+                + ", bigDecimal=" + bigDecimal
                 + ", string=" + string
                 + ", doubleObjeto=" + doubleObjeto
                 + ", primitivoDouble=" + primitivoDouble

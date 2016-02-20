@@ -3,7 +3,7 @@ package br.com.gbvbahia.maker.properties;
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.entityes.EntityPropertiesTest;
+import br.com.gbvbahia.entities.EntityPropertiesTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.MakeCNPJTest;

@@ -1,57 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <make>
-	<setup>
-		<JSR303 value="read" /><!-- read or ignore -->
-		<Null value="never" /><!-- never some all -->
-	</setup>
-	<factories>
-		<factory>br.com.gvt.maker.testes.factory.CEPWorkTest</factory>
-		<factory>br.com.gvt.maker.testes.factory.FactoryCustomerService</factory>
-	</factories>
-	<tests>
-		<test>
-			<names>
-				<name>MakeEntityTest_entityFieldString</name>
-				<name>MakeEntityTest_entityFieldInteger</name>
-				<name>MakeEntityTest_entityFieldAll</name>
-			</names>
-			<entities>
-				<entity class="br.com.gvt.testes.MockEntities.enities.Employee">
-					<field name="name">isName</field>
-					<field name="age">between{18,69}</field>
-				</entity>
-			</entities>
-		</test>
-		<test>
-			<names>
-				<name>MakeEntityTest_entityFieldStringAdress</name>
-				<name>MakeEntityTest_entityFieldAll</name>
-			</names>
-			<entities>
-				<entity class="br.com.gvt.testes.MockEntities.enities.Employee">
-					<field name="adress">between{10,100}</field>
-				</entity>
-			</entities>
-		</test>
-		<test>
-			<names>
-				<name>MakeEntityTest_must_be_ignored</name>
-			</names>
-			<entities>
-				<entity class="br.com.gvt.testes.MockEntities.enities.Employee">
-					<field name="born">between{10,100}</field>
-				</entity>
-			</entities>
-		</test>
-		<test>
-			<names>
-				<name>MakeEntityTest_factoryLoadTest</name>
-			</names>
-			<entities>
-				<entity class="br.com.gvt.testes.MockEntities.enities.Address">
-					<field name="cep">isCEP</field>
-				</entity>
-			</entities>
-		</test>
-	</tests>
+  <setup>
+    <JSR303 value="read" /><!-- read or ignore -->
+    <Null value="never" /><!-- never some all -->
+  </setup>
+  <factories>
+    <factory>br.com.gbvbahia.maker.properties.CEPWorkTest</factory>
+    <factory>br.com.gbvbahia.maker.properties.FactoryCustomerService
+    </factory>
+  </factories>
+  <tests>
+    <test>
+      <names>
+        <name>MakeEntityTest_entityFieldString</name>
+        <name>MakeEntityTest_entityFieldInteger</name>
+        <name>MakeEntityTest_entityFieldAll</name>
+      </names>
+      <entities>
+        <entity class="br.com.gvt.testes.MockEntities.enities.Employee">
+          <field name="name">isName</field>
+          <field name="age">between{18,69}</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>MakeEntityTest_entityFieldStringAdress</name>
+        <name>MakeEntityTest_entityFieldAll</name>
+      </names>
+      <entities>
+        <entity class="br.com.gvt.testes.MockEntities.enities.Employee">
+          <field name="adress">between{10,100}</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>MakeEntityTest_must_be_ignored</name>
+      </names>
+      <entities>
+        <entity class="br.com.gvt.testes.MockEntities.enities.Employee">
+          <field name="born">between{10,100}</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>MakeEntityTest_factoryLoadTest</name>
+      </names>
+      <entities>
+        <entity class="br.com.gvt.testes.MockEntities.enities.Address">
+          <field name="cep">isCEP</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>test1</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.EntityPropertiesTest">
+          <field name="nome">isName</field>
+          <field name="cpf">isCPF</field>
+          <field name="cnpj">isCNPJ</field>
+          <field name="cep">isCEP</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>test2</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.EntityPatternTest">
+          <field name="email">isEmail</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>testList1</name>
+        <name>testSet1</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.EntityListTest">
+          <field name="listPattern">isList{br.com.gbvbahia.entityes.EntityPatternTest}[3,5]
+          </field>
+          <field name="listComplex">isList{br.com.gbvbahia.entityes.EntityListComplexTest}[15,25]
+          </field>
+        </entity>
+        <entity class="br.com.gbvbahia.entities.EntityPatternTest">
+          <field name="email">isEmail</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>testSet1</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.EntitySetTest">
+          <field name="setPattern">isSet{br.com.gbvbahia.entityes.EntityPatternTest}[3,5]
+          </field>
+          <field
+            name=isSet{br.com.gbvbahia.entityes.EntitySetComplexTest}[15,25]</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>testBetween1</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.EntityBetweenTest">
+          <field name="between5_10">between{5,10}</field>
+          <field name="between10_20">between{10,20}</field>
+          <field name="between_M5V40_5V56">between{-5.40,5.56}</field>
+          <field name="between_M50V13_M20V15">between{-50.13,-20.15}</field>
+          <field name="between_M50_50">between{-50,50}</field>
+          <field name="between5_23">between{5,23}</field>
+          <field name="between_M5_5">between{-5,5}</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
+        <name>testIn1</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.EntityInTest">
+          <field name="in_1_2_5">in{1,2,5}</field>
+          <field name="in_10V30_10V50_10V80">in{10.30|10.50|10.80}[|]</field>
+          <field name="in_3000_5000_6000">in{3000,5000,6000}</field>
+          <field name="in_45V80_M45V80_100V10">in{45.80,-45.80,100.10}</field>
+          <field name="in_500_5000_50000_500000_5000000">in{500,5000,50000,500000,5000000}
+          </field>
+          <field name="in_200_300_400">in{200-300-400}[-]</field>
+          <field name="in_A_B_C">in{A_B_C}[_]</field>
+          <field name="in_Comma_At_Percent">in{,|@|%}[|]</field>
+          <field name="only_30">in{30}</field>
+        </entity>
+      </entities>
+    </test>
+  </tests>
 </make>

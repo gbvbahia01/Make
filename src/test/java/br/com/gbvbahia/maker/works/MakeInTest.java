@@ -13,7 +13,7 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.gbvbahia.entityes.EntityInTest;
+import br.com.gbvbahia.entities.EntityInTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
@@ -140,10 +140,9 @@ public class MakeInTest extends TestCase {
       assertTrue("in_A_B_C error: " + test.getIn_A_B_C(), test.getIn_A_B_C().equals("A")
           || test.getIn_A_B_C().equals("B") || test.getIn_A_B_C().equals("C"));
 
-      assertTrue("in_Virgula_Arroba_Percentual error: " + test.getIn_Virgula_Arroba_Percentual(),
-          test.getIn_Virgula_Arroba_Percentual().equals(",")
-              || test.getIn_Virgula_Arroba_Percentual().equals("@")
-              || test.getIn_Virgula_Arroba_Percentual().equals("%"));
+      assertTrue("in_Virgula_Arroba_Percentual error: " + test.getIn_Comma_At_Percent(),
+          test.getIn_Comma_At_Percent().equals(",") || test.getIn_Comma_At_Percent().equals("@")
+              || test.getIn_Comma_At_Percent().equals("%"));
 
       assertTrue("only_30 error: " + test.getOnly_30(), test.getOnly_30() == 30);
     }

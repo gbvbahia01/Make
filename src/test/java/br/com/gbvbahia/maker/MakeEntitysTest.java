@@ -12,7 +12,7 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.gbvbahia.entityes.EntityNotNullTest;
+import br.com.gbvbahia.entities.EntityNotNullTest;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
 

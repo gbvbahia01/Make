@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.entityes;
+package br.com.gbvbahia.entities;
 
 import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.AssertTrue;
