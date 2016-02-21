@@ -1,18 +1,21 @@
 package br.com.gbvbahia.maker;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * Style code is follow the google style:<br>
+ * http://google.github.io/styleguide/javaguide.html#s3.3.3-import-ordering-and-spacing
+ * 
  * @since v.1 01/05/2012
  * @author Guilherme
  */

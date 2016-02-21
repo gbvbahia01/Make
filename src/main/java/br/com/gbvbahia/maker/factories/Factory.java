@@ -1,15 +1,6 @@
 package br.com.gbvbahia.maker.factories;
 
-import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.validation.constraints.NotNull;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.DefaultFactory;
 import br.com.gbvbahia.maker.factories.types.DefaultValuesFactory;
 import br.com.gbvbahia.maker.factories.types.EnumFactory;
@@ -21,6 +12,18 @@ import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.properties.MakeWorksFactory;
 import br.com.gbvbahia.maker.factories.types.properties.XMLoader;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 /**
  * This class will call the XML loader to read the xml setup and prepare all values factories to
@@ -65,8 +68,8 @@ public final class Factory {
    */
   public static void configureFactories(final String... testNameProp) {
     if (SETUP == null) {
-      Factory.logger.info("Factory.loadSetup was not called, using make.xml for setup.");
-      Factory.logger.info("Use the method Factory.loadSetup to load another setup xml file.");
+      Factory.logger.info(I18N.getMsg("setupMakeXmlDefault"));
+      Factory.logger.info(I18N.getMsg("warnAboutLoadXml"));
       loadSetup(null);
     }
     Factory.testName = testNameProp;
@@ -86,10 +89,10 @@ public final class Factory {
    * Keep attention in xml file setup test like make.xml. The values created will be reflection from
    * this file.
    *
-   * @param <T> Tipo da entidade.
-   * @param field Field a ser populado.
-   * @param entity Entidade que contém o field.
-   * @return ValueFactory capaz de popular o field.
+   * @param <T> Represent the class of entity
+   * @param field to be created
+   * @param entity entity that contains the field.
+   * @return ValueFactory that will create the value to put at field.
    */
   public static <T> ValueFactory makeFactory(final Field field, final T entity) {
     if (SETUP.useDefaultValuesFactory(field, entity)) {
@@ -106,18 +109,6 @@ public final class Factory {
 
 
   /**
-   * br.com.gvt.testes.MockEntities.enities.Employee.age class
-   * br.com.gvt.testes.MockEntities.enities.Employee.name
-   * 
-   * @param f
-   * @return
-   */
-  private static boolean isKeyField(Field f) {
-    String key = f.getDeclaringClass().getName() + "." + f.getName();
-    return Factory.workFactories.isFieldMapped(key);
-  }
-
-  /**
    * Não pode ser instânciado.
    */
   private Factory() {}
@@ -125,7 +116,7 @@ public final class Factory {
   /**
    * Where xml setup is kept for all tests.
    * 
-   * @author guilhermebraga
+   * @author Guilherme Braga
    *
    */
   public final static class Setup {
@@ -144,6 +135,33 @@ public final class Factory {
     private void changeSetup(Map<String, String> setupMap) {
       this.JSR303 = setupMap.get("JSR303");
       this.NULL_FIELDS = setupMap.get("Null");
+      this.checkJSR303SetupValue();
+      this.checkNullSetupValue();
+    }
+
+    private void checkJSR303SetupValue() {
+      if (StringUtils.equals(this.JSR303, JSR303_READ)) {
+        return;
+      }
+      if (StringUtils.equals(this.JSR303, JSR303_IGNORE)) {
+        return;
+      }
+      throw new IllegalArgumentException(
+          I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ, JSR303_IGNORE}));
+    }
+
+    private void checkNullSetupValue() {
+      if (StringUtils.equals(this.NULL_FIELDS, NULL_ALWAYS)) {
+        return;
+      }
+      if (StringUtils.equals(this.NULL_FIELDS, NULL_SOME)) {
+        return;
+      }
+      if (StringUtils.equals(this.NULL_FIELDS, NULL_NEVER)) {
+        return;
+      }
+      throw new IllegalArgumentException(
+          I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS, NULL_SOME, NULL_NEVER}));
     }
 
     /**
@@ -151,10 +169,13 @@ public final class Factory {
      * 
      */
     private <T> boolean useDefaultValuesFactory(final Field field, final T entity) {
-      if (this.neverNull() || isKeyField(field)) {
-        return false;
-      }
       if (this.readJSR303()) {
+        if (field.isAnnotationPresent(Null.class)) {
+          return true;
+        }
+        if (isKeyField(field)) {
+          return false;
+        }
         if (!field.isAnnotationPresent(NotNull.class)) {
           if (this.alwaysNull()) {
             return true;
@@ -164,16 +185,31 @@ public final class Factory {
           }
         }
         return false;
-      }
-      if (this.alwaysNull()) {
-        return true;
-      }
-      if (this.someNull()) {
-        if (MakeInteger.getIntervalo(1, 6) == 3) {
+      } else {
+        if (this.neverNull() || isKeyField(field)) {
+          return false;
+        }
+        if (this.alwaysNull()) {
           return true;
         }
+        if (this.someNull()) {
+          if (MakeInteger.getIntervalo(1, 6) == 3) {
+            return true;
+          }
+        }
+        return false;
       }
-      return false;
+    }
+
+    /**
+     * Check if the field is mapped to be worked for some work class. MakeBetween, MakeEmail...
+     * 
+     * @param field the field to check
+     * @return true is mapped false is not.
+     */
+    private static boolean isKeyField(Field field) {
+      String key = field.getDeclaringClass().getName() + "." + field.getName();
+      return Factory.workFactories.isFieldMapped(key);
     }
 
     public boolean readJSR303() {

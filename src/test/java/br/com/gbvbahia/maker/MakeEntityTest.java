@@ -1,16 +1,5 @@
 package br.com.gbvbahia.maker;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
-import org.apache.commons.logging.Log;
-import org.junit.Before;
-import org.junit.Test;
-
 import br.com.gbvbahia.entities.EntityBooleanTest;
 import br.com.gbvbahia.entities.EntityDateTest;
 import br.com.gbvbahia.entities.EntityDecimalTest;
@@ -22,8 +11,22 @@ import br.com.gbvbahia.entities.EntityMinMaxTest;
 import br.com.gbvbahia.entities.EntityMinTest;
 import br.com.gbvbahia.entities.EntityNotNullTest;
 import br.com.gbvbahia.entities.EntitySizeTest;
+import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.log.LogInfo;
+
 import junit.framework.TestCase;
+
+import org.apache.commons.logging.Log;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 /**
  * @since v.1 01/05/2012
@@ -37,8 +40,16 @@ public class MakeEntityTest extends TestCase {
   @Before
   @Override
   public void setUp() {
+    // Load the xml I want, not necessary if is make.xml
+    Factory.loadSetup("make.xml");
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     this.validator = factory.getValidator();
+  }
+
+  @After
+  public void rollback() {
+    // roll back to default make.xml, not necessary if I did not change.
+    Factory.loadSetup("make.xml");
   }
 
   public MakeEntityTest() {
