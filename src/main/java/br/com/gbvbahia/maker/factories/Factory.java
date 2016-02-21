@@ -119,31 +119,31 @@ public final class Factory {
    * @author Guilherme Braga
    *
    */
-  public final static class Setup {
+  public static final class Setup {
     private static final String JSR303_READ = "read";
     private static final String JSR303_IGNORE = "ignore";
     private static final String NULL_ALWAYS = "all";
     private static final String NULL_SOME = "some";
     private static final String NULL_NEVER = "never";
-    private String JSR303;
-    private String NULL_FIELDS;
+    private String jsr303;
+    private String nullFields;
 
     public Setup(Map<String, String> setupMap) {
       this.changeSetup(setupMap);
     }
 
     private void changeSetup(Map<String, String> setupMap) {
-      this.JSR303 = setupMap.get("JSR303");
-      this.NULL_FIELDS = setupMap.get("Null");
-      this.checkJSR303SetupValue();
+      this.jsr303 = setupMap.get("JSR303");
+      this.nullFields = setupMap.get("Null");
+      this.checkJsr303SetupValue();
       this.checkNullSetupValue();
     }
 
-    private void checkJSR303SetupValue() {
-      if (StringUtils.equals(this.JSR303, JSR303_READ)) {
+    private void checkJsr303SetupValue() {
+      if (StringUtils.equals(this.jsr303, JSR303_READ)) {
         return;
       }
-      if (StringUtils.equals(this.JSR303, JSR303_IGNORE)) {
+      if (StringUtils.equals(this.jsr303, JSR303_IGNORE)) {
         return;
       }
       throw new IllegalArgumentException(
@@ -151,13 +151,13 @@ public final class Factory {
     }
 
     private void checkNullSetupValue() {
-      if (StringUtils.equals(this.NULL_FIELDS, NULL_ALWAYS)) {
+      if (StringUtils.equals(this.nullFields, NULL_ALWAYS)) {
         return;
       }
-      if (StringUtils.equals(this.NULL_FIELDS, NULL_SOME)) {
+      if (StringUtils.equals(this.nullFields, NULL_SOME)) {
         return;
       }
-      if (StringUtils.equals(this.NULL_FIELDS, NULL_NEVER)) {
+      if (StringUtils.equals(this.nullFields, NULL_NEVER)) {
         return;
       }
       throw new IllegalArgumentException(
@@ -169,7 +169,7 @@ public final class Factory {
      * 
      */
     private <T> boolean useDefaultValuesFactory(final Field field, final T entity) {
-      if (this.readJSR303()) {
+      if (this.readJsr303()) {
         if (field.isAnnotationPresent(Null.class)) {
           return true;
         }
@@ -212,24 +212,24 @@ public final class Factory {
       return Factory.workFactories.isFieldMapped(key);
     }
 
-    public boolean readJSR303() {
-      return this.JSR303.equals(JSR303_READ);
+    public boolean readJsr303() {
+      return this.jsr303.equals(JSR303_READ);
     }
 
-    public boolean ignoreJSR303() {
-      return this.JSR303.equals(JSR303_IGNORE);
+    public boolean ignoreJsr303() {
+      return this.jsr303.equals(JSR303_IGNORE);
     }
 
     public boolean alwaysNull() {
-      return this.NULL_FIELDS.equals(NULL_ALWAYS);
+      return this.nullFields.equals(NULL_ALWAYS);
     }
 
     public boolean someNull() {
-      return this.NULL_FIELDS.equals(NULL_SOME);
+      return this.nullFields.equals(NULL_SOME);
     }
 
     public boolean neverNull() {
-      return this.NULL_FIELDS.equals(NULL_NEVER);
+      return this.nullFields.equals(NULL_NEVER);
     }
   }
 }

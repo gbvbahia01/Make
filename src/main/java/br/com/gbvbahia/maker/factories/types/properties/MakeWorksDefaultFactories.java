@@ -1,9 +1,7 @@
 package br.com.gbvbahia.maker.factories.types.properties;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.DefaultValuesFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.MakeBetween;
 import br.com.gbvbahia.maker.works.MakeCNPJ;
@@ -15,6 +13,9 @@ import br.com.gbvbahia.maker.works.MakeName;
 import br.com.gbvbahia.maker.works.MakeSet;
 import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Todas as classes default devem ser declaradas aqui, adicionadas na lista WORK_FACTORIES no corpo
@@ -37,6 +38,7 @@ public class MakeWorksDefaultFactories {
     WORK_FACTORIES.add(MakeSet.class);
     WORK_FACTORIES.add(MakeBetween.class);
     WORK_FACTORIES.add(MakeIn.class);
+    WORK_FACTORIES.add(DefaultValuesFactory.class);
   }
 
   /**

@@ -1,147 +1,139 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gbvbahia.entities;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 /**
- *
+ * @since v.1 01/05/2012
  * @author Guilherme
  */
 @Entity
 public class EntityNotNullTest {
 
-    @Null
-    private Integer inteiro;
-    @NotNull
-    private Integer inteiroObjeto;
-    @NotNull
-    private Long longObjeto;
-    @NotNull
-    private Byte byteObjeto;
-    @NotNull
-    private Short shortObjeto;
-    @NotNull
-    private BigInteger bigInteger;
-    @NotNull
-    private BigDecimal bigDecimal;
-    @NotNull
-    private String string;
-    @NotNull
-    private Double doubleObjeto;
-    @NotNull
-    private Float floatObjeto;
-    @NotNull
-    private Character characterObjeto;
-    
-    public Integer getInteiro() {
-        return inteiro;
-    }
+  @Null
+  private Integer inteiro;
+  @NotNull
+  private Integer inteiroObjeto;
+  @NotNull
+  private Long longObjeto;
+  @NotNull
+  private Byte byteObjeto;
+  @NotNull
+  private Short shortObjeto;
+  @NotNull
+  private BigInteger bigInteger;
+  @NotNull
+  private BigDecimal bigDecimal;
+  @NotNull
+  private String string;
+  @NotNull
+  private Double doubleObjeto;
+  @NotNull
+  private Float floatObjeto;
+  @NotNull
+  private Character characterObjeto;
 
-    public void setInteiro(Integer inteiro) {
-        this.inteiro = inteiro;
-    }
+  public Integer getInteiro() {
+    return this.inteiro;
+  }
 
-    public Long getLongObjeto() {
-        return longObjeto;
-    }
+  public void setInteiro(Integer inteiro) {
+    this.inteiro = inteiro;
+  }
 
-    public void setLongObjeto(Long longObjeto) {
-        this.longObjeto = longObjeto;
-    }
+  public Long getLongObjeto() {
+    return this.longObjeto;
+  }
 
-    public Byte getByteObjeto() {
-        return byteObjeto;
-    }
+  public void setLongObjeto(Long longObjeto) {
+    this.longObjeto = longObjeto;
+  }
 
-    public void setByteObjeto(Byte byteObjeto) {
-        this.byteObjeto = byteObjeto;
-    }
+  public Byte getByteObjeto() {
+    return this.byteObjeto;
+  }
 
-    public Integer getInteiroObjeto() {
-        return inteiroObjeto;
-    }
+  public void setByteObjeto(Byte byteObjeto) {
+    this.byteObjeto = byteObjeto;
+  }
 
-    public void setInteiroObjeto(Integer inteiroObjeto) {
-        this.inteiroObjeto = inteiroObjeto;
-    }
+  public Integer getInteiroObjeto() {
+    return this.inteiroObjeto;
+  }
 
-    public Short getShortObjeto() {
-        return shortObjeto;
-    }
+  public void setInteiroObjeto(Integer inteiroObjeto) {
+    this.inteiroObjeto = inteiroObjeto;
+  }
 
-    public void setShortObjeto(Short shortObjeto) {
-        this.shortObjeto = shortObjeto;
-    }
+  public Short getShortObjeto() {
+    return this.shortObjeto;
+  }
 
-    public BigInteger getBigInteger() {
-        return bigInteger;
-    }
+  public void setShortObjeto(Short shortObjeto) {
+    this.shortObjeto = shortObjeto;
+  }
 
-    public void setBigInteger(BigInteger bigInteger) {
-        this.bigInteger = bigInteger;
-    }
+  public BigInteger getBigInteger() {
+    return this.bigInteger;
+  }
 
-    public BigDecimal getBigDecimal() {
-        return bigDecimal;
-    }
+  public void setBigInteger(BigInteger bigInteger) {
+    this.bigInteger = bigInteger;
+  }
 
-    public void setBigDecimal(BigDecimal bigDecimal) {
-        this.bigDecimal = bigDecimal;
-    }
+  public BigDecimal getBigDecimal() {
+    return this.bigDecimal;
+  }
 
-    public String getString() {
-        return string;
-    }
+  public void setBigDecimal(BigDecimal bigDecimal) {
+    this.bigDecimal = bigDecimal;
+  }
 
-    public void setString(String string) {
-        this.string = string;
-    }
+  public String getString() {
+    return this.string;
+  }
 
-    public Double getDoubleObjeto() {
-        return doubleObjeto;
-    }
+  public void setString(String string) {
+    this.string = string;
+  }
 
-    public void setDoubleObjeto(Double doubleObjeto) {
-        this.doubleObjeto = doubleObjeto;
-    }
+  public Double getDoubleObjeto() {
+    return this.doubleObjeto;
+  }
 
-    public Float getFloatObjeto() {
-        return floatObjeto;
-    }
+  public void setDoubleObjeto(Double doubleObjeto) {
+    this.doubleObjeto = doubleObjeto;
+  }
 
-    public void setFloatObjeto(Float floatObjeto) {
-        this.floatObjeto = floatObjeto;
-    }
+  public Float getFloatObjeto() {
+    return this.floatObjeto;
+  }
 
-    public Character getCharacterObjeto() {
-        return characterObjeto;
-    }
+  public void setFloatObjeto(Float floatObjeto) {
+    this.floatObjeto = floatObjeto;
+  }
 
-    public void setCharacterObjeto(Character characterObjeto) {
-        this.characterObjeto = characterObjeto;
-    }
+  public Character getCharacterObjeto() {
+    return this.characterObjeto;
+  }
 
-    @Override
-    public String toString() {
-        return "EntityNotNullTest{" + "inteiro=" + inteiro 
-                + ", inteiroObjeto=" + inteiroObjeto 
-                + ", longObjeto=" + longObjeto 
-                + ", byteObjeto=" + byteObjeto 
-                + ", shortObjeto=" + shortObjeto 
-                + ", bigInteger=" + bigInteger 
-                + ", bigDecimal=" + bigDecimal 
-                + ", doubleObjeto=" + doubleObjeto 
-                + ", floatObjeto=" + floatObjeto 
-                + ", characterObjeto=" + characterObjeto
-                + ", string=" + string + '}';
-    }
+  public void setCharacterObjeto(Character characterObjeto) {
+    this.characterObjeto = characterObjeto;
+  }
+
+  @Override
+  public String toString() {
+    return "EntityNotNullTest{" + "inteiro=" + this.inteiro + ", inteiroObjeto="
+        + this.inteiroObjeto + ", longObjeto=" + this.longObjeto + ", byteObjeto=" + this.byteObjeto
+        + ", shortObjeto=" + this.shortObjeto + ", bigInteger=" + this.bigInteger + ", bigDecimal="
+        + this.bigDecimal + ", doubleObjeto=" + this.doubleObjeto + ", floatObjeto="
+        + this.floatObjeto + ", characterObjeto=" + this.characterObjeto + ", string=" + this.string
+        + '}';
+  }
 
 
 }

@@ -1,68 +1,61 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gbvbahia.entities;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * @since v.1 01/05/2012
  * @author Guilherme
  */
 @Entity
 public class EntitySyntheticTest {
 
-    @NotNull
-    private EntityEnumTest noEntity;
-    
-    @NotNull
-    private EntitySyntheticCicleTest cicleTest;
-    @NotNull
-    private EntityNotNullTest notNullTest;
-    @NotNull
-    private List<EntityBooleanTest> listBooleanTests;
-    private Set<EntityDateTest> setDateTest;
-    @NotNull
-    private Map<String, Double> mapTest;
+  @NotNull
+  private EntityEnumTest noEntity;
 
-    @Override
-    public String toString() {
-        return "EntitySyntheticTest{"
-                + "notNullTest=" + notNullTest
-                + ", listBooleanTests=" + listBooleanTests
-                + ", setDateTest=" + setDateTest
-                + ", mapTest=" + mapTest
-                + ", noEntity=" + noEntity
-                + '}';
-    }
+  @NotNull
+  private EntitySyntheticCicleTest cicleTest;
+  @NotNull
+  private EntityNotNullTest notNullTest;
+  @NotNull
+  private List<EntityBooleanTest> listBooleanTests;
+  private Set<EntityDateTest> setDateTest;
+  @NotNull
+  private Map<String, Double> mapTest;
 
-    public EntitySyntheticCicleTest getCicleTest() {
-        return cicleTest;
-    }
+  @Override
+  public String toString() {
+    return "EntitySyntheticTest{" + "notNullTest=" + this.notNullTest + ", listBooleanTests="
+        + this.listBooleanTests + ", setDateTest=" + this.setDateTest + ", mapTest=" + this.mapTest
+        + ", noEntity=" + this.noEntity + '}';
+  }
 
-    public List<EntityBooleanTest> getListBooleanTests() {
-        return listBooleanTests;
-    }
+  public EntitySyntheticCicleTest getCicleTest() {
+    return this.cicleTest;
+  }
 
-    public Map<String, Double> getMapTest() {
-        return mapTest;
-    }
+  public List<EntityBooleanTest> getListBooleanTests() {
+    return this.listBooleanTests;
+  }
 
-    public EntityNotNullTest getNotNullTest() {
-        return notNullTest;
-    }
+  public Map<String, Double> getMapTest() {
+    return this.mapTest;
+  }
 
-    public Set<EntityDateTest> getSetDateTest() {
-        return setDateTest;
-    }
+  public EntityNotNullTest getNotNullTest() {
+    return this.notNullTest;
+  }
 
-    public EntityEnumTest getNoEntity() {
-        return noEntity;
-    }
-    
+  public Set<EntityDateTest> getSetDateTest() {
+    return this.setDateTest;
+  }
+
+  public EntityEnumTest getNoEntity() {
+    return this.noEntity;
+  }
+
 }

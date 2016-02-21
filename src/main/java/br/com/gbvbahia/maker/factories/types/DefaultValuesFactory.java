@@ -1,12 +1,16 @@
 package br.com.gbvbahia.maker.factories.types;
 
-import java.lang.reflect.Field;
-
-import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * Essa clase cria valores default para os fields informados.<br>
@@ -26,7 +30,12 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
  * @author P9924903
  *
  */
-public class DefaultValuesFactory implements ValueFactory {
+public class DefaultValuesFactory implements ValueSpecializedFactory {
+
+  /**
+   * Use isDefault at xml field that you want this behavior happens.
+   */
+  public static final String KEY_PROPERTY = "isDefault";
 
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
@@ -53,6 +62,17 @@ public class DefaultValuesFactory implements ValueFactory {
   @Override
   public <T> boolean isWorkWith(Field field, T entity) {
     return true;
+  }
+
+  @Override
+  public boolean workValue(String value) {
+    LogInfo.logDebugInformation("DefaultValuesFactory", I18N.getMsg("workValueMake", value));
+    if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
+      return true;
+    }
+    LogInfo.logDebugInformation("DefaultValuesFactory",
+        I18N.getMsg("notIsWork", KEY_PROPERTY, value));
+    return false;
   }
 
 }

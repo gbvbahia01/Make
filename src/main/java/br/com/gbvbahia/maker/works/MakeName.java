@@ -1,17 +1,17 @@
 package br.com.gbvbahia.maker.works;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.lang.reflect.Field;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 
 /**
  * Cria nomes aleatórios, para que funcione deve ter o valor isName no arquivo make.properties.

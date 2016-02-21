@@ -1,13 +1,5 @@
 package br.com.gbvbahia.maker.works;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.MaxMinFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
@@ -15,6 +7,14 @@ import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @since v.1 18/06/2012
