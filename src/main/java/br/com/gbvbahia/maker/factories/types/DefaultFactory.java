@@ -1,5 +1,6 @@
 package br.com.gbvbahia.maker.factories.types;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.OneToOne;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
@@ -23,6 +27,11 @@ import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
  * @author Guilherme
  */
 public class DefaultFactory extends MaxMinFactory {
+
+  /**
+   * For logging changes edit the log4j.properties inside src/test/resources
+   */
+  private static Log logger = LogFactory.getLog(DefaultFactory.class.getSimpleName());
 
   /**
    * Necessário para recursividade.
@@ -53,32 +62,56 @@ public class DefaultFactory extends MaxMinFactory {
   private String className = this.getClass().getSimpleName();
 
   @Override
-  public <T> void makeValue(Field f, T entity, String... testName)
+  public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
     criados.put(entity.getClass(), entity);
-    if (f.getType().equals(String.class)) {
-      LogInfo.logDefaultValue(entity, f, this.className);
-      f.set(entity, MakeString.getString(MakeString.MIN_LENGTH_DEFAULT,
+    if (field.getType().equals(String.class)) {
+      LogInfo.logDefaultValue(entity, field, this.className);
+      field.set(entity, MakeString.getString(MakeString.MIN_LENGTH_DEFAULT,
           MakeString.MAX_LENGTH_DEFAULT, MakeString.StringType.LETTER));
       return;
     }
     try {
-      super.makeValue(f, entity, testName);
+      super.makeValue(field, entity, testName);
     } catch (IllegalArgumentException ex) {
-      if (MakeCharacter.isCharacter(f)) {
-        this.valueToCharacter(f, entity);
-      } else if (MakeBoolean.isBoolean(f)) {
-        this.valueToBoolean(f, entity);
-      } else if (this.isDate(f)) {
-        LogInfo.logDefaultValue(entity, f, this.className);
-        new FuturePastFactory().makeValue(f, entity, testName);
-      } else if (!f.getType().isPrimitive()) {
-        this.avoidCyclicReference(f, entity);
+      if (MakeCharacter.isCharacter(field)) {
+        this.valueToCharacter(field, entity);
+      } else if (MakeBoolean.isBoolean(field)) {
+        this.valueToBoolean(field, entity);
+      } else if (this.isDate(field)) {
+        LogInfo.logDefaultValue(entity, field, this.className);
+        new FuturePastFactory().makeValue(field, entity, testName);
+      } else if (!field.getType().isInterface() && this.hasFielDefaultConstructor(field)) {
+        this.avoidCyclicReference(field, entity);
         recursiveCount--;
+      } else if (field.getType().isInterface()) {
+        logger.info(I18N.getMsg("internafeWarn", field.toGenericString()));
+        logger.info(I18N.getMsg("factoryEspecializedWarn"));
+        field.set(entity, null);
+      } else if (!this.hasFielDefaultConstructor(field)) {
+        logger.info(I18N.getMsg("constructorWarn", field.toGenericString()));
+        logger.info(I18N.getMsg("factoryEspecializedWarn"));
+        field.set(entity, null);
       } else {
         throw new IllegalArgumentException(I18N.getMsg("tipoDesconhecidoDefault"));
       }
     }
+  }
+
+  /**
+   * Check if the field has a default constructor.
+   * 
+   * @param field
+   * @return
+   */
+  private boolean hasFielDefaultConstructor(Field field) {
+    Constructor<?>[] constructors = field.getType().getConstructors();
+    for (int i = 0; i < constructors.length; i++) {
+      if (constructors[i].getTypeParameters().length == 0) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private <T> void valueToBoolean(Field f, T entity)
@@ -105,24 +138,24 @@ public class DefaultFactory extends MaxMinFactory {
    * Evita referência ciclica, ou um loop infinito.
    *
    * @param <T> Tipo da entidade com fields definidos.
-   * @param f Field a ser definido.
+   * @param field Field a ser definido.
    * @param entity Entidade que está sendo definida.
    * @param makeRelationships Define se é para fazer objetos de relacionamentos.
    * @throws IllegalAccessException Se não conseguir definir valor em um field.
    * @throws IllegalArgumentException Se o field não puder ser construído devido algum
    *         relacionamento incorreto.
    */
-  private <T> void avoidCyclicReference(Field f, T entity)
+  private <T> void avoidCyclicReference(Field field, T entity)
       throws IllegalAccessException, IllegalArgumentException {
-    if (((recursiveCount > MAX_RECURSIVE) || this.isMappedBy(f))
-        && criados.containsKey(f.getType())) {
-      f.set(entity, criados.get(f.getType()));
+    if (((recursiveCount > MAX_RECURSIVE) || this.isMappedBy(field))
+        && criados.containsKey(field.getType())) {
+      field.set(entity, criados.get(field.getType()));
       LogInfo.logInfoInformation(this.className, I18N.getMsg("possivelReferenciaCiclica",
-          f.getType().getSimpleName(), entity.getClass().getSimpleName()));
+          field.getType().getSimpleName(), entity.getClass().getSimpleName()));
     } else {
       recursiveCount++;
-      criados.put(f.getType(), MakeEntity.makeEntity(f.getType(), this.testName));
-      f.set(entity, criados.get(f.getType()));
+      criados.put(field.getType(), MakeEntity.makeEntity(field.getType(), this.testName));
+      field.set(entity, criados.get(field.getType()));
     }
   }
 

@@ -84,9 +84,9 @@
       </names>
       <entities>
         <entity class="br.com.gbvbahia.entities.EntityListTest">
-          <field name="listPattern">isList{br.com.gbvbahia.entityes.EntityPatternTest}[3,5]
+          <field name="listPattern">isList{br.com.gbvbahia.entities.EntityPatternTest}[3,5]
           </field>
-          <field name="listComplex">isList{br.com.gbvbahia.entityes.EntityListComplexTest}[15,25]
+          <field name="listComplex">isList{br.com.gbvbahia.entities.EntityListComplexTest}[15,25]
           </field>
         </entity>
         <entity class="br.com.gbvbahia.entities.EntityPatternTest">
@@ -100,10 +100,8 @@
       </names>
       <entities>
         <entity class="br.com.gbvbahia.entities.EntitySetTest">
-          <field name="setPattern">isSet{br.com.gbvbahia.entityes.EntityPatternTest}[3,5]
-          </field>
-          <field
-            name=isSet{br.com.gbvbahia.entityes.EntitySetComplexTest}[15,25]</field>
+          <field name="setPattern">isSet{br.com.gbvbahia.entities.EntityPatternTest}[3,5]</field>
+          <field name="setComplex">isSet{br.com.gbvbahia.entities.EntitySetComplexTest}[15,25]</field>
         </entity>
       </entities>
     </test>

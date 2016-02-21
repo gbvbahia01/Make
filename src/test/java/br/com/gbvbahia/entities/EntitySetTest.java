@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gbvbahia.entities;
 
 import java.util.Set;
@@ -12,22 +8,20 @@ import java.util.Set;
  */
 public class EntitySetTest {
 
-    private Set<EntityPatternTest> setPattern;
-    private Set<EntitySetComplexTest> setComplex;
+  private Set<EntityPatternTest> setPattern;
+  private Set<EntitySetComplexTest> setComplex;
 
-    public Set<EntitySetComplexTest> getSetComplex() {
-        return setComplex;
-    }
+  public Set<EntitySetComplexTest> getSetComplex() {
+    return this.setComplex;
+  }
 
-    public Set<EntityPatternTest> getSetPattern() {
-        return setPattern;
-    }
+  public Set<EntityPatternTest> getSetPattern() {
+    return this.setPattern;
+  }
 
-    @Override
-    public String toString() {
-        return "EntityListTest{"
-                + "listPattern=" + setPattern
-                + "listComplex=" + setComplex
-                + '}';
-    }
+  @Override
+  public String toString() {
+    return "EntityListTest{" + "listPattern=" + this.setPattern + "listComplex=" + this.setComplex
+        + '}';
+  }
 }
