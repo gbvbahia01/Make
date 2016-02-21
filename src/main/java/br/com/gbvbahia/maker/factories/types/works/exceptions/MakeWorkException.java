@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.works.execeptions;
+package br.com.gbvbahia.maker.factories.types.works.exceptions;
 
 /**
  * Classe para minipulações de exceção nos works.

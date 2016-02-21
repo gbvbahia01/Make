@@ -4,6 +4,7 @@
  */
 package br.com.gbvbahia.maker.works;
 
+import br.com.gbvbahia.maker.factories.types.works.MakeCPF;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;

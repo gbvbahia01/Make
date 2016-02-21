@@ -17,6 +17,7 @@ import br.com.gbvbahia.entities.EntityListComplexTest;
 import br.com.gbvbahia.entities.EntityListTest;
 import br.com.gbvbahia.entities.EntityPatternTest;
 import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.types.works.MakeList;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
 

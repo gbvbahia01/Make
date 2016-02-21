@@ -2,9 +2,9 @@ package br.com.exemplo.maker;
 
 import java.lang.reflect.Field;
 
-import org.apache.commons.lang3.StringUtils;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 
-import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
+import org.apache.commons.lang3.StringUtils;
 
 public class FactoryNomePontoAtendimento implements ValueSpecializedFactory {
   /**

@@ -1,11 +1,11 @@
-package br.com.gbvbahia.maker.works;
+package br.com.gbvbahia.maker.factories.types.works;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
 
 import org.apache.commons.lang3.StringUtils;
 

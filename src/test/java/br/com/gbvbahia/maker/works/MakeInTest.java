@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import br.com.gbvbahia.entities.EntityInTest;
 import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.types.works.MakeIn;
 import br.com.gbvbahia.maker.log.LogInfo;
 import junit.framework.TestCase;
 

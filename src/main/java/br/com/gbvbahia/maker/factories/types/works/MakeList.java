@@ -1,12 +1,12 @@
-package br.com.gbvbahia.maker.works;
+package br.com.gbvbahia.maker.factories.types.works;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.types.works.commons.CollectionsHelper;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.MakeWorkException;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-import br.com.gbvbahia.maker.works.common.CollectionsHelper;
-import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 
 import org.apache.commons.lang3.StringUtils;
 

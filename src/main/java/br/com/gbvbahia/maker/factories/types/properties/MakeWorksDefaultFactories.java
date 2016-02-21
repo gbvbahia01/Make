@@ -1,18 +1,18 @@
 package br.com.gbvbahia.maker.factories.types.properties;
 
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.DefaultValuesFactory;
+import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
+import br.com.gbvbahia.maker.factories.types.works.MakeBetween;
+import br.com.gbvbahia.maker.factories.types.works.MakeCNPJ;
+import br.com.gbvbahia.maker.factories.types.works.MakeCPF;
+import br.com.gbvbahia.maker.factories.types.works.MakeEmail;
+import br.com.gbvbahia.maker.factories.types.works.MakeIn;
+import br.com.gbvbahia.maker.factories.types.works.MakeList;
+import br.com.gbvbahia.maker.factories.types.works.MakeName;
+import br.com.gbvbahia.maker.factories.types.works.MakeSet;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.MakeWorkException;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.works.MakeBetween;
-import br.com.gbvbahia.maker.works.MakeCNPJ;
-import br.com.gbvbahia.maker.works.MakeCPF;
-import br.com.gbvbahia.maker.works.MakeEmail;
-import br.com.gbvbahia.maker.works.MakeIn;
-import br.com.gbvbahia.maker.works.MakeList;
-import br.com.gbvbahia.maker.works.MakeName;
-import br.com.gbvbahia.maker.works.MakeSet;
-import br.com.gbvbahia.maker.works.common.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.works.execeptions.MakeWorkException;
 
 import java.util.ArrayList;
 import java.util.List;

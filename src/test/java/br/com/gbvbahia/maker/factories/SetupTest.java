@@ -42,6 +42,21 @@ public class SetupTest {
     Assert.assertNotNull(
         "Cannot be null because the null node is never and annotation Null was not put.",
         nullFields.getNotKeyField());
+
+    nullFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class, "testSetupKeyField");
+    Assert.assertNull("Default Integer must be null", nullFields.getDefaultInt());
+    Assert.assertNull("Default Double must be null", nullFields.getDefaultDouble());
+    Assert.assertNull("Default String must be null", nullFields.getDefaultString());
+    Assert.assertNotNull("Cannot be null because the field is mapped by xml.",
+        nullFields.getKeyField());
+    Assert.assertTrue("keyField has no valid value: " + nullFields.getKeyField(),
+        (nullFields.getKeyField() == 1.0) || (nullFields.getKeyField() == 2.0)
+            || (nullFields.getKeyField() == 5.0));
+    Assert.assertNotNull("Cannot be null because the annotation @NotNull.",
+        nullFields.getNotNullCharacter());
+    Assert.assertNotNull(
+        "Cannot be null because the null node is never and annotation Null was not put.",
+        nullFields.getNotKeyField());
   }
 
   @Test
@@ -51,8 +66,15 @@ public class SetupTest {
     Assert.assertNull("Default Integer must be null", someFields.getDefaultInt());
     Assert.assertNull("Default Double must be null", someFields.getDefaultDouble());
     Assert.assertNull("Default String must be null", someFields.getDefaultString());
+    Assert.assertNotNull("Cannot be null because the annotation @NotNull.",
+        someFields.getNotNullCharacter());
+
+    someFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class, "testSetupKeyField");
     Assert.assertNotNull("Cannot be null because the keyField is mapped as a keyfield in xml.",
         someFields.getKeyField());
+    Assert.assertTrue("keyField has no valid value: " + someFields.getKeyField(),
+        (someFields.getKeyField() == 1.0) || (someFields.getKeyField() == 2.0)
+            || (someFields.getKeyField() == 5.0));
     Assert.assertNotNull("Cannot be null because the annotation @NotNull.",
         someFields.getNotNullCharacter());
     Assert.assertTrue(
@@ -60,4 +82,83 @@ public class SetupTest {
         (someFields.getNotKeyField() == null) || (someFields.getNotKeyField() != null));
   }
 
+  @Test
+  public void testFileMakeJerReadNullAll() {
+    Factory.loadSetup("make_read_all.xml");
+    Jsr303ReadSetupTest allFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class);
+    Assert.assertNull("Default Integer must be null", allFields.getDefaultInt());
+    Assert.assertNull("Default Double must be null", allFields.getDefaultDouble());
+    Assert.assertNull("Default String must be null", allFields.getDefaultString());
+    Assert.assertNull("Must be null because the test name was not informaded.",
+        allFields.getKeyField());
+    Assert.assertNotNull("Cannot be null because the annotation @NotNull.",
+        allFields.getNotNullCharacter());
+    Assert.assertNull(
+        "Must be null because the null node is all and annotation @NotNull was not put.",
+        allFields.getNotKeyField());
+
+    allFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class, "testSetupKeyField");
+    Assert.assertNotNull("Cannot be null because the keyField is mapped as a keyfield in xml.",
+        allFields.getKeyField());
+    Assert.assertTrue("keyField has no valid value: " + allFields.getKeyField(),
+        (allFields.getKeyField() == 1.0) || (allFields.getKeyField() == 2.0)
+            || (allFields.getKeyField() == 5.0));
+    Assert.assertNull(
+        "Must be null because the null node is all and annotation @NotNull was not put.",
+        allFields.getNotKeyField());
+  }
+
+  @Test
+  public void testFileMakeJsrIgnoreNullAll() {
+    Factory.loadSetup("make_ignore_all.xml");
+    Jsr303ReadSetupTest allFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class);
+    Assert.assertNull("Default Integer must be null", allFields.getDefaultInt());
+    Assert.assertNull("Default Double must be null", allFields.getDefaultDouble());
+    Assert.assertNull("Default String must be null", allFields.getDefaultString());
+    Assert.assertNull("Must be null because the test name was not informaded.",
+        allFields.getKeyField());
+    Assert.assertNull("JSR303 must be ignored (@NotNull) and this field is not mapped.",
+        allFields.getNotNullCharacter());
+    Assert.assertNull("Must be null because the null node is all and this field is not mapped.",
+        allFields.getNotKeyField());
+
+    allFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class, "testSetupKeyField");
+    Assert.assertNull("Default Integer must be null", allFields.getDefaultInt());
+    Assert.assertNull("Default Double must be null", allFields.getDefaultDouble());
+    Assert.assertNull("Default String must be null", allFields.getDefaultString());
+    Assert.assertNotNull("Cannot be null because the test name was informaded.",
+        allFields.getKeyField());
+    Assert.assertTrue("keyField has no valid value: " + allFields.getKeyField(),
+        (allFields.getKeyField() == 1.0) || (allFields.getKeyField() == 2.0)
+            || (allFields.getKeyField() == 5.0));
+    Assert.assertNull("JSR303 must be ignored (@NotNull) and this field is not mapped.",
+        allFields.getNotNullCharacter());
+    Assert.assertNull("Must be null because the null node is all and this field is not mapped.",
+        allFields.getNotKeyField());
+  }
+
+  @Test
+  public void testFileMakeJsrIgnoreNullNever() {
+    Factory.loadSetup("make_ignore_never.xml");
+    Jsr303ReadSetupTest neverFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class);
+    Assert.assertNotNull("Default Integer cannot be null", neverFields.getDefaultInt());
+    Assert.assertNotNull("Default Double cannot be null", neverFields.getDefaultDouble());
+    Assert.assertNotNull("Default String cannot be null", neverFields.getDefaultString());
+    Assert.assertNotNull("keyField cannot be null because the test name was not informaded.",
+        neverFields.getKeyField());
+    Assert.assertNotNull("NotNullCharacter cannot be null.", neverFields.getNotNullCharacter());
+    Assert.assertNotNull("NotKeyField cannot be null.", neverFields.getNotKeyField());
+    neverFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class, "testSetupKeyField");
+    Assert.assertNotNull("Default Integer cannot be null", neverFields.getDefaultInt());
+    Assert.assertNull("Default Double must be null because of isDefault field",
+        neverFields.getDefaultDouble());
+    Assert.assertNotNull("Default String cannot be null", neverFields.getDefaultString());
+    Assert.assertNotNull("keyField cannot be null because the test name was not informaded.",
+        neverFields.getKeyField());
+    Assert.assertTrue("keyField has no valid value: " + neverFields.getKeyField(),
+        (neverFields.getKeyField() == 1.0) || (neverFields.getKeyField() == 2.0)
+            || (neverFields.getKeyField() == 5.0));
+    Assert.assertNotNull("NotNullCharacter cannot be null.", neverFields.getNotNullCharacter());
+    Assert.assertNotNull("NotKeyField cannot be null.", neverFields.getNotKeyField());
+  }
 }

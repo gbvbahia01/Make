@@ -1,4 +1,4 @@
-package br.com.gbvbahia.maker.works.common;
+package br.com.gbvbahia.maker.factories.types.works.commons;
 
 /**
  * Utilizada para guardar a classe que será criada para a colção e a quantidade máxima e mínima.

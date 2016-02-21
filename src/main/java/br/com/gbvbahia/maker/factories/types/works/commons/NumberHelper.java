@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gbvbahia.maker.works.common;
+package br.com.gbvbahia.maker.factories.types.works.commons;
 
 import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;

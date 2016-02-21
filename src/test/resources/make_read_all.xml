@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<make>
+  <setup>
+    <JSR303 value="read" /><!-- read or ignore -->
+    <Null value="all" /><!-- never some all -->
+  </setup>
+  <factories>
+    <factory>br.com.gbvbahia.maker.properties.CEPWorkTest</factory>
+    <factory>br.com.gbvbahia.maker.properties.FactoryCustomerService
+    </factory>
+  </factories>
+  <tests>
+    <test>
+      <names>
+        <name>testSetupKeyField</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.Jsr303ReadSetupTest">
+          <field name="keyField">in{1,2,5}</field>
+        </entity>
+      </entities>
+    </test>
+  </tests>
+</make>

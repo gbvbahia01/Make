@@ -2,7 +2,6 @@ package br.com.gbvbahia.maker.factories;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.DefaultFactory;
-import br.com.gbvbahia.maker.factories.types.DefaultValuesFactory;
 import br.com.gbvbahia.maker.factories.types.EnumFactory;
 import br.com.gbvbahia.maker.factories.types.FuturePastFactory;
 import br.com.gbvbahia.maker.factories.types.MaxMinFactory;
@@ -11,6 +10,7 @@ import br.com.gbvbahia.maker.factories.types.TrueFalseFactory;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.properties.MakeWorksFactory;
 import br.com.gbvbahia.maker.factories.types.properties.XMLoader;
+import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 import org.apache.commons.lang3.StringUtils;

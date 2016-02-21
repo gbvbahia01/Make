@@ -1,4 +1,4 @@
-package br.com.gbvbahia.maker.works;
+package br.com.gbvbahia.maker.factories.types.works;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
