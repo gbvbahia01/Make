@@ -17,6 +17,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Use a value informed at field.<br>
+ * in{1,3} Will be used 1 or 3.<br>
+ * If the separator needs to be a value different of "," (comma) you define at [ ].<br>
+ * in{1A3}[A] will be used 1 or 3<br>
+ * 
  * @since v.1 18/06/2012
  * @author Guilherme
  */
@@ -60,9 +65,9 @@ public class MakeIn implements ValueSpecializedFactory {
   }
 
   @Override
-  public <T> boolean isWorkWith(final Field f, final T entity) {
+  public <T> boolean isWorkWith(final Field field, final T entity) {
     for (MakeNumber number : MaxMinFactory.NUMBERS_FACTORYS) {
-      if (number.isMyType(f)) {
+      if (number.isMyType(field)) {
         return true;
       }
     }

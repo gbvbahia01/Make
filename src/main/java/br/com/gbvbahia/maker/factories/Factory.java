@@ -173,16 +173,20 @@ public final class Factory {
         if (field.isAnnotationPresent(Null.class)) {
           return true;
         }
+        if (field.isAnnotationPresent(NotNull.class)) {
+          return false;
+        }
+        if (this.neverNull()) {
+          return false;
+        }
         if (isKeyField(field)) {
           return false;
         }
-        if (!field.isAnnotationPresent(NotNull.class)) {
-          if (this.alwaysNull()) {
-            return true;
-          }
-          if (this.someNull() && (MakeInteger.getIntervalo(1, 6) == 3)) {
-            return true;
-          }
+        if (this.alwaysNull()) {
+          return true;
+        }
+        if (this.someNull() && (MakeInteger.getIntervalo(1, 6) == 3)) {
+          return true;
         }
         return false;
       } else {
