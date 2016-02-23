@@ -1,20 +1,20 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.MaxMinFactory;
-import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.factories.types.works.exceptions.MakeWorkException;
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.MaxMinFactory;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 /**
  * Use a value informed at field.<br>
@@ -32,8 +32,7 @@ public class MakeIn implements ValueSpecializedFactory {
    */
   private List<String> inList;
   /**
-   * No arquivo make.properties deve estár definido no valor para o field: "in\\{.*\\}(\\[.+\\])?".
-   * <br>
+   * No arquivo make.properties deve estár definido no valor para o field: "in\\{.*\\}(\\[.+\\])?". <br>
    * Regex: deve iniciar com <i>in{</i>conter qualquer tipo de caractere. Fecha com <i>}</i> podendo
    * seguir com <i>[</i> conter qualquer caractere "." (ponto) fechando com <i>]</i>. O que está
    * entre <i>[?]</i> Será utilizado como separador, se não houver valor explícito, será considerado
@@ -84,7 +83,7 @@ public class MakeIn implements ValueSpecializedFactory {
               this.inList.get(MakeInteger.getIntervalo(0, this.inList.size() - 1)));
         } catch (NumberFormatException nf) {
           nf.printStackTrace();
-          throw new MakeWorkException("MakeIn", "NumberFormatException",
+          throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
               new String[] {this.inList.toString()}, nf);
         }
       }

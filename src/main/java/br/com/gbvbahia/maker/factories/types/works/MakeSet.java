@@ -1,20 +1,20 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.MakeEntity;
-import br.com.gbvbahia.maker.factories.types.works.commons.CollectionsHelper;
-import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.factories.types.works.exceptions.MakeWorkException;
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.types.works.commons.CollectionsHelper;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 /**
  * @since v.1 01/05/2012
@@ -62,10 +62,11 @@ public class MakeSet implements ValueSpecializedFactory {
   }
 
   @Override
-  public <T> void makeValue(Field f, T entity, String... testName)
-      throws IllegalAccessException, IllegalArgumentException {
-    Set toSet = new HashSet(MakeEntity.makeEntities(this.info.getClazz(),
-        MakeInteger.getIntervalo(this.info.getMin(), this.info.getMax()), testName));
+  public <T> void makeValue(Field f, T entity, String... testName) throws IllegalAccessException,
+      IllegalArgumentException {
+    Set toSet =
+        new HashSet(MakeEntity.makeEntities(this.info.getClazz(),
+            MakeInteger.getIntervalo(this.info.getMin(), this.info.getMax()), testName));
     if (toSet.size() < this.info.getMin()) {
       LogInfo.logWarnInformation("MakeSet",
           I18N.getMsg("setSizeMenorMin", this.info.getMin(), toSet.size()));
@@ -90,10 +91,12 @@ public class MakeSet implements ValueSpecializedFactory {
       this.info = new CollectionsHelper(Class.forName(clazz), new Integer(min), new Integer(max));
     } catch (ClassNotFoundException ce) {
       ce.printStackTrace();
-      throw new MakeWorkException("MakeSet", "ClassNotFoundException", new String[] {clazz}, ce);
+      throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
+          new String[] {clazz}, ce);
     } catch (NumberFormatException nf) {
       nf.printStackTrace();
-      throw new MakeWorkException("MakeSet", "NumberFormatException", new String[] {minMax}, nf);
+      throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
+          new String[] {minMax}, nf);
     }
   }
 }

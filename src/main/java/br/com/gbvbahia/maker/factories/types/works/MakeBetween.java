@@ -1,18 +1,18 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
+import java.lang.reflect.Field;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
+
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.MaxMinFactory;
 import br.com.gbvbahia.maker.factories.types.works.commons.NumberHelper;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.factories.types.works.exceptions.MakeWorkException;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.reflect.Field;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Utilizada para criar valores limitados a um intervalo:<br>
@@ -79,7 +79,7 @@ public class MakeBetween implements ValueSpecializedFactory {
           number.insertValue(field, entity, this.info.getValue());
         } catch (NumberFormatException nf) {
           nf.printStackTrace();
-          throw new MakeWorkException("MakeBetween", "NumberFormatException",
+          throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
               new String[] {this.info.toString()}, nf);
         }
       }

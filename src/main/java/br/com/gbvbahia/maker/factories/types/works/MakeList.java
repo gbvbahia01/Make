@@ -1,35 +1,30 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.MakeEntity;
-import br.com.gbvbahia.maker.factories.types.works.commons.CollectionsHelper;
-import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.factories.types.works.exceptions.MakeWorkException;
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.types.works.commons.CollectionsHelper;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
 /**
- * No arquivo make.properties deve estár definido no valor para o field:
- * "[isList{][a-zA-Z0-9\\.]+[}][\\[][\\d]+,[\\d]+[\\]]".<br>
- * Regex: deve iniciar com <i>isList{</i> contendo letras maiúsculas ou minúsculas, números e o
- * caractere "." (ponto). Fecha com <i>}</i> e deve terminar com <i>[</i> qualquer número ","
- * (virgula) qualquer número <i>]</i>.<br>
- * Ex: test1.br.com.meuprojeto.ClasseCriada.fieldNome = isList{br.com.meupacote.MinhaClasse}[1,4]
- * <br>
- * Isso diz: O fieldNome é um java.util.List contendo objetos MinhasClasse com list.size() entre 1
- * até 4.<br>
- * Atenção: o objeto MinhaCLasse, que irá para dentro do List, deverá possuir um construtor padrão,
- * sem argumentos. Seus objetos primitivos ou Wrappers (incluíndo Strings) serão criados pelo Make,
- * os valores complexos (objetos não primitivos nem wrappers) ou valores limitados que não tem seus
- * limites anotados pela JSR303 deverão ser mapeados pelo arquivo make.properties.
+ * This specialized class will with fields that have the mapped regex value:<br>
+ * "[isList{][a-zA-Z0-9\\.]+[}][\\[][\\d]+,[\\d]+[\\]]"<br>
+ * A list will be created and populled with the class informed between "{" "}", like:<br>
+ * isList{com.mypackage.MyClass}[2,4]<br>
+ * The number between "[" "]" will determine the amount fo class that will be created to put in
+ * list.<br>
+ * If the class referenced between "{" "}" is a object created it needs to have a default
+ * constructor. A constructor without arguments.
  *
  * @since v.1 16/06/2012
  * @author Guilherme
@@ -37,19 +32,15 @@ import java.util.regex.Pattern;
 public class MakeList implements ValueSpecializedFactory {
 
   /**
-   * Guarda informações que serão necessárias para popular a lista;
+   * A setup for a object that will be created.
    */
-  private CollectionsHelper info;
+  private CollectionsHelper valueHelper;
   /**
-   * No arquivo make.properties deve estár definido no valor para o field:
-   * "[isList{][a-zA-Z0-9\\.]+[}][\\[][\\d]+,[\\d]+[\\]]".<br>
-   * Regex: deve iniciar com <i>isList{</i> contendo letras maiusculas ou minusculas, numéros e o
-   * caractere "." (ponto). Fecha com <i>}</i> e deve terminar com <i>[</i> qualquer número ","
-   * (virgula) qualquer número <i>]</i>.
+   * Regex: "[isList{][a-zA-Z0-9\\.]+[}][\\[][\\d]+,[\\d]+[\\]]".
    */
   public static final String KEY_PROPERTY = "isList\\{[a-zA-Z0-9\\.]+\\}[\\[][\\d]+,[\\d]+[\\]]";
   /**
-   * Compilador regex que realiza a comparação.
+   * Compile the regex pattern.
    */
   private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
@@ -76,8 +67,10 @@ public class MakeList implements ValueSpecializedFactory {
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
-    List toSet = new ArrayList(MakeEntity.makeEntities(this.info.getClazz(),
-        MakeInteger.getIntervalo(this.info.getMin(), this.info.getMax()), testName));
+    List toSet =
+        new ArrayList(MakeEntity.makeEntities(this.valueHelper.getClazz(),
+            MakeInteger.getIntervalo(this.valueHelper.getMin(), this.valueHelper.getMax()),
+            testName));
     field.set(entity, toSet);
   }
 
@@ -91,17 +84,22 @@ public class MakeList implements ValueSpecializedFactory {
   private void popularInfo(final String value) {
     String clazz = StringUtils.substringBetween(value, "isList{", "}");
     String minMax = StringUtils.substringBetween(value, "[", "]");
-    String min = minMax.split(",")[0];
-    String max = minMax.split(",")[1];
-    LogInfo.logDebugInformation("MakeList", "Class: " + clazz + " min:" + min + " max: " + max);
+    String minAmountElementsInList = minMax.split(",")[0];
+    String maxAmountElementsInList = minMax.split(",")[1];
+    LogInfo.logDebugInformation("MakeList", "Class: " + clazz + " min:" + minAmountElementsInList
+        + " max: " + maxAmountElementsInList);
     try {
-      this.info = new CollectionsHelper(Class.forName(clazz), new Integer(min), new Integer(max));
+      this.valueHelper =
+          new CollectionsHelper(Class.forName(clazz), new Integer(minAmountElementsInList),
+              new Integer(maxAmountElementsInList));
     } catch (ClassNotFoundException ce) {
       ce.printStackTrace();
-      throw new MakeWorkException("MakeList", "ClassNotFoundException", new String[] {clazz}, ce);
+      throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
+          new String[] {clazz}, ce);
     } catch (NumberFormatException nf) {
       nf.printStackTrace();
-      throw new MakeWorkException("MakeList", "NumberFormatException", new String[] {minMax}, nf);
+      throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
+          new String[] {minMax}, nf);
     }
   }
 }

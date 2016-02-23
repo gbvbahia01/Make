@@ -1,7 +1,9 @@
 package br.com.gbvbahia.maker.factories.types.works.commons;
 
 /**
- * Utilizada para guardar a classe que será criada para a colção e a quantidade máxima e mínima.
+ * Helps to keep information about values and amount of objects that will be made in makeValue
+ * method.<br>
+ * 
  *
  * @since v.1 16/06/2012
  * @author Guilherme
@@ -9,52 +11,36 @@ package br.com.gbvbahia.maker.factories.types.works.commons;
 public class CollectionsHelper<C> {
 
   /**
-   * Tipo do objeto a ser criado.
+   * Class of object the will be made.
    */
   private Class<C> clazz;
   /**
-   * Mínimo a ser criado.
+   * The minimum value that can be made.
    */
   private Integer min;
   /**
-   * Máximo a ser criado.
+   * The maximum value that can be made.
    */
   private Integer max;
 
-  /**
-   * Tipo do objeto a ser criado.
-   *
-   * @return Class.
-   */
   public Class<C> getClazz() {
     return this.clazz;
   }
 
-  /**
-   * Máximo a ser criado.
-   *
-   * @return Integer.
-   */
   public Integer getMax() {
     return this.max;
   }
 
-  /**
-   * Mínimo a ser criado.
-   *
-   * @return Integer.
-   */
   public Integer getMin() {
     return this.min;
   }
 
   /**
-   * Contrutor que definie os valores de auxilio para a geração dos objetos a serem inseridos na
-   * coleção.
-   *
-   * @param clazzInCollection Tipo do objeto a ser criado para a lista.
-   * @param minInCollection Quantidade mánima a ser criada para ser inserida na coleção.
-   * @param maxInCollection Quantidade máxima a ser criada para ser inserida na coleção.
+   * Pass the necessary information to create a object in makeValue method.
+   * 
+   * @param clazzInCollection The class that object must have.
+   * @param minInCollection The minimum value the object can be.
+   * @param maxInCollection The maximum value the object can be.
    */
   public CollectionsHelper(final Class<C> clazzInCollection, final Integer minInCollection,
       final Integer maxInCollection) {

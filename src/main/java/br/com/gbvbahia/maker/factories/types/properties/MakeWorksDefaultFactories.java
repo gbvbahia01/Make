@@ -1,5 +1,8 @@
 package br.com.gbvbahia.maker.factories.types.properties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
 import br.com.gbvbahia.maker.factories.types.works.MakeBetween;
@@ -11,15 +14,14 @@ import br.com.gbvbahia.maker.factories.types.works.MakeList;
 import br.com.gbvbahia.maker.factories.types.works.MakeName;
 import br.com.gbvbahia.maker.factories.types.works.MakeSet;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.factories.types.works.exceptions.MakeWorkException;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Todas as classes default devem ser declaradas aqui, adicionadas na lista WORK_FACTORIES no corpo
- * estático.
+ * All specialized factories original in the framework must be put here.<br>
+ * THis class will manager all specialized factories, made in framework or made by developer.<br>
+ * Classes that was made by developer will be loaded in:<br>
+ * void insertImplFactory(String factoryClass) method.
  *
  * @since v.1 09/06/2012
  * @author Guilherme
@@ -29,6 +31,9 @@ public class MakeWorksDefaultFactories {
   static final List<Class<? extends ValueSpecializedFactory>> WORK_FACTORIES =
       new ArrayList<Class<? extends ValueSpecializedFactory>>();
 
+  /**
+   * Load all specialized factories made with the framework.
+   */
   static {
     WORK_FACTORIES.add(MakeCPF.class);
     WORK_FACTORIES.add(MakeCNPJ.class);
@@ -42,11 +47,13 @@ public class MakeWorksDefaultFactories {
   }
 
   /**
-   * Verifica se os default são necessários ao teste, carrega somente se houver necessidade.<br>
-   * Os implementados pelo desenvolvedor tem preferência sobre os default.
+   * Check with specialized factory will be needed. This is defined check with them were declared in
+   * xml file setup. Looking the field setup and check one by one with key property of each one.<br>
+   * The all specialized factory made by developer have preferences on default specialized
+   * factories.
    *
-   * @param value Valor declarado no properties pelo usuário.
-   * @return A fabrica personalizada de valores, implementada pelo desenvolvedor ou default do Make.
+   * @param The value used a node fild by developer. isDefault, between[1,2], etc
+   * @return A specialized factory, made by framework or developer.
    */
   static ValueSpecializedFactory getPropertiesFactory(String value) {
     for (int i = 0; i < WORK_FACTORIES.size(); i++) {
@@ -55,35 +62,31 @@ public class MakeWorksDefaultFactories {
         if (vpf.workValue(value)) {
           return vpf;
         }
-      } catch (MakeWorkException ex) {
-        LogInfo.logErrorInformation(ex.getClassOrigem(),
-            I18N.getMsg(ex.getMsgProperties(), (Object[]) ex.getVariations()), ex.getCause());
-        ex.printStackTrace();
+      } catch (ValueSpecializedException ex) {
+        LogInfo.logErrorInformation(ex.getOrigemClass().getSimpleName(),
+            I18N.getMsg(ex.getMsgPropertieKey(), (Object[]) ex.getVarArgMsgVariations()),
+            ex.getCause());
         throw ex;
       } catch (InstantiationException ex) {
         LogInfo.logWarnInformation("MakeDefaultFactories", I18N.getMsg(
             "propertiesFactoryInstantiationException", WORK_FACTORIES.get(i).getSimpleName()));
-        ex.printStackTrace();
       } catch (IllegalAccessException ex) {
         LogInfo.logWarnInformation("MakeDefaultFactories", I18N.getMsg(
             "propertiesFactoryIllegalAccessException", WORK_FACTORIES.get(i).getSimpleName()));
-        ex.printStackTrace();
       } catch (IllegalArgumentException ex) {
-        LogInfo.logWarnInformation("MakeDefaultFactories",
-            I18N.getMsg("propertiesFactoryIllegalArgumentException",
-                WORK_FACTORIES.get(i).getSimpleName(), value));
-        ex.printStackTrace();
+        LogInfo.logWarnInformation("MakeDefaultFactories", I18N.getMsg(
+            "propertiesFactoryIllegalArgumentException", WORK_FACTORIES.get(i).getSimpleName(),
+            value));
       } catch (SecurityException ex) {
-        LogInfo.logWarnInformation("MakeDefaultFactories", I18N
-            .getMsg("propertiesFactorySecurityException", WORK_FACTORIES.get(i).getSimpleName()));
-        ex.printStackTrace();
+        LogInfo.logWarnInformation("MakeDefaultFactories", I18N.getMsg(
+            "propertiesFactorySecurityException", WORK_FACTORIES.get(i).getSimpleName()));
       }
     }
     return null;
   }
 
   /**
-   * Carrega as classes da fabricas personalizadas implementadas pelo desenvolvedor.
+   * Load all factories made by developer and declared in node factories in xml setup file.
    *
    * @param key
    * @param value
