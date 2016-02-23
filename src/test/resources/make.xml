@@ -96,6 +96,22 @@
     </test>
     <test>
       <names>
+        <name>testListClassNotFoundException</name>
+      </names>
+      <entities>
+        <entity class="br.com.gbvbahia.entities.EntityListTest">
+          <field name="listPattern">isList{br.com.gbvbahia.entities.ListClassNotFoundException}[3,5]
+          </field>
+          <field name="listComplex">isList{br.com.gbvbahia.entities.EntityListComplexTest}[15,25]
+          </field>
+        </entity>
+        <entity class="br.com.gbvbahia.entities.EntityPatternTest">
+          <field name="email">isEmail</field>
+        </entity>
+      </entities>
+    </test>
+    <test>
+      <names>
         <name>testSet1</name>
       </names>
       <entities>

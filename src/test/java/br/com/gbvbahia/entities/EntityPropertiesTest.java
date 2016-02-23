@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gbvbahia.entities;
 
 /**
@@ -9,42 +5,38 @@ package br.com.gbvbahia.entities;
  * @author Guilherme
  */
 public class EntityPropertiesTest {
-    
-    
-    private String cpf;
-    
-    private String cnpj;
-    
-    private String nome;
 
-    private String cep;
-    
-    public String getCnpj() {
-        return cnpj;
-    }
 
-    public String getCpf() {
-        return cpf;
-    }
+  private String cpf;
 
-    public String getNome() {
-        return nome;
-    }
+  private String cnpj;
 
-    public String getCep() {
-        return cep;
-    }
-    
+  private String nome;
 
-    @Override
-    public String toString() {
-        return "EnityPropertiesTest{"
-                + " cpf=" + cpf
-                + " cnpj=" + cnpj
-                + " nome=" + nome
-                + " cep=" + cep
-                + '}';
-    }
-    
-    
+  private String cep;
+
+  public String getCnpj() {
+    return this.cnpj;
+  }
+
+  public String getCpf() {
+    return this.cpf;
+  }
+
+  public String getNome() {
+    return this.nome;
+  }
+
+  public String getCep() {
+    return this.cep;
+  }
+
+
+  @Override
+  public String toString() {
+    return "EnityPropertiesTest{" + " cpf=" + this.cpf + " cnpj=" + this.cnpj + " nome="
+        + this.nome + " cep=" + this.cep + '}';
+  }
+
+
 }

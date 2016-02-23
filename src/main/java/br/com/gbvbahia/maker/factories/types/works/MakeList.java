@@ -64,6 +64,7 @@ public class MakeList implements ValueSpecializedFactory {
     return field.getType().equals(java.util.List.class);
   }
 
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
@@ -93,11 +94,9 @@ public class MakeList implements ValueSpecializedFactory {
           new CollectionsHelper(Class.forName(clazz), new Integer(minAmountElementsInList),
               new Integer(maxAmountElementsInList));
     } catch (ClassNotFoundException ce) {
-      ce.printStackTrace();
       throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
           new String[] {clazz}, ce);
     } catch (NumberFormatException nf) {
-      nf.printStackTrace();
       throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
           new String[] {minMax}, nf);
     }

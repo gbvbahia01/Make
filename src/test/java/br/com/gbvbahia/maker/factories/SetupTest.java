@@ -39,6 +39,8 @@ public class SetupTest {
   @Test
   public void testDefaultValuesFactorySetupMakeXml() {
     Factory.loadSetup("make.xml");
+    Assert.assertFalse("Make default does not ignore the JSR303", Factory.SETUP.ignoreJsr303());
+    Assert.assertTrue("Make default reads the JSR303", Factory.SETUP.readJsr303());
     Jsr303ReadSetupTest nullFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class);
     Assert.assertNull("Default Integer must be null", nullFields.getDefaultInt());
     Assert.assertNull("Default Double must be null", nullFields.getDefaultDouble());

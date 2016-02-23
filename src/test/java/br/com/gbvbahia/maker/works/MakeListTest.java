@@ -9,6 +9,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +20,8 @@ import br.com.gbvbahia.entities.EntityListTest;
 import br.com.gbvbahia.entities.EntityPatternTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.works.MakeList;
+import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
-import junit.framework.TestCase;
 
 /**
  * @since v.1 01/05/2012
@@ -44,62 +46,6 @@ public class MakeListTest extends TestCase {
   }
 
   @Test
-  public void testRegexList() throws Exception {
-    logger.info("String - GetRegexList");
-    Matcher matcher = this.pattern.matcher("isList{br.com.compre}[1,1]");
-    boolean test = matcher.find();
-    assertTrue("Primeiro: deveria ser true.", test);
-
-    matcher = this.pattern.matcher("isList{br.com.compre}[0,10]");
-    boolean test2 = matcher.find();
-    assertTrue("Segundo: deveria ser true.", test2);
-
-    matcher = this.pattern.matcher("isList{br.com.gbvbahia.entityes.EntityPatternTest}[999,10000]");
-    boolean test3 = matcher.find();
-    assertTrue("Terceiro: deveria ser true.", test3);
-
-    matcher = this.pattern.matcher("isList{}[9,10]");
-    boolean testfalse1 = matcher.find();
-    assertFalse("TesteFalse1: deveria ser false.", testfalse1);
-
-    matcher = this.pattern.matcher("isList{}");
-    boolean testfalse2 = matcher.find();
-    assertFalse("TesteFalse2: deveria ser false.", testfalse2);
-
-    matcher = this.pattern.matcher("isList{br. com.compre}[1,3]");
-    boolean testfalse2_5 = matcher.find();
-    assertFalse("TesteFalse2_5: deveria ser false.", testfalse2_5);
-
-    matcher = this.pattern.matcher("isList{br.com.compre}9,9");
-    boolean testfalse3 = matcher.find();
-    assertFalse("TesteFalse3: deveria ser false.", testfalse3);
-
-    matcher = this.pattern.matcher("isList{br.com.compre}[a9,23]");
-    boolean testfalse4 = matcher.find();
-    assertFalse("TesteFalse4: deveria ser false.", testfalse4);
-
-    matcher = this.pattern.matcher("isList[br.com.compre][1,a2]");
-    boolean testfalse5 = matcher.find();
-    assertFalse("TesteFalse5: deveria ser false.", testfalse5);
-
-    matcher = this.pattern.matcher("isList{br.com.compre}[999]");
-    boolean testfalse6 = matcher.find();
-    assertFalse("TesteFalse6: deveria ser false.", testfalse6);
-
-    matcher = this.pattern.matcher("isList{br.com.compre}[9, 9]");
-    boolean testfalse7 = matcher.find();
-    assertFalse("TesteFalse7: deveria ser false.", testfalse7);
-
-    matcher = this.pattern.matcher("isList{br.com.compre} [9,9]");
-    boolean testfalse8 = matcher.find();
-    assertFalse("TesteFalse8: deveria ser false.", testfalse8);
-
-    matcher = this.pattern.matcher("isSet{br.com.gbvbahia.entityes.EntityPatternTest}[3,5]");
-    boolean testfalse9 = matcher.find();
-    assertFalse("TesteFalse9: deveria ser false.", testfalse9);
-  }
-
-  @Test
   public void testPopularLista() throws Exception {
     logger.info("String - GetPopularLista");
     EntityListTest test = MakeEntity.makeEntity(EntityListTest.class, "testList1");
@@ -112,13 +58,74 @@ public class MakeListTest extends TestCase {
       this.validarJSR303(entity);
     }
     assertNotNull("Test 2: ListComplex de test não pode ser nula.", test.getListComplex());
-    assertTrue("Test 2: ListComplex de test não pode ser menor que 15.",
-        test.getListComplex().size() >= 15);
-    assertTrue("Test 2: ListComplex de test não pode ser maior que 25.",
-        test.getListComplex().size() <= 25);
+    assertTrue("Test 2: ListComplex de test não pode ser menor que 15.", test.getListComplex()
+        .size() >= 15);
+    assertTrue("Test 2: ListComplex de test não pode ser maior que 25.", test.getListComplex()
+        .size() <= 25);
     for (EntityListComplexTest entity : test.getListComplex()) {
       this.validarJSR303(entity);
     }
+  }
+
+  @Test
+  public void testRegexList() throws Exception {
+    logger.info("String - GetRegexList");
+    Matcher matcher = this.pattern.matcher("isList{br.com.compre}[1,1]");
+    boolean test = matcher.find();
+    assertTrue("test: must be true.", test);
+
+    matcher = this.pattern.matcher("isList{br.com.compre}[0,10]");
+    boolean test2 = matcher.find();
+    assertTrue("test2: must be true.", test2);
+
+    matcher = this.pattern.matcher("isList{br.com.gbvbahia.entityes.EntityPatternTest}[999,10000]");
+    boolean test3 = matcher.find();
+    assertTrue("test3: must be true.", test3);
+
+    matcher = this.pattern.matcher("isList{}[9,10]");
+    boolean testfalse1 = matcher.find();
+    assertFalse("testfalse1: must be false.", testfalse1);
+
+    matcher = this.pattern.matcher("isList{}");
+    boolean testfalse2 = matcher.find();
+    assertFalse("testfalse2: must be false.", testfalse2);
+
+    matcher = this.pattern.matcher("isList{br. com.compre}[1,3]");
+    boolean testFalse25 = matcher.find();
+    assertFalse("testefalse25: must be false.", testFalse25);
+
+    matcher = this.pattern.matcher("isList{br.com.compre}9,9");
+    boolean testfalse3 = matcher.find();
+    assertFalse("testfalse3: must be false.", testfalse3);
+
+    matcher = this.pattern.matcher("isList{br.com.compre}[a9,23]");
+    boolean testfalse4 = matcher.find();
+    assertFalse("testfalse4: must be false.", testfalse4);
+
+    matcher = this.pattern.matcher("isList[br.com.compre][1,a2]");
+    boolean testfalse5 = matcher.find();
+    assertFalse("testeFalse5: must be false.", testfalse5);
+
+    matcher = this.pattern.matcher("isList{br.com.compre}[999]");
+    boolean testfalse6 = matcher.find();
+    assertFalse("TesteFalse6: must be false.", testfalse6);
+
+    matcher = this.pattern.matcher("isList{br.com.compre}[9, 9]");
+    boolean testfalse7 = matcher.find();
+    assertFalse("TesteFalse7: must be false.", testfalse7);
+
+    matcher = this.pattern.matcher("isList{br.com.compre} [9,9]");
+    boolean testfalse8 = matcher.find();
+    assertFalse("TesteFalse8: must be false.", testfalse8);
+
+    matcher = this.pattern.matcher("isSet{br.com.gbvbahia.entityes.EntityPatternTest}[3,5]");
+    boolean testfalse9 = matcher.find();
+    assertFalse("TesteFalse9: must be false.", testfalse9);
+  }
+
+  @Test(expected = ValueSpecializedException.class)
+  public void testClassNotFoundException() {
+    MakeEntity.makeEntity(EntityListTest.class, "testListClassNotFoundException");
   }
 
   private void validarJSR303(Object test) {
