@@ -3,6 +3,7 @@ package br.com.gbvbahia.maker.factories.types.properties;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,8 +87,8 @@ public class XMLoader {
     } catch (IOException ioE) {
       throw new XMLoaderException(ioE, "IO Error got when tried to read xml file.");
     } catch (SAXException saxE) {
-      throw new XMLoaderException(saxE,
-          "SAXException got when tried to read " + this.xmlSetupTestFile + " file.");
+      throw new XMLoaderException(saxE, "SAXException got when tried to read "
+          + this.xmlSetupTestFile + " file.");
     }
   }
 
@@ -101,17 +102,21 @@ public class XMLoader {
     try {
       File xmlFile = null;
       String path = "/" + this.xmlSetupTestFile;
-      xmlFile = new File(this.getClass().getResource(path).toURI());
+      URL filePath = this.getClass().getResource(path);
+      if (filePath == null) {
+        throw new XMLoaderException(null, "File " + this.xmlSetupTestFile + " was not found.");
+      }
+      xmlFile = new File(filePath.toURI());
       if (!xmlFile.exists()) {
         throw new IOException("File make xml doesn't exist.");
       }
       return xmlFile;
     } catch (IOException ioE) {
-      throw new XMLoaderException(ioE,
-          "IO Error got when tried to read xml file.\nFile: " + this.xmlSetupTestFile);
+      throw new XMLoaderException(ioE, "IO Error got when tried to read xml file.\nFile: "
+          + this.xmlSetupTestFile);
     } catch (URISyntaxException uriE) {
-      throw new XMLoaderException(uriE,
-          "URI wrong in jar file for " + this.xmlSetupTestFile + " file.");
+      throw new XMLoaderException(uriE, "URI wrong in jar file for " + this.xmlSetupTestFile
+          + " file.");
     }
   }
 

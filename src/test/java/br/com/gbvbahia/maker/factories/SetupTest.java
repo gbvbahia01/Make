@@ -1,12 +1,13 @@
 package br.com.gbvbahia.maker.factories;
 
-import br.com.gbvbahia.entities.Jsr303ReadSetupTest;
-import br.com.gbvbahia.maker.MakeEntity;
-
 import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Test;
+
+import br.com.gbvbahia.entities.Jsr303ReadSetupTest;
+import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.types.properties.exception.XMLoaderException;
 
 /**
  * This class test the inner class Setup inside of class Factory.
@@ -19,6 +20,14 @@ public class SetupTest {
   @After
   public void rollback() {
     Factory.loadSetup("make.xml");
+  }
+
+  /**
+   * Test for a file that not exists. At this case a XMLoaderException must be launched.
+   */
+  @Test(expected = XMLoaderException.class)
+  public void testXmlLoaderException() {
+    Factory.loadSetup("fileNotFound.xml");
   }
 
   /**
@@ -49,7 +58,8 @@ public class SetupTest {
     Assert.assertNull("Default String must be null", nullFields.getDefaultString());
     Assert.assertNotNull("Cannot be null because the field is mapped by xml.",
         nullFields.getKeyField());
-    Assert.assertTrue("keyField has no valid value: " + nullFields.getKeyField(),
+    Assert.assertTrue(
+        "keyField has no valid value: " + nullFields.getKeyField(),
         (nullFields.getKeyField() == 1.0) || (nullFields.getKeyField() == 2.0)
             || (nullFields.getKeyField() == 5.0));
     Assert.assertNotNull("Cannot be null because the annotation @NotNull.",
@@ -72,7 +82,8 @@ public class SetupTest {
     someFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class, "testSetupKeyField");
     Assert.assertNotNull("Cannot be null because the keyField is mapped as a keyfield in xml.",
         someFields.getKeyField());
-    Assert.assertTrue("keyField has no valid value: " + someFields.getKeyField(),
+    Assert.assertTrue(
+        "keyField has no valid value: " + someFields.getKeyField(),
         (someFields.getKeyField() == 1.0) || (someFields.getKeyField() == 2.0)
             || (someFields.getKeyField() == 5.0));
     Assert.assertNotNull("Cannot be null because the annotation @NotNull.",
@@ -100,7 +111,8 @@ public class SetupTest {
     allFields = MakeEntity.makeEntity(Jsr303ReadSetupTest.class, "testSetupKeyField");
     Assert.assertNotNull("Cannot be null because the keyField is mapped as a keyfield in xml.",
         allFields.getKeyField());
-    Assert.assertTrue("keyField has no valid value: " + allFields.getKeyField(),
+    Assert.assertTrue(
+        "keyField has no valid value: " + allFields.getKeyField(),
         (allFields.getKeyField() == 1.0) || (allFields.getKeyField() == 2.0)
             || (allFields.getKeyField() == 5.0));
     Assert.assertNull(
@@ -128,7 +140,8 @@ public class SetupTest {
     Assert.assertNull("Default String must be null", allFields.getDefaultString());
     Assert.assertNotNull("Cannot be null because the test name was informaded.",
         allFields.getKeyField());
-    Assert.assertTrue("keyField has no valid value: " + allFields.getKeyField(),
+    Assert.assertTrue(
+        "keyField has no valid value: " + allFields.getKeyField(),
         (allFields.getKeyField() == 1.0) || (allFields.getKeyField() == 2.0)
             || (allFields.getKeyField() == 5.0));
     Assert.assertNull("JSR303 must be ignored (@NotNull) and this field is not mapped.",
@@ -155,7 +168,8 @@ public class SetupTest {
     Assert.assertNotNull("Default String cannot be null", neverFields.getDefaultString());
     Assert.assertNotNull("keyField cannot be null because the test name was not informaded.",
         neverFields.getKeyField());
-    Assert.assertTrue("keyField has no valid value: " + neverFields.getKeyField(),
+    Assert.assertTrue(
+        "keyField has no valid value: " + neverFields.getKeyField(),
         (neverFields.getKeyField() == 1.0) || (neverFields.getKeyField() == 2.0)
             || (neverFields.getKeyField() == 5.0));
     Assert.assertNotNull("NotNullCharacter cannot be null.", neverFields.getNotNullCharacter());
