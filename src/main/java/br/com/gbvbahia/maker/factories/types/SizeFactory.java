@@ -1,11 +1,13 @@
 package br.com.gbvbahia.maker.factories.types;
 
 import java.lang.reflect.Field;
+import java.util.Observable;
 
 import javax.validation.constraints.Size;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 
@@ -18,6 +20,11 @@ import br.com.gbvbahia.maker.types.complex.MakeString;
  * @author Guilherme
  */
 public class SizeFactory implements ValueFactory {
+
+
+  private SizeFactory() {
+    super();
+  }
 
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
@@ -40,5 +47,29 @@ public class SizeFactory implements ValueFactory {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
+
+  // ==============
+  // Static control
+  // ==============
+  private static ValueFactory instance = null;
+
+  /**
+   * Get a instance for this class encapsulated by ValueSpecializedFactory.
+   * 
+   * @return
+   */
+  public static synchronized ValueFactory getInstance() {
+    if (instance == null) {
+      instance = new SizeFactory();
+      NotifierTests.getNotifyer().addObserver(instance);
+    }
+    return instance;
   }
 }

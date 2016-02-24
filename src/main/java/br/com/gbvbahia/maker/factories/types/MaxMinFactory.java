@@ -1,8 +1,7 @@
 package br.com.gbvbahia.maker.factories.types;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Observable;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -11,16 +10,10 @@ import javax.validation.constraints.Min;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
-import br.com.gbvbahia.maker.types.complex.MakeBigInteger;
-import br.com.gbvbahia.maker.types.complex.MakeStringNumber;
+import br.com.gbvbahia.maker.factories.types.managers.MakeNumberManager;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeByte;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeShort;
 
 /**
  * Factory para classes anotadas com @Min e/ou @Max da JSR303.
@@ -30,27 +23,19 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeShort;
  */
 public class MaxMinFactory implements ValueFactory {
 
-  /**
-   * Contém as fabricas que trabalham com números.
-   */
-  public static final List<MakeNumber> NUMBERS_FACTORYS = new ArrayList<MakeNumber>();
-
-  static {
-    NUMBERS_FACTORYS.add(new MakeBigDecimal());
-    NUMBERS_FACTORYS.add(new MakeBigInteger());
-    NUMBERS_FACTORYS.add(new MakeByte());
-    NUMBERS_FACTORYS.add(new MakeDouble());
-    NUMBERS_FACTORYS.add(new MakeFloat());
-    NUMBERS_FACTORYS.add(new MakeInteger());
-    NUMBERS_FACTORYS.add(new MakeLong());
-    NUMBERS_FACTORYS.add(new MakeShort());
-    NUMBERS_FACTORYS.add(new MakeStringNumber());
+  MaxMinFactory() {
+    super();
   }
+
+  /**
+   * Manager the makeNumber classes.
+   */
+  public final MakeNumberManager numberManager = new MakeNumberManager();
 
   @Override
   public <T> void makeValue(final Field field, final T entity, final String... testName)
       throws IllegalAccessException, IllegalArgumentException {
-    for (MakeNumber makeNumber : NUMBERS_FACTORYS) {
+    for (MakeNumber makeNumber : this.numberManager.getFactoriesNumber()) {
       if (makeNumber.isMyType(field)) {
         makeNumber.insertValue(field, entity);
         return;
@@ -68,6 +53,19 @@ public class MaxMinFactory implements ValueFactory {
   }
 
   /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {
+    Notification infoTest = (Notification) notification;
+    if (infoTest.isTestFinished()) {
+      this.numberManager.clear();
+    }
+  }
+
+
+
+  /**
    * Verifica se o field é tratado com anotações numéricas da JSR303.
    *
    * @param field Field a ser avaliado.
@@ -80,5 +78,23 @@ public class MaxMinFactory implements ValueFactory {
       return true;
     }
     return false;
+  }
+
+  // ==============
+  // Static control
+  // ==============
+  private static ValueFactory instance = null;
+
+  /**
+   * Get a instance for this class encapsulated by ValueSpecializedFactory.
+   * 
+   * @return
+   */
+  public static synchronized ValueFactory getInstance() {
+    if (instance == null) {
+      instance = new MaxMinFactory();
+      NotifierTests.getNotifyer().addObserver(instance);
+    }
+    return instance;
   }
 }

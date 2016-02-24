@@ -1,17 +1,19 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.Field;
 import java.util.MissingResourceException;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.commons.lang3.StringUtils;
+
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 /**
  * Cria nomes aleatórios, para que funcione deve ter o valor isName no arquivo make.properties.
@@ -31,8 +33,15 @@ public class MakeName implements ValueSpecializedFactory {
    */
   private static final int MAX_PROPERTIES_NAMES = 1281;
 
+  /**
+   * Cannot be instantiated outside.
+   */
+  private MakeName() {
+    super();
+  }
+
   @Override
-  public boolean workValue(final String value) {
+  public boolean workValue(String fieldName, String value) {
     LogInfo.logDebugInformation("MakeName", I18N.getMsg("workValueMake", value));
     if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
       return true;
@@ -51,6 +60,12 @@ public class MakeName implements ValueSpecializedFactory {
       throws IllegalAccessException, IllegalArgumentException {
     field.set(entity, getName());
   }
+
+  /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
 
   /**
    * Retira dois valores do arquivo: nomes.properties, onde todos os nomes ficam armazenados.
@@ -81,5 +96,23 @@ public class MakeName implements ValueSpecializedFactory {
       secondName = MakeInteger.getMax(MAX_PROPERTIES_NAMES);
     } while (secondName == firstName);
     return getMsg(firstName) + " " + getMsg(secondName);
+  }
+
+  // ==============
+  // Static control
+  // ==============
+  private static ValueSpecializedFactory instance = null;
+
+  /**
+   * Get a instance for this class encapsulated by ValueSpecializedFactory.
+   * 
+   * @return
+   */
+  public static synchronized ValueSpecializedFactory getInstance() {
+    if (instance == null) {
+      instance = new MakeName();
+      NotifierTests.getNotifyer().addObserver(instance);
+    }
+    return instance;
   }
 }

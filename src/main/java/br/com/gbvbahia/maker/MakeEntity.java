@@ -1,16 +1,17 @@
 package br.com.gbvbahia.maker;
 
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.log.LogInfo;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  * Style code is follow the google style:<br>
@@ -26,6 +27,8 @@ public class MakeEntity {
    */
   private static Log logger = LogFactory.getLog(MakeEntity.class.getSimpleName());
 
+  private static int counter = 0;
+
   /**
    * Cria a entidade com atributos populados.<br>
    * Se tiver anotaçoes da especificação JSR303 (Hibernate Validator) a mesma será respeidata se não
@@ -40,6 +43,9 @@ public class MakeEntity {
     LogInfo.logMakeStartDebug(MakeEntity.class.getSimpleName(), entityParam);
     try {
       Factory.configureFactories(testName);
+      if (counter++ == 0) {
+        NotifierTests.getNotifyer().notifyTestBegin(testName);
+      }
       T entityReturn = entityParam.newInstance();
       prepareValue(entityParam, entityReturn, testName);
       LogInfo.logMakeEndDebug(MakeEntity.class.getSimpleName(), entityParam);
@@ -52,6 +58,10 @@ public class MakeEntity {
       ex.printStackTrace();
       logger.error(I18N.getMsg("illegalAccessException", entityParam.getName()), ex);
       throw new RuntimeException(ex);
+    } finally {
+      if (--counter == 0) {
+        NotifierTests.getNotifyer().notifyTestEnd(testName);
+      }
     }
   }
 
@@ -62,7 +72,7 @@ public class MakeEntity {
       try {
         field.setAccessible(true);
         try {
-          ValueFactory valueFactory = Factory.makeFactory(field, entityParam);
+          ValueFactory valueFactory = Factory.getFactory(field, entityParam);
           valueFactory.makeValue(field, entityReturn, testName);
         } catch (IllegalArgumentException e) {
           LogInfo.logFieldNull(MakeEntity.class.getSimpleName(), field);

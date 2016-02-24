@@ -3,11 +3,13 @@ package br.com.gbvbahia.maker.factories.types;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Observable;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.types.complex.MakeCalendar;
 
 /**
@@ -17,6 +19,10 @@ import br.com.gbvbahia.maker.types.complex.MakeCalendar;
  * @author Guilherme
  */
 public class FuturePastFactory implements ValueFactory {
+
+  private FuturePastFactory() {
+    super();
+  }
 
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
@@ -46,6 +52,12 @@ public class FuturePastFactory implements ValueFactory {
   }
 
   /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
+
+  /**
    * Verifica se o field é tratado com anotações de tempo da JSR303.
    *
    * @param field Field a ser avaliado.
@@ -56,5 +68,23 @@ public class FuturePastFactory implements ValueFactory {
       return true;
     }
     return false;
+  }
+
+  // ==============
+  // Static control
+  // ==============
+  private static ValueFactory instance = null;
+
+  /**
+   * Get a instance for this class encapsulated by ValueSpecializedFactory.
+   * 
+   * @return
+   */
+  public static synchronized ValueFactory getInstance() {
+    if (instance == null) {
+      instance = new FuturePastFactory();
+      NotifierTests.getNotifyer().addObserver(instance);
+    }
+    return instance;
   }
 }

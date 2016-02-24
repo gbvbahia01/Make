@@ -1,5 +1,17 @@
 package br.com.gbvbahia.maker.factories;
 
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.DefaultFactory;
 import br.com.gbvbahia.maker.factories.types.EnumFactory;
@@ -8,22 +20,10 @@ import br.com.gbvbahia.maker.factories.types.MaxMinFactory;
 import br.com.gbvbahia.maker.factories.types.SizeFactory;
 import br.com.gbvbahia.maker.factories.types.TrueFalseFactory;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.factories.types.properties.MakeWorksFactory;
-import br.com.gbvbahia.maker.factories.types.properties.XMLoader;
+import br.com.gbvbahia.maker.factories.types.managers.ValueFactoryManager;
+import br.com.gbvbahia.maker.factories.types.managers.XMLoader;
 import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 /**
  * This class will call the XML loader to read the xml setup and prepare all values factories to
@@ -38,17 +38,19 @@ public final class Factory {
    * For logging changes edit the log4j.properties inside src/test/resources
    */
   private static Log logger = LogFactory.getLog(Factory.class.getSimpleName());
+
   /**
    * Configura o nome do teste para recuperar informações no arquivo make.properties.
    */
   private static String[] testName;
   public static Setup SETUP;
+
   /**
    * Contém uma lista das Factories para cada tipo, ao ser solicitado uma será retornada.
    */
   public static final Set<ValueFactory> FACTORIES = new LinkedHashSet<ValueFactory>();
 
-  private static MakeWorksFactory workFactories = null;
+  private static ValueFactoryManager specializedFactoryManager = null;
 
   /**
    * If you need another xml file for setup or you want rename make.xml you need clall this method
@@ -73,14 +75,15 @@ public final class Factory {
       loadSetup(null);
     }
     Factory.testName = testNameProp;
-    Factory.workFactories = new MakeWorksFactory(testNameProp);
+    Factory.specializedFactoryManager = new ValueFactoryManager(testNameProp);
     // This order is important do not change.
-    FACTORIES.add(Factory.workFactories);
-    FACTORIES.add(new SizeFactory());
-    FACTORIES.add(new MaxMinFactory());
-    FACTORIES.add(new FuturePastFactory());
-    FACTORIES.add(new TrueFalseFactory());
-    FACTORIES.add(new EnumFactory());
+    FACTORIES.add(Factory.specializedFactoryManager);
+    FACTORIES.add(SizeFactory.getInstance());
+    FACTORIES.add(MaxMinFactory.getInstance());
+    FACTORIES.add(FuturePastFactory.getInstance());
+    FACTORIES.add(TrueFalseFactory.getInstance());
+    FACTORIES.add(EnumFactory.getInstance());
+    DefaultFactory.loadInstance();
   }
 
   /**
@@ -94,16 +97,16 @@ public final class Factory {
    * @param entity entity that contains the field.
    * @return ValueFactory that will create the value to put at field.
    */
-  public static <T> ValueFactory makeFactory(final Field field, final T entity) {
+  public static <T> ValueFactory getFactory(final Field field, final T entity) {
     if (SETUP.useDefaultValuesFactory(field, entity)) {
-      return new DefaultValuesFactory();
+      return DefaultValuesFactory.getInstance();
     }
     for (ValueFactory vf : FACTORIES) {
       if (vf.isWorkWith(field, entity)) {
         return vf;
       }
     }
-    return new DefaultFactory(testName);
+    return DefaultFactory.getInstance(testName);
   }
 
 
@@ -146,8 +149,8 @@ public final class Factory {
       if (StringUtils.equals(this.jsr303, JSR303_IGNORE)) {
         return;
       }
-      throw new IllegalArgumentException(
-          I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ, JSR303_IGNORE}));
+      throw new IllegalArgumentException(I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ,
+          JSR303_IGNORE}));
     }
 
     private void checkNullSetupValue() {
@@ -160,8 +163,8 @@ public final class Factory {
       if (StringUtils.equals(this.nullFields, NULL_NEVER)) {
         return;
       }
-      throw new IllegalArgumentException(
-          I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS, NULL_SOME, NULL_NEVER}));
+      throw new IllegalArgumentException(I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS,
+          NULL_SOME, NULL_NEVER}));
     }
 
     /**
@@ -213,7 +216,7 @@ public final class Factory {
      */
     private static boolean isKeyField(Field field) {
       String key = field.getDeclaringClass().getName() + "." + field.getName();
-      return Factory.workFactories.isFieldMapped(key);
+      return Factory.specializedFactoryManager.isFieldMapped(key);
     }
 
     public boolean readJsr303() {

@@ -1,6 +1,7 @@
 package br.com.gbvbahia.maker.properties;
 
 import java.lang.reflect.Field;
+import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,7 +22,7 @@ public class CEPWorkTest implements ValueSpecializedFactory {
   public static final String KEY_PROPERTIE = "isCEP";
 
   @Override
-  public boolean workValue(String value) {
+  public boolean workValue(String fieldName, String value) {
     LogInfo.logDebugInformation("CEPWorkTest", I18N.getMsg("workValueMake", value));
     if (KEY_PROPERTIE.equals(StringUtils.trim(value))) {
       return true;
@@ -40,4 +41,12 @@ public class CEPWorkTest implements ValueSpecializedFactory {
       throws IllegalAccessException, IllegalArgumentException {
     field.set(entity, MakeString.getString(6, MakeString.StringType.NUMBER));
   }
+
+  /**
+   * Object notification is a br.com.gbvbahia.maker.factories.types.managers.Notification you can
+   * safely do a cast.<br>
+   * Notification infoTest = (Notification) notification;
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
 }

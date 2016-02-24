@@ -1,14 +1,12 @@
-package br.com.gbvbahia.maker.factories.types.properties;
+package br.com.gbvbahia.maker.factories.types.managers;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.apache.commons.lang3.StringUtils;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
@@ -19,7 +17,7 @@ import br.com.gbvbahia.maker.log.LogInfo;
  * @since v.1 01/05/2012
  * @author Guilherme
  */
-public class MakeWorksFactory implements ValueFactory {
+public class ValueFactoryManager implements ValueFactory {
 
   /**
    * Armazena o nome do teste configurado, podendo ser recuperado durante o teste se necessário.
@@ -28,35 +26,22 @@ public class MakeWorksFactory implements ValueFactory {
   /**
    * Armazena as fábricas de que executam trabalho com base no arquivo make.properties.
    */
-  private Map<String, ValueFactory> valueFactories = new HashMap<String, ValueFactory>();
+  private final Map<String, ValueFactory> valueFactories;
+
+  private final ValueSpecializedFactoryManager specializedManager;
+
 
   /**
    * Lê o arquivo make.properties, preparando os valores das classes para os testes.
    *
    * @param testName java.lang.String chave da mensagem que será enviada.
    */
-  public MakeWorksFactory(final String... testName) {
+  public ValueFactoryManager(final String... testName) {
     this.testName = testName;
-    try {
-      XMLoader loader = XMLoader.getLoader(null);
-      List<String> factories = loader.getFactories();
-      for (String factory : factories) {
-        MakeWorksDefaultFactories.insertImplFactory(factory);
-      }
-      Map<String, Map<String, String>> mapRules = loader.getMapRulesFieldsByTestName(testName);
-      Set<String> keysClass = mapRules.keySet();
-      for (String keyClass : keysClass) {
-        Map<String, String> fields = mapRules.get(keyClass);
-        Set<String> keysFields = fields.keySet();
-        for (String keyField : keysFields) {
-          this.insertValueFactory(keyClass + "." + keyField, fields.get(keyField));
-        }
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      Logger.getLogger(MakeWorksFactory.class.getName()).log(Level.WARNING,
-          I18N.getMsg("makePropertiesNotFound", (Object[]) testName));
-    }
+    this.specializedManager = new ValueSpecializedFactoryManager();
+    this.valueFactories = new HashMap<String, ValueFactory>();
+    this.loadRulesByClassWithFields(testName);
+    NotifierTests.getNotifyer().addObserver(this);
   }
 
   /**
@@ -89,6 +74,18 @@ public class MakeWorksFactory implements ValueFactory {
   }
 
   /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {
+    Notification infoTest = (Notification) notification;
+    if (infoTest.isTestFinished()) {
+      this.valueFactories.clear();
+      this.specializedManager.clear();
+    }
+  }
+
+  /**
    * Retorna o nome do teste declarado pelo desenvolvedor no arquivo make.properties.
    *
    * @return nome do teste se houver, null se não foi declarado.
@@ -98,16 +95,26 @@ public class MakeWorksFactory implements ValueFactory {
   }
 
   /**
+   * Verifica se o field está mapeado para alguma fábrica no arquivo make.xml.
+   * 
+   * @param keyField
+   * @return
+   */
+  public boolean isFieldMapped(String keyField) {
+    return this.valueFactories.containsKey(keyField);
+  }
+
+  /**
    * Procura um ValueSpecializedFactory registrado para tratar a propriedade registrada no arquivo
    * make.properties.
    *
    * @param key Chave no arquivo make.properties.
    * @param value Valor no arquivo make.properties.
    */
-  private void insertValueFactory(final String key, final String value) {
-    ValueSpecializedFactory fac = MakeWorksDefaultFactories.getPropertiesFactory(value);
+  private void insertValueFactory(final String fieldName, final String value) {
+    ValueSpecializedFactory fac = this.specializedManager.getFactory(fieldName, value);
     if (fac != null) {
-      this.valueFactories.put(key, fac);
+      this.valueFactories.put(fieldName, fac);
     } else {
       final String errorMsg = I18N.getMsg("notFactoryWork", value);
       IllegalArgumentException error = new IllegalArgumentException(errorMsg);
@@ -123,8 +130,31 @@ public class MakeWorksFactory implements ValueFactory {
    * @return Nome esperado no make.properties.
    */
   private String getExpectKey(final Field field) {
-    return StringUtils.substringAfter(field.getDeclaringClass().toString(), "class ") + "."
-        + field.getName();
+    return NamesManager.getFiledName(field);
+  }
+
+  /**
+   * Create a Map<Class name, Map<field name, field rule>> to determine the factory that will create
+   * a value for each field.
+   * 
+   * @param testName the name of tests that need be loaded.
+   */
+  private void loadRulesByClassWithFields(final String... testName) {
+    try {
+      XMLoader loader = XMLoader.getLoader();
+      Map<String, Map<String, String>> mapRules = loader.getMapRulesFieldsByTestName(testName);
+      Set<String> keysClass = mapRules.keySet();
+      for (String keyClass : keysClass) {
+        Map<String, String> fields = mapRules.get(keyClass);
+        Set<String> keysFields = fields.keySet();
+        for (String keyField : keysFields) {
+          this.insertValueFactory(keyClass + "." + keyField, fields.get(keyField));
+        }
+      }
+    } catch (Exception exception) {
+      Logger.getLogger(ValueFactoryManager.class.getName()).log(Level.WARNING,
+          I18N.getMsg("makePropertiesNotFound", (Object[]) testName), exception);
+    }
   }
 
   @Override
@@ -135,9 +165,8 @@ public class MakeWorksFactory implements ValueFactory {
     if (this.getClass() != obj.getClass()) {
       return false;
     }
-    final MakeWorksFactory other = (MakeWorksFactory) obj;
-    if ((this.testName == null) ? (other.testName != null)
-        : !this.testName.equals(other.testName)) {
+    final ValueFactoryManager other = (ValueFactoryManager) obj;
+    if ((this.testName == null) ? (other.testName != null) : !this.testName.equals(other.testName)) {
       return false;
     }
     return true;
@@ -148,15 +177,5 @@ public class MakeWorksFactory implements ValueFactory {
     int hash = 5;
     hash = (47 * hash) + (this.testName != null ? this.testName.hashCode() : 0);
     return hash;
-  }
-
-  /**
-   * Verifica se o field está mapeado para alguma fábrica no arquivo make.xml.
-   * 
-   * @param keyField
-   * @return
-   */
-  public boolean isFieldMapped(String keyField) {
-    return this.valueFactories.containsKey(keyField);
   }
 }

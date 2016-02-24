@@ -2,14 +2,20 @@ package br.com.gbvbahia.maker.factories.types.works;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.MaxMinFactory;
+import br.com.gbvbahia.maker.factories.types.managers.MakeNumberManager;
+import br.com.gbvbahia.maker.factories.types.managers.NamesManager;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
@@ -30,7 +36,7 @@ public class MakeIn implements ValueSpecializedFactory {
   /**
    * Guarda informações que serão necessárias para popular o field.
    */
-  private List<String> inList;
+  private Map<String, List<String>> mapInList = new HashMap<String, List<String>>();
   /**
    * No arquivo make.properties deve estár definido no valor para o field: "in\\{.*\\}(\\[.+\\])?". <br>
    * Regex: deve iniciar com <i>in{</i>conter qualquer tipo de caractere. Fecha com <i>}</i> podendo
@@ -48,14 +54,26 @@ public class MakeIn implements ValueSpecializedFactory {
    */
   private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
+  /**
+   * Manager the makeNumber classes.
+   */
+  public final MakeNumberManager numberManager = new MakeNumberManager();
+
+  /**
+   * Cannot be instantiated outside.
+   */
+  private MakeIn() {
+    super();
+  }
+
   @Override
-  public boolean workValue(final String value) {
+  public boolean workValue(String fieldName, String value) {
     LogInfo.logDebugInformation("MakeIn", I18N.getMsg("workValueMake", value));
     Matcher matcher = PATTERN.matcher(value);
     if (matcher.find()) {
       LogInfo.logDebugInformation("MakeIn", I18N.getMsg("isWork", "In", value));
       LogInfo.logDebugInformation("MakeIn", matcher.group());
-      this.popularInfo(value);
+      this.popularInfo(fieldName, value);
       return true;
     } else {
       LogInfo.logDebugInformation("MakeIn", I18N.getMsg("notIsWork", "In", value));
@@ -65,7 +83,7 @@ public class MakeIn implements ValueSpecializedFactory {
 
   @Override
   public <T> boolean isWorkWith(final Field field, final T entity) {
-    for (MakeNumber number : MaxMinFactory.NUMBERS_FACTORYS) {
+    for (MakeNumber number : this.numberManager.getFactoriesNumber()) {
       if (number.isMyType(field)) {
         return true;
       }
@@ -76,17 +94,30 @@ public class MakeIn implements ValueSpecializedFactory {
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
-    for (MakeNumber number : MaxMinFactory.NUMBERS_FACTORYS) {
+    String keyField = NamesManager.getFiledName(field);
+    List<String> inList = this.mapInList.get(keyField);
+    for (MakeNumber number : this.numberManager.getFactoriesNumber()) {
       if (number.isMyType(field)) {
         try {
           number.insertValue(field, entity,
-              this.inList.get(MakeInteger.getIntervalo(0, this.inList.size() - 1)));
+              inList.get(MakeInteger.getIntervalo(0, inList.size() - 1)));
         } catch (NumberFormatException nf) {
           nf.printStackTrace();
           throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
-              new String[] {this.inList.toString()}, nf);
+              new String[] {inList.toString()}, nf);
         }
       }
+    }
+  }
+
+  /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {
+    Notification infoTest = (Notification) notification;
+    if (infoTest.isTestFinished()) {
+      this.numberManager.clear();
     }
   }
 
@@ -97,13 +128,31 @@ public class MakeIn implements ValueSpecializedFactory {
    * @throws MakeWorkException Se não encontrar a classe informada no properties ou conversão
    *         numérica não for possível.
    */
-  private void popularInfo(final String value) {
+  private void popularInfo(String fieldName, String value) {
     String in = StringUtils.substringBetween(value, "{", "}");
     String split = StringUtils.substringBetween(value, "[", "]");
     if (StringUtils.isBlank(split)) {
       split = ",";
     }
-    this.inList = Arrays.asList(StringUtils.split(in, split));
+    this.mapInList.put(fieldName, Arrays.asList(StringUtils.split(in, split)));
     LogInfo.logDebugInformation("MakeIn", "split:" + split + " in: " + in);
+  }
+
+  // ==============
+  // Static control
+  // ==============
+  private static ValueSpecializedFactory instance = null;
+
+  /**
+   * Get a instance for this class encapsulated by ValueSpecializedFactory.
+   * 
+   * @return
+   */
+  public static synchronized ValueSpecializedFactory getInstance() {
+    if (instance == null) {
+      instance = new MakeIn();
+      NotifierTests.getNotifyer().addObserver(instance);
+    }
+    return instance;
   }
 }

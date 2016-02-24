@@ -1,10 +1,11 @@
 package br.com.gbvbahia.maker.properties;
 
 import java.lang.reflect.Field;
-
-import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
+
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 
 public class FactoryCustomerService implements ValueSpecializedFactory {
   /**
@@ -25,7 +26,7 @@ public class FactoryCustomerService implements ValueSpecializedFactory {
   }
 
   @Override
-  public boolean workValue(final String value) {
+  public boolean workValue(String fieldName, String value) {
     if (KEY_PROPERTIE.equals(StringUtils.trim(value))) {
       return true;
     }
@@ -42,4 +43,12 @@ public class FactoryCustomerService implements ValueSpecializedFactory {
   public <T> boolean isWorkWith(Field field, T entity) {
     return field.getType().equals(String.class);
   }
+
+  /**
+   * Object notification is a br.com.gbvbahia.maker.factories.types.managers.Notification you can
+   * safely do a cast.<br>
+   * Notification infoTest = (Notification) notification;
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
 }

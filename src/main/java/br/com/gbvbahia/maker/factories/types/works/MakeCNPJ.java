@@ -1,15 +1,17 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
+import java.lang.reflect.Field;
+import java.util.Observable;
+
+import org.apache.commons.lang3.StringUtils;
+
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.reflect.Field;
 
 /**
  * Retorna uma string no formato de um CNPJ válido, em relação a validação do digito verificador.
@@ -29,12 +31,12 @@ public class MakeCNPJ implements ValueSpecializedFactory {
   public static final String KEY_PROPERTY = "isCNPJ";
 
   /**
-   * Construtor padrão.
+   * Cannot be instantiated outside.
    */
-  public MakeCNPJ() {}
+  private MakeCNPJ() {}
 
   @Override
-  public boolean workValue(final String value) {
+  public boolean workValue(String fieldName, String value) {
     LogInfo.logDebugInformation("MakeCNPJ", I18N.getMsg("workValueMake", value));
     if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
       return true;
@@ -44,8 +46,8 @@ public class MakeCNPJ implements ValueSpecializedFactory {
   }
 
   @Override
-  public <T> boolean isWorkWith(final Field f, final T entity) {
-    return f.getType().equals(String.class);
+  public <T> boolean isWorkWith(final Field field, final T entity) {
+    return field.getType().equals(String.class);
   }
 
   @Override
@@ -53,6 +55,12 @@ public class MakeCNPJ implements ValueSpecializedFactory {
       throws IllegalAccessException, IllegalArgumentException {
     field.set(entity, getCNPJ());
   }
+
+  /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
 
   /**
    * Gera um CNPJ aleatório mas válido, ou seja, o dígito verificador correto.
@@ -130,5 +138,23 @@ public class MakeCNPJ implements ValueSpecializedFactory {
     dig = cpfCaracteres - (soma % cpfCaracteres);
     cnpjCalc += ((dig == ten) || (dig == cpfCaracteres)) ? "0" : Integer.toString(dig);
     return StringUtils.substring(cnpjCalc, twelve);
+  }
+
+  // ==============
+  // Static control
+  // ==============
+  private static ValueSpecializedFactory instance = null;
+
+  /**
+   * Get a instance for this class encapsulated by ValueSpecializedFactory.
+   * 
+   * @return
+   */
+  public static synchronized ValueSpecializedFactory getInstance() {
+    if (instance == null) {
+      instance = new MakeCNPJ();
+      NotifierTests.getNotifyer().addObserver(instance);
+    }
+    return instance;
   }
 }

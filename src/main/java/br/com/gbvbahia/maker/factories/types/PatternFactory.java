@@ -3,6 +3,7 @@ package br.com.gbvbahia.maker.factories.types;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import javax.validation.constraints.Pattern;
 
@@ -72,4 +73,10 @@ public class PatternFactory implements ValueFactory {
       }
     }
   }
+
+  /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
 }

@@ -1,19 +1,21 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
+import java.lang.reflect.Field;
+import java.util.MissingResourceException;
+import java.util.Observable;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.commons.lang3.StringUtils;
+
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.reflect.Field;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Cria e-mails com formatos válidos, após @ existe uma lista de possibilidades, antes do @ uma
@@ -34,8 +36,15 @@ public class MakeEmail implements ValueSpecializedFactory {
    */
   public static final String KEY_PROPERTY = "isEmail";
 
+  /**
+   * Cannot be instantiated outside.
+   */
+  private MakeEmail() {
+    super();
+  }
+
   @Override
-  public boolean workValue(final String value) {
+  public boolean workValue(String fieldName, String value) {
     LogInfo.logDebugInformation("MakeEmail", I18N.getMsg("workValueMake", value));
     if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
       return true;
@@ -56,6 +65,12 @@ public class MakeEmail implements ValueSpecializedFactory {
   }
 
   /**
+   * Observer to warn about the test stage.
+   */
+  @Override
+  public void update(Observable notifierTests, Object notification) {}
+
+  /**
    * Gera um e-mail válido aleatoriamente. O texto após @ é fixo em algumas possibilidades.
    * <code>{"@hotmail.com", "@gmail.com","@ig.com.br",
    * "@amazon.com","@mycompany.com","@aol.com",
@@ -66,9 +81,10 @@ public class MakeEmail implements ValueSpecializedFactory {
    */
   public static String getEmail() {
     int emaiPos = MakeInteger.getMax(MAX_PROPERTIES_EMAILS);
-    String nameIni = MakeCharacter.getLetter().toString() + MakeCharacter.getLetter().toString()
-        + MakeCharacter.getLetter().toString()
-        + MakeString.getString(4, MakeString.StringType.NUMBER);
+    String nameIni =
+        MakeCharacter.getLetter().toString() + MakeCharacter.getLetter().toString()
+            + MakeCharacter.getLetter().toString()
+            + MakeString.getString(4, MakeString.StringType.NUMBER);
     String email = getMsg(emaiPos);
     return nameIni.toLowerCase().trim() + email;
   }
@@ -89,5 +105,23 @@ public class MakeEmail implements ValueSpecializedFactory {
           "Maker: E-mail não encontrada para {0}", new Object[] {"email" + posicao});
       return "email" + posicao;
     }
+  }
+
+  // ==============
+  // Static control
+  // ==============
+  private static ValueSpecializedFactory instance = null;
+
+  /**
+   * Get a instance for this class encapsulated by ValueSpecializedFactory.
+   * 
+   * @return
+   */
+  public static synchronized ValueSpecializedFactory getInstance() {
+    if (instance == null) {
+      instance = new MakeEmail();
+      NotifierTests.getNotifyer().addObserver(instance);
+    }
+    return instance;
   }
 }

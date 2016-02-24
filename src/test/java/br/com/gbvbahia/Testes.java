@@ -8,6 +8,7 @@ import br.com.gbvbahia.i18n.I18NTest;
 import br.com.gbvbahia.maker.MakeEntitySynteticTest;
 import br.com.gbvbahia.maker.MakeEntityTest;
 import br.com.gbvbahia.maker.MakeEntitysTest;
+import br.com.gbvbahia.maker.onetoone.OneToOneTest;
 import br.com.gbvbahia.maker.properties.MakePropertiesTest;
 import br.com.gbvbahia.maker.types.date.MakeCalendarTest;
 import br.com.gbvbahia.maker.types.date.MakeDateTest;
@@ -15,6 +16,7 @@ import br.com.gbvbahia.maker.types.string.MakeCharacterTest;
 import br.com.gbvbahia.maker.types.string.MakeStringTest;
 import br.com.gbvbahia.maker.types.wrappers.*;
 import br.com.gbvbahia.maker.works.*;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -45,7 +47,8 @@ import org.junit.runners.Suite;
     MakeListTest.class,
     MakeSetTest.class,
     MakeBetweenTest.class,
-    MakeInTest.class
+    MakeInTest.class,
+    OneToOneTest.class
 })
 public class Testes {
 }

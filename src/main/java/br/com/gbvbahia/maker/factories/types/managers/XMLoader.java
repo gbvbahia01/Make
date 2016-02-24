@@ -1,5 +1,6 @@
-package br.com.gbvbahia.maker.factories.types.properties;
+package br.com.gbvbahia.maker.factories.types.managers;
 
+import java.awt.IllegalComponentStateException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,6 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.properties.exception.XMLoaderException;
 
 /**
@@ -36,6 +38,20 @@ public class XMLoader {
   private Document document = null;
 
   private static XMLoader loader = null;
+
+  /**
+   * Call after a loader was created using the method getLoader(String xmlName).
+   * 
+   * @return a previously loader created.
+   * @exception IllegalComponentStateException if the method getLoader(String xmlName) was not
+   *            called before.
+   */
+  public static XMLoader getLoader() {
+    if (loader == null) {
+      throw new IllegalComponentStateException(I18N.getMsg("xmlLoaderNullException"));
+    }
+    return loader;
+  }
 
   /**
    * This is a singleton class for xml file. If you send another xml a new XMLoader will be created,
