@@ -15,7 +15,7 @@ import java.util.Observer;
  * @since v.2 02/24/2016
  *
  */
-public class NotifierTests {
+public class NotifierTests extends Observable {
 
   // ==============
   // Static control
@@ -42,24 +42,25 @@ public class NotifierTests {
   // ================
   // Instance control
   // ================
-  private Observable reported;
-
-  private NotifierTests() {
-    this.reported = new Observable();
-  }
+  /**
+   * Cannot be instantiated outside.
+   */
+  private NotifierTests() {}
 
   /**
    * Notify all Observers that the test started.
    */
   public void notifyTestBegin(String... testName) {
-    this.reported.notifyObservers(new Notification(TEST_BEGIN, testName));
+    super.setChanged();
+    super.notifyObservers(new Notification(TEST_BEGIN, testName));
   }
 
   /**
    * Notify all Observers that the test end.
    */
   public void notifyTestEnd(String... testName) {
-    this.reported.notifyObservers(new Notification(TEST_END, testName));
+    super.setChanged();
+    super.notifyObservers(new Notification(TEST_END, testName));
     this.testOver();
   }
 
@@ -68,14 +69,15 @@ public class NotifierTests {
    * 
    * @param observer
    */
+  @Override
   public void addObserver(Observer observer) {
-    this.reported.addObserver(observer);
+    super.addObserver(observer);
   }
 
   /**
    * Must be called when the test is over.
    */
   private void testOver() {
-    this.reported.deleteObservers();
+    super.deleteObservers();
   }
 }
