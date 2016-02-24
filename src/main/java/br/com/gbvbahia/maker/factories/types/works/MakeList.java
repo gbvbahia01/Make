@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.managers.NamesManager;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.factories.types.works.commons.CollectionsHelper;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
@@ -92,8 +92,11 @@ public class MakeList implements ValueSpecializedFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {
-    this.ruleHelper.clear();
+  public void testStageChanged(Notification notification) {
+    if (notification.isTestFinished()) {
+      this.ruleHelper.clear();
+      instance = null;
+    }
   }
 
   /**

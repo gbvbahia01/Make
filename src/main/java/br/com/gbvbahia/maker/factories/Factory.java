@@ -74,6 +74,7 @@ public final class Factory {
       Factory.logger.info(I18N.getMsg("warnAboutLoadXml"));
       loadSetup(null);
     }
+    FACTORIES.clear();
     Factory.testName = testNameProp;
     Factory.specializedFactoryManager = new ValueFactoryManager(testNameProp);
     // This order is important do not change.

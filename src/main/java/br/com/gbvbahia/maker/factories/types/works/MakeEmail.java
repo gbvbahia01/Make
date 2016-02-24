@@ -2,7 +2,6 @@ package br.com.gbvbahia.maker.factories.types.works;
 
 import java.lang.reflect.Field;
 import java.util.MissingResourceException;
-import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +9,7 @@ import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
@@ -68,7 +68,11 @@ public class MakeEmail implements ValueSpecializedFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {}
+  public void testStageChanged(Notification notification) {
+    if (notification.isTestFinished()) {
+      instance = null;
+    }
+  }
 
   /**
    * Gera um e-mail válido aleatoriamente. O texto após @ é fixo em algumas possibilidades.

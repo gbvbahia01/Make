@@ -3,7 +3,6 @@ package br.com.gbvbahia.maker.factories.types;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
 import javax.validation.constraints.Pattern;
 
@@ -11,6 +10,7 @@ import org.apache.commons.logging.Log;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
@@ -78,5 +78,5 @@ public class PatternFactory implements ValueFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {}
+  public void testStageChanged(Notification notification) {}
 }

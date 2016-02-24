@@ -1,11 +1,11 @@
 package br.com.gbvbahia.maker.properties;
 
 import java.lang.reflect.Field;
-import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
@@ -43,10 +43,8 @@ public class CEPWorkTest implements ValueSpecializedFactory {
   }
 
   /**
-   * Object notification is a br.com.gbvbahia.maker.factories.types.managers.Notification you can
-   * safely do a cast.<br>
-   * Notification infoTest = (Notification) notification;
+   * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {}
+  public void testStageChanged(Notification notification) {}
 }

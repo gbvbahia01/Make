@@ -1,7 +1,6 @@
 package br.com.gbvbahia.maker.factories.types;
 
 import java.lang.reflect.Field;
-import java.util.Observable;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -56,10 +55,14 @@ public class MaxMinFactory implements ValueFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {
-    Notification infoTest = (Notification) notification;
+  public void testStageChanged(Notification notification) {
+    Notification infoTest = notification;
     if (infoTest.isTestFinished()) {
       this.numberManager.clear();
+      instance = null;
+    }
+    if (infoTest.isTestStarted()) {
+      this.numberManager.loadNumberFactories();
     }
   }
 

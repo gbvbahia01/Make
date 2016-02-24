@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -114,10 +113,13 @@ public class MakeIn implements ValueSpecializedFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {
-    Notification infoTest = (Notification) notification;
-    if (infoTest.isTestFinished()) {
+  public void testStageChanged(Notification notification) {
+    if (notification.isTestFinished()) {
       this.numberManager.clear();
+      instance = null;
+    }
+    if (notification.isTestStarted()) {
+      this.numberManager.loadNumberFactories();
     }
   }
 

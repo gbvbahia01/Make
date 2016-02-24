@@ -5,7 +5,8 @@
 package br.com.gbvbahia.maker.factories.types.common;
 
 import java.lang.reflect.Field;
-import java.util.Observer;
+
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests.Notified;
 
 /**
  * Cada tipo de valor será criado por classes que imeplementam ValueFactory.<br>
@@ -16,7 +17,7 @@ import java.util.Observer;
  * @since v.1 20/5/2012
  * @author Guilherme
  */
-public interface ValueFactory extends Observer {
+public interface ValueFactory extends Notified {
 
   /**
    * Executa ação de criar valor(es) para ser(em) inseridos no field.

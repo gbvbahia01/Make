@@ -1,7 +1,7 @@
 package br.com.gbvbahia.maker.factories.types.managers;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is responsible to notify all objects thats need to be informed about the start and/or the
@@ -15,7 +15,17 @@ import java.util.Observer;
  * @since v.2 02/24/2016
  *
  */
-public class NotifierTests extends Observable {
+public class NotifierTests {
+
+  /**
+   * Use for all classes that needs to be informed about the stage of test is changed.
+   * 
+   * @author Guilherme Braga
+   *
+   */
+  public interface Notified {
+    public void testStageChanged(Notification notification);
+  }
 
   // ==============
   // Static control
@@ -42,6 +52,9 @@ public class NotifierTests extends Observable {
   // ================
   // Instance control
   // ================
+
+  private List<Notified> observers = new ArrayList<Notified>();
+
   /**
    * Cannot be instantiated outside.
    */
@@ -51,16 +64,18 @@ public class NotifierTests extends Observable {
    * Notify all Observers that the test started.
    */
   public void notifyTestBegin(String... testName) {
-    super.setChanged();
-    super.notifyObservers(new Notification(TEST_BEGIN, testName));
+    for (Notified observer : this.observers) {
+      observer.testStageChanged(new Notification(TEST_BEGIN, testName));
+    }
   }
 
   /**
    * Notify all Observers that the test end.
    */
   public void notifyTestEnd(String... testName) {
-    super.setChanged();
-    super.notifyObservers(new Notification(TEST_END, testName));
+    for (Notified observer : this.observers) {
+      observer.testStageChanged(new Notification(TEST_END, testName));
+    }
     this.testOver();
   }
 
@@ -69,15 +84,14 @@ public class NotifierTests extends Observable {
    * 
    * @param observer
    */
-  @Override
-  public void addObserver(Observer observer) {
-    super.addObserver(observer);
+  public void addObserver(Notified observer) {
+    this.observers.add(observer);
   }
 
   /**
    * Must be called when the test is over.
    */
   private void testOver() {
-    super.deleteObservers();
+    this.observers.clear();
   }
 }

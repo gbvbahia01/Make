@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Observable;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.managers.NamesManager;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.factories.types.works.commons.CollectionsHelper;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
@@ -89,7 +89,12 @@ public class MakeSet implements ValueSpecializedFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {}
+  public void testStageChanged(Notification notification) {
+    if (notification.isTestFinished()) {
+      this.ruleHelper.clear();
+      instance = null;
+    }
+  }
 
   /**
    * Popula info (CollectionsHelper) com informações necessárias para criar e popular o List.

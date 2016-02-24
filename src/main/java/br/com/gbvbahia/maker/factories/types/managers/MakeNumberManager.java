@@ -34,13 +34,12 @@ public class MakeNumberManager {
   public MakeNumberManager() {
     super();
     this.factoriesNumber = new ArrayList<MakeNumber>();
-    this.loadNumberFactories();
   }
 
   /**
    * Call when the test start.
    */
-  private void loadNumberFactories() {
+  public void loadNumberFactories() {
     this.factoriesNumber.add(new MakeBigDecimal());
     this.factoriesNumber.add(new MakeBigInteger());
     this.factoriesNumber.add(new MakeByte());

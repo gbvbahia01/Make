@@ -3,7 +3,6 @@ package br.com.gbvbahia.maker.factories.types.managers;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,9 +76,8 @@ public class ValueFactoryManager implements ValueFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {
-    Notification infoTest = (Notification) notification;
-    if (infoTest.isTestFinished()) {
+  public void testStageChanged(Notification notification) {
+    if (notification.isTestFinished()) {
       this.valueFactories.clear();
       this.specializedManager.clear();
     }
