@@ -42,7 +42,7 @@ public class EnumFactory implements ValueFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void testStageChanged(Notification notification) {
+  public void updateStage(Notification notification) {
     if (notification.isTestFinished()) {
       instance = null;
     }

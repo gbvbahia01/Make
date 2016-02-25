@@ -24,7 +24,7 @@ public class NotifierTests {
    *
    */
   public interface Notified {
-    public void testStageChanged(Notification notification);
+    public void updateStage(Notification notification);
   }
 
   // ==============
@@ -65,7 +65,7 @@ public class NotifierTests {
    */
   public void notifyTestBegin(String... testName) {
     for (Notified observer : this.observers) {
-      observer.testStageChanged(new Notification(TEST_BEGIN, testName));
+      observer.updateStage(new Notification(TEST_BEGIN, testName));
     }
   }
 
@@ -74,7 +74,7 @@ public class NotifierTests {
    */
   public void notifyTestEnd(String... testName) {
     for (Notified observer : this.observers) {
-      observer.testStageChanged(new Notification(TEST_END, testName));
+      observer.updateStage(new Notification(TEST_END, testName));
     }
     this.testOver();
   }

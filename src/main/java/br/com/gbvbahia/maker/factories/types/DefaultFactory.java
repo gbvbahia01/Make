@@ -191,15 +191,15 @@ public class DefaultFactory extends MaxMinFactory {
    * Observer to warn about the test stage.
    */
   @Override
-  public void testStageChanged(Notification notification) {
+  public void updateStage(Notification notification) {
     Notification infoTest = notification;
     if (infoTest.isTestFinished()) {
       this.mapOneToOne.clear();
-      super.testStageChanged(notification);
+      super.updateStage(notification);
       instance = null;
     }
     if (infoTest.isTestStarted()) {
-      super.testStageChanged(notification);
+      super.updateStage(notification);
     }
   }
 
