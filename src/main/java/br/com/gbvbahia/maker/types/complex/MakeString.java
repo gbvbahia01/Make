@@ -177,8 +177,8 @@ public final class MakeString {
     if (caracteres > MAX_LENGTH_SUPPORTS) {
       throw new IllegalArgumentException(I18N.getMsg("sizeLenghFatal", MAX_LENGTH_SUPPORTS));
     } else if (caracteres < 0) {
-      throw new IllegalArgumentException(
-          I18N.getMsg("caractereToStringErro", new Integer(caracteres)));
+      throw new IllegalArgumentException(I18N.getMsg("caractereToStringErro", new Integer(
+          caracteres)));
     } else if (caracteres == 0) {
       return true;
     }
@@ -195,7 +195,6 @@ public final class MakeString {
     try {
       return ResourceBundle.getBundle("loren_make").getString("loren" + posicao);
     } catch (MissingResourceException e) {
-      e.printStackTrace();
       Logger.getLogger(I18N.class.getName()).log(Level.SEVERE,
           "Maker: Loren não encontrada para {0}", new Object[] {"loren" + posicao});
       return "loren" + posicao;
@@ -233,8 +232,11 @@ public final class MakeString {
           I18N.getMsg("minLorenError", maxCaracteres, MIN_CARACTERES_LOREN));
     } else if (maxCaracteres > MAX_LENGTH_SUPPORTS) {
       linhas = MAX_CARACTERES_LOREN;
-      LogInfo.logWarnInformation("MakeString", I18N.getMsg("minLorenError", maxCaracteres,
-          MAX_CARACTERES_LOREN * CARACTERES_LINE_LOREN));
+      LogInfo
+          .logWarnInformation(
+              "MakeString",
+              I18N.getMsg("minLorenError", maxCaracteres, MAX_CARACTERES_LOREN
+                  * CARACTERES_LINE_LOREN));
     } else {
       linhas = maxCaracteres / CARACTERES_LINE_LOREN;
       if (linhas == 0) {

@@ -96,7 +96,6 @@ public class MakeBetween implements ValueSpecializedFactory {
         try {
           number.insertValue(field, entity, this.numberHelper.get(keyField).getValue());
         } catch (NumberFormatException nf) {
-          nf.printStackTrace();
           throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
               new String[] {this.numberHelper.get(keyField).toString()}, nf);
         }

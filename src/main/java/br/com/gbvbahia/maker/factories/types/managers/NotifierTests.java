@@ -36,6 +36,8 @@ public class NotifierTests {
   private static NotifierTests notifier = null;
   public static final Integer TEST_BEGIN = 1;
   public static final Integer TEST_END = 2;
+  public static final Integer TEST_RECURSION_BEGIN = 3;
+  public static final Integer TEST_RECURSION_END = 4;
 
   /**
    * Recover a instance of NotifierTests.
@@ -66,6 +68,34 @@ public class NotifierTests {
   public void notifyTestBegin(String... testName) {
     for (Notified observer : this.observers) {
       observer.updateStage(new Notification(TEST_BEGIN, testName));
+    }
+  }
+
+  /**
+   * Notify all observer about recursion in the test is about to begin. Amount of calls made at
+   * MakeEntity.makeEntity method after first. If the value is 1 means that: two calls are made: the
+   * first call by developer and the second call made by framework to create a new complex object.
+   * 
+   * @param amount of recursion made by framework.
+   * @param testName the name of the test.
+   */
+  public void notifyTestRecursionBegin(Integer amount, String... testName) {
+    for (Notified observer : this.observers) {
+      observer.updateStage(new Notification(TEST_RECURSION_BEGIN, amount, testName));
+    }
+  }
+
+  /**
+   * Notify all observer about recursion in the test is finished. Amount of calls made at
+   * MakeEntity.makeEntity method after first. If the value is 1 means that: two calls are made: the
+   * first call by developer and the second call made by framework to create a new complex object.
+   * 
+   * @param amount of recursion made by framework.
+   * @param testName the name of the test.
+   */
+  public void notifyTestRecursionEnd(Integer amount, String... testName) {
+    for (Notified observer : this.observers) {
+      observer.updateStage(new Notification(TEST_RECURSION_END, amount, testName));
     }
   }
 

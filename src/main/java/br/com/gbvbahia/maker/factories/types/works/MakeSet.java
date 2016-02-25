@@ -113,11 +113,9 @@ public class MakeSet implements ValueSpecializedFactory {
       this.ruleHelper.put(fieldName, new CollectionsHelper(Class.forName(clazz), new Integer(min),
           new Integer(max)));
     } catch (ClassNotFoundException ce) {
-      ce.printStackTrace();
       throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
           new String[] {clazz}, ce);
     } catch (NumberFormatException nf) {
-      nf.printStackTrace();
       throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
           new String[] {minMax}, nf);
     }

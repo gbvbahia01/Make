@@ -104,7 +104,6 @@ public class MakeEmail implements ValueSpecializedFactory {
       String email = ResourceBundle.getBundle("emails_make").getString("email" + posicao);
       return email;
     } catch (MissingResourceException e) {
-      e.printStackTrace();
       Logger.getLogger(I18N.class.getName()).log(Level.SEVERE,
           "Maker: E-mail não encontrada para {0}", new Object[] {"email" + posicao});
       return "email" + posicao;

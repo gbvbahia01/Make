@@ -101,7 +101,6 @@ public class MakeIn implements ValueSpecializedFactory {
           number.insertValue(field, entity,
               inList.get(MakeInteger.getIntervalo(0, inList.size() - 1)));
         } catch (NumberFormatException nf) {
-          nf.printStackTrace();
           throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
               new String[] {inList.toString()}, nf);
         }

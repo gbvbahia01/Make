@@ -51,11 +51,13 @@ public class OneToOneTest extends TestCase {
       Assert.assertTrue("Some can have wife null", true);
       LogInfo.getLog(OneToOneTest.class.getName() + " testHusbandCreationReadSome").info(
           "A husband´s wife was not created");
+      return;
     }
     if (husband.getWife().getHusband() == null) {
       Assert.assertTrue("Some can husbend of wife null", true);
       LogInfo.getLog(OneToOneTest.class.getName() + " testHusbandCreationReadSome").info(
           "A husband for wife was not created");
+      return;
     }
     Assert.assertTrue("The husbands are not the same",
         husband.getWife().equals(husband.getWife().getHusband().getWife()));

@@ -81,7 +81,6 @@ public class MakeName implements ValueSpecializedFactory {
     try {
       return ResourceBundle.getBundle("names_make").getString("nome" + posicao);
     } catch (MissingResourceException e) {
-      e.printStackTrace();
       Logger.getLogger(I18N.class.getName()).log(Level.SEVERE,
           "Maker: Nome não encontrada para {0}", new Object[] {"nome" + posicao});
       return "nome" + posicao;

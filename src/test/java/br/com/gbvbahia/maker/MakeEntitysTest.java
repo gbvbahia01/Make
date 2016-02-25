@@ -8,13 +8,15 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.gbvbahia.entities.EntityNotNullTest;
+import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.log.LogInfo;
-import junit.framework.TestCase;
 
 /**
  * @since v.1 01/05/2012
@@ -38,6 +40,7 @@ public class MakeEntitysTest extends TestCase {
 
   @Test
   public void testEntitysError() throws Exception {
+    Factory.loadSetup("make.xml");
     logger.info("Entity - EntitysError");
     boolean excecao = false;
     try {
@@ -59,6 +62,7 @@ public class MakeEntitysTest extends TestCase {
 
   @Test
   public void testEntitysList() throws Exception {
+    Factory.loadSetup("make.xml");
     logger.info("Entity - EntitysList");
     List<EntityNotNullTest> tests = MakeEntity.makeEntities(EntityNotNullTest.class, 10);
     for (EntityNotNullTest test : tests) {

@@ -27,7 +27,7 @@ public class MakeEntity {
    */
   private static Log logger = LogFactory.getLog(MakeEntity.class.getSimpleName());
 
-  private static int counter = 0;
+  private static Integer counter = 0;
 
   /**
    * Cria a entidade com atributos populados.<br>
@@ -43,25 +43,19 @@ public class MakeEntity {
     LogInfo.logMakeStartDebug(MakeEntity.class.getSimpleName(), entityParam);
     try {
       Factory.configureFactories(testName);
-      if (counter++ == 0) {
-        NotifierTests.getNotifyer().notifyTestBegin(testName);
-      }
+      notifyStarted(testName);
       T entityReturn = entityParam.newInstance();
       prepareValue(entityParam, entityReturn, testName);
       LogInfo.logMakeEndDebug(MakeEntity.class.getSimpleName(), entityParam);
       return entityReturn;
     } catch (InstantiationException ex) {
-      ex.printStackTrace();
       logger.error(I18N.getMsg("instantiationException", entityParam.getName()), ex);
       throw new RuntimeException(ex);
     } catch (IllegalAccessException ex) {
-      ex.printStackTrace();
       logger.error(I18N.getMsg("illegalAccessException", entityParam.getName()), ex);
       throw new RuntimeException(ex);
     } finally {
-      if (--counter == 0) {
-        NotifierTests.getNotifyer().notifyTestEnd(testName);
-      }
+      notifyEnded(testName);
     }
   }
 
@@ -81,6 +75,22 @@ public class MakeEntity {
       } finally {
         field.setAccessible(accessField);
       }
+    }
+  }
+
+  private static void notifyEnded(String... testName) {
+    if (--counter == 0) {
+      NotifierTests.getNotifyer().notifyTestEnd(testName);
+    } else {
+      NotifierTests.getNotifyer().notifyTestRecursionBegin(counter, testName);
+    }
+  }
+
+  private static void notifyStarted(String... testName) {
+    if (counter++ == 0) {
+      NotifierTests.getNotifyer().notifyTestBegin(testName);
+    } else {
+      NotifierTests.getNotifyer().notifyTestRecursionBegin(counter - 1, testName);
     }
   }
 
