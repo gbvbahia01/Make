@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.persistence.OneToOne;
 
@@ -31,7 +29,7 @@ import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
  * @since v.1 20/05/2012
  * @author Guilherme
  */
-public class DefaultFactory extends MaxMinFactory implements Observer {
+public class DefaultFactory extends MaxMinFactory {
 
   /**
    * For logging changes edit the log4j.properties inside src/test/resources
@@ -60,7 +58,6 @@ public class DefaultFactory extends MaxMinFactory implements Observer {
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
-    this.mapOneToOne.put(entity.getClass(), entity);
     if (field.getType().equals(String.class)) {
       LogInfo.logDefaultValue(entity, field, this.className);
       field.set(entity, MakeString.getString(MakeString.MIN_LENGTH_DEFAULT,
@@ -102,7 +99,7 @@ public class DefaultFactory extends MaxMinFactory implements Observer {
   private boolean hasFielDefaultConstructor(Field field) {
     Constructor<?>[] constructors = field.getType().getConstructors();
     for (int i = 0; i < constructors.length; i++) {
-      if (constructors[i].getTypeParameters().length == 0) {
+      if (constructors[i].getParameterTypes().length == 0) {
         return true;
       }
     }
@@ -194,10 +191,15 @@ public class DefaultFactory extends MaxMinFactory implements Observer {
    * Observer to warn about the test stage.
    */
   @Override
-  public void update(Observable notifierTests, Object notification) {
-    Notification infoTest = (Notification) notification;
+  public void testStageChanged(Notification notification) {
+    Notification infoTest = notification;
     if (infoTest.isTestFinished()) {
       this.mapOneToOne.clear();
+      super.testStageChanged(notification);
+      instance = null;
+    }
+    if (infoTest.isTestStarted()) {
+      super.testStageChanged(notification);
     }
   }
 
