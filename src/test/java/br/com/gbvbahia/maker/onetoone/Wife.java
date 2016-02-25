@@ -2,8 +2,6 @@ package br.com.gbvbahia.maker.onetoone;
 
 import javax.persistence.OneToOne;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-
 public class Wife {
 
   private int age;
@@ -12,7 +10,6 @@ public class Wife {
 
   public Wife() {
     super();
-    LogInfo.getLog(Wife.class.getName()).warn("A Wife was created");
   }
 
   @OneToOne(mappedBy = "wife")
