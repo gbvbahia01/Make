@@ -46,7 +46,6 @@ public class MakeEntity {
       notifyStarted(testName);
       T entityReturn = entityParam.newInstance();
       prepareValue(entityParam, entityReturn, testName);
-      LogInfo.logMakeEndDebug(MakeEntity.class.getSimpleName(), entityParam);
       return entityReturn;
     } catch (InstantiationException ex) {
       logger.error(I18N.getMsg("instantiationException", entityParam.getName()), ex);
@@ -55,6 +54,7 @@ public class MakeEntity {
       logger.error(I18N.getMsg("illegalAccessException", entityParam.getName()), ex);
       throw new RuntimeException(ex);
     } finally {
+      LogInfo.logMakeEndDebug(MakeEntity.class.getSimpleName(), entityParam);
       notifyEnded(testName);
     }
   }
@@ -78,6 +78,12 @@ public class MakeEntity {
     }
   }
 
+  /**
+   * Need to be called after Factory.configureFactories(testName) because all factories are listener
+   * of stage test.
+   * 
+   * @param testName the tests names that will be used.
+   */
   private static void notifyStarted(String... testName) {
     if (counter++ == 0) {
       NotifierTests.getNotifyer().notifyTestBegin(testName);

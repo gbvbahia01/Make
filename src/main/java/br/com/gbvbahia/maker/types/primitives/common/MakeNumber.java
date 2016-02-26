@@ -1,132 +1,134 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in the editor.
  */
 package br.com.gbvbahia.maker.types.primitives.common;
 
-import br.com.gbvbahia.maker.log.LogInfo;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.apache.commons.lang3.StringUtils;
 
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.log.LogInfo;
+
 /**
- * Unifica trabalhos das classes que criam números.
- *
+ * Define one contract for all class that create numbers.
+ * 
  * @since v.1 10/06/2012
- * @author Guilherme
+ * @author Guilherme Braga
  */
 public abstract class MakeNumber {
 
-    /**
-     * Se o field tiver o tipo que o produtor trabalha retorna true, caso
-     * contrario false. Por exemplo, se o Field for String, MakeLong
-     * retorna false e MakeString retornaria true.
-     *
-     * @param f O field que terá o valor definido.
-     * @return True para se trabalha com e false se não trabalha.
-     */
-    public abstract boolean isMyType(Field f);
+  /**
+   * It is used to inform to the caller if can create values for the field passed.
+   *
+   * @param field that will have a value made.
+   * @return true can make or false cannot make.
+   */
+  public abstract boolean isMyType(Field field);
 
-    /**
-     * Insere o valor no field da entidade passada, o valor deverá ser
-     * fabricado de acordo com a anotação da JSR303 que houver no field.
-     *
-     * @param <T> Tipo da entidade passada.
-     * @param f Field da entidade a ser populado
-     * @param entity Entidade a ter um field populado.
-     */
-    public abstract <T> void insertValue(Field f, T entity)
-            throws IllegalArgumentException, IllegalAccessException;
+  /**
+   * Create a value to put in the field parameter.<br>
+   * Before to use this method you must call isMyType method to check if is possible to make a value
+   * for the field parameter.<br>
+   * The value will be made in the method and will respect the xml setup rules.
+   *
+   * @param <T> Type of the entity object.
+   * @param field that will have a value made.
+   * @param entity object that has he field to be populated.
+   */
+  public abstract <T> void insertValue(Field field, T entity) throws IllegalArgumentException,
+      IllegalAccessException;
 
-    /**
-     * Insere o valor passado no field da entidade passada, o valor será
-     * convertido para o tipo do field.
-     *
-     * @param <T> Tipo da entidade passada.
-     * @param f Field da entidade a ser populado
-     * @param value Valor a ser inserido no field da entidade a ser
-     * populado.
-     * @param entity Entidade a ter um field populado.
-     */
-    public abstract <T> void insertValue(Field f, T entity, String value)
-            throws IllegalArgumentException, IllegalAccessException;
+  /**
+   * Put the value to the field. The parameter value will be converted to the type of field.
+   *
+   * @param <T> Type of the entity object.
+   * @param field that will have a value made.
+   * @param entity object that has he field to be populated.
+   * @param value a value that will be converted to the type of field and will put into it.
+   */
+  public abstract <T> void insertValue(Field field, T entity, String value)
+      throws IllegalArgumentException, IllegalAccessException;
 
-    /**
-     * Cria um valor entre os valores anotados com
-     * javax.validation.constraints.Min ou javax.validation.constraints.Max
-     * da especificação JSR303.<br> Se não encontrar os valores irá
-     * utilizar os determinados nos parâmetros minValue e/ou MaxValue
-     *
-     * @param f Campo a ter o valor determinado.
-     * @param minValue Mínimo aceitavel, será utilizado se não houver a
-     * anotação @Min da JSR303.
-     * @param maxValue Máximo aceitavel, será utilizado se não houver a
-     * anotação @Max da JSR303.
-     * @return Array de duas posições, [0] será o minimo e [1] o máximo.
-     */
-    protected Number[] getMinMaxValues(
-            final Field f,
-            final Number minValue,
-            final Number maxValue) {
-        Number[] toReturn = new Number[2];
-        if (f.isAnnotationPresent(Min.class)) {
-            toReturn[0] = new Long(f.getAnnotation(Min.class).value());
-        } else if (f.isAnnotationPresent(DecimalMin.class)) {
-            toReturn[0] = new Double(f.getAnnotation(DecimalMin.class).value());
-        } else if (f.isAnnotationPresent(Digits.class)) {
-            toReturn[0] = 0.0;
-        } else {
-            LogInfo.logDefaultValue(f.getDeclaringClass().getSimpleName(),
-                    f, "NumberFactory");
-            toReturn[0] = minValue.doubleValue();
-        }
-        if (f.isAnnotationPresent(Max.class)) {
-            toReturn[1] = new Long(f.getAnnotation(Max.class).value());
-        } else if (f.isAnnotationPresent(DecimalMax.class)) {
-            toReturn[1] = new Double(f.getAnnotation(DecimalMax.class).value());
-        } else if (f.isAnnotationPresent(Digits.class)) {
-            toReturn[1] = maxDigits(f.getAnnotation(Digits.class).integer());
-        } else {
-            LogInfo.logDefaultValue(f.getDeclaringClass().getSimpleName(),
-                    f, "NumberFactory");
-            toReturn[1] = maxValue.doubleValue();
-        }
-        return toReturn;
+  /**
+   * This method can have two behaviors:<br>
+   * 1. If the xml setup is set to read for JSR303 this method will search for @Min and @Max
+   * annotations and use mix and max values respectively. If cannot find for those annotations its
+   * will use the method parameters minValue and maxValue.<br>
+   * 2. If the xml setup is set to ignore JSR303 this method will ignore the @Min and @Max
+   * annotations and will use the parameters minValue and maxValue.
+   *
+   * @param field that will have a value made.
+   * @param minValue acceptable to be created, used only if cannot use @Min annotation.
+   * @param maxValue acceptable to be created, used only if cannot use @Max annotation.
+   * @return Array with two positions, [0] minimum value and [1] the maximum value.
+   */
+  protected Number[] getMinMaxValues(Field field, Number minValue, Number maxValue) {
+    Number[] toReturn = new Number[2];
+    boolean readJsr303 = Factory.SETUP.readJsr303();
+    if (field.isAnnotationPresent(Min.class) && readJsr303) {
+      toReturn[0] = new Long(field.getAnnotation(Min.class).value());
+    } else if (field.isAnnotationPresent(DecimalMin.class) && readJsr303) {
+      toReturn[0] = new Double(field.getAnnotation(DecimalMin.class).value());
+    } else if (field.isAnnotationPresent(Digits.class)) {
+      toReturn[0] = 0.0;
+    } else {
+      LogInfo.logDefaultValue(field.getDeclaringClass().getSimpleName(), field, "NumberFactory");
+      toReturn[0] = minValue.doubleValue();
     }
-
-    /**
-     * Cria um número maior possivel com a quantidade de digitos
-     * informado.<br> Máximo Long é 9,223,372,036,854,775,807L, utilizo 8
-     * porque 9 teria problema em: 9,999,999,999,999,999,999L NOK, oito
-     * aguenta uma casa decimal a mais: 8,888,888,888,888,888,888L OK
-     *
-     * @param integer Representa a quantidade de números.
-     * @return Se integer fo 2, retorna 88, se for 3, 888...
-     */
-    protected Long maxDigits(final int integer) {
-        String toReturn = "";
-        return new Long(StringUtils.leftPad(toReturn, integer, "8"));
+    if (field.isAnnotationPresent(Max.class) && readJsr303) {
+      toReturn[1] = new Long(field.getAnnotation(Max.class).value());
+    } else if (field.isAnnotationPresent(DecimalMax.class) && readJsr303) {
+      toReturn[1] = new Double(field.getAnnotation(DecimalMax.class).value());
+    } else if (field.isAnnotationPresent(Digits.class) && readJsr303) {
+      toReturn[1] = this.maxDigits(field.getAnnotation(Digits.class).integer());
+    } else {
+      LogInfo.logDefaultValue(field.getDeclaringClass().getSimpleName(), field, "NumberFactory");
+      toReturn[1] = maxValue.doubleValue();
     }
+    return toReturn;
+  }
 
-    /**
-     * Verifica se existe a anotação Digits no field, se existir garante
-     * que o valor a ser definido esteja dentro da qantidade máxima
-     * delimitada.
-     *
-     * @param f Field que terá o valor determinado.
-     * @param valor Valor que será inserido no field.
-     * @return O valor passado se não houver @Digits, se houver o valor
-     * será alterado para se encaixar na necessidade.
-     */
-    protected Number maxDecimal(final Field f, final Number valor) {
-        if (f.isAnnotationPresent(Digits.class)) {
-            int maxDecimal = f.getAnnotation(Digits.class).fraction();
-            return new BigDecimal(valor.toString()).setScale(maxDecimal,
-                    RoundingMode.HALF_EVEN).doubleValue();
-        } else {
-            return valor;
-        }
+  /**
+   * Creates the greatest number possible.<br>
+   *
+   * @param amountDigits represents the amount of numbers, 3 = 999, 5 = 99999.
+   * @return a larger number with the digits informed.
+   */
+  protected Long maxDigits(int amountDigits) {
+    String toReturn = "";
+    if (amountDigits < 19) {
+      return new Long(StringUtils.leftPad(toReturn, amountDigits, "9"));
+    } else {
+      return Long.MAX_VALUE;
     }
+  }
+
+  /**
+   * Checks if the annotation @Digits is present on the field and the JSR303 is defined read in the
+   * xml. If true a value valid for that annotation will be made.
+   *
+   * @param field that will have a value made.
+   * @param value that will be put in the field.
+   * @return If @Digits is present and read in xml the value will be changed to respect it else the
+   *         value parameter will be returned as the same.
+   */
+  protected Number maxDecimal(Field field, Number value) {
+    boolean readJsr303 = Factory.SETUP.readJsr303();
+    if (field.isAnnotationPresent(Digits.class) && readJsr303) {
+      int maxDecimal = field.getAnnotation(Digits.class).fraction();
+      return new BigDecimal(value.toString()).setScale(maxDecimal, RoundingMode.HALF_EVEN)
+          .doubleValue();
+    } else {
+      return value;
+    }
+  }
 }

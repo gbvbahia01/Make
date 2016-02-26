@@ -63,7 +63,11 @@ public class NotifierTests {
   private NotifierTests() {}
 
   /**
-   * Notify all Observers that the test started.
+   * Notify all Observers that the test started. Need to be called after
+   * Factory.configureFactories(testName) because all factories are listener of stage test and they
+   * will only be made after this call.
+   * 
+   * @param testName the tests names that will be used.
    */
   public void notifyTestBegin(String... testName) {
     for (Notified observer : this.observers) {

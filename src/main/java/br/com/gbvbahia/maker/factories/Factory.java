@@ -43,7 +43,10 @@ public final class Factory {
    * Configura o nome do teste para recuperar informações no arquivo make.properties.
    */
   private static String[] testName;
-  public static Setup SETUP;
+  /**
+   * Setup is instantiated but not configured.
+   */
+  public static Setup SETUP = new Setup(null);
 
   /**
    * Contém uma lista das Factories para cada tipo, ao ser solicitado uma será retornada.
@@ -53,7 +56,7 @@ public final class Factory {
   private static ValueFactoryManager specializedFactoryManager = null;
 
   /**
-   * If you need another xml file for setup or you want rename make.xml you need clall this method
+   * If you need another xml file for setup or you want rename make.xml you must call this method
    * before start tests.
    * 
    * @param xmlSetupFile the xml setup file to load all test setup.
@@ -69,7 +72,7 @@ public final class Factory {
    * @param testNameProp all tests that will be loaded.
    */
   public static void configureFactories(final String... testNameProp) {
-    if (SETUP == null) {
+    if ((SETUP == null) || !SETUP.isCreated()) {
       Factory.logger.info(I18N.getMsg("setupMakeXmlDefault"));
       Factory.logger.info(I18N.getMsg("warnAboutLoadXml"));
       loadSetup(null);
@@ -131,9 +134,20 @@ public final class Factory {
     private static final String NULL_NEVER = "never";
     private String jsr303;
     private String nullFields;
+    private boolean created;
 
+    /**
+     * Define all behavior of framework reading the setupMap.
+     * 
+     * @param setupMap
+     */
     public Setup(Map<String, String> setupMap) {
+      this.created = false;
+      if (setupMap == null) {
+        return;
+      }
       this.changeSetup(setupMap);
+      this.created = true;
     }
 
     private void changeSetup(Map<String, String> setupMap) {
@@ -221,23 +235,33 @@ public final class Factory {
     }
 
     public boolean readJsr303() {
-      return this.jsr303.equals(JSR303_READ);
+      return JSR303_READ.equals(this.jsr303);
     }
 
     public boolean ignoreJsr303() {
-      return this.jsr303.equals(JSR303_IGNORE);
+      return JSR303_IGNORE.equals(this.jsr303);
     }
 
     public boolean alwaysNull() {
-      return this.nullFields.equals(NULL_ALWAYS);
+      return NULL_ALWAYS.equals(this.nullFields);
     }
 
     public boolean someNull() {
-      return this.nullFields.equals(NULL_SOME);
+      return NULL_SOME.equals(this.nullFields);
     }
 
     public boolean neverNull() {
-      return this.nullFields.equals(NULL_NEVER);
+      return NULL_NEVER.equals(this.nullFields);
     }
+
+    /**
+     * If setup was defined with a valid map this will be true.
+     * 
+     * @return true if all SETUP was set and false if not.
+     */
+    public boolean isCreated() {
+      return this.created;
+    }
+
   }
 }
