@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gbvbahia.entities;
+
+import javax.validation.constraints.NotNull;
 
 import br.com.gbvbahia.entityes.constantes.EnumCleanTest;
 import br.com.gbvbahia.entityes.constantes.EnumExternalTest;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -14,47 +11,45 @@ import javax.validation.constraints.NotNull;
  */
 public class EntityEnumTest2 {
 
-    enum TestEnum {
+  enum TestEnum {
 
-        PRIMERO, SEGUNDO, TERCEIRO, QUARTO
-    }
-    @NotNull
-    private TestEnum testEnum;
-    @NotNull
-    private EnumExternalTest enumExternalTest;
-    @NotNull
-    private EnumCleanTest enumCleanTest;
+    PRIMERO, SEGUNDO, TERCEIRO, QUARTO
+  }
 
-    public TestEnum getTestEnum() {
-        return testEnum;
-    }
+  @NotNull
+  private TestEnum testEnum;
+  @NotNull
+  private EnumExternalTest enumExternalTest;
+  @NotNull
+  private EnumCleanTest enumCleanTest;
 
-    public void setTestEnum(TestEnum testEnum) {
-        this.testEnum = testEnum;
-    }
+  public TestEnum getTestEnum() {
+    return this.testEnum;
+  }
 
-    public EnumExternalTest getEnumExternalTest() {
-        return enumExternalTest;
-    }
+  public void setTestEnum(TestEnum testEnum) {
+    this.testEnum = testEnum;
+  }
 
-    public void setEnumExternalTest(EnumExternalTest enumExternalTest) {
-        this.enumExternalTest = enumExternalTest;
-    }
+  public EnumExternalTest getEnumExternalTest() {
+    return this.enumExternalTest;
+  }
 
-    public EnumCleanTest getEnumCleanTest() {
-        return enumCleanTest;
-    }
+  public void setEnumExternalTest(EnumExternalTest enumExternalTest) {
+    this.enumExternalTest = enumExternalTest;
+  }
 
-    public void setEnumCleanTest(EnumCleanTest enumCleanTest) {
-        this.enumCleanTest = enumCleanTest;
-    }
+  public EnumCleanTest getEnumCleanTest() {
+    return this.enumCleanTest;
+  }
 
-    @Override
-    public String toString() {
-        return "EntityEnumTest{"
-                + "testEnum=" + testEnum
-                + "enumExternalTest=" + enumExternalTest
-                + "enumCleanTest=" + enumCleanTest
-                + '}';
-    }
+  public void setEnumCleanTest(EnumCleanTest enumCleanTest) {
+    this.enumCleanTest = enumCleanTest;
+  }
+
+  @Override
+  public String toString() {
+    return "EntityEnumTest{" + "testEnum=" + this.testEnum + "enumExternalTest="
+        + this.enumExternalTest + "enumCleanTest=" + this.enumCleanTest + '}';
+  }
 }

@@ -1,6 +1,3 @@
-/*
- * To change this template, choose Tools | Templates and open the template in the editor.
- */
 package br.com.gbvbahia.maker.types.date;
 
 import static org.junit.Assert.assertNotNull;

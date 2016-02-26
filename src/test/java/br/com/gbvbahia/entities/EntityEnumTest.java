@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gbvbahia.entities;
 
-import br.com.gbvbahia.entityes.constantes.EnumExternalTest;
 import javax.validation.constraints.NotNull;
+
+import br.com.gbvbahia.entityes.constantes.EnumExternalTest;
 
 /**
  *
@@ -13,38 +10,37 @@ import javax.validation.constraints.NotNull;
  */
 public class EntityEnumTest {
 
-    enum TestEnum {
+  enum TestEnum {
 
-        PRIMERO, SEGUNDO, TERCEIRO, QUARTO
-    }
-    @NotNull
-    private TestEnum testEnum;
-    @NotNull
-    private EnumExternalTest enumExternalTest;
+    PRIMERO, SEGUNDO, TERCEIRO, QUARTO
+  }
 
-    
-    public TestEnum getTestEnum() {
-        return testEnum;
-    }
-
-    public void setTestEnum(TestEnum testEnum) {
-        this.testEnum = testEnum;
-    }
+  @NotNull
+  private TestEnum testEnum;
+  @NotNull
+  private EnumExternalTest enumExternalTest;
 
 
-    public EnumExternalTest getEnumExternalTest() {
-        return enumExternalTest;
-    }
+  public TestEnum getTestEnum() {
+    return this.testEnum;
+  }
 
-    public void setEnumExternalTest(EnumExternalTest enumExternalTest) {
-        this.enumExternalTest = enumExternalTest;
-    }
+  public void setTestEnum(TestEnum testEnum) {
+    this.testEnum = testEnum;
+  }
 
-    @Override
-    public String toString() {
-        return "EntityEnumTest{"
-                + "testEnum=" + testEnum
-                + "enumExternalTest=" + enumExternalTest
-                + '}';
-    }
+
+  public EnumExternalTest getEnumExternalTest() {
+    return this.enumExternalTest;
+  }
+
+  public void setEnumExternalTest(EnumExternalTest enumExternalTest) {
+    this.enumExternalTest = enumExternalTest;
+  }
+
+  @Override
+  public String toString() {
+    return "EntityEnumTest{" + "testEnum=" + this.testEnum + "enumExternalTest="
+        + this.enumExternalTest + '}';
+  }
 }

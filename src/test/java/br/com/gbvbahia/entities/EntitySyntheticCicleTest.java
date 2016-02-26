@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gbvbahia.entities;
 
 import javax.persistence.Entity;
@@ -14,24 +10,21 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class EntitySyntheticCicleTest {
-    
-    @NotNull
-    private String nome;
-    
-    @NotNull
-    private EntitySyntheticTest cicle;
-    
-    @NotNull
-    @OneToOne(mappedBy="cicleTest")
-    private EntitySyntheticTest mapped;
 
-    @Override
-    public String toString() {
-        return "EntitySyntheticCicleTest{"
-                + "nome=" + nome
-                + "mapped=" + mapped
-                + '}';
-    }
-    
-    
+  @NotNull
+  private String nome;
+
+  @NotNull
+  private EntitySyntheticTest cicle;
+
+  @NotNull
+  @OneToOne(mappedBy = "cicleTest")
+  private EntitySyntheticTest mapped;
+
+  @Override
+  public String toString() {
+    return "EntitySyntheticCicleTest{" + "nome=" + this.nome + "mapped=" + this.mapped + '}';
+  }
+
+
 }
