@@ -1,11 +1,11 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in the editor.
  */
 package br.com.gbvbahia.maker.types.primitives;
 
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import java.lang.reflect.Field;
+
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 /**
  * Cria um valor booleano aleatório.
@@ -15,33 +15,30 @@ import java.lang.reflect.Field;
  */
 public final class MakeBoolean {
 
-    /**
-     * Devolve um valor booleano, true ou false.
-     *
-     * @return True ou False.
-     */
-    public static Boolean getBoolean() {
-        return MakeInteger.getMax(2) == 2;
-    }
+  /**
+   * Devolve um valor booleano, true ou false.
+   *
+   * @return True ou False.
+   */
+  public static Boolean getBoolean() {
+    return MakeInteger.getMax(2) == 2;
+  }
 
-    /**
-     * Retorna True para tipos Boolean ou boolean.
-     *
-     * @param f Field a ser avaliado.
-     * @return True para tipos Boolean ou boolean, False para outros
-     * tipos.
-     */
-    public static boolean isBoolean(Field f) {
-        if (f.getType().equals(Boolean.class)
-                || f.getType().equals(boolean.class)) {
-            return true;
-        }
-        return false;
+  /**
+   * Retorna True para tipos Boolean ou boolean.
+   *
+   * @param f Field a ser avaliado.
+   * @return True para tipos Boolean ou boolean, False para outros tipos.
+   */
+  public static boolean isBoolean(Field f) {
+    if (f.getType().equals(Boolean.class) || f.getType().equals(boolean.class)) {
+      return true;
     }
+    return false;
+  }
 
-    /**
-     * Não pode ser instânciado.
-     */
-    private MakeBoolean() {
-    }
+  /**
+   * Não pode ser instânciado.
+   */
+  private MakeBoolean() {}
 }
