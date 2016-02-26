@@ -19,42 +19,43 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
 public class MakeBigDecimal extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
+  public <T> void insertValue(Field field, T entity) throws IllegalArgumentException,
       IllegalAccessException {
-    Number[] minMax = this.getMinMaxValues(f, -Double.MAX_VALUE, Double.MAX_VALUE);
+    Number[] minMax = this.getMinMaxValues(field, -Double.MAX_VALUE, Double.MAX_VALUE);
     double min = minMax[0].doubleValue();
     double max = minMax[1].doubleValue();
     Double intervalo = new Double(MakeDouble.getIntervalo(min, max));
-    this.insertValue(f, entity, this.maxDecimal(f, intervalo).toString());
+    this.insertValue(field, entity, this.maxDecimal(field, intervalo).toString());
   }
 
   @Override
-  public <T> void insertValue(Field f, T entity, String value) throws IllegalArgumentException,
+  public <T> void insertValue(Field field, T entity, String value) throws IllegalArgumentException,
       IllegalAccessException {
-    f.set(entity, new BigDecimal(value));
+    field.set(entity, new BigDecimal(value));
   }
 
   @Override
-  public boolean isMyType(final Field f) {
-    return isBigDecimal(f);
+  public boolean isMyType(final Field field) {
+    return isBigDecimal(field);
   }
 
   /**
-   * Gera um número entre os valores solicitados.
+   * Makes a number between min parameter and max parameter.
    *
-   * @param min Número minimo aceitavel.
-   * @param max Número máximo aceitavel.
-   * @return Número aleatório.
+   * @param min minimum acceptable number.
+   * @param max maximum acceptable number.
+   * @return a random number between min and max parameters.
    */
   public static BigDecimal getIntervalo(final double min, final double max) {
     return new BigDecimal(MakeDouble.getIntervalo(min, max).toString());
   }
 
   /**
-   * Retorna um número aleatório limitado ao max passado.
+   * Creates a number up max parameter.<br>
+   * The minimum acceptable as parameter max is 1.
    *
-   * @param max Minimo 1.
-   * @return Double limitado ao max.
+   * @param max the maximum value the return can be. Must be at least 1.
+   * @return a value up max.
    */
   public static BigDecimal getMax(final double max) {
     if (max <= 0) {
@@ -65,13 +66,13 @@ public class MakeBigDecimal extends MakeNumber {
   }
 
   /**
-   * Retorna True para tipos Float ou float.
+   * Checks if the field is a type BigDecimal.
    *
-   * @param f Field a ser avaliado.
-   * @return True para tipos Float ou float, False para outros tipos.
+   * @param field to be evaluated.
+   * @return true if is BigDecimal type false if not.
    */
-  public static boolean isBigDecimal(final Field f) {
-    if (f.getType().equals(BigDecimal.class)) {
+  public static boolean isBigDecimal(final Field field) {
+    if (field.getType().equals(BigDecimal.class)) {
       return true;
     }
     return false;
