@@ -192,13 +192,12 @@ public class DefaultFactory extends MaxMinFactory {
    */
   @Override
   public void updateStage(Notification notification) {
-    Notification infoTest = notification;
-    if (infoTest.isTestFinished()) {
+    if (notification.isTestFinished()) {
       this.mapOneToOne.clear();
       super.updateStage(notification);
       instance = null;
     }
-    if (infoTest.isTestStarted()) {
+    if (notification.isTestStarted()) {
       super.updateStage(notification);
     }
   }

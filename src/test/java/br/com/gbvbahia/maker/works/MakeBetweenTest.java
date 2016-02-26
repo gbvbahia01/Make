@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import br.com.gbvbahia.entities.EntityBetweenTest;
 import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.works.MakeBetween;
 import br.com.gbvbahia.maker.log.LogInfo;
 
@@ -90,6 +91,7 @@ public class MakeBetweenTest extends TestCase {
   @Test
   public void testPopularBetween() throws Exception {
     logger.info("String - GetPopularBetween");
+    Factory.loadSetup("make.xml");
     for (int i = 0; i < 50; i++) {
       EntityBetweenTest test = MakeEntity.makeEntity(EntityBetweenTest.class, "testBetween1");
       logger.debug(test);

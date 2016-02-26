@@ -78,19 +78,19 @@ public class MakeEntity {
     }
   }
 
-  private static void notifyEnded(String... testName) {
-    if (--counter == 0) {
-      NotifierTests.getNotifyer().notifyTestEnd(testName);
-    } else {
-      NotifierTests.getNotifyer().notifyTestRecursionBegin(counter, testName);
-    }
-  }
-
   private static void notifyStarted(String... testName) {
     if (counter++ == 0) {
       NotifierTests.getNotifyer().notifyTestBegin(testName);
     } else {
       NotifierTests.getNotifyer().notifyTestRecursionBegin(counter - 1, testName);
+    }
+  }
+
+  private static void notifyEnded(String... testName) {
+    if (--counter == 0) {
+      NotifierTests.getNotifyer().notifyTestEnd(testName);
+    } else {
+      NotifierTests.getNotifyer().notifyTestRecursionEnd(counter, testName);
     }
   }
 

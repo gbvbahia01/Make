@@ -19,6 +19,7 @@ import br.com.gbvbahia.entities.EntityListComplexTest;
 import br.com.gbvbahia.entities.EntityListTest;
 import br.com.gbvbahia.entities.EntityPatternTest;
 import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.works.MakeList;
 import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
@@ -48,6 +49,7 @@ public class MakeListTest extends TestCase {
   @Test
   public void testPopularLista() throws Exception {
     logger.info("String - GetPopularLista");
+    Factory.loadSetup("make.xml");
     EntityListTest test = MakeEntity.makeEntity(EntityListTest.class, "testList1");
     logger.debug(test);
     assertNotNull("Test 1: test não pode ser nulo.", test);

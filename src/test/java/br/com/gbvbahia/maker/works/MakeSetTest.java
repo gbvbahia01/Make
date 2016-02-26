@@ -9,6 +9,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,9 +19,9 @@ import br.com.gbvbahia.entities.EntityPatternTest;
 import br.com.gbvbahia.entities.EntitySetComplexTest;
 import br.com.gbvbahia.entities.EntitySetTest;
 import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.works.MakeSet;
 import br.com.gbvbahia.maker.log.LogInfo;
-import junit.framework.TestCase;
 
 /**
  * @since v.1 01/05/2012
@@ -98,6 +100,7 @@ public class MakeSetTest extends TestCase {
   @Test
   public void testPopularSet() throws Exception {
     logger.info("String - GetPopularSet");
+    Factory.loadSetup("make.xml");
     EntitySetTest test = MakeEntity.makeEntity(EntitySetTest.class, "testSet1");
     logger.debug(test);
     assertNotNull("Test 1: test não pode ser nulo.", test);

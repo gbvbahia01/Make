@@ -1,5 +1,7 @@
 package br.com.gbvbahia.maker.factories.types.managers;
 
+import java.util.Arrays;
+
 /**
  * The object passed when a notification need to be sent.
  * 
@@ -68,6 +70,31 @@ public class Notification {
   public Integer getRecursion() {
     return this.recursion;
   }
+
+  /**
+   * public static final Integer TEST_BEGIN = 1; public static final Integer TEST_END = 2; public
+   * static final Integer TEST_RECURSION_BEGIN = 3; public static final Integer TEST_RECURSION_END =
+   * 4;
+   */
+  @Override
+  public String toString() {
+    String stage = "";
+    if (NotifierTests.TEST_BEGIN.equals(this.stageTest)) {
+      stage = "Test begin";
+    }
+    if (NotifierTests.TEST_END.equals(this.stageTest)) {
+      stage = "Test end";
+    }
+    if (NotifierTests.TEST_RECURSION_BEGIN.equals(this.stageTest)) {
+      stage = "Test recursion begin";
+    }
+    if (NotifierTests.TEST_RECURSION_END.equals(this.stageTest)) {
+      stage = "Test recursion end";
+    }
+    return "Notification [ recursion:" + this.recursion + " stageTest:" + stage + ", testName:"
+        + Arrays.toString(this.testName) + "]";
+  }
+
 
 
 }

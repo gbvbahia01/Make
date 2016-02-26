@@ -9,15 +9,17 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.gbvbahia.entities.EntityPatternTest;
 import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.works.MakeEmail;
 import br.com.gbvbahia.maker.log.LogInfo;
-import junit.framework.TestCase;
 
 /**
  * @since v.1 01/05/2012
@@ -40,6 +42,7 @@ public class MakeEmailTest extends TestCase {
   @Test
   public void testMakePattern() throws Exception {
     logger.info("Entity - MakePattern");
+    Factory.loadSetup("make.xml");
     List<String> listEmail = new ArrayList<String>();
     for (int i = 0; i < 10; i++) {
       listEmail.add(MakeEmail.getEmail());
