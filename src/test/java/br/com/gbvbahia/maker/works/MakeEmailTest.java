@@ -51,11 +51,11 @@ public class MakeEmailTest extends TestCase {
       EntityPatternTest test = MakeEntity.make(EntityPatternTest.class, "test2");
       logger.debug(test);
       assertNotNull("Test é nulo.", test);
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
-  private void validarJSR303(Object test) {
+  private void validarJsr303(Object test) {
     Set<ConstraintViolation<Object>> erros = this.validator.validate(test);
     for (ConstraintViolation<Object> erro : erros) {
       logger.error(erro.getMessage());

@@ -14,7 +14,7 @@ import br.com.gbvbahia.maker.types.complex.MakeString;
  * @since v.1 01/05/2012
  * @author Guilherme
  */
-public class CEPWorkTest implements ValueSpecializedFactory {
+public class CepWorkTest implements ValueSpecializedFactory {
 
   /**
    * Como o propertie deve estár definido no valor: "isCEP".

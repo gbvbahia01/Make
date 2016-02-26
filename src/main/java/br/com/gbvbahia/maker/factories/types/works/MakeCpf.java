@@ -19,7 +19,7 @@ import br.com.gbvbahia.maker.types.complex.MakeString;
  * @since v.1 09/06/2012
  * @author Guilherme
  */
-public class MakeCPF implements ValueSpecializedFactory {
+public class MakeCpf implements ValueSpecializedFactory {
 
   /**
    * Como o propertie deve estár definido no valor: "isCPF".
@@ -29,7 +29,7 @@ public class MakeCPF implements ValueSpecializedFactory {
   /**
    * Cannot be instantiated outside.
    */
-  private MakeCPF() {}
+  private MakeCpf() {}
 
   /**
    * Retorna uma string no formato de um CPF válido, em relação a validação do digito verificador.
@@ -39,7 +39,7 @@ public class MakeCPF implements ValueSpecializedFactory {
    *
    * @return String no formato de um CPF válido.
    */
-  public static String getCPF() {
+  public static String getCpf() {
     String noveDigitos = MakeString.getString(9, MakeString.StringType.NUMBER);
     return noveDigitos + calcularDigitoVerificador(noveDigitos);
   }
@@ -47,7 +47,7 @@ public class MakeCPF implements ValueSpecializedFactory {
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
-    field.set(entity, getCPF());
+    field.set(entity, getCpf());
   }
 
   @Override
@@ -135,7 +135,7 @@ public class MakeCPF implements ValueSpecializedFactory {
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {
-      instance = new MakeCPF();
+      instance = new MakeCpf();
       NotifierTests.getNotifyer().addObserver(instance);
     }
     return instance;

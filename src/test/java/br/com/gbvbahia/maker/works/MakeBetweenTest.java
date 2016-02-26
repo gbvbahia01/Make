@@ -122,11 +122,11 @@ public class MakeBetweenTest extends TestCase {
       condition = (test.getBetween_M5_5() >= -5) && (test.getBetween_M5_5() <= 5);
       assertTrue("Test 7: Entre -5 e 5: " + test.getBetween_M5_5(), condition);
 
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
-  private void validarJSR303(Object test) {
+  private void validarJsr303(Object test) {
     Set<ConstraintViolation<Object>> erros = this.validator.validate(test);
     for (ConstraintViolation<Object> erro : erros) {
       logger.error(erro.getMessage());

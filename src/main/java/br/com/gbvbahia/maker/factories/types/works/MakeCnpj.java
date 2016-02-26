@@ -23,7 +23,7 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
  * @since v.1 09/06/2012
  * @author Guilherme
  */
-public class MakeCNPJ implements ValueSpecializedFactory {
+public class MakeCnpj implements ValueSpecializedFactory {
 
   /**
    * Como o propertie deve estár definido no valor: "isCNPJ".
@@ -33,7 +33,7 @@ public class MakeCNPJ implements ValueSpecializedFactory {
   /**
    * Cannot be instantiated outside.
    */
-  private MakeCNPJ() {}
+  private MakeCnpj() {}
 
   @Override
   public boolean workValue(String fieldName, String value) {
@@ -53,7 +53,7 @@ public class MakeCNPJ implements ValueSpecializedFactory {
   @Override
   public <T> void makeValue(Field field, final T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
-    field.set(entity, getCNPJ());
+    field.set(entity, getCnpj());
   }
 
   /**
@@ -71,7 +71,7 @@ public class MakeCNPJ implements ValueSpecializedFactory {
    *
    * @return CNPJ válido.
    */
-  public static String getCNPJ() {
+  public static String getCnpj() {
     String cnpj = MakeString.getString(8, MakeString.StringType.NUMBER);
     if (MakeBoolean.getBoolean()) {
       Integer filiais = MakeInteger.getMax(11);
@@ -156,7 +156,7 @@ public class MakeCNPJ implements ValueSpecializedFactory {
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {
-      instance = new MakeCNPJ();
+      instance = new MakeCnpj();
       NotifierTests.getNotifyer().addObserver(instance);
     }
     return instance;

@@ -62,7 +62,7 @@ public class MakeEntityTest extends TestCase {
     EntityEnumTest test = MakeEntity.make(EntityEnumTest.class);
     assertNotNull("Test é nulo.", test);
     assertNotNull("EnumExternalTest nula", test.getEnumExternalTest());
-    this.validarJSR303(test);
+    this.validarJsr303(test);
     try {
       EntityEnumTest2 test2 = MakeEntity.make(EntityEnumTest2.class);
     } catch (UnsupportedOperationException e) {
@@ -80,7 +80,7 @@ public class MakeEntityTest extends TestCase {
       logger.debug(test);
       assertNotNull("Test é nulo.", test);
       assertNotNull("LimiteDefault nula", test.getLimiteDefault());
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
@@ -92,7 +92,7 @@ public class MakeEntityTest extends TestCase {
       logger.debug(test);
       assertNotNull("Test é nulo.", test);
       assertNotNull("NoNullDate nula", test.getNoNullDate());
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
@@ -104,7 +104,7 @@ public class MakeEntityTest extends TestCase {
       logger.debug(test);
       assertNotNull("Test é nulo.", test);
       assertNotNull("BigDecimal nulo", test.getBigDecimal());
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
@@ -125,7 +125,7 @@ public class MakeEntityTest extends TestCase {
           .doubleValue() >= 1.79769313486231570E+307);
       assertTrue("ShortObjeto menor que 32760 ou maior que 32765: " + test.getShortObjeto(),
           (test.getShortObjeto() >= 32760) && (test.getShortObjeto() <= 32765));
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
@@ -140,7 +140,7 @@ public class MakeEntityTest extends TestCase {
     assertFalse("BooleanObjectFalse nao false", test.getBooleanObjectFalse());
     assertFalse("BooleanPrimitiveFalse nao false", test.getBooleanPrimitiveFalse());
     assertNotNull("booleanTrueOrFalse nulo", test.getBooleanTrueOrFalse());
-    this.validarJSR303(test);
+    this.validarJsr303(test);
   }
 
   @Test
@@ -184,7 +184,7 @@ public class MakeEntityTest extends TestCase {
           (test.getFloatObjeto() >= 5000) || (test.getFloatObjeto() <= 5150));
       assertTrue("Valor primitivoFloat inesperado",
           (test.getPrimitivoFloat() >= 1) || (test.getPrimitivoFloat() <= 3));
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
@@ -215,7 +215,7 @@ public class MakeEntityTest extends TestCase {
       assertTrue("Valor primitivoFloat inesperado", test.getPrimitivoFloat() >= 1);
       assertTrue("longObjetoMinMaxValue valor inválido: " + test.getLongObjetoMinMaxValue(),
           test.getLongObjetoMinMaxValue() >= (Long.MAX_VALUE - 1));
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
@@ -246,7 +246,7 @@ public class MakeEntityTest extends TestCase {
       assertTrue("Valor primitivoFloat inesperado", test.getPrimitivoFloat() <= 1);
       assertTrue("longObjetoMinMaxValue valor inválido: " + test.getLongObjetoMinMaxValue(),
           test.getLongObjetoMinMaxValue() <= (Long.MIN_VALUE + 1));
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
@@ -268,11 +268,11 @@ public class MakeEntityTest extends TestCase {
       assertNotNull("doubleObjeto é nulo", test.getDoubleObjeto());
       assertNotNull("floatObjeto é nulo", test.getFloatObjeto());
       assertNotNull("characterObjeto é nulo", test.getCharacterObjeto());
-      this.validarJSR303(test);
+      this.validarJsr303(test);
     }
   }
 
-  private void validarJSR303(Object test) {
+  private void validarJsr303(Object test) {
     Set<ConstraintViolation<Object>> erros = this.validator.validate(test);
     for (ConstraintViolation<Object> erro : erros) {
       logger.error(erro.getMessage());

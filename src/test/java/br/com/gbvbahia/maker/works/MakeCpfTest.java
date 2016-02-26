@@ -5,18 +5,18 @@ import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.factories.types.works.MakeCPF;
+import br.com.gbvbahia.maker.factories.types.works.MakeCpf;
 import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  *
  * @author Guilherme
  */
-public class MakeCPFTest extends TestCase {
+public class MakeCpfTest extends TestCase {
 
   private static Log logger = LogInfo.getLog("Test :: MakeCPFTest");
 
-  public MakeCPFTest() {
+  public MakeCpfTest() {
     super("Maker :: CPF");
   }
 
@@ -24,11 +24,11 @@ public class MakeCPFTest extends TestCase {
    * Test of getCPF method, of class MakeCPF.
    */
   @Test
-  public void testGetCPF() {
+  public void testGetCpf() {
     logger.info("String - GetCPF");
     for (int i = 0; i < 50; i++) {
-      String result = MakeCPF.getCPF();
-      assertTrue("CPF: " + result + " INVÁLIDO!", validarCPF(result));
+      String result = MakeCpf.getCpf();
+      assertTrue("CPF: " + result + " INVÁLIDO!", validarCpf(result));
       logger.debug("CPF: " + result);
     }
   }
@@ -39,24 +39,24 @@ public class MakeCPFTest extends TestCase {
    * @return Boolean True para válido e false para inválido
    * @since 29/12/2006
    */
-  public static boolean validarCPF(String cpf) {
+  public static boolean validarCpf(String cpf) {
     cpf = cpf.replace(".", "").replace("-", "").replace(" ", "");
     if (cpf.length() != 11) {
       return false;
     }
     int d1, d2;
     int digito1, digito2, resto;
-    int digitoCPF;
+    int digitoCpf;
     String nDigResult;
     d1 = d2 = 0;
     digito1 = digito2 = resto = 0;
     for (int nCount = 1; nCount < (cpf.length() - 1); nCount++) {
-      digitoCPF = Integer.valueOf(cpf.substring(nCount - 1, nCount)).intValue();
+      digitoCpf = Integer.valueOf(cpf.substring(nCount - 1, nCount)).intValue();
       // multiplique a ultima casa por 2 a seguinte por 3 a seguinte por 4 e assim por diante.
-      d1 = d1 + ((11 - nCount) * digitoCPF);
+      d1 = d1 + ((11 - nCount) * digitoCpf);
       // para o segundo digito repita o procedimento incluindo o primeiro digito calculado no passo
       // anterior.
-      d2 = d2 + ((12 - nCount) * digitoCPF);
+      d2 = d2 + ((12 - nCount) * digitoCpf);
     }
     // Primeiro resto da divisão por 11.
     resto = (d1 % 11);

@@ -57,7 +57,7 @@ public class MakeListTest extends TestCase {
     assertTrue("Test 1: List de test não pode ser menor que 3.", test.getListPattern().size() >= 3);
     assertTrue("Test 1: List de test não pode ser maior que 5.", test.getListPattern().size() <= 5);
     for (EntityPatternTest entity : test.getListPattern()) {
-      this.validarJSR303(entity);
+      this.validarJsr303(entity);
     }
     assertNotNull("Test 2: ListComplex de test não pode ser nula.", test.getListComplex());
     assertTrue("Test 2: ListComplex de test não pode ser menor que 15.", test.getListComplex()
@@ -65,7 +65,7 @@ public class MakeListTest extends TestCase {
     assertTrue("Test 2: ListComplex de test não pode ser maior que 25.", test.getListComplex()
         .size() <= 25);
     for (EntityListComplexTest entity : test.getListComplex()) {
-      this.validarJSR303(entity);
+      this.validarJsr303(entity);
     }
   }
 
@@ -130,7 +130,7 @@ public class MakeListTest extends TestCase {
     MakeEntity.make(EntityListTest.class, "testListClassNotFoundException");
   }
 
-  private void validarJSR303(Object test) {
+  private void validarJsr303(Object test) {
     Set<ConstraintViolation<Object>> erros = this.validator.validate(test);
     for (ConstraintViolation<Object> erro : erros) {
       logger.error(erro.getMessage());

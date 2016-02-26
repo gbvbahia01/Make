@@ -8,8 +8,8 @@ import java.util.Set;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
 import br.com.gbvbahia.maker.factories.types.works.MakeBetween;
-import br.com.gbvbahia.maker.factories.types.works.MakeCNPJ;
-import br.com.gbvbahia.maker.factories.types.works.MakeCPF;
+import br.com.gbvbahia.maker.factories.types.works.MakeCnpj;
+import br.com.gbvbahia.maker.factories.types.works.MakeCpf;
 import br.com.gbvbahia.maker.factories.types.works.MakeEmail;
 import br.com.gbvbahia.maker.factories.types.works.MakeIn;
 import br.com.gbvbahia.maker.factories.types.works.MakeList;
@@ -50,8 +50,8 @@ public final class ValueSpecializedFactoryManager {
    * Load all specialized factories made with the framework.
    */
   private void loadSpecializedFactories() {
-    this.specializedFactories.put(MakeCPF.class, MakeCPF.getInstance());
-    this.specializedFactories.put(MakeCNPJ.class, MakeCNPJ.getInstance());
+    this.specializedFactories.put(MakeCpf.class, MakeCpf.getInstance());
+    this.specializedFactories.put(MakeCnpj.class, MakeCnpj.getInstance());
     this.specializedFactories.put(MakeName.class, MakeName.getInstance());
     this.specializedFactories.put(MakeEmail.class, MakeEmail.getInstance());
     this.specializedFactories.put(MakeList.class, MakeList.getInstance());

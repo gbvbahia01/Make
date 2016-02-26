@@ -5,7 +5,7 @@
     <Null value="some" /><!-- never some all -->
   </setup>
   <factories>
-    <factory>br.com.gbvbahia.maker.properties.CEPWorkTest</factory>
+    <factory>br.com.gbvbahia.maker.properties.CepWorkTest</factory>
     <factory>br.com.gbvbahia.maker.properties.FactoryCustomerService
     </factory>
   </factories>

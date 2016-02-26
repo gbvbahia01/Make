@@ -5,18 +5,18 @@ import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.factories.types.works.MakeCNPJ;
+import br.com.gbvbahia.maker.factories.types.works.MakeCnpj;
 import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  *
  * @author Guilherme
  */
-public class MakeCNPJTest extends TestCase {
+public class MakeCnpjTest extends TestCase {
 
   private static Log logger = LogInfo.getLog("Test :: MakeCNPJTest");
 
-  public MakeCNPJTest() {
+  public MakeCnpjTest() {
     super("Maker :: CNPJ");
   }
 
@@ -24,11 +24,11 @@ public class MakeCNPJTest extends TestCase {
    * Test of getCPF method, of class MakeCNPJ.
    */
   @Test
-  public void testGetCNPJ() {
+  public void testGetCnpj() {
     logger.info("String - GetCNPJ");
     for (int i = 0; i < 50; i++) {
-      String result = MakeCNPJ.getCNPJ();
-      assertTrue("CNPJ: " + result + " INVÁLIDO, Tamanho: " + result.length(), validarCNPJ(result));
+      String result = MakeCnpj.getCnpj();
+      assertTrue("CNPJ: " + result + " INVÁLIDO, Tamanho: " + result.length(), validarCnpj(result));
       logger.debug("CNPJ: " + result);
     }
   }
@@ -40,7 +40,7 @@ public class MakeCNPJTest extends TestCase {
    * @param str_cnpj
    * @return retorna verdadeiro (true) para CNPJ válido e falso (false) para CNPJ inválido
    */
-  public static boolean validarCNPJ(String str_cnpj) {
+  public static boolean validarCnpj(String str_cnpj) {
     if (str_cnpj == null) {
       return false;
     }

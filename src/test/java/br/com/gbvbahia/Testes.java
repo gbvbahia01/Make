@@ -21,8 +21,8 @@ import br.com.gbvbahia.maker.types.wrappers.MakeIntegerTest;
 import br.com.gbvbahia.maker.types.wrappers.MakeLongTest;
 import br.com.gbvbahia.maker.types.wrappers.MakeShortTest;
 import br.com.gbvbahia.maker.works.MakeBetweenTest;
-import br.com.gbvbahia.maker.works.MakeCNPJTest;
-import br.com.gbvbahia.maker.works.MakeCPFTest;
+import br.com.gbvbahia.maker.works.MakeCnpjTest;
+import br.com.gbvbahia.maker.works.MakeCpfTest;
 import br.com.gbvbahia.maker.works.MakeInTest;
 import br.com.gbvbahia.maker.works.MakeListTest;
 import br.com.gbvbahia.maker.works.MakeSetTest;
@@ -35,7 +35,7 @@ import br.com.gbvbahia.maker.works.MakeSetTest;
 @Suite.SuiteClasses({I18NTest.class, MakeBooleanTest.class, MakeByteTest.class,
     MakeShortTest.class, MakeIntegerTest.class, MakeLongTest.class, MakeFloatTest.class,
     MakeDoubleTest.class, MakeCharacterTest.class, MakeStringTest.class, MakeCalendarTest.class,
-    MakeDateTest.class, MakeCPFTest.class, MakeCNPJTest.class, MakeEntityTest.class,
+    MakeDateTest.class, MakeCpfTest.class, MakeCnpjTest.class, MakeEntityTest.class,
     MakeEntitySynteticTest.class, MakeEntitysTest.class, MakePropertiesTest.class,
     MakeListTest.class, MakeSetTest.class, MakeBetweenTest.class, MakeInTest.class,
     OneToOneTest.class})

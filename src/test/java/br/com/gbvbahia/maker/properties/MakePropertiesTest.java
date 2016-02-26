@@ -9,8 +9,8 @@ import br.com.gbvbahia.entities.EntityPropertiesTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.works.MakeCNPJTest;
-import br.com.gbvbahia.maker.works.MakeCPFTest;
+import br.com.gbvbahia.maker.works.MakeCnpjTest;
+import br.com.gbvbahia.maker.works.MakeCpfTest;
 
 /**
  * @since v.1 01/05/2012
@@ -36,9 +36,9 @@ public class MakePropertiesTest extends TestCase {
       assertTrue("Sem erros", true);
       assertNotNull("EntityPropertiesTest não pode ser nula", test);
       assertNotNull("EntityPropertiesTest.cpf não pode ser nulo", test.getCpf());
-      assertTrue("CPF não válido!", MakeCPFTest.validarCPF(test.getCpf()));
+      assertTrue("CPF não válido!", MakeCpfTest.validarCpf(test.getCpf()));
       assertNotNull("EntityPropertiesTest.cnpj não pode ser nulo", test.getCnpj());
-      assertTrue("CNPJ não válido!", MakeCNPJTest.validarCNPJ(test.getCnpj()));
+      assertTrue("CNPJ não válido!", MakeCnpjTest.validarCnpj(test.getCnpj()));
       assertNotNull("EntityPropertiesTest.nome não pode ser nulo", test.getNome());
       assertNotNull("EntityPropertiesTest.cep não pode ser nulo", test.getCep());
 
