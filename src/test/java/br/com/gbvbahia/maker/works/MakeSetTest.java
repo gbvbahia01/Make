@@ -101,7 +101,7 @@ public class MakeSetTest extends TestCase {
   public void testPopularSet() throws Exception {
     logger.info("String - GetPopularSet");
     Factory.loadSetup("make.xml");
-    EntitySetTest test = MakeEntity.makeEntity(EntitySetTest.class, "testSet1");
+    EntitySetTest test = MakeEntity.make(EntitySetTest.class, "testSet1");
     logger.debug(test);
     assertNotNull("Test 1: test não pode ser nulo.", test);
     assertNotNull("Test 1: Set de test não pode ser nula.", test.getSetPattern());

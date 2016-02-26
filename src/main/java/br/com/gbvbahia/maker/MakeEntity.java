@@ -39,7 +39,7 @@ public class MakeEntity {
    * @param entityParam Classe a ter os atributos gerados.
    * @param testName O nome do teste para ser utilizado ao ler o arquivo make.properties
    */
-  public static <T> T makeEntity(final Class<T> entityParam, String... testName) {
+  public static <T> T make(final Class<T> entityParam, String... testName) {
     LogInfo.logMakeStartDebug(MakeEntity.class.getSimpleName(), entityParam);
     try {
       Factory.configureFactories(testName);
@@ -108,7 +108,7 @@ public class MakeEntity {
     }
     List<T> toReturn = new ArrayList<T>();
     for (int i = 0; i < amount; i++) {
-      toReturn.add(makeEntity(entity, testName));
+      toReturn.add(make(entity, testName));
     }
     return toReturn;
   }

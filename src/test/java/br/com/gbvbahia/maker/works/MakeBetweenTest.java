@@ -93,7 +93,7 @@ public class MakeBetweenTest extends TestCase {
     logger.info("String - GetPopularBetween");
     Factory.loadSetup("make.xml");
     for (int i = 0; i < 50; i++) {
-      EntityBetweenTest test = MakeEntity.makeEntity(EntityBetweenTest.class, "testBetween1");
+      EntityBetweenTest test = MakeEntity.make(EntityBetweenTest.class, "testBetween1");
       logger.debug(test);
       assertNotNull("Test 0: test não pode ser nulo.", test);
 

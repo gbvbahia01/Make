@@ -32,7 +32,7 @@ public class MakePropertiesTest extends TestCase {
     Factory.loadSetup("make.xml");
     logger.info("FactoryProperties");
     for (int i = 0; i < 50; i++) {
-      EntityPropertiesTest test = MakeEntity.makeEntity(EntityPropertiesTest.class, "test1");
+      EntityPropertiesTest test = MakeEntity.make(EntityPropertiesTest.class, "test1");
       assertTrue("Sem erros", true);
       assertNotNull("EntityPropertiesTest não pode ser nula", test);
       assertNotNull("EntityPropertiesTest.cpf não pode ser nulo", test.getCpf());

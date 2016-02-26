@@ -21,7 +21,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testHusbandCreationReadNever() {
     Factory.loadSetup("make.xml");
-    Husband husband = MakeEntity.makeEntity(Husband.class);
+    Husband husband = MakeEntity.make(Husband.class);
     Assert.assertNotNull("husband was not made", husband);
 
     Assert.assertTrue("The husbands are not the same",
@@ -34,7 +34,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testWifeCreationReadNever() {
     Factory.loadSetup("make.xml");
-    Wife wife = MakeEntity.makeEntity(Wife.class);
+    Wife wife = MakeEntity.make(Wife.class);
     Assert.assertNotNull("wife was not made", wife);
     Assert.assertNotNull("wife's husband was not made", wife.getHusband());
     Assert.assertTrue("The wifes are not the same", wife.equals(wife.getHusband().getWife()));
@@ -45,7 +45,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testHusbandCreationReadSome() {
     Factory.loadSetup("make_read_some.xml");
-    Husband husband = MakeEntity.makeEntity(Husband.class);
+    Husband husband = MakeEntity.make(Husband.class);
     Assert.assertNotNull("husband was not made", husband);
     if (husband.getWife() == null) {
       Assert.assertTrue("Some can have wife null", true);
@@ -66,7 +66,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testHusbandCreationReadAll() {
     Factory.loadSetup("make_read_all.xml");
-    Husband husband = MakeEntity.makeEntity(Husband.class);
+    Husband husband = MakeEntity.make(Husband.class);
     Assert.assertNotNull("husband was not made", husband);
     Assert.assertNull("The wife is not null", husband.getWife());
   }
@@ -74,7 +74,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testWifeCreationReadAll() {
     Factory.loadSetup("make_read_all.xml");
-    Wife wife = MakeEntity.makeEntity(Wife.class);
+    Wife wife = MakeEntity.make(Wife.class);
     Assert.assertNotNull("wife was not made", wife);
     Assert.assertNull("wife's husband is not null", wife.getHusband());
   }
@@ -82,7 +82,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testHusbandCreationIgnoreNever() {
     Factory.loadSetup("make_ignore_never.xml");
-    Husband husband = MakeEntity.makeEntity(Husband.class);
+    Husband husband = MakeEntity.make(Husband.class);
     Assert.assertNotNull("husband was not made", husband);
 
     Assert.assertTrue("The husbands are not the same",
@@ -94,7 +94,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testWifeCreationIgnoreNever() {
     Factory.loadSetup("make_ignore_never.xml");
-    Wife wife = MakeEntity.makeEntity(Wife.class);
+    Wife wife = MakeEntity.make(Wife.class);
     Assert.assertNotNull("wife was not made", wife);
     Assert.assertNotNull("wife's husband was not made", wife.getHusband());
     Assert.assertTrue("The wifes are not the same", wife.equals(wife.getHusband().getWife()));
@@ -105,7 +105,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testHusbandCreationIgnoreAll() {
     Factory.loadSetup("make_ignore_all.xml");
-    Husband husband = MakeEntity.makeEntity(Husband.class);
+    Husband husband = MakeEntity.make(Husband.class);
     Assert.assertNotNull("husband was not made", husband);
     Assert.assertNull("The wife is not null", husband.getWife());
   }
@@ -113,7 +113,7 @@ public class OneToOneTest extends TestCase {
   @Test
   public void testWifeCreationIgnoreAll() {
     Factory.loadSetup("make_ignore_all.xml");
-    Wife wife = MakeEntity.makeEntity(Wife.class);
+    Wife wife = MakeEntity.make(Wife.class);
     Assert.assertNotNull("wife was not made", wife);
     Assert.assertNull("The husband is not null", wife.getHusband());
   }

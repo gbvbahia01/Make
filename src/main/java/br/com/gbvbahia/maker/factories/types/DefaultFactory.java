@@ -146,8 +146,7 @@ public class DefaultFactory extends MaxMinFactory {
       field.set(entity, this.mapOneToOne.get(field.getType()));
     } else {
       if (!this.mapOneToOne.containsKey(field.getType())) {
-        this.mapOneToOne
-            .put(field.getType(), MakeEntity.makeEntity(field.getType(), this.testName));
+        this.mapOneToOne.put(field.getType(), MakeEntity.make(field.getType(), this.testName));
       }
       field.set(entity, this.mapOneToOne.get(field.getType()));
     }

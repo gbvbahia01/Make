@@ -110,7 +110,7 @@ public class MakeInTest extends TestCase {
     logger.info("String - InValues");
     Factory.loadSetup("make.xml");
     for (int i = 0; i < 50; i++) {
-      EntityInTest test = MakeEntity.makeEntity(EntityInTest.class, "testIn1");
+      EntityInTest test = MakeEntity.make(EntityInTest.class, "testIn1");
       logger.debug(test);
       assertNotNull("Test não pode ser nulo", test);
       assertTrue("in_1_2_5 error: " + test.getIn_1_2_5(), test.getIn_1_2_5().equals(1)

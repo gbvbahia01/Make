@@ -50,7 +50,7 @@ public class MakeListTest extends TestCase {
   public void testPopularLista() throws Exception {
     logger.info("String - GetPopularLista");
     Factory.loadSetup("make.xml");
-    EntityListTest test = MakeEntity.makeEntity(EntityListTest.class, "testList1");
+    EntityListTest test = MakeEntity.make(EntityListTest.class, "testList1");
     logger.debug(test);
     assertNotNull("Test 1: test não pode ser nulo.", test);
     assertNotNull("Test 1: List de test não pode ser nula.", test.getListPattern());
@@ -127,7 +127,7 @@ public class MakeListTest extends TestCase {
 
   @Test(expected = ValueSpecializedException.class)
   public void testClassNotFoundException() {
-    MakeEntity.makeEntity(EntityListTest.class, "testListClassNotFoundException");
+    MakeEntity.make(EntityListTest.class, "testListClassNotFoundException");
   }
 
   private void validarJSR303(Object test) {

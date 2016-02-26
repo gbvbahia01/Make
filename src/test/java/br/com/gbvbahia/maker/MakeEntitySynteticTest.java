@@ -25,7 +25,7 @@ public class MakeEntitySynteticTest extends TestCase {
   public void testMakeSyntetic() throws Exception {
     Factory.loadSetup("make.xml");
     logger.info("Entity - MakeSyntetic");
-    EntitySyntheticTest test = MakeEntity.makeEntity(EntitySyntheticTest.class);
+    EntitySyntheticTest test = MakeEntity.make(EntitySyntheticTest.class);
     assertNotNull("Test é nulo.", test);
     assertNotNull("Ref Ciclica nula.", test.getCicleTest());
     assertNotNull("Entidade NotNullTest nula", test.getNotNullTest());
