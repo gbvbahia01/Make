@@ -1,78 +1,78 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in the editor.
  */
 package br.com.gbvbahia.maker.types.complex;
 
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
-import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
+
 /**
- * Gerador de números inteiros aleatório.
+ * A number factory to work with BigInteger fields.
  *
  * @since v.1 10/06/2012
- * @author Guilherme
+ * @author Guilherme Braga
  */
 public class MakeBigInteger extends MakeNumber {
 
-    @Override
-    public <T> void insertValue(final Field f, final T entity)
-            throws IllegalArgumentException, IllegalAccessException {
-        Number[] minMax = getMinMaxValues(f, Long.MIN_VALUE,
-                Long.MAX_VALUE);
-        long min = minMax[0].longValue();
-        long max = minMax[1].longValue();
-        insertValue(f, entity, MakeLong.getIntervalo(min, max).toString());
-    }
+  @Override
+  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
+      IllegalAccessException {
+    Number[] minMax = this.getMinMaxValues(f, Long.MIN_VALUE, Long.MAX_VALUE);
+    long min = minMax[0].longValue();
+    long max = minMax[1].longValue();
+    this.insertValue(f, entity, MakeLong.getIntervalo(min, max).toString());
+  }
 
-    @Override
-    public <T> void insertValue(Field f, T entity, String value)
-            throws IllegalArgumentException, IllegalAccessException {
-        f.set(entity, new BigInteger(value));
-    }
+  @Override
+  public <T> void insertValue(Field f, T entity, String value) throws IllegalArgumentException,
+      IllegalAccessException {
+    f.set(entity, new BigInteger(value));
+  }
 
-    @Override
-    public boolean isMyType(final Field f) {
-        return isBigInteger(f);
-    }
+  @Override
+  public boolean isMyType(final Field f) {
+    return isBigInteger(f);
+  }
 
-    /**
-     * Gera um número entre os valores solicitados.
-     *
-     * @param min Número minimo aceitavel.
-     * @param max Número máximo aceitavel.
-     * @return Número aleatório.
-     */
-    public static BigInteger getIntervalo(final long min, final long max) {
-        return new BigInteger(MakeLong.getIntervalo(min, max).toString());
-    }
+  /**
+   * Makes a number between min parameter and max parameter.
+   *
+   * @param min minimum acceptable number.
+   * @param max maximum acceptable number.
+   * @return a random number between min and max parameters.
+   */
+  public static BigInteger getIntervalo(final long min, final long max) {
+    return new BigInteger(MakeLong.getIntervalo(min, max).toString());
+  }
 
-    /**
-     * Retorna um número aleatório limitado ao max passado.
-     *
-     * @param max Minimo 1.
-     * @return Integer limitado ao max.
-     */
-    public static BigInteger getMax(final long max) {
-        if (max <= 0) {
-            throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
-        }
-        return new BigInteger(MakeLong.getIntervalo(0, max).toString());
+  /**
+   * Creates a number up max parameter.<br>
+   * The minimum acceptable as parameter max is 1.
+   *
+   * @param max the maximum value the return can be. Must be at least 1.
+   * @return a value up max.
+   */
+  public static BigInteger getMax(final long max) {
+    if (max <= 0) {
+      throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
     }
+    return new BigInteger(MakeLong.getIntervalo(0, max).toString());
+  }
 
-    /**
-     * Retorna True para tipos Integer ou int.
-     *
-     * @param f Field a ser avaliado.
-     * @return True para tipos Integer ou int, False para outros tipos.
-     */
-    public static boolean isBigInteger(final Field f) {
-        if (f.getType().equals(BigInteger.class)) {
-            return true;
-        }
-        return false;
+  /**
+   * Checks if the field is a type BigInteger.
+   *
+   * @param field to be evaluated.
+   * @return true if is BigInteger type false if not.
+   */
+  public static boolean isBigInteger(final Field field) {
+    if (field.getType().equals(BigInteger.class)) {
+      return true;
     }
+    return false;
+  }
 }
