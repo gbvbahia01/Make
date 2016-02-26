@@ -72,6 +72,7 @@ public class MakeName implements ValueSpecializedFactory {
   }
 
   /**
+   * It fetches two names from names_make.properties file.<br>
    * Retira dois valores do arquivo: nomes.properties, onde todos os nomes ficam armazenados.
    *
    * @param posicao indica qual posição deverá ser trazido o nome, de 0 até 1281.

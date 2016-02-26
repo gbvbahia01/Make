@@ -4,10 +4,7 @@
 
 package br.com.gbvbahia.maker.types.complex;
 
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,79 +14,64 @@ import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 /**
- * Cria Strings no perfil solicitado.
+ * Build a String determined by enum String type.
  *
  * @since 21/04/2012
- * @author Guilherme
+ * @author Guilherme Braga
  */
 public final class MakeString {
 
   /**
-   * Utilize para determinar o tipo de Caracteres que podem ser retornados na String.<br>
-   * ALL: Todos os tipos de caracter.<br>
-   * LETTER: Somente caracter tipo letrra a-zA-Z incluindo espaço.<br>
-   * NUMBER: Somente numeros.<br>
-   * SYMBOL: Qualquer caracter dentro de MakeCharacter.SYMBOLS<br>
+   * Use to determine the type of characters that will be returned.<br>
+   * ALL: all types of characters can be returned.<br>
+   * LETTER: only characters between a-zA-Z space is included.<br>
+   * NUMBER: only numbers.<br>
+   * SYMBOL: any character inside of MakeCharacter.SYMBOLS<br>
    */
   public enum StringType {
-
-    /**
-     * LETTER: Somente caracter tipo letrra a-zA-Z <b>incluindo</b> espaço.
-     */
-    LETTER,
-    /**
-     * NUMBER: Somente numeros.
-     */
-    NUMBER,
-    /**
-     * Qualquer caracter dentro de MakeCharacter.SYMBOLS.
-     */
-    SYMBOL,
-    /**
-     * Todos os tipos de caracter.
-     */
-    ALL
+    LETTER, NUMBER, SYMBOL, ALL
   };
 
   /**
-   * O arquivo loren.properties possui uma quantidade limitada de linhas loren, essa variável
-   * armazena o limite.
+   * Means the amount of lines in loren.properties file.
    */
   private static final int MAX_PROPERTIES_LOREN = 206;
   /**
-   * Representa a quantidade de caracteres por linha no arquivo loren.properties.
+   * Means then amount of characters by line in loren.properties file.
+   * 
    */
   private static final int CARACTERES_LINE_LOREN = 100;
   /**
-   * Quantidade maxima default de linhas buscadas no Loren, 2000 caracteres.
+   * Default maximum amount of lines can be fetched in loren.properties.
    */
   private static final int MAX_CARACTERES_LOREN = 20;
   /**
-   * Quantidade minna default de linhas buscadas no Loren, 2000 caracteres.
+   * Default minimum amount of lines can be fetched in loren.properties.
    */
   private static final int MIN_CARACTERES_LOREN = 1;
   /**
-   * Quantidade máxima de caracteres quando não informado pelo desenvolvedor.
+   * Default maximum of characters when developer did not set.
    */
   public static final int MAX_LENGTH_DEFAULT = 50;
   /**
-   * Quantidade minina de caracteres quando não informado pelo desenvolvedor.
+   * Default minimum of characters when developer did not set.
    */
   public static final int MIN_LENGTH_DEFAULT = 1;
   /**
-   * Se a solicitação de criação de String for maior que este valor uma IllergalArgumentException
-   * será lançada.
+   * Maximum amount of characters made by make. If a value is bigger than it a
+   * IllergalArgumentException will be launched.
    */
   public static final int MAX_LENGTH_SUPPORTS = 4000;
 
   /**
-   * Gera uma String (Upper ou Lower) no tamanho limitado solicidato. Todo tipo de caracter poderá
-   * ser incluído na String gerada, utilize:<br>
-   * getString(int caracteres, StringType type) para controlar os tipos de caracter se desejado.
-   *
-   * @param max Máximo de caracteres
-   * @param min Minimo de caracteres
-   * @return A sring no tamanho solicitado.
+   * It makes a String with amount of characters between min and max parameters. Use type parameter
+   * to control the types of character inside of the String.
+   * 
+   * @param max Maximum of characters.
+   * @param min Minimum of characters.
+   * @param type can be any StringType value.
+   * @return A String to be used.
+   * @throws IllegalArgumentException if max is bigger than MakeString.MAX_LENGTH_SUPPORTS constant.
    */
   public static String getString(final int min, final int max, StringType type) {
     if (min < 0) {
@@ -100,21 +82,24 @@ public final class MakeString {
   }
 
   /**
-   * Gera uma String no tamanho limitado solicidato. Se for somente texto, LETTER, um texto Lorem
-   * ipsum será retornado.
-   *
-   * @param caracteres Quantidade de caracteres.
-   * @return A sring no tamanho solicitado.
+   * It makes a String with a size informed in parameter characters. Use type parameter to control
+   * the types of character inside of the String.
+   * 
+   * @param characters amount of it.
+   * @param type can be any StringType value.
+   * @return A String to be used.
+   * @throws IllegalArgumentException if characters is bigger than MakeString.MAX_LENGTH_SUPPORTS
+   *         constant.
    */
-  public static String getString(final int caracteres, final StringType type) {
-    if (checkCaracters(caracteres)) {
+  public static String getString(final int characters, final StringType type) {
+    if (isEmptyCaracters(characters)) {
       return "";
     }
     StringBuilder sb = new StringBuilder();
     if (StringType.LETTER.equals(type)) {
-      return getLoren(caracteres);
+      return getLoren(characters);
     }
-    for (int i = 0; i < caracteres; i++) {
+    for (int i = 0; i < characters; i++) {
       switch (type) {
         case NUMBER:
           sb.append(MakeCharacter.getNumber());
@@ -130,105 +115,107 @@ public final class MakeString {
   }
 
   /**
-   * Adiciona qualquer tipo de caractere na String, Simbolo, numérico e letras.
+   * Add any type of character in a stringBuilder parameter.
    *
-   * @param sb StringBuilder a ser inserido o caracter.
+   * @param stringBuilder to be put a new character.
    */
-  private static void all(final StringBuilder sb) {
+  private static void all(final StringBuilder stringBuilder) {
     switch (MakeInteger.getMax(5)) {
       case 3:
-        sb.append(MakeCharacter.getNumber());
+        stringBuilder.append(MakeCharacter.getNumber());
         break;
       case 1:
-        sb.append(MakeCharacter.getSymbols());
+        stringBuilder.append(MakeCharacter.getSymbols());
         break;
       default:
-        letter(sb);
+        letter(stringBuilder);
     }
   }
 
   /**
-   * Adiciona letras na StringBuilder. Podendo ser Upper ou Lower e espaços.
+   * Add letter type of character in a stringBuilder parameter.<br>
+   * Space character can be put.
    *
-   * @param sb StringBuilder a ser inserido o caracter.
+   * @param stringBuilder to be put a new character.
    */
-  private static void letter(final StringBuilder sb) {
+  private static void letter(final StringBuilder stringBuilder) {
     switch (MakeInteger.getMax(5)) {
       case 3:
-        sb.append(MakeCharacter.getLetter().toString().toUpperCase());
+        stringBuilder.append(MakeCharacter.getLetter().toString().toUpperCase());
         break;
       case 1:
-        sb.append(" ");
+        stringBuilder.append(" ");
         break;
       default:
-        sb.append(MakeCharacter.getLetter().toString());
+        stringBuilder.append(MakeCharacter.getLetter().toString());
     }
   }
 
   /**
-   * Valida o tamanho da String podendo lançar uma IllegalArgumentException se a String for muito
-   * grande ou se a solicitação for muito grande.
-   *
-   * @param caracteres Quantidade de caracteres que a String deve ter.
-   * @return True para String vazia, false para uma String válida não vazia.
-   * @throws IllegalArgumentException Se a quantidade solicitada for inválida.
+   * Check the amount of characters informed result in a empty String.
+   * 
+   * @param characters amount of.
+   * @return true is a empty String and false is a String with characters.
+   * @throws IllegalArgumentException if the amount is less than zero or bigger than bigger than
+   *         MakeString.MAX_LENGTH_SUPPORTS constant.
    */
-  private static boolean checkCaracters(final int caracteres) throws IllegalArgumentException {
-    if (caracteres > MAX_LENGTH_SUPPORTS) {
+  private static boolean isEmptyCaracters(final int characters) throws IllegalArgumentException {
+    if (characters > MAX_LENGTH_SUPPORTS) {
       throw new IllegalArgumentException(I18N.getMsg("sizeLenghFatal", MAX_LENGTH_SUPPORTS));
-    } else if (caracteres < 0) {
+    } else if (characters < 0) {
       throw new IllegalArgumentException(I18N.getMsg("caractereToStringErro", new Integer(
-          caracteres)));
-    } else if (caracteres == 0) {
+          characters)));
+    } else if (characters == 0) {
       return true;
     }
     return false;
   }
 
   /**
-   * Retira dois valores do arquivo: nomes.properties, onde todos os nomes ficam armazenados.
-   *
-   * @param posicao indica qual posição deverá ser trazido o nome, de 0 até 1281.
-   * @return java.lang.String referente a um nome.
+   * It fetches a line from loren_make.properties file.
+   * 
+   * @param position that the line must be fetched.
+   * @return A line in position informed.
+   * @throws IllegalAccessException If a resource problem occurs.
    */
-  private static String getMsg(final int posicao) {
+  private static String getMsg(final int position) {
     try {
-      return ResourceBundle.getBundle("loren_make").getString("loren" + posicao);
-    } catch (MissingResourceException e) {
-      Logger.getLogger(I18N.class.getName()).log(Level.SEVERE,
-          "Maker: Loren não encontrada para {0}", new Object[] {"loren" + posicao});
-      return "loren" + posicao;
+      return ResourceBundle.getBundle("loren_make").getString("loren" + position);
+    } catch (Exception exeption) {
+      throw new IllegalArgumentException(I18N.getMsg("loren_make_ResourceError", new Integer(
+          position), exeption));
     }
   }
 
   /**
-   * Retorna as strings solicitadas utilizando trechos do Lorem ipsum, simulação de texto da
-   * indústria tipográfica e de impressos. O trecho será aleatório, por ser utilizado partes de 100
-   * caracteres, a cada 100 caractres poderá haver repetição.
+   * It makes a String using the loren_make.properties file. Each 100 characters a new line is
+   * fetched and a line inserted before can be inserted again.
    *
-   * @param caracteres Quantidade de caracteres. Se menor ou igual a 0 será utilizado default, 50.
-   * @return String tipo Lorem ipsum de no máximo
+   * @param characters Amount of characters. If equal zero will be used the constant
+   *        MakeString.MIN_CARACTERES_LOREN.
+   * @return A String made from loren_make.properties file.
+   * @throws IllegalAccessException If a resource problem occurs.
    */
-  public static String getLoren(final int caracteres) {
-    int linhas = setLines(caracteres);
+  public static String getLoren(final int characters) {
+    int linhas = setLines(characters);
     StringBuilder sb = new StringBuilder();
     for (; linhas > 0; linhas--) {
       sb.append(getMsg(MakeInteger.getMax(MAX_PROPERTIES_LOREN)));
     }
-    return StringUtils.substring(sb.toString(), 0, caracteres);
+    return StringUtils.substring(sb.toString(), 0, characters);
   }
 
   /**
-   * Define a quantidade de linhas que devem ser buscadas do arquivo loren.properties.
-   *
-   * @param maxCaracteres Qantidade máxima de caracteres.
-   * @return Quantidade de linhas necessárias.
+   * Defines the amount of lines is needed from loren_make.properties for maxCaracteres parameter.
+   * 
+   * @param maxCaracteres is the maximum characters needed.
+   * @return Amount of lines is necessary to create a String with the amount maxCaracteres.
    */
   private static int setLines(final int maxCaracteres) {
     int linhas;
     if (maxCaracteres <= 0) {
       linhas = MIN_CARACTERES_LOREN;
-      LogInfo.logWarnInformation("MakeString",
+      LogInfo.logDebugInformation("MakeString",
           I18N.getMsg("minLorenError", maxCaracteres, MIN_CARACTERES_LOREN));
     } else if (maxCaracteres > MAX_LENGTH_SUPPORTS) {
       linhas = MAX_CARACTERES_LOREN;
@@ -247,7 +234,7 @@ public final class MakeString {
   }
 
   /**
-   * Não pode ser instanciada.
+   * Cannot be instantiated.
    */
   private MakeString() {}
 }
