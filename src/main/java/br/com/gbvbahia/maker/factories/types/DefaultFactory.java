@@ -1,17 +1,5 @@
 package br.com.gbvbahia.maker.factories.types;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.persistence.OneToOne;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
@@ -21,6 +9,18 @@ import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.OneToOne;
 
 /**
  * Deve ser utilizado como <b>Factory Padrão</b>, para atributos somente anotados com @NotNull.<br>
@@ -106,8 +106,8 @@ public class DefaultFactory extends MaxMinFactory {
     return false;
   }
 
-  private <T> void valueToBoolean(Field field, T entity) throws IllegalArgumentException,
-      IllegalAccessException {
+  private <T> void valueToBoolean(Field field, T entity)
+      throws IllegalArgumentException, IllegalAccessException {
     LogInfo.logDefaultValue(entity, field, this.className);
     if (field.getType().equals(Boolean.class)) {
       field.set(entity, MakeBoolean.getBoolean());
@@ -116,8 +116,8 @@ public class DefaultFactory extends MaxMinFactory {
     }
   }
 
-  private <T> void valueToCharacter(Field field, T entity) throws IllegalArgumentException,
-      IllegalAccessException {
+  private <T> void valueToCharacter(Field field, T entity)
+      throws IllegalArgumentException, IllegalAccessException {
     LogInfo.logDefaultValue(entity, field, this.className);
     if (field.getType().equals(Character.class)) {
       field.set(entity, MakeCharacter.getCharacter());
@@ -137,8 +137,8 @@ public class DefaultFactory extends MaxMinFactory {
    * @throws IllegalArgumentException Se o field não puder ser construído devido algum
    *         relacionamento incorreto.
    */
-  private <T> void avoidCyclicReference(Field field, T entity) throws IllegalAccessException,
-      IllegalArgumentException {
+  private <T> void avoidCyclicReference(Field field, T entity)
+      throws IllegalAccessException, IllegalArgumentException {
     if (this.hasOneToOne(field, entity) && !this.mapOneToOne.containsKey(field.getType())) {
       this.mapOneToOne.put(entity.getClass(), entity);
     }

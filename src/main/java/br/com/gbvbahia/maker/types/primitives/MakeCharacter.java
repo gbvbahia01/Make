@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.types.primitives;
 
-import java.lang.reflect.Field;
-
-import org.apache.commons.logging.Log;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
+import org.apache.commons.logging.Log;
+
+import java.lang.reflect.Field;
+
 /**
- *
+ * @since v.1 06/2012
  * @author Guilherme
  */
 public final class MakeCharacter {
@@ -96,11 +96,11 @@ public final class MakeCharacter {
   /**
    * Retorna True para tipos Character ou char.
    *
-   * @param f Field a ser avaliado.
+   * @param field Field a ser avaliado.
    * @return True para tipos Character ou char, False para outros tipos.
    */
-  public static boolean isCharacter(Field f) {
-    if (f.getType().equals(Character.class) || f.getType().equals(char.class)) {
+  public static boolean isCharacter(Field field) {
+    if (field.getType().equals(Character.class) || field.getType().equals(char.class)) {
       return true;
     }
     return false;

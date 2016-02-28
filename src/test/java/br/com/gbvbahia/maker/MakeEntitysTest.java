@@ -1,12 +1,8 @@
 package br.com.gbvbahia.maker;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import br.com.gbvbahia.entities.EntityNotNullTest;
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.log.LogInfo;
 
 import junit.framework.TestCase;
 
@@ -14,9 +10,13 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.gbvbahia.entities.EntityNotNullTest;
-import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.log.LogInfo;
+import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 /**
  * @since v.1 01/05/2012
@@ -44,7 +44,7 @@ public class MakeEntitysTest extends TestCase {
     logger.info("Entity - EntitysError");
     boolean excecao = false;
     try {
-      List<EntityNotNullTest> test = MakeEntity.makeEntities(EntityNotNullTest.class, -10);
+      MakeEntity.makeEntities(EntityNotNullTest.class, -10);
     } catch (IllegalArgumentException e) {
       excecao = true;
       logger.debug(e.getMessage());
@@ -52,7 +52,7 @@ public class MakeEntitysTest extends TestCase {
     assertTrue("Esperado IllegalArgumentException", excecao);
     excecao = false;
     try {
-      List<EntityNotNullTest> test = MakeEntity.makeEntities(EntityNotNullTest.class, -1);
+      MakeEntity.makeEntities(EntityNotNullTest.class, -1);
     } catch (IllegalArgumentException e) {
       excecao = true;
       logger.debug(e.getMessage());

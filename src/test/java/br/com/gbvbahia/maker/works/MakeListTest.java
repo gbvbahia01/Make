@@ -1,20 +1,5 @@
 package br.com.gbvbahia.maker.works;
 
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
-import junit.framework.TestCase;
-
-import org.apache.commons.logging.Log;
-import org.junit.Before;
-import org.junit.Test;
-
 import br.com.gbvbahia.entities.EntityListComplexTest;
 import br.com.gbvbahia.entities.EntityListTest;
 import br.com.gbvbahia.entities.EntityPatternTest;
@@ -23,6 +8,21 @@ import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.works.MakeList;
 import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
+
+import junit.framework.TestCase;
+
+import org.apache.commons.logging.Log;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 /**
  * @since v.1 01/05/2012
@@ -60,10 +60,10 @@ public class MakeListTest extends TestCase {
       this.validarJsr303(entity);
     }
     assertNotNull("Test 2: ListComplex de test não pode ser nula.", test.getListComplex());
-    assertTrue("Test 2: ListComplex de test não pode ser menor que 15.", test.getListComplex()
-        .size() >= 15);
-    assertTrue("Test 2: ListComplex de test não pode ser maior que 25.", test.getListComplex()
-        .size() <= 25);
+    assertTrue("Test 2: ListComplex de test não pode ser menor que 15.",
+        test.getListComplex().size() >= 15);
+    assertTrue("Test 2: ListComplex de test não pode ser maior que 25.",
+        test.getListComplex().size() <= 25);
     for (EntityListComplexTest entity : test.getListComplex()) {
       this.validarJsr303(entity);
     }

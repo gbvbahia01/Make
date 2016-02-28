@@ -1,9 +1,5 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import java.lang.reflect.Field;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
@@ -12,6 +8,10 @@ import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * Retorna uma string no formato de um CNPJ válido, em relação a validação do digito verificador.
@@ -152,7 +152,7 @@ public class MakeCnpj implements ValueSpecializedFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance of MakeCnpj encapsulated in ValueFactory.
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {

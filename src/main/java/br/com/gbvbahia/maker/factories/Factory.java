@@ -1,17 +1,5 @@
 package br.com.gbvbahia.maker.factories;
 
-import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.DefaultFactory;
 import br.com.gbvbahia.maker.factories.types.EnumFactory;
@@ -24,6 +12,18 @@ import br.com.gbvbahia.maker.factories.types.managers.ValueFactoryManager;
 import br.com.gbvbahia.maker.factories.types.managers.XMLoader;
 import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 /**
  * This class will call the XML loader to read the xml setup and prepare all values factories to
@@ -137,13 +137,17 @@ public final class Factory {
     private boolean created;
 
     /**
-     * Define all behavior of framework reading the setupMap.
+     * Define all behavior of framework reading the setupMap.<br>
+     * If a null or empty map is sent the setup rules will not be loaded but any exception will be
+     * launched.<br>
+     * To load setup again call Factory.loadSetup(nameXmlSetup) with correctly name of XML setup
+     * file.
      * 
-     * @param setupMap
+     * @param setupMap a map with all rules declared in XML setup file.
      */
     public Setup(Map<String, String> setupMap) {
       this.created = false;
-      if (setupMap == null) {
+      if ((setupMap == null) || setupMap.isEmpty()) {
         return;
       }
       this.changeSetup(setupMap);
@@ -164,8 +168,8 @@ public final class Factory {
       if (StringUtils.equals(this.jsr303, JSR303_IGNORE)) {
         return;
       }
-      throw new IllegalArgumentException(I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ,
-          JSR303_IGNORE}));
+      throw new IllegalArgumentException(
+          I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ, JSR303_IGNORE}));
     }
 
     private void checkNullSetupValue() {
@@ -178,8 +182,8 @@ public final class Factory {
       if (StringUtils.equals(this.nullFields, NULL_NEVER)) {
         return;
       }
-      throw new IllegalArgumentException(I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS,
-          NULL_SOME, NULL_NEVER}));
+      throw new IllegalArgumentException(
+          I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS, NULL_SOME, NULL_NEVER}));
     }
 
     /**

@@ -1,13 +1,13 @@
 package br.com.gbvbahia.entities;
 
-import javax.validation.constraints.NotNull;
-
 import br.com.gbvbahia.entityes.constantes.EnumCleanTest;
 import br.com.gbvbahia.entityes.constantes.EnumExternalTest;
 
+import javax.validation.constraints.NotNull;
+
 /**
- *
- * @author Guilherme
+ * @since v.1 06/2012
+ * @author Guilherme Braga
  */
 public class EntityEnumTest2 {
 

@@ -1,11 +1,11 @@
 package br.com.gbvbahia.maker.types.complex;
 
-import java.lang.reflect.Field;
-import java.math.BigInteger;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
+
+import java.lang.reflect.Field;
+import java.math.BigInteger;
 
 /**
  * A number factory to work with BigInteger fields.
@@ -16,23 +16,23 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
 public class MakeBigInteger extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
-      IllegalAccessException {
-    Number[] minMax = this.getMinMaxValues(f, Long.MIN_VALUE, Long.MAX_VALUE);
+  public <T> void insertValue(final Field field, final T entity)
+      throws IllegalArgumentException, IllegalAccessException {
+    Number[] minMax = this.getMinMaxValues(field, Long.MIN_VALUE, Long.MAX_VALUE);
     long min = minMax[0].longValue();
     long max = minMax[1].longValue();
-    this.insertValue(f, entity, MakeLong.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeLong.getIntervalo(min, max).toString());
   }
 
   @Override
-  public <T> void insertValue(Field f, T entity, String value) throws IllegalArgumentException,
-      IllegalAccessException {
-    f.set(entity, new BigInteger(value));
+  public <T> void insertValue(Field field, T entity, String value)
+      throws IllegalArgumentException, IllegalAccessException {
+    field.set(entity, new BigInteger(value));
   }
 
   @Override
-  public boolean isMyType(final Field f) {
-    return isBigInteger(f);
+  public boolean isMyType(final Field field) {
+    return isBigInteger(field);
   }
 
   /**

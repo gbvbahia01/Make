@@ -1,6 +1,6 @@
 package br.com.gbvbahia.maker.log;
 
-import java.lang.reflect.Field;
+import br.com.gbvbahia.i18n.I18N;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -8,7 +8,7 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import br.com.gbvbahia.i18n.I18N;
+import java.lang.reflect.Field;
 
 /**
  * Class to help with logging information.

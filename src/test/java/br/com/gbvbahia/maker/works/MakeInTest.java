@@ -1,13 +1,10 @@
 package br.com.gbvbahia.maker.works;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import br.com.gbvbahia.entities.EntityInTest;
+import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.factories.types.works.MakeIn;
+import br.com.gbvbahia.maker.log.LogInfo;
 
 import junit.framework.TestCase;
 
@@ -15,11 +12,10 @@ import org.apache.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.gbvbahia.entities.EntityInTest;
-import br.com.gbvbahia.maker.MakeEntity;
-import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.factories.types.works.MakeIn;
-import br.com.gbvbahia.maker.log.LogInfo;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @since v.1 01/05/2012
@@ -29,7 +25,7 @@ public class MakeInTest extends TestCase {
 
   private static Log logger = LogInfo.getLog("Test :: MakeInTest");
   private Pattern pattern;
-  private Validator validator;
+  // private Validator validator;
 
   public MakeInTest() {
     super("MakeInTest");
@@ -38,8 +34,8 @@ public class MakeInTest extends TestCase {
   @Before
   @Override
   public void setUp() {
-    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    this.validator = factory.getValidator();
+    // ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    // this.validator = factory.getValidator();
     this.pattern = Pattern.compile(MakeIn.KEY_PROPERTY);
   }
 
@@ -116,15 +112,14 @@ public class MakeInTest extends TestCase {
       assertTrue("in_1_2_5 error: " + test.getIn_1_2_5(), test.getIn_1_2_5().equals(1)
           || test.getIn_1_2_5().equals(2) || test.getIn_1_2_5().equals(5));
 
-      assertTrue("in_10V30_10V50_10V80 error: " + test.getIn_10V30_10V50_10V80(), test
-          .getIn_10V30_10V50_10V80().equals(new BigDecimal("10.30"))
-          || test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.50"))
-          || test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.80")));
+      assertTrue("in_10V30_10V50_10V80 error: " + test.getIn_10V30_10V50_10V80(),
+          test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.30"))
+              || test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.50"))
+              || test.getIn_10V30_10V50_10V80().equals(new BigDecimal("10.80")));
 
-      assertTrue("in_3000_5000_6000 error: " + test.getIn_3000_5000_6000(), test
-          .getIn_3000_5000_6000().equals(3000L)
-          || test.getIn_3000_5000_6000().equals(5000L)
-          || test.getIn_3000_5000_6000().equals(6000L));
+      assertTrue("in_3000_5000_6000 error: " + test.getIn_3000_5000_6000(),
+          test.getIn_3000_5000_6000().equals(3000L) || test.getIn_3000_5000_6000().equals(5000L)
+              || test.getIn_3000_5000_6000().equals(6000L));
 
       assertTrue("in_45V80_M45V80_100V10: " + test.getIn_45V80_M45V80_100V10(),
           test.getIn_45V80_M45V80_100V10().equals(45.80F)
@@ -138,18 +133,16 @@ public class MakeInTest extends TestCase {
               || test.getIn_500_5000_50000_500000_5000000().equals(new BigInteger("500000"))
               || test.getIn_500_5000_50000_500000_5000000().equals(new BigInteger("5000000")));
 
-      assertTrue("in_200_300_400 error: " + test.getIn_200_300_400(), test.getIn_200_300_400()
-          .equals("200")
-          || test.getIn_200_300_400().equals("300")
-          || test.getIn_200_300_400().equals("400"));
+      assertTrue("in_200_300_400 error: " + test.getIn_200_300_400(),
+          test.getIn_200_300_400().equals("200") || test.getIn_200_300_400().equals("300")
+              || test.getIn_200_300_400().equals("400"));
 
       assertTrue("in_A_B_C error: " + test.getIn_A_B_C(), test.getIn_A_B_C().equals("A")
           || test.getIn_A_B_C().equals("B") || test.getIn_A_B_C().equals("C"));
 
-      assertTrue("in_Virgula_Arroba_Percentual error: " + test.getIn_Comma_At_Percent(), test
-          .getIn_Comma_At_Percent().equals(",")
-          || test.getIn_Comma_At_Percent().equals("@")
-          || test.getIn_Comma_At_Percent().equals("%"));
+      assertTrue("in_Virgula_Arroba_Percentual error: " + test.getIn_Comma_At_Percent(),
+          test.getIn_Comma_At_Percent().equals(",") || test.getIn_Comma_At_Percent().equals("@")
+              || test.getIn_Comma_At_Percent().equals("%"));
 
       assertTrue("only_30 error: " + test.getOnly_30(), test.getOnly_30() == 30);
     }

@@ -1,11 +1,11 @@
 package br.com.gbvbahia.maker.types.complex;
 
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
+
+import java.lang.reflect.Field;
+import java.math.BigDecimal;
 
 /**
  * A number factory to work with BigDecimal fields.
@@ -16,8 +16,8 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
 public class MakeBigDecimal extends MakeNumber {
 
   @Override
-  public <T> void insertValue(Field field, T entity) throws IllegalArgumentException,
-      IllegalAccessException {
+  public <T> void insertValue(Field field, T entity)
+      throws IllegalArgumentException, IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, -Double.MAX_VALUE, Double.MAX_VALUE);
     double min = minMax[0].doubleValue();
     double max = minMax[1].doubleValue();
@@ -26,8 +26,8 @@ public class MakeBigDecimal extends MakeNumber {
   }
 
   @Override
-  public <T> void insertValue(Field field, T entity, String value) throws IllegalArgumentException,
-      IllegalAccessException {
+  public <T> void insertValue(Field field, T entity, String value)
+      throws IllegalArgumentException, IllegalAccessException {
     field.set(entity, new BigDecimal(value));
   }
 
