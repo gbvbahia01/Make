@@ -1,14 +1,14 @@
 package br.com.gbvbahia.maker.onetoone;
 
+import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.log.LogInfo;
+
 import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-
-import br.com.gbvbahia.maker.MakeEntity;
-import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.log.LogInfo;
 
 public class OneToOneTest extends TestCase {
 
@@ -49,14 +49,14 @@ public class OneToOneTest extends TestCase {
     Assert.assertNotNull("husband was not made", husband);
     if (husband.getWife() == null) {
       Assert.assertTrue("Some can have wife null", true);
-      LogInfo.getLog(OneToOneTest.class.getName() + " testHusbandCreationReadSome").info(
-          "A husband´s wife was not created");
+      LogInfo.getLog(OneToOneTest.class.getName() + " testHusbandCreationReadSome")
+          .info("A husband´s wife was not created");
       return;
     }
     if (husband.getWife().getHusband() == null) {
       Assert.assertTrue("Some can husbend of wife null", true);
-      LogInfo.getLog(OneToOneTest.class.getName() + " testHusbandCreationReadSome").info(
-          "A husband for wife was not created");
+      LogInfo.getLog(OneToOneTest.class.getName() + " testHusbandCreationReadSome")
+          .info("A husband for wife was not created");
       return;
     }
     Assert.assertTrue("The husbands are not the same",

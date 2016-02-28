@@ -1,11 +1,11 @@
 package br.com.gbvbahia.maker.types.primitives.numbers;
 
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+
+import java.lang.reflect.Field;
+import java.math.BigDecimal;
 
 /**
  * Gerador de números decimais aleatório.
@@ -16,28 +16,29 @@ import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 public class MakeDouble extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
-      IllegalAccessException {
-    Number[] minMax = this.getMinMaxValues(f, -Double.MAX_VALUE, Double.MAX_VALUE);
+  public <T> void insertValue(final Field field, final T entity)
+      throws IllegalArgumentException, IllegalAccessException {
+    Number[] minMax = this.getMinMaxValues(field, -Double.MAX_VALUE, Double.MAX_VALUE);
     double min = minMax[0].doubleValue();
     double max = minMax[1].doubleValue();
     Double intervalo = MakeDouble.getIntervalo(min, max);
-    this.insertValue(f, entity, new Double(this.maxDecimal(f, intervalo).doubleValue()).toString());
+    this.insertValue(field, entity,
+        new Double(this.maxDecimal(field, intervalo).doubleValue()).toString());
   }
 
   @Override
-  public <T> void insertValue(final Field f, final T entity, final String value)
+  public <T> void insertValue(final Field field, final T entity, final String value)
       throws IllegalArgumentException, IllegalAccessException {
-    if (f.getType().equals(Double.class)) {
-      f.set(entity, new Double(value));
+    if (field.getType().equals(Double.class)) {
+      field.set(entity, new Double(value));
     } else {
-      f.set(entity, new Double(value).doubleValue());
+      field.set(entity, new Double(value).doubleValue());
     }
   }
 
   @Override
-  public boolean isMyType(Field f) {
-    return isDouble(f);
+  public boolean isMyType(Field field) {
+    return isDouble(field);
   }
 
   /**
@@ -83,11 +84,11 @@ public class MakeDouble extends MakeNumber {
   /**
    * Retorna True para tipos Double ou double.
    *
-   * @param f Field a ser avaliado.
+   * @param field Field a ser avaliado.
    * @return True para tipos Double ou double, False para outros tipos.
    */
-  public static boolean isDouble(final Field f) {
-    if (f.getType().equals(Double.class) || f.getType().equals(double.class)) {
+  public static boolean isDouble(final Field field) {
+    if (field.getType().equals(Double.class) || field.getType().equals(double.class)) {
       return true;
     }
     return false;

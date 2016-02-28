@@ -3,7 +3,7 @@ package br.com.gbvbahia.entities;
 import java.util.Set;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntitySetTest {

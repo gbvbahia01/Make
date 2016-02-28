@@ -1,10 +1,5 @@
 package br.com.gbvbahia.maker.factories.types.managers;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
 import br.com.gbvbahia.maker.factories.types.works.MakeBetween;
@@ -18,6 +13,11 @@ import br.com.gbvbahia.maker.factories.types.works.MakeSet;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * All specialized factories original in the framework must be put here.<br>
@@ -33,14 +33,14 @@ public final class ValueSpecializedFactoryManager {
   /**
    * SpecializedFactories default and made by developer.
    */
-  private final Map<Class<? extends ValueSpecializedFactory>, ValueSpecializedFactory> specializedFactories;
+  private final Map<Class<? extends ValueSpecializedFactory>, ValueSpecializedFactory> spzFactories;
 
   /**
    * Visible only in the same package.
    */
   protected ValueSpecializedFactoryManager() {
     super();
-    this.specializedFactories =
+    this.spzFactories =
         new HashMap<Class<? extends ValueSpecializedFactory>, ValueSpecializedFactory>();
     this.loadDeveloperFactories();
     this.loadSpecializedFactories();
@@ -50,22 +50,19 @@ public final class ValueSpecializedFactoryManager {
    * Load all specialized factories made with the framework.
    */
   private void loadSpecializedFactories() {
-    this.specializedFactories.put(MakeCpf.class, MakeCpf.getInstance());
-    this.specializedFactories.put(MakeCnpj.class, MakeCnpj.getInstance());
-    this.specializedFactories.put(MakeName.class, MakeName.getInstance());
-    this.specializedFactories.put(MakeEmail.class, MakeEmail.getInstance());
-    this.specializedFactories.put(MakeList.class, MakeList.getInstance());
-    this.specializedFactories.put(MakeSet.class, MakeSet.getInstance());
-    this.specializedFactories.put(MakeBetween.class, MakeBetween.getInstance());
-    this.specializedFactories.put(MakeIn.class, MakeIn.getInstance());
-    this.specializedFactories.put(DefaultValuesFactory.class, DefaultValuesFactory.getInstance());
+    this.spzFactories.put(MakeCpf.class, MakeCpf.getInstance());
+    this.spzFactories.put(MakeCnpj.class, MakeCnpj.getInstance());
+    this.spzFactories.put(MakeName.class, MakeName.getInstance());
+    this.spzFactories.put(MakeEmail.class, MakeEmail.getInstance());
+    this.spzFactories.put(MakeList.class, MakeList.getInstance());
+    this.spzFactories.put(MakeSet.class, MakeSet.getInstance());
+    this.spzFactories.put(MakeBetween.class, MakeBetween.getInstance());
+    this.spzFactories.put(MakeIn.class, MakeIn.getInstance());
+    this.spzFactories.put(DefaultValuesFactory.class, DefaultValuesFactory.getInstance());
   }
 
   /**
    * Load all factories made by developer and declared in node factories in xml setup file.
-   *
-   * @param key
-   * @param value
    */
   @SuppressWarnings("unchecked")
   private void loadDeveloperFactories() {
@@ -75,9 +72,9 @@ public final class ValueSpecializedFactoryManager {
       try {
         Class<? extends ValueSpecializedFactory> fac =
             (Class<? extends ValueSpecializedFactory>) Class.forName(factory);
-        if (!this.specializedFactories.containsKey(fac)) {
+        if (!this.spzFactories.containsKey(fac)) {
           ValueSpecializedFactory specializedFactory = fac.newInstance();
-          this.specializedFactories.put(fac, specializedFactory);
+          this.spzFactories.put(fac, specializedFactory);
           NotifierTests.getNotifyer().addObserver(specializedFactory);
         }
       } catch (ClassNotFoundException ex) {
@@ -103,10 +100,10 @@ public final class ValueSpecializedFactoryManager {
    * @return A specialized factory, made by framework or developer.
    */
   protected ValueSpecializedFactory getFactory(String fieldName, String keyField) {
-    Set<Class<? extends ValueSpecializedFactory>> keyClass = this.specializedFactories.keySet();
+    Set<Class<? extends ValueSpecializedFactory>> keyClass = this.spzFactories.keySet();
     for (Class<? extends ValueSpecializedFactory> clazz : keyClass) {
       try {
-        ValueSpecializedFactory vpf = this.specializedFactories.get(clazz);
+        ValueSpecializedFactory vpf = this.spzFactories.get(clazz);
         if (vpf.workValue(fieldName, keyField)) {
           return vpf;
         }
@@ -124,7 +121,7 @@ public final class ValueSpecializedFactoryManager {
    * Clear all objects put at specializedFactories.
    */
   protected void clear() {
-    this.specializedFactories.clear();
+    this.spzFactories.clear();
   }
 
 }

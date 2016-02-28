@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
-
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class MakeLongTest extends TestCase {
@@ -39,8 +39,10 @@ public class MakeLongTest extends TestCase {
   @Test
   public void testMinMaxIsReturned() throws Exception {
     logger.info("Long - MinMaxIsReturned");
-    int min = 1, max = 3;
-    boolean minOk = false, maxOk = false;
+    int min = 1;
+    int max = 3;
+    boolean minOk = false;
+    boolean maxOk = false;
     for (int i = 0; i < 100; i++) {
       if (!minOk && (MakeLong.getIntervalo(min, max) == min)) {
         logger.debug("minOk setter true, interation: " + i);
@@ -69,7 +71,7 @@ public class MakeLongTest extends TestCase {
       logger.debug("Max: " + i + " Result: " + result);
       assertTrue("Intervalo incorreta", result <= i);
     }
-    Long result2 = MakeLong.getMax(1l);
+    Long result2 = MakeLong.getMax(1L);
     logger.debug("Max: 1 Result: " + result2);
     assertTrue("Teste minimo incorreto", result2 <= 1);
   }

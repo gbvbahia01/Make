@@ -1,8 +1,8 @@
 package br.com.gbvbahia.maker.types.primitives;
 
-import java.lang.reflect.Field;
-
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import java.lang.reflect.Field;
 
 /**
  * Cria um valor booleano aleatório.
@@ -24,11 +24,11 @@ public final class MakeBoolean {
   /**
    * Retorna True para tipos Boolean ou boolean.
    *
-   * @param f Field a ser avaliado.
+   * @param field Field a ser avaliado.
    * @return True para tipos Boolean ou boolean, False para outros tipos.
    */
-  public static boolean isBoolean(Field f) {
-    if (f.getType().equals(Boolean.class) || f.getType().equals(boolean.class)) {
+  public static boolean isBoolean(Field field) {
+    if (field.getType().equals(Boolean.class) || field.getType().equals(boolean.class)) {
       return true;
     }
     return false;

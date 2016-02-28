@@ -3,7 +3,7 @@ package br.com.gbvbahia.entities;
 import java.util.List;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityListTest {
@@ -21,7 +21,7 @@ public class EntityListTest {
 
   @Override
   public String toString() {
-    return "EntityListTest{" + "listPattern=" + this.listPattern + "listComplex="
-        + this.listComplex + '}';
+    return "EntityListTest{" + "listPattern=" + this.listPattern + "listComplex=" + this.listComplex
+        + '}';
   }
 }

@@ -1,16 +1,16 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
-
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class MakeFloatTest extends TestCase {

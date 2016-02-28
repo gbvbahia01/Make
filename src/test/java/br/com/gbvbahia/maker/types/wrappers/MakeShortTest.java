@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeShort;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeShort;
-
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class MakeShortTest extends TestCase {

@@ -3,14 +3,14 @@ package br.com.gbvbahia.maker.types.wrappers;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.apache.commons.logging.Log;
-import org.junit.Test;
-
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 
+import org.apache.commons.logging.Log;
+import org.junit.Test;
+
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class MakeBooleanTest {
@@ -25,15 +25,16 @@ public class MakeBooleanTest {
   @Test
   public void testGetBoolean() {
     logger.info("Boolean - GetBoolean");
-    boolean trueCheck = false, falseCheck = false;
+    boolean trueCheck = false;
+    boolean falseCheck = false;
     for (int i = 0; i < 100; i++) {
-      Boolean b = MakeBoolean.getBoolean();
-      logger.debug("Result Boolean: " + b);
-      assertNotNull("Boolean nulo!", b);
-      if (b) {
+      Boolean bool = MakeBoolean.getBoolean();
+      logger.debug("Result Boolean: " + bool);
+      assertNotNull("Boolean nulo!", bool);
+      if (bool) {
         trueCheck = true;
       }
-      if (!b) {
+      if (!bool) {
         falseCheck = true;
       }
       if (trueCheck && falseCheck) {

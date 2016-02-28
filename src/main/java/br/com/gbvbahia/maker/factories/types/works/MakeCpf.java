@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import java.lang.reflect.Field;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * Cria uma String que passa no teste de validação de CPF, nove caracteres mais dois digitos
@@ -131,7 +131,7 @@ public class MakeCpf implements ValueSpecializedFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for MakeCpf class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {

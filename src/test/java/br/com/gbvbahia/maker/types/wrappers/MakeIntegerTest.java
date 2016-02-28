@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class MakeIntegerTest extends TestCase {

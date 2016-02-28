@@ -1,16 +1,16 @@
 package br.com.gbvbahia.maker.factories.types;
 
+import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.types.complex.MakeCalendar;
+
 import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
-
-import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
-import br.com.gbvbahia.maker.types.complex.MakeCalendar;
 
 /**
  * Fabrica valeroes para Calendar e Date
@@ -82,7 +82,7 @@ public class FuturePastFactory implements ValueFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for FuturePastFactory class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueFactory getInstance() {
     if (instance == null) {

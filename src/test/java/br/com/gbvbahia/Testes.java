@@ -1,8 +1,5 @@
 package br.com.gbvbahia;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import br.com.gbvbahia.i18n.I18NTest;
 import br.com.gbvbahia.maker.MakeEntitySynteticTest;
 import br.com.gbvbahia.maker.MakeEntityTest;
@@ -27,17 +24,19 @@ import br.com.gbvbahia.maker.works.MakeInTest;
 import br.com.gbvbahia.maker.works.MakeListTest;
 import br.com.gbvbahia.maker.works.MakeSetTest;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({I18NTest.class, MakeBooleanTest.class, MakeByteTest.class,
-    MakeShortTest.class, MakeIntegerTest.class, MakeLongTest.class, MakeFloatTest.class,
-    MakeDoubleTest.class, MakeCharacterTest.class, MakeStringTest.class, MakeCalendarTest.class,
-    MakeDateTest.class, MakeCpfTest.class, MakeCnpjTest.class, MakeEntityTest.class,
-    MakeEntitySynteticTest.class, MakeEntitysTest.class, MakePropertiesTest.class,
-    MakeListTest.class, MakeSetTest.class, MakeBetweenTest.class, MakeInTest.class,
-    OneToOneTest.class})
+@Suite.SuiteClasses({I18NTest.class, MakeBooleanTest.class, MakeByteTest.class, MakeShortTest.class,
+    MakeIntegerTest.class, MakeLongTest.class, MakeFloatTest.class, MakeDoubleTest.class,
+    MakeCharacterTest.class, MakeStringTest.class, MakeCalendarTest.class, MakeDateTest.class,
+    MakeCpfTest.class, MakeCnpjTest.class, MakeEntityTest.class, MakeEntitySynteticTest.class,
+    MakeEntitysTest.class, MakePropertiesTest.class, MakeListTest.class, MakeSetTest.class,
+    MakeBetweenTest.class, MakeInTest.class, OneToOneTest.class})
 public class Testes {
 }

@@ -1,7 +1,7 @@
 package br.com.gbvbahia.entities;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityPropertiesTest {
@@ -34,8 +34,8 @@ public class EntityPropertiesTest {
 
   @Override
   public String toString() {
-    return "EnityPropertiesTest{" + " cpf=" + this.cpf + " cnpj=" + this.cnpj + " nome="
-        + this.nome + " cep=" + this.cep + '}';
+    return "EnityPropertiesTest{" + " cpf=" + this.cpf + " cnpj=" + this.cnpj + " nome=" + this.nome
+        + " cep=" + this.cep + '}';
   }
 
 

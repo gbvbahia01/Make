@@ -1,16 +1,16 @@
 package br.com.gbvbahia.maker.factories.types.managers;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import br.com.gbvbahia.maker.log.LogInfo;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
-import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  * @since v.1 01/05/2012
@@ -95,8 +95,8 @@ public class ValueFactoryManager implements ValueFactory {
   /**
    * Verifica se o field está mapeado para alguma fábrica no arquivo make.xml.
    * 
-   * @param keyField
-   * @return
+   * @param keyField that will be checked if is mapped for any factory.
+   * @return true is is mapped or false if is not.
    */
   public boolean isFieldMapped(String keyField) {
     return this.valueFactories.containsKey(keyField);
@@ -132,8 +132,7 @@ public class ValueFactoryManager implements ValueFactory {
   }
 
   /**
-   * Create a Map<Class name, Map<field name, field rule>> to determine the factory that will create
-   * a value for each field.
+   * Create a Map to determine the factory that will create a value for each field.
    * 
    * @param testName the name of tests that need be loaded.
    */
@@ -164,7 +163,8 @@ public class ValueFactoryManager implements ValueFactory {
       return false;
     }
     final ValueFactoryManager other = (ValueFactoryManager) obj;
-    if ((this.testName == null) ? (other.testName != null) : !this.testName.equals(other.testName)) {
+    if ((this.testName == null) ? (other.testName != null)
+        : !this.testName.equals(other.testName)) {
       return false;
     }
     return true;

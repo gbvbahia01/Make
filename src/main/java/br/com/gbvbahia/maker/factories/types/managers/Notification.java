@@ -75,6 +75,8 @@ public class Notification {
    * public static final Integer TEST_BEGIN = 1; public static final Integer TEST_END = 2; public
    * static final Integer TEST_RECURSION_BEGIN = 3; public static final Integer TEST_RECURSION_END =
    * 4;
+   * 
+   * @since v.2
    */
   @Override
   public String toString() {

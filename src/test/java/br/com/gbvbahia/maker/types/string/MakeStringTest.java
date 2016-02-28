@@ -1,7 +1,10 @@
 package br.com.gbvbahia.maker.types.string;
 
-import java.util.Arrays;
-import java.util.List;
+import br.com.gbvbahia.maker.factories.types.works.MakeEmail;
+import br.com.gbvbahia.maker.factories.types.works.MakePassword;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.complex.MakeString;
+import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 
 import junit.framework.TestCase;
 
@@ -10,14 +13,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.factories.types.works.MakeEmail;
-import br.com.gbvbahia.maker.factories.types.works.MakePassword;
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.complex.MakeString;
-import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
+import java.util.Arrays;
+import java.util.List;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class MakeStringTest extends TestCase {

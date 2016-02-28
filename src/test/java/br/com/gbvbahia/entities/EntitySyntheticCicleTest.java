@@ -5,7 +5,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 @Entity

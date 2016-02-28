@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.works;
 
+import br.com.gbvbahia.maker.factories.types.works.MakeCnpj;
+import br.com.gbvbahia.maker.log.LogInfo;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.factories.types.works.MakeCnpj;
-import br.com.gbvbahia.maker.log.LogInfo;
-
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class MakeCnpjTest extends TestCase {
@@ -34,26 +34,21 @@ public class MakeCnpjTest extends TestCase {
   }
 
   /**
-   * Código Java de uma classe com os métodos de validação de CNPJ de acordo com as regras da
-   * Receita Federal.
+   * Checks if the Brazilian cnpj is a right/valid number.
    *
-   * @param str_cnpj
-   * @return retorna verdadeiro (true) para CNPJ válido e falso (false) para CNPJ inválido
+   * @param strCnpj the Brazilian cnpj that will be checked.
+   * @return true for cnpj right or false if is not right.
    */
-  public static boolean validarCnpj(String str_cnpj) {
-    if (str_cnpj == null) {
+  public static boolean validarCnpj(String strCnpj) {
+    if (strCnpj == null) {
       return false;
     }
-    if (str_cnpj.length() != 14) {
+    if (strCnpj.length() != 14) {
       return false;
     }
     int soma = 0, aux, dig;
-    String cnpj_calc = str_cnpj.substring(0, 12);
-    char[] chr_cnpj = str_cnpj.toCharArray();
-
-    /*
-     * Primeira parte
-     */
+    String cnpj_calc = strCnpj.substring(0, 12);
+    char[] chr_cnpj = strCnpj.toCharArray();
     for (int i = 0; i < 4; i++) {
       if (((chr_cnpj[i] - 48) >= 0) && ((chr_cnpj[i] - 48) <= 9)) {
         soma += (chr_cnpj[i] - 48) * (6 - (i + 1));
@@ -65,12 +60,7 @@ public class MakeCnpjTest extends TestCase {
       }
     }
     dig = 11 - (soma % 11);
-
     cnpj_calc += ((dig == 10) || (dig == 11)) ? "0" : Integer.toString(dig);
-
-    /*
-     * Segunda parte
-     */
     soma = 0;
     for (int i = 0; i < 5; i++) {
       if (((chr_cnpj[i] - 48) >= 0) && ((chr_cnpj[i] - 48) <= 9)) {
@@ -84,7 +74,6 @@ public class MakeCnpjTest extends TestCase {
     }
     dig = 11 - (soma % 11);
     cnpj_calc += ((dig == 10) || (dig == 11)) ? "0" : Integer.toString(dig);
-
-    return str_cnpj.equals(cnpj_calc);
+    return strCnpj.equals(cnpj_calc);
   }
 }

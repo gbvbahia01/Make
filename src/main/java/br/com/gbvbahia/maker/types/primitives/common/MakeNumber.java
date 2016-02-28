@@ -1,5 +1,10 @@
 package br.com.gbvbahia.maker.types.primitives.common;
 
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.log.LogInfo;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -9,11 +14,6 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  * Define one contract for all class that create numbers.
@@ -41,8 +41,8 @@ public abstract class MakeNumber {
    * @param field that will have a value made.
    * @param entity object that has he field to be populated.
    */
-  public abstract <T> void insertValue(Field field, T entity) throws IllegalArgumentException,
-      IllegalAccessException;
+  public abstract <T> void insertValue(Field field, T entity)
+      throws IllegalArgumentException, IllegalAccessException;
 
   /**
    * Put the value to the field. The parameter value will be converted to the type of field.

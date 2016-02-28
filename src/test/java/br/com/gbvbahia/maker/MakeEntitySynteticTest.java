@@ -1,13 +1,13 @@
 package br.com.gbvbahia.maker;
 
+import br.com.gbvbahia.entities.EntitySyntheticTest;
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.log.LogInfo;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
-
-import br.com.gbvbahia.entities.EntitySyntheticTest;
-import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  * @since v.1 01/05/2012

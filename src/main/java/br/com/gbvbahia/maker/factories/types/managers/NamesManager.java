@@ -1,8 +1,8 @@
 package br.com.gbvbahia.maker.factories.types.managers;
 
-import java.lang.reflect.Field;
-
 import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
 
 /**
  * Names of field and class must be centralized to use like key Maps.

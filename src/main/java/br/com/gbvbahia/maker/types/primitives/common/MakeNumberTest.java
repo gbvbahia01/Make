@@ -1,9 +1,9 @@
 package br.com.gbvbahia.maker.types.primitives.common;
 
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
 
 public class MakeNumberTest {
 

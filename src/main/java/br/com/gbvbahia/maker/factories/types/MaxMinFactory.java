@@ -1,18 +1,18 @@
 package br.com.gbvbahia.maker.factories.types;
 
-import java.lang.reflect.Field;
-
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.MakeNumberManager;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+
+import java.lang.reflect.Field;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 /**
  * Factory para classes anotadas com @Min e/ou @Max da JSR303.
@@ -91,7 +91,7 @@ public class MaxMinFactory implements ValueFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for MaxMinFactory class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueFactory getInstance() {
     if (instance == null) {

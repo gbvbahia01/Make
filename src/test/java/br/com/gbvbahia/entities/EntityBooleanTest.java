@@ -5,7 +5,7 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityBooleanTest {

@@ -1,13 +1,5 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import java.lang.reflect.Field;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
@@ -16,6 +8,14 @@ import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Cria e-mails com formatos válidos, após @ existe uma lista de possibilidades, antes do @ uma
@@ -85,10 +85,9 @@ public class MakeEmail implements ValueSpecializedFactory {
    */
   public static String getEmail() {
     int emaiPos = MakeInteger.getMax(MAX_PROPERTIES_EMAILS);
-    String nameIni =
-        MakeCharacter.getLetter().toString() + MakeCharacter.getLetter().toString()
-            + MakeCharacter.getLetter().toString()
-            + MakeString.getString(4, MakeString.StringType.NUMBER);
+    String nameIni = MakeCharacter.getLetter().toString() + MakeCharacter.getLetter().toString()
+        + MakeCharacter.getLetter().toString()
+        + MakeString.getString(4, MakeString.StringType.NUMBER);
     String email = getMsg(emaiPos);
     return nameIni.toLowerCase().trim() + email;
   }
@@ -118,7 +117,7 @@ public class MakeEmail implements ValueSpecializedFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for MakeEmail class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {

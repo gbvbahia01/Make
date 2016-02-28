@@ -1,15 +1,5 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.managers.MakeNumberManager;
 import br.com.gbvbahia.maker.factories.types.managers.NamesManager;
@@ -20,6 +10,16 @@ import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedEx
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Use a value informed at field.<br>
@@ -37,7 +37,8 @@ public class MakeIn implements ValueSpecializedFactory {
    */
   private Map<String, List<String>> mapInList = new HashMap<String, List<String>>();
   /**
-   * No arquivo make.properties deve estár definido no valor para o field: "in\\{.*\\}(\\[.+\\])?". <br>
+   * No arquivo make.properties deve estár definido no valor para o field: "in\\{.*\\}(\\[.+\\])?".
+   * <br>
    * Regex: deve iniciar com <i>in{</i>conter qualquer tipo de caractere. Fecha com <i>}</i> podendo
    * seguir com <i>[</i> conter qualquer caractere "." (ponto) fechando com <i>]</i>. O que está
    * entre <i>[?]</i> Será utilizado como separador, se não houver valor explícito, será considerado
@@ -147,7 +148,7 @@ public class MakeIn implements ValueSpecializedFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for MakeIn class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {

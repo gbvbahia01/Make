@@ -1,8 +1,5 @@
 package br.com.gbvbahia.maker.factories.types.managers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
 import br.com.gbvbahia.maker.types.complex.MakeBigInteger;
 import br.com.gbvbahia.maker.types.complex.MakeStringNumber;
@@ -13,6 +10,9 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeShort;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Use to manipulate a lot of classes that can make a lot of type of numbers.

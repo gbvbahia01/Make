@@ -1,9 +1,9 @@
 package br.com.gbvbahia.maker.types.primitives.numbers;
 
-import java.lang.reflect.Field;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+
+import java.lang.reflect.Field;
 
 /**
  * Gerador de números inteiros aleatório.
@@ -14,27 +14,27 @@ import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 public class MakeInteger extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
-      IllegalAccessException {
-    Number[] minMax = this.getMinMaxValues(f, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  public <T> void insertValue(final Field field, final T entity)
+      throws IllegalArgumentException, IllegalAccessException {
+    Number[] minMax = this.getMinMaxValues(field, Integer.MIN_VALUE, Integer.MAX_VALUE);
     int min = minMax[0].intValue();
     int max = minMax[1].intValue();
-    this.insertValue(f, entity, MakeInteger.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeInteger.getIntervalo(min, max).toString());
   }
 
   @Override
-  public <T> void insertValue(Field f, T entity, String value) throws IllegalArgumentException,
-      IllegalAccessException {
-    if (f.getType().equals(Integer.class)) {
-      f.set(entity, new Integer(value));
+  public <T> void insertValue(Field field, T entity, String value)
+      throws IllegalArgumentException, IllegalAccessException {
+    if (field.getType().equals(Integer.class)) {
+      field.set(entity, new Integer(value));
     } else {
-      f.set(entity, new Integer(value).intValue());
+      field.set(entity, new Integer(value).intValue());
     }
   }
 
   @Override
-  public boolean isMyType(final Field f) {
-    return isInteger(f);
+  public boolean isMyType(final Field field) {
+    return isInteger(field);
   }
 
   /**
@@ -64,11 +64,11 @@ public class MakeInteger extends MakeNumber {
   /**
    * Retorna True para tipos Integer ou int.
    *
-   * @param f Field a ser avaliado.
+   * @param field Field a ser avaliado.
    * @return True para tipos Integer ou int, False para outros tipos.
    */
-  public static boolean isInteger(final Field f) {
-    if (f.getType().equals(Integer.class) || f.getType().equals(int.class)) {
+  public static boolean isInteger(final Field field) {
+    if (field.getType().equals(Integer.class) || field.getType().equals(int.class)) {
       return true;
     }
     return false;

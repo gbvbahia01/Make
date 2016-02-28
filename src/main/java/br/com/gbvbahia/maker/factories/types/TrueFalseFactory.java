@@ -1,16 +1,16 @@
 package br.com.gbvbahia.maker.factories.types;
 
-import java.lang.reflect.Field;
-
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.AssertTrue;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import java.lang.reflect.Field;
+
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
 
 /**
  * Factory para classes anotadas com @AssertTrue e/ou @AssertFalse da JSR303.
@@ -78,7 +78,8 @@ public class TrueFalseFactory implements ValueFactory {
    * @return True para possui anotação booleana False para não possui.
    */
   private boolean isBoolean(Field field) {
-    if (field.isAnnotationPresent(AssertTrue.class) || field.isAnnotationPresent(AssertFalse.class)) {
+    if (field.isAnnotationPresent(AssertTrue.class)
+        || field.isAnnotationPresent(AssertFalse.class)) {
       return true;
     }
     return false;
@@ -92,7 +93,7 @@ public class TrueFalseFactory implements ValueFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for TrueFalseFactory class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueFactory getInstance() {
     if (instance == null) {

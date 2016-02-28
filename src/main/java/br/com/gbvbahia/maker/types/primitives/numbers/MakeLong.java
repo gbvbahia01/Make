@@ -1,13 +1,13 @@
 package br.com.gbvbahia.maker.types.primitives.numbers;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
-
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 
 /**
  * Gerador de números inteiros aleatório.
@@ -18,27 +18,27 @@ import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 public class MakeLong extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
-      IllegalAccessException {
-    Number[] minMax = this.getMinMaxValues(f, Long.MIN_VALUE, Long.MAX_VALUE);
+  public <T> void insertValue(Field field, T entity)
+      throws IllegalArgumentException, IllegalAccessException {
+    Number[] minMax = this.getMinMaxValues(field, Long.MIN_VALUE, Long.MAX_VALUE);
     long min = minMax[0].longValue();
     long max = minMax[1].longValue();
-    this.insertValue(f, entity, MakeLong.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeLong.getIntervalo(min, max).toString());
   }
 
   @Override
-  public <T> void insertValue(final Field f, final T entity, final String value)
+  public <T> void insertValue(final Field field, final T entity, final String value)
       throws IllegalArgumentException, IllegalAccessException {
-    if (f.getType().equals(Long.class)) {
-      f.set(entity, new Long(value));
+    if (field.getType().equals(Long.class)) {
+      field.set(entity, new Long(value));
     } else {
-      f.set(entity, new Long(value).longValue());
+      field.set(entity, new Long(value).longValue());
     }
   }
 
   @Override
-  public boolean isMyType(Field f) {
-    return isLong(f);
+  public boolean isMyType(Field field) {
+    return isLong(field);
   }
 
   /**
@@ -67,13 +67,11 @@ public class MakeLong extends MakeNumber {
       long longValue;
       if ((max + min) == 0) {
         if ((RANDOM.nextInt() % 2) == 0) {
-          longValue =
-              new BigDecimal((ale * ((max / 2) + min))).setScale(0, RoundingMode.HALF_EVEN)
-                  .longValue();
+          longValue = new BigDecimal((ale * ((max / 2) + min))).setScale(0, RoundingMode.HALF_EVEN)
+              .longValue();
         } else {
-          longValue =
-              new BigDecimal((ale * (max + (min / 2)))).setScale(0, RoundingMode.HALF_EVEN)
-                  .longValue();
+          longValue = new BigDecimal((ale * (max + (min / 2)))).setScale(0, RoundingMode.HALF_EVEN)
+              .longValue();
         }
       } else {
         longValue =
@@ -86,10 +84,8 @@ public class MakeLong extends MakeNumber {
       }
     } else {
       try {
-        numero =
-            min
-                + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN)
-                    .longValue();
+        numero = min
+            + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
       } catch (StackOverflowError s) {
         LogInfo.logWarnInformation("MakeLong", I18N.getMsg("bigErroStack", max, min, ale));
         throw s;
@@ -115,11 +111,11 @@ public class MakeLong extends MakeNumber {
   /**
    * Retorna True para tipos Long ou long.
    *
-   * @param f Field a ser avaliado.
+   * @param field Field a ser avaliado.
    * @return True para tipos Long ou long, False para outros tipos.
    */
-  public static boolean isLong(final Field f) {
-    if (f.getType().equals(Long.class) || f.getType().equals(long.class)) {
+  public static boolean isLong(final Field field) {
+    if (field.getType().equals(Long.class) || field.getType().equals(long.class)) {
       return true;
     }
     return false;

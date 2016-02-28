@@ -1,15 +1,5 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.managers.NamesManager;
@@ -20,6 +10,16 @@ import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFacto
 import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This specialized class will with fields that have the mapped regex value:<br>
@@ -34,6 +34,7 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
  * @since v.1 16/06/2012
  * @author Guilherme
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class MakeList implements ValueSpecializedFactory {
 
   /**
@@ -77,14 +78,12 @@ public class MakeList implements ValueSpecializedFactory {
     return field.getType().equals(java.util.List.class);
   }
 
-  @SuppressWarnings({"unchecked", "rawtypes"})
   @Override
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
     CollectionsHelper valueHelper = this.ruleHelper.get(NamesManager.getFiledName(field));
-    List toSet =
-        new ArrayList(MakeEntity.makeEntities(valueHelper.getClazz(),
-            MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
+    List toSet = new ArrayList(MakeEntity.makeEntities(valueHelper.getClazz(),
+        MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
     field.set(entity, toSet);
   }
 
@@ -111,11 +110,11 @@ public class MakeList implements ValueSpecializedFactory {
     String minMax = StringUtils.substringBetween(value, "[", "]");
     String minAmountElementsInList = minMax.split(",")[0];
     String maxAmountElementsInList = minMax.split(",")[1];
-    LogInfo.logDebugInformation("MakeList", "Class: " + clazz + " min:" + minAmountElementsInList
-        + " max: " + maxAmountElementsInList);
+    LogInfo.logDebugInformation("MakeList",
+        "Class: " + clazz + " min:" + minAmountElementsInList + " max: " + maxAmountElementsInList);
     try {
-      this.ruleHelper.put(fieldName, new CollectionsHelper(Class.forName(clazz), new Integer(
-          minAmountElementsInList), new Integer(maxAmountElementsInList)));
+      this.ruleHelper.put(fieldName, new CollectionsHelper(Class.forName(clazz),
+          new Integer(minAmountElementsInList), new Integer(maxAmountElementsInList)));
     } catch (ClassNotFoundException ce) {
       throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
           new String[] {clazz}, ce);
@@ -133,7 +132,7 @@ public class MakeList implements ValueSpecializedFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for MakeList class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {

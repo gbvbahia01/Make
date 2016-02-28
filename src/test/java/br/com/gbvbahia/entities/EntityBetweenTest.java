@@ -8,7 +8,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityBetweenTest {

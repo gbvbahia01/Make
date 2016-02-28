@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityInTest {

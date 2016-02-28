@@ -1,11 +1,11 @@
 package br.com.gbvbahia.maker.properties;
 
-import java.lang.reflect.Field;
+import br.com.gbvbahia.maker.factories.types.managers.Notification;
+import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 
 import org.apache.commons.lang3.StringUtils;
 
-import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
+import java.lang.reflect.Field;
 
 public class FactoryCustomerService implements ValueSpecializedFactory {
   /**

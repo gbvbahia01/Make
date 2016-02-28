@@ -7,7 +7,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityDecimalTest {

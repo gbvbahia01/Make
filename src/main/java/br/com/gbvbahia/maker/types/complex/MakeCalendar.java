@@ -1,11 +1,10 @@
 package br.com.gbvbahia.maker.types.complex;
 
-import java.util.Calendar;
-
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
+import java.util.Calendar;
+
 /**
- *
  * Cria uma data aleatória limitada em 1800 dias para frente, futuro ou 1800 dias para traz,
  * passado.
  *

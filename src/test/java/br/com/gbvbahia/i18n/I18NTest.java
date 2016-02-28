@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class I18NTest extends TestCase {

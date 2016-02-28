@@ -1,11 +1,11 @@
 package br.com.gbvbahia.i18n;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Classe responsável para manter todas as mensagens que serão enviadas ao usuário.<br>

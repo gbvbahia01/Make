@@ -1,8 +1,8 @@
 package br.com.gbvbahia.maker.types.primitives.numbers;
 
-import java.lang.reflect.Field;
-
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+
+import java.lang.reflect.Field;
 
 /**
  * @since v.1 11/05/2012
@@ -11,27 +11,27 @@ import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 public class MakeByte extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
-      IllegalAccessException {
-    Number[] minMax = this.getMinMaxValues(f, Byte.MIN_VALUE, Byte.MAX_VALUE);
+  public <T> void insertValue(final Field field, final T entity)
+      throws IllegalArgumentException, IllegalAccessException {
+    Number[] minMax = this.getMinMaxValues(field, Byte.MIN_VALUE, Byte.MAX_VALUE);
     byte min = minMax[0].byteValue();
     byte max = minMax[1].byteValue();
-    this.insertValue(f, entity, MakeByte.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeByte.getIntervalo(min, max).toString());
   }
 
   @Override
-  public <T> void insertValue(final Field f, final T entity, final String value)
+  public <T> void insertValue(final Field field, final T entity, final String value)
       throws IllegalArgumentException, IllegalAccessException {
-    if (f.getType().equals(Byte.class)) {
-      f.set(entity, new Byte(value));
+    if (field.getType().equals(Byte.class)) {
+      field.set(entity, new Byte(value));
     } else {
-      f.set(entity, new Byte(value).byteValue());
+      field.set(entity, new Byte(value).byteValue());
     }
   }
 
   @Override
-  public boolean isMyType(final Field f) {
-    return isByte(f);
+  public boolean isMyType(final Field field) {
+    return isByte(field);
   }
 
   /**
@@ -58,11 +58,11 @@ public class MakeByte extends MakeNumber {
   /**
    * Retorna True para tipos Byte ou byte.
    *
-   * @param f Field a ser avaliado.
+   * @param field Field a ser avaliado.
    * @return True para tipos Byte ou byte, False para outros tipos.
    */
-  public static boolean isByte(final Field f) {
-    if (f.getType().equals(Byte.class) || f.getType().equals(byte.class)) {
+  public static boolean isByte(final Field field) {
+    if (field.getType().equals(Byte.class) || field.getType().equals(byte.class)) {
       return true;
     }
     return false;

@@ -3,7 +3,6 @@ package br.com.gbvbahia.maker.types.complex;
 import java.util.Date;
 
 /**
- *
  * Cria uma data aleatória limitada em 1800 dias para frente, futuro ou 1800 dias para traz,
  * passado.
  *

@@ -1,6 +1,5 @@
 package br.com.gbvbahia.entities;
 
-// ~--- JDK imports ------------------------------------------------------------
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -8,7 +7,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityMaxTest {

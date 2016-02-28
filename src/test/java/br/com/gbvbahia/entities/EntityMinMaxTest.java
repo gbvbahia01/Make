@@ -1,6 +1,5 @@
 package br.com.gbvbahia.entities;
 
-// ~--- JDK imports ------------------------------------------------------------
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -10,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityMinMaxTest {
@@ -220,8 +219,8 @@ public class EntityMinMaxTest {
 
   @Override
   public String toString() {
-    return "EntityMinMaxTest{" + "bigDecimal=" + this.bigDecimal + ", bigInteger="
-        + this.bigInteger + ", byteObjeto=" + this.byteObjeto + ", inteiro=" + this.inteiro
+    return "EntityMinMaxTest{" + "bigDecimal=" + this.bigDecimal + ", bigInteger=" + this.bigInteger
+        + ", byteObjeto=" + this.byteObjeto + ", inteiro=" + this.inteiro
         + ", inteiroNegativoObjeto=" + this.inteiroNegativoObjeto + ", inteiroObjeto="
         + this.inteiroObjeto + ", longObjeto=" + this.longObjeto + ", primitivoByte="
         + this.primitivoByte + ", primitivoInt=" + this.primitivoInt + ", primitivoLong="

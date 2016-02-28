@@ -1,5 +1,15 @@
 package br.com.gbvbahia.maker.factories.types.managers;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.properties.exception.XMLoaderException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import java.awt.IllegalComponentStateException;
 import java.io.File;
 import java.io.IOException;
@@ -14,16 +24,6 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import br.com.gbvbahia.i18n.I18N;
-import br.com.gbvbahia.maker.factories.types.properties.exception.XMLoaderException;
 
 /**
  * This class reads the xml tests setup for executing the tests.
@@ -86,10 +86,8 @@ public class XMLoader {
   /**
    * Load the document that represents XML with SQLs.
    * 
-   * @throws SAXException
-   * @throws IOException
-   * @throws ParserConfigurationException
-   * @throws URISyntaxException
+   * @throws XMLoaderException If anything goes wrong when the XML is about to be read or its be
+   *         reading a XMLoaderException can be thrown with a real exception problem inside.
    */
   private void loadDocument() {
     try {
@@ -103,16 +101,17 @@ public class XMLoader {
     } catch (IOException ioE) {
       throw new XMLoaderException(ioE, "IO Error got when tried to read xml file.");
     } catch (SAXException saxE) {
-      throw new XMLoaderException(saxE, "SAXException got when tried to read "
-          + this.xmlSetupTestFile + " file.");
+      throw new XMLoaderException(saxE,
+          "SAXException got when tried to read " + this.xmlSetupTestFile + " file.");
     }
   }
 
   /**
    * Load the XML file in hard disk.
    * 
-   * @return
-   * @throws XMLSQLExeption
+   * @return XML File with setup.
+   * @throws XMLSQLExeption If anything goes wrong when the XML is about to be read or its be
+   *         reading a XMLoaderException can be thrown with a real exception problem inside.
    */
   private File loadFile() throws XMLoaderException {
     try {
@@ -128,11 +127,11 @@ public class XMLoader {
       }
       return xmlFile;
     } catch (IOException ioE) {
-      throw new XMLoaderException(ioE, "IO Error got when tried to read xml file.\nFile: "
-          + this.xmlSetupTestFile);
+      throw new XMLoaderException(ioE,
+          "IO Error got when tried to read xml file.\nFile: " + this.xmlSetupTestFile);
     } catch (URISyntaxException uriE) {
-      throw new XMLoaderException(uriE, "URI wrong in jar file for " + this.xmlSetupTestFile
-          + " file.");
+      throw new XMLoaderException(uriE,
+          "URI wrong in jar file for " + this.xmlSetupTestFile + " file.");
     }
   }
 
@@ -147,13 +146,13 @@ public class XMLoader {
    */
   public List<String> getFactories() {
     List<String> factories = new ArrayList<String>();
-    NodeList nList = this.document.getElementsByTagName("factories");
-    for (int i = 0; i < nList.getLength(); i++) {
-      Node nNode = nList.item(i);
-      if (Node.ELEMENT_NODE == nNode.getNodeType()) {
-        Element element = (Element) nNode;
+    NodeList nodeList = this.document.getElementsByTagName("factories");
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      Node node = nodeList.item(i);
+      if (Node.ELEMENT_NODE == node.getNodeType()) {
+        Element element = (Element) node;
         NodeList factoriesNode = element.getElementsByTagName("factory");
-        for (int ii = 0; ii < nList.getLength(); ii++) {
+        for (int ii = 0; ii < nodeList.getLength(); ii++) {
           factories.add(factoriesNode.item(ii).getTextContent());
         }
       }
@@ -215,7 +214,7 @@ public class XMLoader {
   }
 
   /**
-   * Returns all NodeList <test> thats contains the testName in the node <names>
+   * Returns all NodeList test thats contains the testName in the node names.
    * 
    * @param testName the name of the test
    * @param nodeTestChilds all nodes test, where the name will be searched for.

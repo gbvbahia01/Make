@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntitySizeTest {

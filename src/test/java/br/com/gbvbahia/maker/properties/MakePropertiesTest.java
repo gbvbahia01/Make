@@ -1,16 +1,16 @@
 package br.com.gbvbahia.maker.properties;
 
-import junit.framework.TestCase;
-
-import org.apache.commons.logging.Log;
-import org.junit.Test;
-
 import br.com.gbvbahia.entities.EntityPropertiesTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.MakeCnpjTest;
 import br.com.gbvbahia.maker.works.MakeCpfTest;
+
+import junit.framework.TestCase;
+
+import org.apache.commons.logging.Log;
+import org.junit.Test;
 
 /**
  * @since v.1 01/05/2012

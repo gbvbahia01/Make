@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 /**
- *
+ * @since v.1
  * @author Guilherme
  */
 public class EntityDateTest {

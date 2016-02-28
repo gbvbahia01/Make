@@ -1,14 +1,13 @@
 package br.com.gbvbahia.maker.factories.types.works.commons;
 
-import java.math.RoundingMode;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.maker.types.complex.MakeBigDecimal;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.RoundingMode;
+
 /**
- *
  * Realiza o trabalho de manipular String passadas para o tipo correto.
  *
  * @since v.1 17/06/2012
@@ -37,14 +36,12 @@ public class NumberHelper {
   public String getValue() {
     if (StringUtils.contains(this.min, ".") || StringUtils.contains(this.max, ".")) {
       int decimal = StringUtils.substringAfter(this.min, ".").length();
-      this.value =
-          MakeBigDecimal
-              .getIntervalo(new Double(this.min).doubleValue(), new Double(this.max).doubleValue())
-              .setScale(decimal, RoundingMode.UP).toString();
+      this.value = MakeBigDecimal
+          .getIntervalo(new Double(this.min).doubleValue(), new Double(this.max).doubleValue())
+          .setScale(decimal, RoundingMode.UP).toString();
     } else {
-      this.value =
-          MakeLong.getIntervalo(new Long(this.min).longValue(), new Long(this.max).longValue())
-              .toString();
+      this.value = MakeLong
+          .getIntervalo(new Long(this.min).longValue(), new Long(this.max).longValue()).toString();
     }
     return this.value;
   }

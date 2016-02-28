@@ -1,15 +1,5 @@
 package br.com.gbvbahia.maker.factories.types.works;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.managers.NamesManager;
@@ -21,10 +11,21 @@ import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedEx
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @since v.1 01/05/2012
  * @author Guilherme
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class MakeSet implements ValueSpecializedFactory {
 
   /**
@@ -75,9 +76,8 @@ public class MakeSet implements ValueSpecializedFactory {
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
     CollectionsHelper valueHelper = this.ruleHelper.get(NamesManager.getFiledName(field));
-    Set toSet =
-        new HashSet(MakeEntity.makeEntities(valueHelper.getClazz(),
-            MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
+    Set toSet = new HashSet(MakeEntity.makeEntities(valueHelper.getClazz(),
+        MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
     if (toSet.size() < valueHelper.getMin()) {
       LogInfo.logWarnInformation("MakeSet",
           I18N.getMsg("setSizeMenorMin", valueHelper.getMin(), toSet.size()));
@@ -110,8 +110,8 @@ public class MakeSet implements ValueSpecializedFactory {
     String max = minMax.split(",")[1];
     LogInfo.logDebugInformation("MakeSet", "Class: " + clazz + " min:" + min + " max: " + max);
     try {
-      this.ruleHelper.put(fieldName, new CollectionsHelper(Class.forName(clazz), new Integer(min),
-          new Integer(max)));
+      this.ruleHelper.put(fieldName,
+          new CollectionsHelper(Class.forName(clazz), new Integer(min), new Integer(max)));
     } catch (ClassNotFoundException ce) {
       throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
           new String[] {clazz}, ce);
@@ -129,7 +129,7 @@ public class MakeSet implements ValueSpecializedFactory {
   /**
    * Get a instance for this class encapsulated by ValueSpecializedFactory.
    * 
-   * @return
+   * @return a instance for MakeSet class encapsulated by ValueSpecializedFactory.
    */
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {

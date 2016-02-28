@@ -1,8 +1,8 @@
 package br.com.gbvbahia.maker.types.primitives.numbers;
 
-import java.lang.reflect.Field;
-
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
+
+import java.lang.reflect.Field;
 
 /**
  * @since v.1 11/05/2012
@@ -11,27 +11,27 @@ import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 public class MakeShort extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field f, final T entity) throws IllegalArgumentException,
-      IllegalAccessException {
-    Number[] minMax = this.getMinMaxValues(f, Short.MIN_VALUE, Short.MAX_VALUE);
+  public <T> void insertValue(final Field field, final T entity)
+      throws IllegalArgumentException, IllegalAccessException {
+    Number[] minMax = this.getMinMaxValues(field, Short.MIN_VALUE, Short.MAX_VALUE);
     short min = minMax[0].shortValue();
     short max = minMax[1].shortValue();
-    this.insertValue(f, entity, MakeShort.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeShort.getIntervalo(min, max).toString());
   }
 
   @Override
-  public <T> void insertValue(final Field f, final T entity, final String value)
+  public <T> void insertValue(final Field field, final T entity, final String value)
       throws IllegalArgumentException, IllegalAccessException {
-    if (f.getType().equals(Short.class)) {
-      f.set(entity, new Short(value));
+    if (field.getType().equals(Short.class)) {
+      field.set(entity, new Short(value));
     } else {
-      f.set(entity, new Short(value).shortValue());
+      field.set(entity, new Short(value).shortValue());
     }
   }
 
   @Override
-  public boolean isMyType(final Field f) {
-    return isShort(f);
+  public boolean isMyType(final Field field) {
+    return isShort(field);
   }
 
   /**
@@ -58,11 +58,11 @@ public class MakeShort extends MakeNumber {
   /**
    * Retorna True para tipos Short ou short.
    *
-   * @param f Field a ser avaliado.
+   * @param field Field a ser avaliado.
    * @return True para tipos Short ou short, False para outros tipos.
    */
-  public static boolean isShort(final Field f) {
-    if (f.getType().equals(Short.class) || f.getType().equals(short.class)) {
+  public static boolean isShort(final Field field) {
+    if (field.getType().equals(Short.class) || field.getType().equals(short.class)) {
       return true;
     }
     return false;

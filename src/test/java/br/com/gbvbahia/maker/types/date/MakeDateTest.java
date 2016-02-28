@@ -3,14 +3,14 @@ package br.com.gbvbahia.maker.types.date;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Calendar;
-import java.util.Date;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.complex.MakeDate;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.complex.MakeDate;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @since v.1 01/2012
