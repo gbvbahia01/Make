@@ -1,12 +1,12 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeByte;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
+
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeByte;
 
 /**
  * @since v.1
@@ -25,7 +25,7 @@ public class MakeByteTest extends TestCase {
    */
   @Test
   public void testGetIntervalo() {
-    logger.info("Byte - GetIntervalo");
+    logger.debug("Byte - GetIntervalo");
     for (byte min = 1; min < (Byte.MAX_VALUE - 100); min++) {
       for (byte max = (byte) (min + 1); max < Byte.MAX_VALUE; max++) {
         Byte result = MakeByte.getIntervalo(min, max);
@@ -42,7 +42,7 @@ public class MakeByteTest extends TestCase {
    */
   @Test
   public void testGetMax() {
-    logger.info("Byte - GetMax");
+    logger.debug("Byte - GetMax");
     for (byte i = 1; i < Byte.MAX_VALUE; i++) {
       Byte result = MakeByte.getMax(i);
       logger.debug("Max: " + i + " Result: " + result);

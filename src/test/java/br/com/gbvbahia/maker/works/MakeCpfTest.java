@@ -1,12 +1,12 @@
 package br.com.gbvbahia.maker.works;
 
-import br.com.gbvbahia.maker.factories.types.works.MakeCpf;
-import br.com.gbvbahia.maker.log.LogInfo;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
+
+import br.com.gbvbahia.maker.factories.types.works.MakeCpf;
+import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  * @since v.1
@@ -25,7 +25,7 @@ public class MakeCpfTest extends TestCase {
    */
   @Test
   public void testGetCpf() {
-    logger.info("String - GetCPF");
+    logger.debug("String - GetCPF");
     for (int i = 0; i < 50; i++) {
       String result = MakeCpf.getCpf();
       assertTrue("CPF: " + result + " INVÁLIDO!", validarCpf(result));

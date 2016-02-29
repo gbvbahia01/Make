@@ -1,19 +1,5 @@
 package br.com.gbvbahia.maker.works;
 
-import br.com.gbvbahia.entities.EntityPatternTest;
-import br.com.gbvbahia.entities.EntitySetComplexTest;
-import br.com.gbvbahia.entities.EntitySetTest;
-import br.com.gbvbahia.maker.MakeEntity;
-import br.com.gbvbahia.maker.factories.Factory;
-import br.com.gbvbahia.maker.factories.types.works.MakeSet;
-import br.com.gbvbahia.maker.log.LogInfo;
-
-import junit.framework.TestCase;
-
-import org.apache.commons.logging.Log;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +8,20 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import junit.framework.TestCase;
+
+import org.apache.commons.logging.Log;
+import org.junit.Before;
+import org.junit.Test;
+
+import br.com.gbvbahia.entities.EntityPatternTest;
+import br.com.gbvbahia.entities.EntitySetComplexTest;
+import br.com.gbvbahia.entities.EntitySetTest;
+import br.com.gbvbahia.maker.MakeEntity;
+import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.factories.types.works.MakeSet;
+import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  * @since v.1 01/05/2012
@@ -47,7 +47,7 @@ public class MakeSetTest extends TestCase {
 
   @Test
   public void testRegexSet() throws Exception {
-    logger.info("String - GetRegexSet");
+    logger.debug("String - GetRegexSet");
     Matcher matcher = this.pattern.matcher("isSet{br.com.compre}[1,1]");
     boolean test = matcher.find();
     assertTrue("Primeiro: deveria ser true.", test);
@@ -99,7 +99,7 @@ public class MakeSetTest extends TestCase {
 
   @Test
   public void testPopularSet() throws Exception {
-    logger.info("String - GetPopularSet");
+    logger.debug("String - GetPopularSet");
     Factory.loadSetup("make.xml");
     EntitySetTest test = MakeEntity.make(EntitySetTest.class, "testSet1");
     logger.debug(test);

@@ -3,13 +3,13 @@ package br.com.gbvbahia.maker.types.date;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.complex.MakeCalendar;
+import java.util.Calendar;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import java.util.Calendar;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.complex.MakeCalendar;
 
 /**
  * @since v.1
@@ -26,7 +26,7 @@ public class MakeCalendarTest {
    */
   @Test
   public void testGetInFuture() {
-    logger.info("Calendar - GetInFuture");
+    logger.debug("Calendar - GetInFuture");
     Calendar result = MakeCalendar.getInFuture();
     assertNotNull("Data Futura nula", result);
     Calendar now = Calendar.getInstance();
@@ -38,7 +38,7 @@ public class MakeCalendarTest {
    */
   @Test
   public void testGetInPast() {
-    logger.info("Calendar - GetInPast");
+    logger.debug("Calendar - GetInPast");
     Calendar result = MakeCalendar.getInPast();
     assertNotNull("Data Passada nula", result);
     Calendar now = Calendar.getInstance();
@@ -50,7 +50,7 @@ public class MakeCalendarTest {
    */
   @Test
   public void testGetCalendar() {
-    logger.info("Calendar - GetCalendar");
+    logger.debug("Calendar - GetCalendar");
     Calendar result = MakeCalendar.getCalendar();
     assertNotNull("Data Aeatória nula", result);
     Calendar now = Calendar.getInstance();

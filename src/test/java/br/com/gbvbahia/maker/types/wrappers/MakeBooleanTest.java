@@ -3,11 +3,11 @@ package br.com.gbvbahia.maker.types.wrappers;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
-
 import org.apache.commons.logging.Log;
 import org.junit.Test;
+
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
 
 /**
  * @since v.1
@@ -24,7 +24,7 @@ public class MakeBooleanTest {
    */
   @Test
   public void testGetBoolean() {
-    logger.info("Boolean - GetBoolean");
+    logger.debug("Boolean - GetBoolean");
     boolean trueCheck = false;
     boolean falseCheck = false;
     for (int i = 0; i < 100; i++) {

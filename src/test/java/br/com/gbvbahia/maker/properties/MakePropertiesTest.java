@@ -1,16 +1,16 @@
 package br.com.gbvbahia.maker.properties;
 
+import junit.framework.TestCase;
+
+import org.apache.commons.logging.Log;
+import org.junit.Test;
+
 import br.com.gbvbahia.entities.EntityPropertiesTest;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.works.MakeCnpjTest;
 import br.com.gbvbahia.maker.works.MakeCpfTest;
-
-import junit.framework.TestCase;
-
-import org.apache.commons.logging.Log;
-import org.junit.Test;
 
 /**
  * @since v.1 01/05/2012
@@ -30,7 +30,7 @@ public class MakePropertiesTest extends TestCase {
   @Test
   public void testFactoryPropertiesMultiplos() {
     Factory.loadSetup("make.xml");
-    logger.info("FactoryProperties");
+    logger.debug("FactoryProperties");
     for (int i = 0; i < 50; i++) {
       EntityPropertiesTest test = MakeEntity.make(EntityPropertiesTest.class, "test1");
       assertTrue("Sem erros", true);

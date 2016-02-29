@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.factories.types;
 
+import java.lang.reflect.Field;
+
+import javax.validation.constraints.Size;
+
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
-
-import java.lang.reflect.Field;
-
-import javax.validation.constraints.Size;
 
 /**
  * Cria String com base na anotação @Size (javax.validation.constraints.Size) da JSR303.<br>
@@ -32,7 +32,7 @@ public class SizeFactory implements ValueFactory {
     int min = field.getAnnotation(Size.class).min();
     int max = field.getAnnotation(Size.class).max();
     if ((max > MakeString.MAX_LENGTH_SUPPORTS) && (min < MakeString.MAX_LENGTH_SUPPORTS)) {
-      LogInfo.logWarnInformation("SizeFactory",
+      LogInfo.logInfoInformation("SizeFactory",
           I18N.getMsg("sizeLengh", MakeString.MAX_LENGTH_SUPPORTS, max));
       max = MakeString.MAX_LENGTH_SUPPORTS;
     }

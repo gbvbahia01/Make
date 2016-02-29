@@ -1,15 +1,15 @@
 package br.com.gbvbahia.maker.types.string;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
+import java.util.Arrays;
+import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.MakeCharacter;
 
 /**
  * @since v.1
@@ -25,7 +25,7 @@ public class MakeCharacterTest extends TestCase {
 
   @Test
   public void testGetNumber() throws Exception {
-    logger.info("Character - GetNumber");
+    logger.debug("Character - GetNumber");
     for (int i = 0; i < 1000; i++) {
       Character test = MakeCharacter.getNumber();
       logger.debug("MakeCharacter.getNumber retornou: " + test);
@@ -47,7 +47,7 @@ public class MakeCharacterTest extends TestCase {
 
   @Test
   public void testGetLetter() throws Exception {
-    logger.info("Character - GetLetter");
+    logger.debug("Character - GetLetter");
     for (int i = 0; i < 1000; i++) {
       Character test = MakeCharacter.getLetter();
       logger.debug("MakeCharacter.getLetter retornou: " + test);
@@ -62,7 +62,7 @@ public class MakeCharacterTest extends TestCase {
 
   @Test
   public void testGetSymbols() throws Exception {
-    logger.info("Character - GetSymbols");
+    logger.debug("Character - GetSymbols");
     List<Character> character = Arrays.asList(MakeCharacter.SYMBOLS);
     for (int i = 0; i < 100; i++) {
       Character test = MakeCharacter.getSymbols();
@@ -78,13 +78,12 @@ public class MakeCharacterTest extends TestCase {
 
   @Test
   public void testGetCharacter() throws Exception {
-    logger.info("Character - GetCharacter");
+    logger.debug("Character - GetCharacter");
     List<Character> character = Arrays.asList(MakeCharacter.SYMBOLS);
     for (int i = 0; i < 1000; i++) {
       Character test = MakeCharacter.getCharacter();
       logger.debug("MakeCharacter.getCharacter retornou: " + test);
-      if (!this.checkLetter(test) && !this.checkNumber(test)
-          && !this.checkSymbols(test, character)) {
+      if (!this.checkLetter(test) && !this.checkNumber(test) && !this.checkSymbols(test, character)) {
         fail("Character " + test + " é inválido!");
       }
     }

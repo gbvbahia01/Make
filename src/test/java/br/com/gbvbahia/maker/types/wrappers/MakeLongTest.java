@@ -1,12 +1,12 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
+
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
 
 /**
  * @since v.1
@@ -24,7 +24,7 @@ public class MakeLongTest extends TestCase {
    */
   @Test
   public void testGetIntervalo() {
-    logger.info("Long - GetIntervalo");
+    logger.debug("Long - GetIntervalo");
     for (long min = 1000000000; min < 1000000100; min++) {
       for (long max = min + 1; max < 1000000200; max++) {
         Long result = MakeLong.getIntervalo(min, max);
@@ -38,7 +38,7 @@ public class MakeLongTest extends TestCase {
 
   @Test
   public void testMinMaxIsReturned() throws Exception {
-    logger.info("Long - MinMaxIsReturned");
+    logger.debug("Long - MinMaxIsReturned");
     int min = 1;
     int max = 3;
     boolean minOk = false;
@@ -65,7 +65,7 @@ public class MakeLongTest extends TestCase {
    */
   @Test
   public void testGetMax() {
-    logger.info("Long - GetMax");
+    logger.debug("Long - GetMax");
     for (int i = 1000000000; i <= 1000000100; i++) {
       Long result = MakeLong.getMax(i);
       logger.debug("Max: " + i + " Result: " + result);

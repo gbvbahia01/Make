@@ -1,12 +1,12 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
+
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 /**
  * @since v.1
@@ -25,7 +25,7 @@ public class MakeIntegerTest extends TestCase {
    */
   @Test
   public void testGetIntervalo() {
-    logger.info("Integer - GetIntervalo");
+    logger.debug("Integer - GetIntervalo");
     for (int min = 1; min < 100; min++) {
       for (int max = min + 1; max < 200; max++) {
         Integer result = MakeInteger.getIntervalo(min, max);
@@ -42,7 +42,7 @@ public class MakeIntegerTest extends TestCase {
    */
   @Test
   public void testGetMax() {
-    logger.info("Integer - GetMax");
+    logger.debug("Integer - GetMax");
     for (int i = 1; i < 100; i++) {
       Integer result = MakeInteger.getMax(i);
       logger.debug("Max: " + i + " Result: " + result);

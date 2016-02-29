@@ -1,12 +1,12 @@
 package br.com.gbvbahia.maker.works;
 
-import br.com.gbvbahia.maker.factories.types.works.MakeCnpj;
-import br.com.gbvbahia.maker.log.LogInfo;
-
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
+
+import br.com.gbvbahia.maker.factories.types.works.MakeCnpj;
+import br.com.gbvbahia.maker.log.LogInfo;
 
 /**
  * @since v.1
@@ -25,7 +25,7 @@ public class MakeCnpjTest extends TestCase {
    */
   @Test
   public void testGetCnpj() {
-    logger.info("String - GetCNPJ");
+    logger.debug("String - GetCNPJ");
     for (int i = 0; i < 50; i++) {
       String result = MakeCnpj.getCnpj();
       assertTrue("CNPJ: " + result + " INVÁLIDO, Tamanho: " + result.length(), validarCnpj(result));
