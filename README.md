@@ -2,9 +2,11 @@
 A framework that can make easily a lot of entity or objects to use in unit tests or populate a data base.
 
 ## Code Example
+
+```<java>
 MyObject myObject = MakeEntity.make(MyObject .class);
 List<MyObject> myObjects = MakeEntity.makeEntities(MyObject .class, amount);
-
+```
 ## Motivation
 Working in a simple project I was working with JSR303 specification in my entities. The project started with JUnit tests.
 While it was a small project with few entities, 4 or 5 it was easy to keep.
