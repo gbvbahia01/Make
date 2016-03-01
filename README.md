@@ -12,9 +12,9 @@ Working in a simple project I was working with JSR303 specification in my entiti
 While it was a small project with few entities, 4 or 5 it was easy to keep.<br>
 When the project got big and I had to change the relation between my entities, my happy day became a week of hell.<br>
 I visualized two sad options: remove the hibernate validator or remake all entities in my units tests.<br>
-For me as a developer I chose the second. I was happy with the validation in JPA2 and JSF2 forms and a lot of bugs avoided with JSR303.<br>
+For me, as a developer, I chose the second. I was happy with the validation in JPA2 and JSF2 forms and a lot of bugs avoided with JSR303.<br>
 For my boss, as a manager, time is money and spend a lot of time in test code is not acceptable.<br>
-When my coworkers realized the big job to refactor all those code. They went to manager side. I was alone :(<br>
+When my coworkers realized the big refactoring in all those codes. They went to the manager side. I was alone :(<br>
 So I had the idea to make this framework and we decided to remove the JUnit tests until it get ready.<br>
 Yes is true. I started to work with it in my house at nights. Worth it, do not worry. I got a university specialization using it;).<br>
 When I put it into our application I realized that also I could used to populate my test data base. I could see a data base with 100.000 objects created in 3 hours. You must realize that I am inlcuding the realation between objects is also included in this amount. Our 50 tables were crowded with a lot of valid data.<br>
@@ -33,6 +33,7 @@ The configuration of the framework is made with a XML setup file. Is important t
 You can get a exemple XML setup file in src/test/resource folder from this project. Check the file make.xml.<br>
 Make use this name by default but you can change it.<br>
 The XML setup file is divided in 3 parts:<br>
+<b>Setup Tag </b><br>
 ```<XML>
 <setup>
     <JSR303 value="read" /><!-- read or ignore -->
@@ -44,15 +45,54 @@ The Null tag determines how the framework will work about when set null values:<
 *   The 'never' value tells to the Make to create values for all fields. Only fields that have no default constructor will be set null or fields that will be treated with specialized factory (this last I will explain soon). If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set.<br>
 *   The 'some' value will define If a value will be made or null will be set. One chance to six to be a null value. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br> 
 *   The 'all' value means that Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br>
-*   
-<b> Specialized Factories </b>
-Some fields need to be treated with a special value. Like a contract number, a social number, drive id and so on. For this cases you can create a specialized factory. Create in the TEST source of course.
+
+<b>Test Tag</b><br>
+````<XML>
+<tests>
+    <test>
+      <names>
+        <name>Test_Name_1</name>
+        <name>Test_Name_2</name>
+      </names>
+      <entities>
+        <entity class="br.com.tests.Employee">
+          <field name="name">isName</field>
+          <field name="age">between{18,69}</field>
+        </entity>
+      </entities>
+    </test>
+     <test>
+      <names>
+        <name>Test_Name_3</name>
+      </names>
+      <entities>
+        <entity class="br.com.tests.Employee">
+          <field name="salary">between{3000,4500}</field>
+        </entity>
+      </entities>
+    </test>
+</tests>
+```
+In the tests tag you can create more the one test and give a name or names to all tests. For this you must use the <name> tag.
+This names make easy change rules between tests keeping one file and merge more the one test in one call:
+```<java>
+ MakeEntity.make(Employee.class, "Test_Name_1","Test_Name_3");
+ MakeEntity.make(Employee.class, "Test_Name_2");
+```
+Make method receive a String var-args as a second argument. When is informed Make will search all tests that have the name informed. The order is important. The first rule is kept. I mean that: a rule from the first test name will no replaced by a second rule for a second name for the same class field.<br>
+
+
+
+<b> Specialized Factories </b><br>
+Some fields need to be treated with a special value. Like a contract number, a social number, drive id and so on. For this cases you can create a specialized factory. You must create all of it in the TEST source of course.
 A specialized factory needs to implement ValueSpecializedFactory:
 ```<java>
 boolean workValue(String fieldName, String value);
 void makeValue(Field field, T entity, String... testName);
 boolean isWorkWith(Field field, T entity);
 ```
+
+
 
 
 ```<XML>
