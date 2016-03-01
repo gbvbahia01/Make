@@ -1,5 +1,7 @@
 package br.com.gbvbahia.maker.factories.types.works.exceptions;
 
+import br.com.gbvbahia.i18n.I18N;
+import br.com.gbvbahia.maker.factories.types.properties.exception.MakeCreationException;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 
 /**
@@ -8,7 +10,7 @@ import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFacto
  * @since v.1 16/06/2012
  * @author Guilherme
  */
-public class ValueSpecializedException extends RuntimeException {
+public class ValueSpecializedException extends MakeCreationException {
 
   private static final long serialVersionUID = 1517631196990226457L;
   /**
@@ -69,7 +71,7 @@ public class ValueSpecializedException extends RuntimeException {
    */
   public ValueSpecializedException(Class<? extends ValueSpecializedFactory> origem,
       String msgPropertieKey, String[] variations, Throwable cause) {
-    super(cause);
+    super(I18N.getMsg(msgPropertieKey, (Object[]) variations), cause);
     this.origemClass = origem;
     this.msgPropertieKey = msgPropertieKey;
     this.varArgMsgVariations = variations;
