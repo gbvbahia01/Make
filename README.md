@@ -1,4 +1,4 @@
-# Make V. 2.0
+# Make V.2.0
 A framework that can make easily a lot of entity or objects to use in unit tests or populate a data base.
 
 ## Code Example
@@ -40,10 +40,28 @@ The XML setup file is divided in 3 parts:<br>
   </setup>
 ```
 The JSR303 tag is used to inform the framework to read or to ignore the annotations JSR303. If you project does'nt have this annotations you must have to set ignore here.<br>
-The Null tag determines how the framework will work about when set null values.<br>
-The 'never' value tells to the Make to create values for all fields. Only fields that have no default constructor will be set null or fields that will be treated with specialized factory (this last I will explain soon). If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set.<br>
-The 'some' value will define If a value will be made or null will be set. One chance to six to be a null value. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br> 
-The 'all' value means that Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.
+The Null tag determines how the framework will work about when set null values:<br>
+*   The 'never' value tells to the Make to create values for all fields. Only fields that have no default constructor will be set null or fields that will be treated with specialized factory (this last I will explain soon). If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set.<br>
+*   The 'some' value will define If a value will be made or null will be set. One chance to six to be a null value. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br> 
+*   The 'all' value means that Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br>
+*   
+# Specialized Factories
+Some fields need to be treated with a special value. Like a contract number, a social number, drive id and so on. For this cases you can create a specialized factory. Create in the TEST source of course.
+A specialized factory needs to implement ValueSpecializedFactory:
+```<java>
+boolean workValue(String fieldName, String value);
+void makeValue(Field field, T entity, String... testName);
+boolean isWorkWith(Field field, T entity);
+```
+
+
+```<XML>
+  <factories>
+    <factory>br.com.gbvbahia.maker.properties.CepWorkTest</factory>
+    <factory>br.com.gbvbahia.maker.properties.FactoryCustomerService
+    </factory>
+  </factories>
+```
 <br>DO NOT put XML setup file in make folder test. It is must be put in the application folder resource test. 
 
 
