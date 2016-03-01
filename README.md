@@ -46,6 +46,19 @@ If you do not use JSR303 annotations Make will create open values for all fields
 
 The configuration of the framework is made with a XML setup file. Is important that this file have to be put in your resource folder test.
 
+You can get a exemple XML setup file in src/test/resource folder from this project. Check the file make.xml.
+Make use this name by default but you can change it.
+The XML setup file is divided in 3 parts:
+```<XML>
+<setup>
+    <JSR303 value="read" /><!-- read or ignore -->
+    <Null value="never" /><!-- never some all -->
+  </setup>
+```
+The JSR303 tag is used to inform the framework to read or ignore the annotations JSR303. If you project does'nt have this annotations you must have set ignore here.
+The Null tag determines how the framework will work about set null values.  
+
+
 DO NOT put in make folder test but the application folder resource test. 
 
 
