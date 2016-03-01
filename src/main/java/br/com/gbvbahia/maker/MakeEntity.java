@@ -4,10 +4,8 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.properties.exception.MakeCreationException;
 import br.com.gbvbahia.maker.log.LogInfo;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -21,11 +19,6 @@ import java.util.List;
  * @author Guilherme
  */
 public class MakeEntity {
-
-  /**
-   * For logging changes edit the log4j.properties inside src/test/resources
-   */
-  private static Log logger = LogFactory.getLog(MakeEntity.class.getSimpleName());
 
   private static Integer counter = 0;
 
@@ -48,11 +41,11 @@ public class MakeEntity {
       prepareValue(entityParam, entityReturn, testName);
       return entityReturn;
     } catch (InstantiationException ex) {
-      logger.error(I18N.getMsg("instantiationException", entityParam.getName()), ex);
-      throw new RuntimeException(ex);
+      throw new MakeCreationException(I18N.getMsg("instantiationException", entityParam.getName()),
+          ex);
     } catch (IllegalAccessException ex) {
-      logger.error(I18N.getMsg("illegalAccessException", entityParam.getName()), ex);
-      throw new RuntimeException(ex);
+      throw new MakeCreationException(I18N.getMsg("illegalAccessException", entityParam.getName()),
+          ex);
     } finally {
       LogInfo.logMakeEndDebug(MakeEntity.class.getSimpleName(), entityParam);
       notifyEnded(testName);
