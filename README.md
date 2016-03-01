@@ -36,7 +36,7 @@ Make use this name by default but you can change it.<br>
 The XML setup file is divided in 3 parts:<br>
 <b>Setup Tag </b><br>
 ```<XML>
-<setup>
+  <setup>
     <JSR303 value="read" /><!-- read or ignore -->
     <Null value="never" /><!-- never some all -->
   </setup>
@@ -84,7 +84,8 @@ This names make easy change rules between tests keeping one file and merge more 
  MakeEntity.make(Employee.class, "Test_Name_2");
 ```
 Make method receive a String var-args as a second argument. When is informed Make will search all tests that have the name informed. The order is important. The first rule is kept. I mean that: a rule from the first test name will no replaced by a second rule for a second name for the same class field.<br>
-The next tag is entities. This tag enable to create a lot of rules fields in the same test. You do not need put a tag for each field class. Only the fields that you want to define rules. In this example Employer or Employee can have each one 10 fields but only the fields in XML will have rules for values. Others fields will use JSR303 if have or free values if have not.
+The next tag is entities. This tag enable to create a lot of rules fields in the same test. You do not need put a tag for each field class. Only the fields that you want to define rules. In this example Employer or Employee can have each one 10 fields but only the fields in XML will have rules for values. Others fields will use JSR303 if have or free values if have not.<br>
+It is necessary on entity tag the class value you must inform the class full name.<br>
 
 <b> Specialized Factories </b><br>
 Some fields need to be treated with a special value. Like a contract number, a social number, drive id and so on. For this cases you can create a specialized factory. You must create all of it in the TEST source of course.
