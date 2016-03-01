@@ -45,7 +45,7 @@ The Null tag determines how the framework will work about when set null values:<
 *   The 'some' value will define If a value will be made or null will be set. One chance to six to be a null value. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br> 
 *   The 'all' value means that Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br>
 *   
-<b> Specialized Factories <b/>
+<b> Specialized Factories </b>
 Some fields need to be treated with a special value. Like a contract number, a social number, drive id and so on. For this cases you can create a specialized factory. Create in the TEST source of course.
 A specialized factory needs to implement ValueSpecializedFactory:
 ```<java>
