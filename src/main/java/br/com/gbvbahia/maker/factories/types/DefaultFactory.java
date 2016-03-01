@@ -85,7 +85,8 @@ public class DefaultFactory extends MaxMinFactory {
         logger.info(I18N.getMsg("factoryEspecializedWarn"));
         field.set(entity, null);
       } else {
-        throw new IllegalArgumentException(I18N.getMsg("tipoDesconhecidoDefault"));
+        logger.warn(I18N.getMsg("tipoDesconhecidoDefault"));
+        field.set(entity, null);
       }
     }
   }
@@ -106,8 +107,8 @@ public class DefaultFactory extends MaxMinFactory {
     return false;
   }
 
-  private <T> void valueToBoolean(Field field, T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  private <T> void valueToBoolean(Field field, T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     LogInfo.logDefaultValue(entity, field, this.className);
     if (field.getType().equals(Boolean.class)) {
       field.set(entity, MakeBoolean.getBoolean());
@@ -116,8 +117,8 @@ public class DefaultFactory extends MaxMinFactory {
     }
   }
 
-  private <T> void valueToCharacter(Field field, T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  private <T> void valueToCharacter(Field field, T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     LogInfo.logDefaultValue(entity, field, this.className);
     if (field.getType().equals(Character.class)) {
       field.set(entity, MakeCharacter.getCharacter());
@@ -137,8 +138,8 @@ public class DefaultFactory extends MaxMinFactory {
    * @throws IllegalArgumentException Se o field não puder ser construído devido algum
    *         relacionamento incorreto.
    */
-  private <T> void avoidCyclicReference(Field field, T entity)
-      throws IllegalAccessException, IllegalArgumentException {
+  private <T> void avoidCyclicReference(Field field, T entity) throws IllegalAccessException,
+      IllegalArgumentException {
     if (this.hasOneToOne(field, entity) && !this.mapOneToOne.containsKey(field.getType())) {
       this.mapOneToOne.put(entity.getClass(), entity);
     }
