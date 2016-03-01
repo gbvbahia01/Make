@@ -55,8 +55,9 @@ The XML setup file is divided in 3 parts:
     <Null value="never" /><!-- never some all -->
   </setup>
 ```
-The JSR303 tag is used to inform the framework to read or ignore the annotations JSR303. If you project does'nt have this annotations you must have set ignore here.
-The Null tag determines how the framework will work about set null values.  
+The JSR303 tag is used to inform the framework to read or ignore the annotations JSR303. If you project does'nt have this annotations you must have to set ignore here.
+The Null tag determines how the framework will work about when set null values.<br>
+The 'never' value tells to the Make to create values for all fields. Only fields that have no default constructor will be set null or fields that will be treated with specialized factory (this last I will explain soon).
 
 
 DO NOT put in make folder test but the application folder resource test. 
