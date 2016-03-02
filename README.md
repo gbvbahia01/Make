@@ -1,6 +1,10 @@
 # Make V.2.0 
-<b>-- I'm doing this documentation please be patient. It is a bit large. --</b><br>
 A framework that can make easily a lot of entity or objects to use in unit tests or populate a data base.
+
+## Motivation
+I want to use the JSR303 specification in my entities without a hell in my JUnit tests.<br>
+Create a database that can be reliable to make tests.<br>
+
 
 ## Code Example
 
@@ -8,22 +12,6 @@ A framework that can make easily a lot of entity or objects to use in unit tests
 MyObject myObject = MakeEntity.make(MyObject .class);
 List<MyObject> myObjects = MakeEntity.makes(MyObject .class, amount);
 ```
-## Motivation
-Working in a simple project I was working with JSR303 specification in my entities. The project started with JUnit tests.<br>
-While it was a small project with few entities, 4 or 5 it was easy to keep.<br>
-When the project got big and I had to change the relation between my entities, my happy day became a week of hell.<br>
-I visualized two sad options: remove the hibernate validator or remake all entities in my units tests.<br>
-For me, as a developer, I chose the second. I was happy with the validation in JPA2 and JSF2 forms and a lot of bugs avoided with JSR303.<br>
-For my boss, as a manager, time is money and spend a lot of time in test code is not acceptable.<br>
-When my coworkers realized the big refactoring in all those codes. They went to the manager side. I was alone :(<br>
-So I had the idea to make this framework and we decided to remove the JUnit tests until it get ready.<br>
-Yes is true. I started to work with it in my house at nights. Worth it, do not worry. I got a university specialization using it;).<br>
-When I put it into our application I realized that also I could used to populate my test data base. I could see a data base with 100.000 objects created in 3 hours. You must realize that I am including the relation between objects is also included in this amount. Our 50 tables were crowded with a lot of valid data.<br>
-Now is in second version available for all because I worked in my house, not in my job. ;)
-
-## Requirements
-The object to be made needs to have a default constructor. A constructor without arguments.<br>
-Make will create all fields for the object, if the field is another complex object is necessary that object has a default constructor too or null will be set.
 
 ## Mechanics
 Objects are defined with fields. Usually is necessary to define some rules in the fields. Like a car cannot have -3.5 of gasoline and cannot pass tha maximum amount in its fuel tank.<br>
@@ -32,7 +20,17 @@ If you use JSR303 annotations Make will read them and use to create the fields v
 All values created using the JSR303 will be valid, but some of them cannot be acceptable. Like a field that represents a birth date for a person. You can use the annotation @NotNull with @Past. In this case the values will be in the past therefore be valid. But Make can create dates like one day ago or 200 years ago and for the business will be more satisfactory some dates between 18 and 80 years. For situations like that Make has space to put a engine to create those values. This engine is called Specialized Factories.
 If you do not use JSR303 annotations Make will create open values for all fields. You can change this behavior using the Specialized Factories too.
 
-## Setup
+## Requirements
+To build it you will need the Apache Maven.
+The object to be made needs to have a default constructor. A constructor without arguments.<br>
+Make will create all fields for the object, if the field is another complex object is necessary that object has a default constructor too or null will be set.
+
+## Installation
+You can download the project and put it as test dependence in your project.<br>
+Copy from folder src/test/resource the make.xml file and paste it into your project resource test.<br>
+Follow the next step to configure this file.<br>
+
+## Setup File
 The configuration of the framework is made with a XML setup file. Is very important that you put this file in your project test resource folder.<br>
 Make uses this name for XML setup file by default but you can change it. If you do, before start to create objects with Make you need to call a static method at Factory class called loadSetup as the name of XML setup file as parameter:<br>
 
@@ -202,9 +200,3 @@ Your specialized factory is ready for be used now. To work is only need to map a
 
 And remember:
 <br>DO NOT put XML setup file in make folder test. It is must be put in the application folder resource test. 
-
-
-## Installation
-You can download the project and put it as test dependence in your project.
-
-To build it you will need the Apache maven.
