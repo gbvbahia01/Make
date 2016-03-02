@@ -42,6 +42,7 @@ You can get a XML setup file example in src/test/resource folder from Make proje
 From now I will call it make.xml.<br>
 Let's take a look in the make.xml file.<br>
 The make.xml is divided in 3 parts:<br>
+
 <b>Setup Tag </b><br>
 ```<XML>
   <setup>
@@ -54,7 +55,10 @@ The JSR303 tag is used to setup the behavior about JSR303 annotations. To read o
 *   IGNORE: Make wont be looking for JSR303 and the values will be open to any value that the field can handle.<br>
 
 The Null tag determines how the framework will work about to set null values:<br>
-*   NEVER: Make always will create values for all fields. Three cases can set null at a field: the field type does not have default constructor, JSR303 is defined to read and the field has the annotation @Null, and fields that will be treated with specialized factory.<br>
+*   NEVER: Make always will create values for all fields. Three cases can set null at a field: 
+      1 - the field type does not have default constructor.
+      2 - JSR303 is defined to read and the field has the annotation @Null.
+      3 - Fields that will be treated with specialized factory.<br>
 *   SOME: Make will create a value to set or will set null. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br> 
 *   ALL: Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br>
 
