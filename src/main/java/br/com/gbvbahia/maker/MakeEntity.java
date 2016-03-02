@@ -126,7 +126,8 @@ public class MakeEntity {
    */
   public static <T> List<T> makes(Class<T> objectParam, int amount, String... testName) {
     if (amount < 1) {
-      throw new IllegalArgumentException(I18N.getMsg("qutdadeEntityInvalida", amount));
+      throw new MakeCreationException(I18N.getMsg("qutdadeEntityInvalida", amount),
+          new IllegalArgumentException(amount + ""));
     }
     List<T> toReturn = new ArrayList<T>();
     for (int i = 0; i < amount; i++) {
