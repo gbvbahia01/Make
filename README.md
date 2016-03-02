@@ -56,8 +56,8 @@ The JSR303 tag is used to Make setup to read or to ignore the annotations JSR303
 
 The Null tag determines how the framework will work about to set null values:<br>
 *   NEVER: Make always will create values for all fields. Three cases can set null at a field: the field type does not have default constructor, JSR303 is defined to read and the field has the annotation @Null, and fields that will be treated with specialized factory.<br>
-*   SOME: value will define If a value will be made or null will be set. One chance to six to be a null value. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br> 
-*   The 'all' value means that Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br>
+*   SOME: Make will create a value to set or will set null. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br> 
+*   ALL: Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br>
 
 <b>Test Tag</b><br>
 ````<XML>
