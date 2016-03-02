@@ -77,4 +77,5 @@ public class MakeEntitysTest extends TestCase {
     }
     assertTrue("Erros de validação encontrados", erros.isEmpty());
   }
+
 }
