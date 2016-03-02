@@ -39,7 +39,8 @@ Make uses the name make.xml for XML setup file by default but you can change it.
 ```
 
 You can get a XML setup file example in src/test/resource folder from Make project.<br>
-From now I will call it make.xml. Let's take a look in the make.xml file.<br>
+From now I will call it make.xml.<br>
+Let's take a look in the make.xml file.<br>
 The make.xml is divided in 3 parts:<br>
 <b>Setup Tag </b><br>
 ```<XML>
@@ -48,7 +49,7 @@ The make.xml is divided in 3 parts:<br>
     <Null value="never" /><!-- never some all -->
   </setup>
 ```
-The JSR303 tag is used to Make setup to read or to ignore the annotations JSR303. If your project does not have these annotations, you must set ignore here.<br>
+The JSR303 tag is used to setup the behavior about JSR303 annotations. To read or to ignore those annotations. If your project does not have these annotations, you must set ignore here.<br>
 *   READ: Make will be looking for JSR303 annotations to create valid values.
 *   IGNORE: Make wont be looking for JSR303 and the values will be open to any value that the field can handle.<br>
 
