@@ -21,7 +21,7 @@ All values created using the JSR303 will be valid, but some of them cannot be ac
 If you do not use JSR303 annotations Make will create open values for all fields. You can change this behavior using the Specialized Factories too.
 
 ## Requirements
-To build it you will need the Apache Maven.
+To build it you will need the Apache Maven.<br>
 The object to be made needs to have a default constructor. A constructor without arguments.<br>
 Make will create all fields for the object, if the field is another complex object is necessary that object has a default constructor too or null will be set.
 
