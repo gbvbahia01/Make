@@ -9,8 +9,8 @@ A framework that can make easily a lot of entity or objects to use in unit tests
 ## How to
 
 ```<java>
-MyObject myObject = MakeEntity.make(MyObject .class);
-List<MyObject> myObjects = MakeEntity.makes(MyObject .class, amount);
+MyObject myObject = MakeEntity.make(MyObject.class);
+List<MyObject> myObjects = MakeEntity.makes(MyObject.class, amount);
 ```
 
 ## Mechanics
