@@ -198,7 +198,7 @@ You <b>do not need to check the test names</b>. Make already did for you.
     </factory>
   </factories>
 ```
-Your specialized factory will be ready for be used now. To work is only need to map a field class to it and Make will do the rest for you. 
+Your specialized factory is ready for be used now. To work is only need to map a field class to it and Make will do the rest for you. 
 
 And remember:
 <br>DO NOT put XML setup file in make folder test. It is must be put in the application folder resource test. 
