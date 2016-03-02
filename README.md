@@ -147,22 +147,60 @@ The framework Make has some specialized factories implemented that you can use:<
 	This specialized factory work with a type of number that exist in Brazil.<br>
 	Works only with String.<br>
 
-You must create all in the TEST source of your project.
+Certainly you will need to create your specialized factory. In this case is quite simple to do this in Make.<br>
+You must create all in the TEST source of your project. So choose a package in src/test/java or other source folder test that your project has.<br>
 To create a specialized factory two steeps are need:
-*   Implement ValueSpecializedFactory:
+1º   Implement ValueSpecializedFactory:
 ```<java>
 boolean workValue(String fieldName, String value);
-void makeValue(Field field, T entity, String... testName);
 boolean isWorkWith(Field field, T entity);
+void makeValue(Field field, T entity, String... testName);
 ```
-*   Declare the class in make.xml at tag <factories>: 
+*   boolean workValue(String fieldName, String value) method: this method receives the full name of the field and the value is the key that was put in make.xml for that field. Basically what you have to do is ignore the field name and check if the value is a key expected for this specialized factory class that you are making.<br>
+Let's take a look at the workValue in MakeName class:
+
+```<java>
+  public boolean workValue(String fieldName, String value) {
+    if (KEY_PROPERTY.equals(StringUtils.trim(value))) {
+      return true;
+    }
+    return false;
+  }
+```
+KEY_PROPERTY in this case is "isName". So if value is equal isName this class will inform that can make the value for this field.<br>
+
+*   boolean isWorkWith(Field field, T entity); this method receives the field that will receive a value and the instance of the object that has the field. This method enables that specialized factories check if the type of field is expected for it. DO NOT set any value in this method. Only do checks.<br>
+Let's take a look at the workValue in MakeName class:
+
+```<java>
+  public <T> boolean isWorkWith(final Field field, final T entity) {
+    return field.getType().equals(String.class);
+  }
+```
+It is only check if the field class (field.getType()) is a String class and return true if is.<br>
+
+*  void makeValue(Field field, T entity, String... testName); this method receives the field, the instance of object that has the field and the names of the tests passed as argument in MakeEntity.make method. Again will be quite simple. You will only set the value in a field.<br> 
+Let's take a look at the workValue in MakeName class:
+
+```<java>
+  public <T> void makeValue(Field field, final T entity, String... testName)
+      throws IllegalAccessException, IllegalArgumentException {
+    field.set(entity, getName());
+  }
+```
+You <b>do not need to check the test names</b>. Make already did for you.   
+
+2º   Declare the class in make.xml at tag <factories>: 
 ```<XML>
   <factories>
-    <factory>br.com.gbvbahia.maker.properties.CepWorkTest</factory>
-    <factory>br.com.gbvbahia.maker.properties.FactoryCustomerService
+    <factory>br.com.mypackage.CepWorkTest</factory>
+    <factory>br.com.mypackage.FactoryCustomerService
     </factory>
   </factories>
 ```
+Your specialized factory will be ready for be used now. To work is only need to map a field class to it and Make will do the rest for you. 
+
+And remember:
 <br>DO NOT put XML setup file in make folder test. It is must be put in the application folder resource test. 
 
 
