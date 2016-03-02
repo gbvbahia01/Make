@@ -215,7 +215,7 @@ And remember:
 //TODO ;)
 
 ## Contributors
-Guilherme Braga <h5><a href="https://br.linkedin.com/in/guilherme-braga-a7994823" target="_blank">(LinkedIn)</a></h5>
+Guilherme Braga <a href="https://br.linkedin.com/in/guilherme-braga-a7994823" target="_blank">(LinkedIn)</a>
 
 ## License
 Apache 2.0
