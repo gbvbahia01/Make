@@ -100,17 +100,15 @@ The next tag is entities. This tag enable to create a lot of rules fields in the
 It is necessary the class value be informed the class full name.<br>
 
 <b> Specialized Factories </b><br>
-Some fields need to be treated with a special value. Like a contract number, a social number, drive id and so on. For this cases you can create a specialized factory. You must create all of it in the TEST source of course.
-A specialized factory needs to implement ValueSpecializedFactory:
+Some fields need to be treated with a special value. The value needs to be more than valid it needs to be a specialized value. Like a contract number, a social number, drive id and so on. For this cases you can use or create a specialized factory. You must create all in the TEST source of your project.
+To create a specialized factory two steeps are need:
+*   Implement ValueSpecializedFactory:
 ```<java>
 boolean workValue(String fieldName, String value);
 void makeValue(Field field, T entity, String... testName);
 boolean isWorkWith(Field field, T entity);
 ```
-
-
-
-
+*   Declare the class in make.xml at tag <factories>: 
 ```<XML>
   <factories>
     <factory>br.com.gbvbahia.maker.properties.CepWorkTest</factory>
