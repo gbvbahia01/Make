@@ -20,10 +20,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Utilizada para criar valores limitados a um intervalo:<br>
- * testBetween1.br.com.gbvbahia.entityes.EntityBetweenTest.valor = between{5,10}<br>
- * A propriedade valor será definida entre 5 e 10. Sendo os dois valores inclusos, podendo ser
- * utilizados.
+ * <b>MakeBetween</b><br>
+ * tag: between{start,end}<br>
+ * Examples: between{18,80} between{-90.50,90.50}<br>
+ * Works with all types of numbers: byte, short, int, long, float and double. Include wrappers. Work
+ * with String too, but the values used to start and end must be numeric.
  *
  * @since v.1 18/06/2012
  * @author Guilherme

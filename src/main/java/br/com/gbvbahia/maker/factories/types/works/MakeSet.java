@@ -22,6 +22,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * <b>MakeSet</b><br>
+ * tag:isSet{class name}[3,5]<br>
+ * Example: isSet{br.com.pro.Employee}[5,25]<br>
+ * Some relations are one to many and for those case a set can be necessary.<br>
+ * Inside of { } inform the full class name that will be created to add a Set.<br>
+ * The class referenced between "{" "}" needs to have a default constructor. A constructor without
+ * arguments.<br>
+ * Inside of [ ] inform the minimum and maximum amount of objects that need to be created to add the
+ * Set.<br>
+ * A collection with Set cannot have two objects as equals. Make will try to create a Set with a
+ * satisfactory amount. But if the framework cannot add objects because of equals the set can have
+ * less objects than configured as minimum at isSet value.
+ * 
  * @since v.1 01/05/2012
  * @author Guilherme
  */
@@ -33,15 +46,11 @@ public class MakeSet implements ValueSpecializedFactory {
    */
   private Map<String, CollectionsHelper> ruleHelper = new HashMap<String, CollectionsHelper>();
   /**
-   * No arquivo make.properties deve estár definido no valor para o field:
-   * "[isSet{][a-zA-Z0-9\\.]+[}][\\[][\\d]+,[\\d]+[\\]]".<br>
-   * Regex: deve iniciar com <i>isList{</i> contendo letras maiusculas ou minusculas, numéros e o
-   * caractere "." (ponto). Fecha com <i>}</i> e deve terminar com <i>[</i> qualquer número ","
-   * (virgula) qualquer número <i>]</i>.
+   * Key for this specialized factory.
    */
   public static final String KEY_PROPERTY = "isSet\\{[a-zA-Z0-9\\.]+\\}[\\[][\\d]+,[\\d]+[\\]]";
   /**
-   * Compilador regex que realiza a comparação.
+   * The compile regex.
    */
   private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
@@ -98,11 +107,11 @@ public class MakeSet implements ValueSpecializedFactory {
   }
 
   /**
-   * Popula info (CollectionsHelper) com informações necessárias para criar e popular o List.
+   * Create ruleHelper object (CollectionsHelper) with information needed to create a Set.
    *
-   * @param value Valor declarado no make.properties.
-   * @throws MakeWorkException Se não encontrar a classe informada no properties ou conversão
-   *         numérica não for possível.
+   * @param fieldName field name that will have a set.
+   * @param value the string isList wrote in XML setup file.
+   * @throws ValueSpecializedException if any problem happens.
    */
   private void popularInfo(String fieldName, String value) {
     String clazz = StringUtils.substringBetween(value, "isSet{", "}");

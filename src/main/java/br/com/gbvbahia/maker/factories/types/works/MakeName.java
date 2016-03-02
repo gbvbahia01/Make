@@ -16,7 +16,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Cria nomes aleatórios, para que funcione deve ter o valor isName no arquivo make.properties.
+ * <b>MakeName</b><br>
+ * tag: isName<br>
+ * Example: isName<br>
+ * Create a person name.<br>
+ * Works only with String.<br>
+ * Two names are used to create the name.<br>
+ * All names come from names_make.properties file
  *
  * @since v.1 10/06/2012
  * @author Guilherme
@@ -24,12 +30,11 @@ import java.util.logging.Logger;
 public class MakeName implements ValueSpecializedFactory {
 
   /**
-   * Como o propertie deve estár definido no valor: "isName".
+   * Key for this specialized factory.
    */
   public static final String KEY_PROPERTY = "isName";
   /**
-   * O arquivo nomes.properties possui uma quantidade limitada de nomes, essa variável armazena o
-   * limite.
+   * Amount of names in names_make.properties.
    */
   private static final int MAX_PROPERTIES_NAMES = 1281;
 
@@ -73,25 +78,24 @@ public class MakeName implements ValueSpecializedFactory {
 
   /**
    * It fetches two names from names_make.properties file.<br>
-   * Retira dois valores do arquivo: nomes.properties, onde todos os nomes ficam armazenados.
    *
-   * @param posicao indica qual posição deverá ser trazido o nome, de 0 até 1281.
-   * @return java.lang.String referente a um nome.
+   * @param position index of name must be fetched.
+   * @return java.lang.String the name.
    */
-  private static String getMsg(final int posicao) {
+  private static String getMsg(final int position) {
     try {
-      return ResourceBundle.getBundle("names_make").getString("nome" + posicao);
+      return ResourceBundle.getBundle("names_make").getString("nome" + position);
     } catch (MissingResourceException e) {
       Logger.getLogger(I18N.class.getName()).log(Level.SEVERE,
-          "Maker: Nome não encontrada para {0}", new Object[] {"nome" + posicao});
-      return "nome" + posicao;
+          "Maker: Nome não encontrada para {0}", new Object[] {"nome" + position});
+      return "nome" + position;
     }
   }
 
   /**
-   * Retira dois valores do arquivo: nomes.properties, onde todos os nomes ficam armazenados.
+   * It fetches two names from names_make.properties file.<br>
    *
-   * @return String nome.
+   * @return String the name.
    */
   public static String getName() {
     int firstName = MakeInteger.getMax(MAX_PROPERTIES_NAMES);

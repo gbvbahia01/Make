@@ -60,7 +60,7 @@ The Null tag determines how the framework will work about to set null values:<br
 *   ALL: Make will set null for all fields. Fields that will be treated with specialized factory will not be interfered for this tag. If the tag JSR303 is defined to read and the field has the annotation @Null a null value will be set. If the field has @NotNull annotation a value will be made.<br>
 
 <b>Test Tag</b><br>
-````<XML>
+```<XML>
 <tests>
     <test>
       <names>
@@ -97,10 +97,49 @@ These test names can make easy changes in some rules between tests. The tests ca
 ```
 Make method receive a String var-args as a second argument. When this parameter is informed Make will search all tests that have the name informed. The order is important. The first rule searched is kept. I mean that: a rule from the first test name will no replaced by a second rule for a second name for the same class field.<br>
 The next tag is entities. This tag enable to create a lot of rules fields in the same test. You do not need put a tag for each field class. Only the fields that you want to define specialized rules. In this example Employer or Employee can have each one 10 fields but only the fields in XML will have specialized rules for values. Others fields will use JSR303 if have or free values if have not.<br>
-It is necessary the class value be informed the class full name.<br>
+Notice that is necessary the class value be informed with the class full name.<br>
 
 <b> Specialized Factories </b><br>
-Some fields need to be treated with a special value. The value needs to be more than valid it needs to be a specialized value. Like a contract number, a social number, drive id and so on. For this cases you can use or create a specialized factory. You must create all in the TEST source of your project.
+Some fields need to be treated with a special value. The value needs to be more than valid it needs to be a specialized value. Like a contract number, a social number, drive id and so on. For this cases you can use or create a specialized factory.<br>
+Each specialized factory has a key to map with a field that you want to make a value. You can do a mapping between a field and a specialized factory in a field tag inside of the entity tag:<br>
+```<XML>
+        <entity class="br.com.tests.Employee">
+          <field name="name">isName</field>
+          <field name="age">between{18,69}</field>
+        </entity>
+```
+
+In this above case the specialized factories that answer for "isName" and "between{?,?}" will make those values.<br>
+Notice the class employee can have more fields. All of them will be worked by Make, but only the fields called name and age will have a specialized factory to work on.<br>
+
+The framework Make has some specialized factories implemented that you can use:<br>
+*   <b>MakeBetween</b> tag: between{start,end} Examples:  <field name="age">between{18,80}</field> <field name="temperature">between{-90.50,90.50}</field>
+     Works with all types of numbers: byte, short, int, long, float and double. Include wrappers. Work with String too, but the values used to start and end must be numeric.
+
+*   <b>MakeIn</b>      tag: in{x,y,z}[,] Examples: <field name="age">in{10;20;30}[;]</field> in{10.30|10.50|10.80}[|] in{A,B,C}   
+	Works with numbers and characters. MakeIn will choose a value in the range informed.<br>
+	Notice the character between the [?] is the separator between possible values. If is not informed will be used comma.<br> 
+
+*   <b>MakeEmail</b>   tag: isEmail      Example: <field name="email">isEmail</field>
+	A String in email format will be created. Works only with String. Before @ a String will be between 3 and 8. After @ all values are chosen in emails_make.properties file.
+
+*   <b>MakeName</b>    tag: isName       Example: <field name="name">isName</field>
+	Create a person name.  Works only with String. Two names are used to create the name. All names come from names_make.properties file 
+	
+*   <b>MakeList</b>    tag:isList{class name}[I,E] Example: <field name="employees">isList{br.com.pro.Employee}[5,25]</field>
+	Some relations are one to many and for those case a list can be necessary.<br>
+	Inside of { } inform the full class name that will be created to add a List.<br>
+	The class referenced between "{" "}" needs to have a default constructor. A constructor without arguments.<br>
+	Inside of [ ] inform the minimum and maximum amount of objects that need to be created to add the List.<br> 
+	
+*   <b>MakeSet</b> tag:isSet{class name}[3,5] Example: <field name="employees">isSet{br.com.pro.Employee}[5,25]</field>
+	Some relations are one to many and for those case a set can be necessary.<br>
+	Inside of { } inform the full class name that will be created to add a Set.<br>
+	The class referenced between "{" "}" needs to have a default constructor. A constructor without arguments.<br>
+	Inside of [ ] inform the minimum and maximum amount of objects that need to be created to add the Set.<br>
+	A collection with Set cannot have two objects as equals. Make will try to create a Set with a satisfactory amount. But if the framework cannot add objects because of equals the set can have less objects than configured as minimum at isSet value. 
+
+You must create all in the TEST source of your project.
 To create a specialized factory two steeps are need:
 *   Implement ValueSpecializedFactory:
 ```<java>

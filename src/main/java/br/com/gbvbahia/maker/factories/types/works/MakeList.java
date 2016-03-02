@@ -22,14 +22,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This specialized class will with fields that have the mapped regex value:<br>
- * "[isList{][a-zA-Z0-9\\.]+[}][\\[][\\d]+,[\\d]+[\\]]"<br>
- * A list will be created and populled with the class informed between "{" "}", like:<br>
- * isList{com.mypackage.MyClass}[2,4]<br>
- * The number between "[" "]" will determine the amount fo class that will be created to put in
- * list.<br>
+ * <b>MakeList</b><br>
+ * tag:isList{class name}[I,E]<br>
+ * Example: isList{br.com.pro.Employee}[5,25]<br>
+ * Some relations are one to many and for those case a list can be necessary.<br>
+ * Inside of {} inform the full class name that will be created to add a List.<br>
+ * Inside of [] inform the minimum and maximum amount of objects that need to be created to add the
+ * List.<br>
  * If the class referenced between "{" "}" is a object created it needs to have a default
- * constructor. A constructor without arguments.
+ * constructor. A constructor without arguments.<br>
  *
  * @since v.1 16/06/2012
  * @author Guilherme
@@ -100,11 +101,11 @@ public class MakeList implements ValueSpecializedFactory {
   }
 
   /**
-   * Popula info (CollectionsHelper) com informações necessárias para criar e popular o List.
+   * Create ruleHelper object (CollectionsHelper) with information needed to create a List.
    *
-   * @param value Valor declarado no make.properties.
-   * @throws MakeWorkException Se não encontrar a classe informada no properties ou conversão
-   *         numérica não for possível.
+   * @param fieldName field name that will have a list.
+   * @param value the string isList wrote in XML setup file.
+   * @throws ValueSpecializedException if any problem happens.
    */
   private void popularInfo(String fieldName, String value) {
     String clazz = StringUtils.substringBetween(value, "isList{", "}");

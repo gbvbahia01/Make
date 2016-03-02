@@ -21,6 +21,13 @@ import java.util.logging.Logger;
  * Cria e-mails com formatos válidos, após @ existe uma lista de possibilidades, antes do @ uma
  * String entre 3 a 8 caracteres é fabricada.
  *
+ * <b>MakeEmail</b><br>
+ * tag: isEmail<br>
+ * Example: isEmail<br>
+ * Works only with String.<br>
+ * Before @ a String will be between 3 and 8.<br>
+ * After @ all values are chosen in emails_make.properties file.<br>
+ * 
  * @since v.1 09/06/2012
  * @author Guilherme
  */
@@ -85,9 +92,10 @@ public class MakeEmail implements ValueSpecializedFactory {
    */
   public static String getEmail() {
     int emaiPos = MakeInteger.getMax(MAX_PROPERTIES_EMAILS);
-    String nameIni = MakeCharacter.getLetter().toString() + MakeCharacter.getLetter().toString()
-        + MakeCharacter.getLetter().toString()
-        + MakeString.getString(4, MakeString.StringType.NUMBER);
+    String nameIni =
+        MakeCharacter.getLetter().toString() + MakeCharacter.getLetter().toString()
+            + MakeCharacter.getLetter().toString()
+            + MakeString.getString(4, MakeString.StringType.NUMBER);
     String email = getMsg(emaiPos);
     return nameIni.toLowerCase().trim() + email;
   }

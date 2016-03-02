@@ -22,10 +22,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Use a value informed at field.<br>
+ * <b>MakeIn</b><br>
+ * tag: in{x,y,z}[,]<br>
+ * Examples: in{10;20;30}[;] in{10.30|10.50|10.80}[|] in{A,B,C}<br>
  * in{1,3} Will be used 1 or 3.<br>
  * If the separator needs to be a value different of "," (comma) you define at [ ].<br>
  * in{1A3}[A] will be used 1 or 3<br>
+ * Works with numbers and characters. MakeIn will choose a value in the range informed.<br>
+ * Notice the character between the [?] is the separator between possible values. If is not informed
+ * will be used comma.<br>
  * 
  * @since v.1 18/06/2012
  * @author Guilherme
@@ -37,20 +42,11 @@ public class MakeIn implements ValueSpecializedFactory {
    */
   private Map<String, List<String>> mapInList = new HashMap<String, List<String>>();
   /**
-   * No arquivo make.properties deve estár definido no valor para o field: "in\\{.*\\}(\\[.+\\])?".
-   * <br>
-   * Regex: deve iniciar com <i>in{</i>conter qualquer tipo de caractere. Fecha com <i>}</i> podendo
-   * seguir com <i>[</i> conter qualquer caractere "." (ponto) fechando com <i>]</i>. O que está
-   * entre <i>[?]</i> Será utilizado como separador, se não houver valor explícito, será considerado
-   * "," (virgula). <br>
-   * Ex: Inteiros: in{1,1}[,], in{10|100}[|], in{-10ab10}[ab]<br>
-   * Fracionádos: in{1.12,1.22}[,] in{-10.33,100.40} in{1!10.20}[!]<br>
-   * Letras: in{abc|abg}[|] <br>
-   * Se o segundo número for menor que o primeiro um erro será gerado.
+   * Regex for in key.
    */
   public static final String KEY_PROPERTY = "in\\{.*\\}(\\[.+\\])?";
   /**
-   * Compilador regex que realiza a comparação.
+   * Regex compiler.
    */
   private static final Pattern PATTERN = Pattern.compile(KEY_PROPERTY);
 
@@ -124,11 +120,10 @@ public class MakeIn implements ValueSpecializedFactory {
   }
 
   /**
-   * Popula info (CollectionsHelper) com informações necessárias para criar e popular o List.
+   * It prepares the factory to work.
    *
-   * @param value Valor declarado no make.properties.
-   * @throws MakeWorkException Se não encontrar a classe informada no properties ou conversão
-   *         numérica não for possível.
+   * @param fieldName the field that will receive the value.
+   * @param value the value declared in XML setup file.
    */
   private void popularInfo(String fieldName, String value) {
     String in = StringUtils.substringBetween(value, "{", "}");
