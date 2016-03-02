@@ -156,7 +156,7 @@ The framework Make has some specialized factories implemented that you can use:<
 
 Certainly you will need to create your specialized factory. In this case is quite simple to do this in Make.<br>
 You must create all in the TEST source of your project. So choose a package in src/test/java or other source folder test that your project has.<br>
-To create a specialized factory two steeps are need:
+To create a specialized factory two steps are needed:<br>
 1º   Implement ValueSpecializedFactory:
 ```<java>
 boolean workValue(String fieldName, String value);
