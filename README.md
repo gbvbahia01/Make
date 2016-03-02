@@ -26,9 +26,9 @@ The object to be made needs to have a default constructor. A constructor without
 Make will create all fields for the object, if the field is another complex object is necessary that object has a default constructor too or null will be set.
 
 ## Setup
-We define or objects with fields. Sometime we need to define rules about the values. Like a car cannot have -3.5 of gasoline and cannot pass tha maximum amount of the fuel tank.<br>
-Make will create the values respecting those rules.<br>
-If you use JSR303 annotations Make will read them and use to create the fields values. With the only exception about the annotation javax.validation.constraints.Pattern. For this annotation you will have to create a value. You can use another Make tool.<br>
+Objects are defined with fields. Usually is necessary to define some rules in the fields. Like a car cannot have -3.5 of gasoline and cannot pass tha maximum amount in its fuel tank.<br>
+Make can create those values respecting all rules.<br>
+If you use JSR303 annotations Make will read them and use to create the fields values. Make will read the JSR303 annotations using to do a reverse engineering to create valid values for each field. With the only exception about the annotation @Pattern. For this annotation you will have to create a value. A good thing is that  Make has a lot of tools to help you.<br>
 If you do not use JSR303 annotations Make will create open values for all fields but you can change this behavior using the XML file setup. In this file you can define a range of values or other rule for a lot of fields.<br>
 The configuration of the framework is made with a XML setup file. Is important that this file have to be put in your resource folder test.<br>
 You can get a exemple XML setup file in src/test/resource folder from this project. Check the file make.xml.<br>
