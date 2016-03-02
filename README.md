@@ -123,7 +123,7 @@ The framework Make has some specialized factories implemented that you can use:<
 *   <b>MakeBetween</b> tag: between{start,end} Examples:  <field name="age">between{18,80}</field> <field name="temperature">between{-90.50,90.50}</field>
      Works with all types of numbers: byte, short, int, long, float and double. Include wrappers. Work with String too, but the values used to start and end must be numeric.
 
-*   <b>MakeIn</b>      tag: in{x,y,z}[,] Examples: <field name="age">in{10;20;30}[;]</field> in{10.30|10.50|10.80}[|] in{A,B,C}<br>   
+*   <b>MakeIn</b>      tag: in{x,y,z}[,] Examples: <field name="age">in{10;20;30}[;]</field> in{10.30|10.50|10.80}[|] in{A,B,C}<br>
 	Works with numbers and characters. MakeIn will choose a value in the range informed.<br>
 	Notice the character between the [?] is the separator between possible values. If is not informed will be used comma.<br> 
 
