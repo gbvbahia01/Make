@@ -218,4 +218,4 @@ And remember:
 Guilherme Braga <a href="https://br.linkedin.com/in/guilherme-braga-a7994823" target="_blank">(LinkedIn)</a>
 
 ## License
-Apache 2.0
+<a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache 2.0</a>
