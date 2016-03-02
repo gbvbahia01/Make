@@ -214,7 +214,7 @@ And remember:
 //TODO ;)
 
 ## Contributors
-//TODO ;) 
+Guilherme Braga (LinkedIn link //TODO)
 
 ## License
 Apache 2.0
