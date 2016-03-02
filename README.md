@@ -106,7 +106,8 @@ Notice that is necessary the class value be informed with the class full name.<b
         <entity class="br.com.tests.Employee">
 ```
 
-<b> Specialized Factories </b><br>
+## Specialized Factories
+
 Some fields need to be treated with a special value. The value needs to be more than valid it needs to be a specialized value. Like a contract number, a social number, drive id and so on. For this cases you can use or create a specialized factory.<br>
 Each specialized factory has a key to map with a field that you want to make a value. You can do a mapping between a field and a specialized factory in a <i>field</i> tag inside of the <i>entity</i> tag:<br>
 ```<XML>
