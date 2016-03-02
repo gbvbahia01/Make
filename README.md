@@ -30,12 +30,18 @@ Objects are defined with fields. Usually is necessary to define some rules in th
 Make can create those values respecting all rules.<br>
 If you use JSR303 annotations Make will read them and use to create the fields values. Make will read the JSR303 annotations using to do a reverse engineering to create valid values for each field. With the only exception about the annotation @Pattern. For this annotation you will have to create a value. A good thing is that  Make has a lot of tools to help you.<br>
 All values created using the JSR303 will be valid, but some of them cannot be acceptable. Like a field that represents a birthdate for a person. You can use the annotation @NotNull with @Past. In this case the values will be in the past therefore be valid. But Make can create dates like one day ago or 200 years ago and for the business will be more satisfactory some dates between 18 and 80 years. For situations like that Make has space to put a engine to create those values. This engine is called Specialized Factories.
-If you do not use JSR303 annotations Make will create open values for all fields. You can change this behavior using the XML file setup. In this file you can define a range of values or others rules for one or a lot of fields.<br>
+If you do not use JSR303 annotations Make will create open values for all fields. You can change this behavior using the Specialized Factories too.
 
 ## Setup
-The configuration of the framework is made with a XML setup file. Is important that this file have to be put in your resource folder test.<br>
-You can get a exemple XML setup file in src/test/resource folder from this project. Check the file make.xml.<br>
-Make use this name by default but you can change it.<br>
+The configuration of the framework is made with a XML setup file. Is very important that you put this file in your project test resource folder.<br>
+Make uses this name for XML setup file by default but you can change it. If you do, before start to create objects with Make you need to call a static method at Factory class called loadSetup as the name of XML setup file as parameter:<br>
+
+```<java>
+ Factory.loadSetup("myXMLSetup.xml");
+```
+
+You can get a XML setup file example in src/test/resource folder from Make project.<br>
+Let's take a look in the make.xml file.<br>
 The XML setup file is divided in 3 parts:<br>
 <b>Setup Tag </b><br>
 ```<XML>
