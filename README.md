@@ -92,7 +92,7 @@ The Null tag determines how the framework will work about to set null values:<br
     </test>
 </tests>
 ```
-At the <tests> tag you can create more the one test and give a name or names to all tests. For this you must use the <name> tag.
+At the tests tag you can create more the one test and give a name or names to all tests. For this you must use the <name> tag.
 These test names can make easy changes in some rules between tests. The tests can keep one file and merge more than one test in one call:
 ```<java>
  MakeEntity.make(Employee.class, "Test_Name_1","Test_Name_3");
