@@ -22,8 +22,8 @@ If you do not use JSR303 annotations Make will create open values for all fields
 
 ## Requirements
 To build it you will need the Apache Maven.<br>
-The object to be made needs to have a default constructor. A constructor without arguments.<br>
-Make will create all fields for the object, if the field is another complex object is necessary that object has a default constructor too or null will be set.
+The object to be made by Make needs to have a default constructor. A constructor without arguments.<br>
+Make will create all fields for the object. if the object that is being made has a field that is another complex object is necessary that object has a default constructor too or null will be set.
 
 ## Installation
 You can download the project and put it as test dependence in your project.<br>
