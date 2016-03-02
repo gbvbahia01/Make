@@ -6,7 +6,7 @@ A framework that can make easily a lot of entity or objects to use in unit tests
 2.   Create a database that can be reliable to do tests.<br>
 
 
-## Code Example
+## How to
 
 ```<java>
 MyObject myObject = MakeEntity.make(MyObject .class);
