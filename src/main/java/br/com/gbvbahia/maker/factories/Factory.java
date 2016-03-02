@@ -168,8 +168,8 @@ public final class Factory {
       if (StringUtils.equals(this.jsr303, JSR303_IGNORE)) {
         return;
       }
-      throw new IllegalArgumentException(
-          I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ, JSR303_IGNORE}));
+      throw new IllegalArgumentException(I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ,
+          JSR303_IGNORE}));
     }
 
     private void checkNullSetupValue() {
@@ -182,8 +182,8 @@ public final class Factory {
       if (StringUtils.equals(this.nullFields, NULL_NEVER)) {
         return;
       }
-      throw new IllegalArgumentException(
-          I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS, NULL_SOME, NULL_NEVER}));
+      throw new IllegalArgumentException(I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS,
+          NULL_SOME, NULL_NEVER}));
     }
 
     /**
@@ -239,23 +239,23 @@ public final class Factory {
     }
 
     public boolean readJsr303() {
-      return JSR303_READ.equals(this.jsr303);
+      return StringUtils.equalsIgnoreCase(JSR303_READ, this.jsr303);
     }
 
     public boolean ignoreJsr303() {
-      return JSR303_IGNORE.equals(this.jsr303);
+      return StringUtils.equalsIgnoreCase(JSR303_IGNORE, this.jsr303);
     }
 
     public boolean alwaysNull() {
-      return NULL_ALWAYS.equals(this.nullFields);
+      return StringUtils.equalsIgnoreCase(NULL_ALWAYS, this.nullFields);
     }
 
     public boolean someNull() {
-      return NULL_SOME.equals(this.nullFields);
+      return StringUtils.equalsIgnoreCase(NULL_SOME, this.nullFields);
     }
 
     public boolean neverNull() {
-      return NULL_NEVER.equals(this.nullFields);
+      return StringUtils.equalsIgnoreCase(NULL_NEVER, this.nullFields);
     }
 
     /**
