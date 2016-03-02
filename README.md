@@ -32,7 +32,7 @@ Follow the next step to configure this file.<br>
 
 ## Setup File
 The configuration of the framework is made with a XML setup file. Is very important that you put this file in your project test resource folder.<br>
-Make uses this name for XML setup file by default but you can change it. If you do, before start to create objects with Make you need to call a static method at Factory class called loadSetup as the name of XML setup file as parameter:<br>
+Make uses the name make.xml for XML setup file by default but you can change it. If you do, before start to create objects with Make you need to call a static method at Factory class called loadSetup as the name of XML setup file as parameter:<br>
 
 ```<java>
  Factory.loadSetup("myXMLSetup.xml");
