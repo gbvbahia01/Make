@@ -14,19 +14,25 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 
 /**
- * Retorna uma string no formato de um CNPJ válido, em relação a validação do digito verificador.
- * Retorna 12 caracteres mais dois digitos verificadores, totalizando quatorze caracteres. Não
- * retorna formatado, somente números, pontos,ífen e barra são excluídos.<br>
- * ATENÇÃO: Criado para facilitar testes de desenvolvimento de software. <br>
- * Para que funcione deve ter o valor isCNPJ no arquivo make.properties.
- *
+ * Retorna uma string no formato de um CNPJ valido, em relacao a validacao do digito verificador.
+ * Retorna 12 caracteres mais dois digitos verificadores, totalizando quatorze caracteres. Nao
+ * retorna formatado, somente numeros, pontos, ifen e barra sao excluidos.<br>
+ * ATENCAO: Criado para facilitar testes de desenvolvimento de software. <br>
+ * Para que funcione deve ter o valor isCNPJ no arquivo make.properties.<br>
+ * <br>
+ * <b>MakeCnpj</b><br>
+ * tag: isCNPJ<br>
+ * Example: isCNPJ<br>
+ * This specialized factory work with a type of number that exist in Brazil.<br>
+ * Works only with String.<br>
+ * 
  * @since v.1 09/06/2012
  * @author Guilherme
  */
 public class MakeCnpj implements ValueSpecializedFactory {
 
   /**
-   * Como o propertie deve estár definido no valor: "isCNPJ".
+   * Key for this specialized factory.
    */
   public static final String KEY_PROPERTY = "isCNPJ";
 
@@ -67,9 +73,9 @@ public class MakeCnpj implements ValueSpecializedFactory {
   }
 
   /**
-   * Gera um CNPJ aleatório mas válido, ou seja, o dígito verificador correto.
+   * Gera um CNPJ aleatorio mas valido, ou seja, o digito verificador correto.
    *
-   * @return CNPJ válido.
+   * @return CNPJ valido.
    */
   public static String getCnpj() {
     String cnpj = MakeString.getString(8, MakeString.StringType.NUMBER);
@@ -89,10 +95,10 @@ public class MakeCnpj implements ValueSpecializedFactory {
   }
 
   /**
-   * Cria os dígitos verificadores do CNPJ com base nos 12 caracteres passados.
+   * Cria os digitos verificadores do CNPJ com base nos 12 caracteres passados.
    *
-   * @param strCnpj 12 caractres numéricos do CNPJ
-   * @return retorna Strings no formato de CNPJ válidas.
+   * @param strCnpj 12 caractres numericos do CNPJ
+   * @return String no formato de CNPJ validas.
    */
   private static String digitCalculate(final String strCnpj) {
     final int four = 4;

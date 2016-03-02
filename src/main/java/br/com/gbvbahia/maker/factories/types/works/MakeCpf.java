@@ -12,17 +12,25 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Field;
 
 /**
- * Cria uma String que passa no teste de validação de CPF, nove caracteres mais dois digitos
+ * Cria uma String que passa no teste de validacao de CPF, nove caracteres mais dois digitos
  * verificadores.<br>
- * Para que funcione deve ter o valor isCPF no arquivo make.properties
- *
+ * Para que funcione deve ter o valor isCPF no arquivo make.xml<br>
+ * ATENCAO: Criado para facilitar testes de desenvolvimento de software.<br>
+ * <br>
+ * 
+ * <b>MakeCpf</b><br>
+ * tag: isCPF<br>
+ * Example: isCPF<br>
+ * This specialized factory work with a type of number that exist in Brazil.<br>
+ * Works only with String.<br>
+ * 
  * @since v.1 09/06/2012
  * @author Guilherme
  */
 public class MakeCpf implements ValueSpecializedFactory {
 
   /**
-   * Como o propertie deve estár definido no valor: "isCPF".
+   * Key for this specialized factory.
    */
   public static final String KEY_PROPERTY = "isCPF";
 
@@ -32,12 +40,12 @@ public class MakeCpf implements ValueSpecializedFactory {
   private MakeCpf() {}
 
   /**
-   * Retorna uma string no formato de um CPF válido, em relação a validação do digito verificador.
-   * Retorna nove caracteres mais dois digitos verificadores, totalizando onze caracteres. Não
-   * retorna formatado, somente números, pontos e ífen são excluídos. <br>
-   * ATENÇÃO: Criado para facilitar testes de desenvolvimento de software.
+   * Retorna uma string no formato de um CPF valido, em relação a validacao do digito verificador.
+   * Retorna nove caracteres mais dois digitos verificadores, totalizando onze caracteres. Nao
+   * retorna formatado, somente numeros, pontos e ifen são excluidos. <br>
+   * ATENCAO: Criado para facilitar testes de desenvolvimento de software.
    *
-   * @return String no formato de um CPF válido.
+   * @return String no formato de um CPF valido.
    */
   public static String getCpf() {
     String noveDigitos = MakeString.getString(9, MakeString.StringType.NUMBER);
@@ -60,12 +68,6 @@ public class MakeCpf implements ValueSpecializedFactory {
     return false;
   }
 
-  /**
-   * Irá avaliar se o tipo do Field é trabalhado pelo mesmo, aqui deve ser String.
-   *
-   * @param field Field a ter o valor definido.
-   * @return True para String False para o resto.
-   */
   @Override
   public <T> boolean isWorkWith(Field field, T entity) {
     return field.getType().equals(String.class);
@@ -82,10 +84,10 @@ public class MakeCpf implements ValueSpecializedFactory {
   }
 
   /**
-   * Com base no cpf passado é calculado o dígito verificador.
+   * Com base no cpf passado eh calculado o digito verificador.
    *
-   * @param cpf Somente números.
-   * @return duas Strings numéricas referente ao dígito verificador.
+   * @param cpf Somente numeros.
+   * @return duas Strings numericas referente ao digito verificador.
    */
   private static String calcularDigitoVerificador(String cpf) {
     Integer[] valores = new Integer[cpf.length()];

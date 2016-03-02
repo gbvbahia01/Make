@@ -126,18 +126,26 @@ The framework Make has some specialized factories implemented that you can use:<
 *   <b>MakeName</b>    tag: isName       Example: <field name="name">isName</field>
 	Create a person name.  Works only with String. Two names are used to create the name. All names come from names_make.properties file 
 	
-*   <b>MakeList</b>    tag:isList{class name}[I,E] Example: <field name="employees">isList{br.com.pro.Employee}[5,25]</field>
+*   <b>MakeList</b>    tag: isList{class name}[I,E] Example: <field name="employees">isList{br.com.pro.Employee}[5,25]</field>
 	Some relations are one to many and for those case a list can be necessary.<br>
 	Inside of { } inform the full class name that will be created to add a List.<br>
 	The class referenced between "{" "}" needs to have a default constructor. A constructor without arguments.<br>
 	Inside of [ ] inform the minimum and maximum amount of objects that need to be created to add the List.<br> 
 	
-*   <b>MakeSet</b> tag:isSet{class name}[3,5] Example: <field name="employees">isSet{br.com.pro.Employee}[5,25]</field>
+*   <b>MakeSet</b>     tag: isSet{class name}[3,5] Example: <field name="employees">isSet{br.com.pro.Employee}[5,25]</field>
 	Some relations are one to many and for those case a set can be necessary.<br>
 	Inside of { } inform the full class name that will be created to add a Set.<br>
 	The class referenced between "{" "}" needs to have a default constructor. A constructor without arguments.<br>
 	Inside of [ ] inform the minimum and maximum amount of objects that need to be created to add the Set.<br>
 	A collection with Set cannot have two objects as equals. Make will try to create a Set with a satisfactory amount. But if the framework cannot add objects because of equals the set can have less objects than configured as minimum at isSet value. 
+
+*   <b>MakeCpf</b>     tag: isCPF  Example: <field name="cpf">isCPF</field>
+	This specialized factory work with a type of number that exist in Brazil.<br>
+	Works only with String.<br>
+	
+*   <b>MakeCnpj</b>    tag: isCNPJ Example: <field name="cnpj">isCNPJ</field>
+	This specialized factory work with a type of number that exist in Brazil.<br>
+	Works only with String.<br>
 
 You must create all in the TEST source of your project.
 To create a specialized factory two steeps are need:
