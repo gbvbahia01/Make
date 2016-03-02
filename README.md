@@ -3,7 +3,7 @@ A framework that can make easily a lot of entity or objects to use in unit tests
 
 ## Motivation
 1.   I want to use the JSR303 specification in my entities without a hell in my JUnit tests.<br>
-2.   Create a database that can be reliable to make tests.<br>
+2.   Create a database that can be reliable to do tests.<br>
 
 
 ## Code Example
