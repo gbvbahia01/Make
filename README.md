@@ -108,7 +108,7 @@ Notice that is necessary the class value be informed with the class full name.<b
 
 <b> Specialized Factories </b><br>
 Some fields need to be treated with a special value. The value needs to be more than valid it needs to be a specialized value. Like a contract number, a social number, drive id and so on. For this cases you can use or create a specialized factory.<br>
-Each specialized factory has a key to map with a field that you want to make a value. You can do a mapping between a field and a specialized factory in a field tag inside of the entity tag:<br>
+Each specialized factory has a key to map with a field that you want to make a value. You can do a mapping between a field and a specialized factory in a <i>field</i> tag inside of the <i>entity</i> tag:<br>
 ```<XML>
         <entity class="br.com.tests.Employee">
           <field name="name">isName</field>
@@ -123,34 +123,34 @@ The framework Make has some specialized factories implemented that you can use:<
 *   <b>MakeBetween</b> tag: between{start,end} Examples:  <field name="age">between{18,80}</field> <field name="temperature">between{-90.50,90.50}</field>
      Works with all types of numbers: byte, short, int, long, float and double. Include wrappers. Work with String too, but the values used to start and end must be numeric.
 
-*   <b>MakeIn</b>      tag: in{x,y,z}[,] Examples: <field name="age">in{10;20;30}[;]</field> in{10.30|10.50|10.80}[|] in{A,B,C}   
+*   <b>MakeIn</b>      tag: in{x,y,z}[,] Examples: <field name="age">in{10;20;30}[;]</field> in{10.30|10.50|10.80}[|] in{A,B,C}<br>   
 	Works with numbers and characters. MakeIn will choose a value in the range informed.<br>
 	Notice the character between the [?] is the separator between possible values. If is not informed will be used comma.<br> 
 
-*   <b>MakeEmail</b>   tag: isEmail      Example: <field name="email">isEmail</field>
+*   <b>MakeEmail</b>   tag: isEmail      Example: <field name="email">isEmail</field><br>
 	A String in email format will be created. Works only with String. Before @ a String will be between 3 and 8. After @ all values are chosen in emails_make.properties file.
 
-*   <b>MakeName</b>    tag: isName       Example: <field name="name">isName</field>
+*   <b>MakeName</b>    tag: isName       Example: <field name="name">isName</field><br>
 	Create a person name.  Works only with String. Two names are used to create the name. All names come from names_make.properties file 
 	
-*   <b>MakeList</b>    tag: isList{class name}[I,E] Example: <field name="employees">isList{br.com.pro.Employee}[5,25]</field>
+*   <b>MakeList</b>    tag: isList{class name}[I,E] Example: <field name="employees">isList{br.com.pro.Employee}[5,25]</field><br>
 	Some relations are one to many and for those case a list can be necessary.<br>
 	Inside of { } inform the full class name that will be created to add a List.<br>
 	The class referenced between "{" "}" needs to have a default constructor. A constructor without arguments.<br>
 	Inside of [ ] inform the minimum and maximum amount of objects that need to be created to add the List.<br> 
 	
-*   <b>MakeSet</b>     tag: isSet{class name}[3,5] Example: <field name="employees">isSet{br.com.pro.Employee}[5,25]</field>
+*   <b>MakeSet</b>     tag: isSet{class name}[3,5] Example: <field name="employees">isSet{br.com.pro.Employee}[5,25]</field><br>
 	Some relations are one to many and for those case a set can be necessary.<br>
 	Inside of { } inform the full class name that will be created to add a Set.<br>
 	The class referenced between "{" "}" needs to have a default constructor. A constructor without arguments.<br>
 	Inside of [ ] inform the minimum and maximum amount of objects that need to be created to add the Set.<br>
 	A collection with Set cannot have two objects as equals. Make will try to create a Set with a satisfactory amount. But if the framework cannot add objects because of equals the set can have less objects than configured as minimum at isSet value. 
 
-*   <b>MakeCpf</b>     tag: isCPF  Example: <field name="cpf">isCPF</field>
+*   <b>MakeCpf</b>     tag: isCPF  Example: <field name="cpf">isCPF</field><br>
 	This specialized factory work with a type of number that exist in Brazil.<br>
 	Works only with String.<br>
 	
-*   <b>MakeCnpj</b>    tag: isCNPJ Example: <field name="cnpj">isCNPJ</field>
+*   <b>MakeCnpj</b>    tag: isCNPJ Example: <field name="cnpj">isCNPJ</field><br>
 	This specialized factory work with a type of number that exist in Brazil.<br>
 	Works only with String.<br>
 
