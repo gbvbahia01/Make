@@ -99,8 +99,12 @@ These test names can make easy changes in some rules between tests. The tests ca
  MakeEntity.make(Employee.class, "Test_Name_2");
 ```
 Make method receive a String var-args as a second argument. When this parameter is informed Make will search all tests that have the name informed. The order is important. The first rule searched is kept. I mean that: a rule from the first test name will not be replaced by a second rule for a second name for the same class field.<br>
-The next tag is entities. This tag enable to create a lot of rules fields in the same test. You do not need put a tag for each field class. Only the fields that you want to define specialized rules. In this example Employer or Employee can have each one 10 fields but only the fields in XML will have specialized rules for values. Others fields will use JSR303 if have or free values if have not.<br>
+The next tag is <i>entities</i>. This tag enable to create a lot of rules fields in the same test. You do not need put a tag for each field class. Only the fields that you want to define specialized rules. In this example Employer or Employee can have each one 10 fields but only the fields in XML will have specialized rules for values. Others fields will use JSR303 if have or free values if have not.<br>
 Notice that is necessary the class value be informed with the class full name.<br>
+
+```<XML>
+        <entity class="br.com.tests.Employee">
+```
 
 <b> Specialized Factories </b><br>
 Some fields need to be treated with a special value. The value needs to be more than valid it needs to be a specialized value. Like a contract number, a social number, drive id and so on. For this cases you can use or create a specialized factory.<br>
