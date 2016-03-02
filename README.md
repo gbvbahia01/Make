@@ -16,7 +16,7 @@ List<MyObject> myObjects = MakeEntity.makes(MyObject .class, amount);
 ## Mechanics
 Objects are defined with fields. Usually is necessary to define some rules in those fields. Like a car cannot have -3.5 of gasoline and cannot pass tha maximum amount in its fuel tank.<br>
 Make can create those values respecting all rules.<br>
-If you use JSR303 annotations Make will read them and use to create the fields values. Make will read the JSR303 annotations using to do a reverse engineering to create valid values for each field. With the only exception about the annotation @Pattern. For this annotation you will have to create a value. A good thing is that  Make has a lot of tools to help you.<br>
+If you use JSR303 annotations Make will read them and use to create the fields values. Make will do a reverse engineering to create valid values for each field. With the only exception about the annotation @Pattern. For this annotation you will have to create a value. A good thing is that  Make has a lot of tools to help you.<br>
 All values created using the JSR303 will be valid, but some of them cannot be acceptable. Like a field that represents a birth date for a person. You can use the annotation @NotNull with @Past. In this case the values will be in the past therefore be valid. Notice that Make can create dates like one day ago or 200 years ago and for the business will be more satisfactory some dates between 18 and 80 years. For situations like that Make has space to put a engine to create those values. This engine is called Specialized Factories.<br>
 If you do not use JSR303 annotations Make will create open values for all fields. You can change this behavior using the Specialized Factories too.
 
