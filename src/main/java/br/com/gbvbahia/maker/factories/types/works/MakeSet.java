@@ -76,8 +76,9 @@ public class MakeSet implements ValueSpecializedFactory {
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
     CollectionsHelper valueHelper = this.ruleHelper.get(NamesManager.getFiledName(field));
-    Set toSet = new HashSet(MakeEntity.makeEntities(valueHelper.getClazz(),
-        MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
+    Set toSet =
+        new HashSet(MakeEntity.makes(valueHelper.getClazz(),
+            MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
     if (toSet.size() < valueHelper.getMin()) {
       LogInfo.logWarnInformation("MakeSet",
           I18N.getMsg("setSizeMenorMin", valueHelper.getMin(), toSet.size()));
@@ -110,8 +111,8 @@ public class MakeSet implements ValueSpecializedFactory {
     String max = minMax.split(",")[1];
     LogInfo.logDebugInformation("MakeSet", "Class: " + clazz + " min:" + min + " max: " + max);
     try {
-      this.ruleHelper.put(fieldName,
-          new CollectionsHelper(Class.forName(clazz), new Integer(min), new Integer(max)));
+      this.ruleHelper.put(fieldName, new CollectionsHelper(Class.forName(clazz), new Integer(min),
+          new Integer(max)));
     } catch (ClassNotFoundException ce) {
       throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
           new String[] {clazz}, ce);

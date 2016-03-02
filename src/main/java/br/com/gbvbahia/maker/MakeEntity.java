@@ -124,7 +124,7 @@ public class MakeEntity {
    * @param testName the names of tests in XML setup file that have the tests rules.
    * @return a list with the new stances of objectParam with fields populated.
    */
-  public static <T> List<T> makeEntities(Class<T> objectParam, int amount, String... testName) {
+  public static <T> List<T> makes(Class<T> objectParam, int amount, String... testName) {
     if (amount < 1) {
       throw new IllegalArgumentException(I18N.getMsg("qutdadeEntityInvalida", amount));
     }

@@ -82,8 +82,9 @@ public class MakeList implements ValueSpecializedFactory {
   public <T> void makeValue(Field field, T entity, String... testName)
       throws IllegalAccessException, IllegalArgumentException {
     CollectionsHelper valueHelper = this.ruleHelper.get(NamesManager.getFiledName(field));
-    List toSet = new ArrayList(MakeEntity.makeEntities(valueHelper.getClazz(),
-        MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
+    List toSet =
+        new ArrayList(MakeEntity.makes(valueHelper.getClazz(),
+            MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
     field.set(entity, toSet);
   }
 
@@ -110,11 +111,11 @@ public class MakeList implements ValueSpecializedFactory {
     String minMax = StringUtils.substringBetween(value, "[", "]");
     String minAmountElementsInList = minMax.split(",")[0];
     String maxAmountElementsInList = minMax.split(",")[1];
-    LogInfo.logDebugInformation("MakeList",
-        "Class: " + clazz + " min:" + minAmountElementsInList + " max: " + maxAmountElementsInList);
+    LogInfo.logDebugInformation("MakeList", "Class: " + clazz + " min:" + minAmountElementsInList
+        + " max: " + maxAmountElementsInList);
     try {
-      this.ruleHelper.put(fieldName, new CollectionsHelper(Class.forName(clazz),
-          new Integer(minAmountElementsInList), new Integer(maxAmountElementsInList)));
+      this.ruleHelper.put(fieldName, new CollectionsHelper(Class.forName(clazz), new Integer(
+          minAmountElementsInList), new Integer(maxAmountElementsInList)));
     } catch (ClassNotFoundException ce) {
       throw new ValueSpecializedException(this.getClass(), "ClassNotFoundException",
           new String[] {clazz}, ce);
