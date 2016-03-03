@@ -73,7 +73,7 @@ public final class MakeString {
    * @return A String to be used.
    * @throws IllegalArgumentException if max is bigger than MakeString.MAX_LENGTH_SUPPORTS constant.
    */
-  public static String getString(final int min, final int max, StringType type) {
+  public static String getString(int min, int max, StringType type) {
     if (min < 0) {
       throw new IllegalArgumentException(I18N.getMsg("caractereToStringErro", new Integer(min)));
     }
@@ -91,7 +91,7 @@ public final class MakeString {
    * @throws IllegalArgumentException if characters is bigger than MakeString.MAX_LENGTH_SUPPORTS
    *         constant.
    */
-  public static String getString(final int characters, final StringType type) {
+  public static String getString(int characters, StringType type) {
     if (isEmptyCaracters(characters)) {
       return "";
     }
@@ -196,7 +196,7 @@ public final class MakeString {
    * @return A String made from loren_make.properties file.
    * @throws IllegalAccessException If a resource problem occurs.
    */
-  public static String getLoren(final int characters) {
+  public static String getLoren(int characters) {
     int linhas = setLines(characters);
     StringBuilder sb = new StringBuilder();
     for (; linhas > 0; linhas--) {

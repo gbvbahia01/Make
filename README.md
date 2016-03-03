@@ -230,34 +230,37 @@ And remember:
 To create those values a large API were made. With a lot of static methods that can be used as a Swiss Army Knife into JUnit tests.<br>
 After add Make as a test dependence in our project you can use all these methods listed below:
 
-*   Boolean    MakeBoolean.getBoolean();                    Can return true or false.
-*   Character  MakeCharacter.getNumber();                   A character between 0 and 9.
-*   Character  MakeCharacter.getLetter();                   A character between a and Z.
-*   Character  MakeCharacter.getSymbols();                  A character in !, @, #, $, &, %, ?, -, +
-*   Character  MakeCharacter.getCharacter();                Any character.
-*   Byte       MakeByte.getMax(byte max);                   A random byte limited by max value.
-*   Byte       MakeByte.getRange(byte min, byte max);       A random number between min and max parameters.
-*   Short      MakeShort.getMax(short max);                 A random short limited by max value.
-*   Short      MakeShort.getRange(short min, short max);    A random number between min and max parameters.
-*   Integer    MakeInteger.getMax(int max);                 A random integer limited by max value.
-*   Integer    MakeInteger.getRange(int min, int max);      A random number between min and max parameters.
-*   Long       MakeLong.getMax(long max);                   A random long limited by max value.
-*   Long       MakeLong.getRange(long min, long max);       A random number between min and max parameters.
-*   Float      MakeFloat.getMax(float max);                 A random float limited by max value.
-*   Float      MakeFloat.getRange(float min, float max)     A random number between min and max parameters.
-*   Double     MakeDouble.getMax(double max)                A random double limited by max value.
-*   Double     MakeDouble.getRange(double min, double max)  A random number between min and max parameters.
-*   BigInteger MakeBigInteger.getMax(long max);             A random BigInteger limited by max value.
-*   BigInteger MakeBigInteger.getRange(long min, long max)  A random number between min and max parameters.
-*   BigDecimal MakeBigDecimal.getMax(double max);           A random BigDecimal limited by max value.
-*   BigDecimal MakeBigDecimal.getRange(double i, double e); A random number between min and max parameters.
-*   Calendar   MakeCalendar.getInFuture();					A Calendar in the future limited to 1800 days forward.
-*   Calendar   MakeCalendar.getInPast();                    A Calendar in the past limited to 1800 days behind.
-*   Calendar   MakeCalendar.getCalendar();                  A Calendar in the past or in the future with 1800 days limited.
-*   Date       MakeDate.getInFuture();					    A Date in the future limited to 1800 days forward.
-*   Date       MakeDate.getInPast();                        A Date in the past limited to 1800 days behind.
-*   Date       MakeDate.getCalendar();                      A Date in the past or in the future with 1800 days limited.
-   
+*   Boolean    MakeBoolean.getBoolean();                    Can return true or false.<br>
+*   Character  MakeCharacter.getNumber();                   A character between 0 and 9.<br>
+*   Character  MakeCharacter.getLetter();                   A character between a and Z.<br>
+*   Character  MakeCharacter.getSymbols();                  A character in !, @, #, $, &, %, ?, -, +<br>
+*   Character  MakeCharacter.getCharacter();                Any character.<br>
+*   Byte       MakeByte.getMax(byte max);                   A random byte limited by max value.<br>
+*   Byte       MakeByte.getRange(byte min, byte max);       A random number between min and max parameters.<br>
+*   Short      MakeShort.getMax(short max);                 A random short limited by max value.<br>
+*   Short      MakeShort.getRange(short min, short max);    A random number between min and max parameters.<br>
+*   Integer    MakeInteger.getMax(int max);                 A random integer limited by max value.<br>
+*   Integer    MakeInteger.getRange(int min, int max);      A random number between min and max parameters.<br>
+*   Long       MakeLong.getMax(long max);                   A random long limited by max value.<br>
+*   Long       MakeLong.getRange(long min, long max);       A random number between min and max parameters.<br>
+*   Float      MakeFloat.getMax(float max);                 A random float limited by max value.<br>
+*   Float      MakeFloat.getRange(float min, float max)     A random number between min and max parameters.<br>
+*   Double     MakeDouble.getMax(double max)                A random double limited by max value.<br>
+*   Double     MakeDouble.getRange(double min, double max)  A random number between min and max parameters.<br>
+*   BigInteger MakeBigInteger.getMax(long max);             A random BigInteger limited by max value.<br>
+*   BigInteger MakeBigInteger.getRange(long min, long max)  A random number between min and max parameters.<br>
+*   BigDecimal MakeBigDecimal.getMax(double max);           A random BigDecimal limited by max value.<br>
+*   BigDecimal MakeBigDecimal.getRange(double i, double e); A random number between min and max parameters.<br>
+*   Calendar   MakeCalendar.getInFuture();					A Calendar in the future limited to 1800 days forward.<br>
+*   Calendar   MakeCalendar.getInPast();                    A Calendar in the past limited to 1800 days behind.<br>
+*   Calendar   MakeCalendar.getCalendar();                  A Calendar in the past or in the future with 1800 days limited.<br>
+*   Date       MakeDate.getInFuture();					    A Date in the future limited to 1800 days forward.<br>
+*   Date       MakeDate.getInPast();                        A Date in the past limited to 1800 days behind.<br>
+*   Date       MakeDate.getCalendar();                      A Date in the past or in the future with 1800 days limited.<br>
+*   String	   MakeString.getString(int min, int max, StringType type); It makes a String with amount of characters between min and max parameters. Use type parameter to control the types of character inside of the String.<br>
+*   String     MakeString.getString(int characters, StringType type);    It makes a String with a size informed in parameter characters. Use type parameter to control the types of character inside of the String.<br>
+*   String     MakeString.getLoren(int characters);                      It makes a String using the loren_make.properties file.
+
 
 ## Contributors
 Guilherme Braga <a href="https://br.linkedin.com/in/guilherme-braga-a7994823" target="_blank">(LinkedIn)</a>
