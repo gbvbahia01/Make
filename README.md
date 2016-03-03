@@ -205,6 +205,7 @@ The updateStage receives a Notification object that contains some informations a
    *   The name or names used to call MakeEntity.make is in Notification.<br>
    *   The stage of the object creation can be known using the methods: isCreationStarted, isCreationFinished, isCreationRecursionBegin and isCreationRecursionEnd.
    *   To know the amount of recursion made by Make you can call the method getRecursion. If the value is 1 means that two calls were made: the first call by developer and the second call made by framework to create a new complex object. If is 2 means that three calls were made: the first by developer and 2 more by the framework. And so on.<br>
+
 The object creation can have 4 stages:<br>
 1   BEGIN: When the MakeEntity.make is called by developer.<br> 
 2   END: When the MakeEntity.make called by developer finished the object creation.<br>
