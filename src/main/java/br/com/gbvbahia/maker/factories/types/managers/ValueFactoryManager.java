@@ -40,7 +40,7 @@ public class ValueFactoryManager implements ValueFactory {
     this.specializedManager = new ValueSpecializedFactoryManager();
     this.valueFactories = new HashMap<String, ValueFactory>();
     this.loadRulesByClassWithFields(testName);
-    NotifierTests.getNotifyer().addObserver(this);
+    NotifierStage.getNotifyer().addObserver(this);
   }
 
   /**

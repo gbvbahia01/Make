@@ -3,7 +3,7 @@ package br.com.gbvbahia.maker.factories.types;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.factories.types.properties.exception.MakeCreationException;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
@@ -62,7 +62,7 @@ public class EnumFactory implements ValueFactory {
   public static synchronized ValueFactory getInstance() {
     if (instance == null) {
       instance = new EnumFactory();
-      NotifierTests.getNotifyer().addObserver(instance);
+      NotifierStage.getNotifyer().addObserver(instance);
     }
     return instance;
   }

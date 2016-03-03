@@ -3,7 +3,7 @@ package br.com.gbvbahia.maker;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.Factory;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.factories.types.properties.exception.MakeCreationException;
 import br.com.gbvbahia.maker.log.LogInfo;
 
@@ -97,17 +97,17 @@ public class MakeEntity {
    */
   private static void notifyStarted(String... testName) {
     if (counter++ == 0) {
-      NotifierTests.getNotifyer().notifyTestBegin(testName);
+      NotifierStage.getNotifyer().notifyMakeBegin(testName);
     } else {
-      NotifierTests.getNotifyer().notifyTestRecursionBegin(counter - 1, testName);
+      NotifierStage.getNotifyer().notifyMakeRecursionBegin(counter - 1, testName);
     }
   }
 
   private static void notifyEnded(String... testName) {
     if (--counter == 0) {
-      NotifierTests.getNotifyer().notifyTestEnd(testName);
+      NotifierStage.getNotifyer().notifyMakeEnd(testName);
     } else {
-      NotifierTests.getNotifyer().notifyTestRecursionEnd(counter, testName);
+      NotifierStage.getNotifyer().notifyMakeRecursionEnd(counter, testName);
     }
   }
 

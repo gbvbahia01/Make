@@ -2,7 +2,7 @@ package br.com.gbvbahia.maker.factories.types.works;
 
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
@@ -105,7 +105,7 @@ public class DefaultValuesFactory implements ValueSpecializedFactory {
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {
       instance = new DefaultValuesFactory();
-      NotifierTests.getNotifyer().addObserver(instance);
+      NotifierStage.getNotifyer().addObserver(instance);
     }
     return instance;
   }

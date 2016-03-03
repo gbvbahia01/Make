@@ -4,7 +4,7 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.MakeNumberManager;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 
 import java.lang.reflect.Field;
@@ -96,7 +96,7 @@ public class MaxMinFactory implements ValueFactory {
   public static synchronized ValueFactory getInstance() {
     if (instance == null) {
       instance = new MaxMinFactory();
-      NotifierTests.getNotifyer().addObserver(instance);
+      NotifierStage.getNotifyer().addObserver(instance);
     }
     return instance;
   }

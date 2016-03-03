@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 
@@ -72,7 +72,7 @@ public class SizeFactory implements ValueFactory {
   public static synchronized ValueFactory getInstance() {
     if (instance == null) {
       instance = new SizeFactory();
-      NotifierTests.getNotifyer().addObserver(instance);
+      NotifierStage.getNotifyer().addObserver(instance);
     }
     return instance;
   }

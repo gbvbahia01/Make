@@ -75,7 +75,7 @@ public final class ValueSpecializedFactoryManager {
         if (!this.spzFactories.containsKey(fac)) {
           ValueSpecializedFactory specializedFactory = fac.newInstance();
           this.spzFactories.put(fac, specializedFactory);
-          NotifierTests.getNotifyer().addObserver(specializedFactory);
+          NotifierStage.getNotifyer().addObserver(specializedFactory);
         }
       } catch (ClassNotFoundException ex) {
         LogInfo.logErrorInformation("MakePropertiesDefaultFactories",

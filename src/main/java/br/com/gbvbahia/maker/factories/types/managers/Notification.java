@@ -12,44 +12,49 @@ import java.util.Arrays;
 public class Notification {
 
   /**
-   * Must be a value in a NotifierTests constants range: TEST_BEGIN or TEST_END.
+   * Must be a value in a NotifierStage constants range: MAKE_BEGIN, MAKE_END, MAKE_RECURSION_BEGIN
+   * or MAKE_RECURSION_END.
    */
-  private Integer stageTest;
+  private Integer stageMake;
   private String[] testName;
+  /**
+   * If the value is 1 means that: two calls are made: the first call by developer and the second
+   * call made by framework to create a new complex object.
+   */
   private Integer recursion = 0;
 
   /**
-   * Create a notification with information about the test.
+   * Create a notification with information about the Make creation stage.
    * 
-   * @param stageTest need to be informed and the value must be a NotifierTests constant.
+   * @param stageMake need to be informed and the value must be a NotifierStage constant.
    * @param testName The same value passed at makeEntity method.
    */
-  public Notification(Integer stageTest, String[] testName) {
+  public Notification(Integer stageMake, String[] testName) {
     super();
-    this.stageTest = stageTest;
+    this.stageMake = stageMake;
     this.testName = testName;
   }
 
   /**
-   * Create a notification with information about the test.<br>
+   * Create a notification with information about the make creation stage.<br>
    * 
-   * @param stageTest need to be informed and the value must be a NotifierTests constant.
+   * @param stageMake need to be informed and the value must be a NotifierStage constant.
    * @param recursion amount of calls did at MakeEntity.makeEntity.
    * @param testName The same value passed at makeEntity method.
    */
-  public Notification(Integer stageTest, Integer recursion, String[] testName) {
+  public Notification(Integer stageMake, Integer recursion, String[] testName) {
     super();
-    this.stageTest = stageTest;
+    this.stageMake = stageMake;
     this.testName = testName;
     this.recursion = recursion;
   }
 
   public boolean isTestStarted() {
-    return NotifierTests.TEST_BEGIN.equals(this.stageTest);
+    return NotifierStage.MAKE_BEGIN.equals(this.stageMake);
   }
 
   public boolean isTestFinished() {
-    return NotifierTests.TEST_END.equals(this.stageTest);
+    return NotifierStage.MAKE_END.equals(this.stageMake);
   }
 
   public boolean isTestInRecursion() {
@@ -72,8 +77,8 @@ public class Notification {
   }
 
   /**
-   * public static final Integer TEST_BEGIN = 1; public static final Integer TEST_END = 2; public
-   * static final Integer TEST_RECURSION_BEGIN = 3; public static final Integer TEST_RECURSION_END =
+   * public static final Integer MAKE_BEGIN = 1; public static final Integer MAKE_END = 2; public
+   * static final Integer MAKE_RECURSION_BEGIN = 3; public static final Integer MAKE_RECURSION_END =
    * 4;
    * 
    * @since v.2
@@ -81,22 +86,19 @@ public class Notification {
   @Override
   public String toString() {
     String stage = "";
-    if (NotifierTests.TEST_BEGIN.equals(this.stageTest)) {
-      stage = "Test begin";
+    if (NotifierStage.MAKE_BEGIN.equals(this.stageMake)) {
+      stage = "Make begin";
     }
-    if (NotifierTests.TEST_END.equals(this.stageTest)) {
-      stage = "Test end";
+    if (NotifierStage.MAKE_END.equals(this.stageMake)) {
+      stage = "Make end";
     }
-    if (NotifierTests.TEST_RECURSION_BEGIN.equals(this.stageTest)) {
-      stage = "Test recursion begin";
+    if (NotifierStage.MAKE_RECURSION_BEGIN.equals(this.stageMake)) {
+      stage = "Make recursion begin";
     }
-    if (NotifierTests.TEST_RECURSION_END.equals(this.stageTest)) {
-      stage = "Test recursion end";
+    if (NotifierStage.MAKE_RECURSION_END.equals(this.stageMake)) {
+      stage = "Make recursion end";
     }
-    return "Notification [ recursion:" + this.recursion + " stageTest:" + stage + ", testName:"
+    return "Notification [ recursion:" + this.recursion + " stageMake:" + stage + ", testName:"
         + Arrays.toString(this.testName) + "]";
   }
-
-
-
 }

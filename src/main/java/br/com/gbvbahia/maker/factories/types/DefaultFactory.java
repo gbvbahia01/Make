@@ -4,7 +4,7 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.MakeEntity;
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.complex.MakeString;
 import br.com.gbvbahia.maker.types.primitives.MakeBoolean;
@@ -224,7 +224,7 @@ public class DefaultFactory extends MaxMinFactory {
   public static void loadInstance() {
     if (instance == null) {
       instance = new DefaultFactory();
-      NotifierTests.getNotifyer().addObserver(instance);
+      NotifierStage.getNotifyer().addObserver(instance);
     }
   }
 }

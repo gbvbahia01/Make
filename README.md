@@ -163,6 +163,7 @@ To create a specialized factory two steps are needed:<br>
 boolean workValue(String fieldName, String value);
 boolean isWorkWith(Field field, T entity);
 void makeValue(Field field, T entity, String... testName);
+void updateStage(Notification notification);
 ```
 *   boolean workValue(String fieldName, String value) method: this method receives the full name of the field and the value is the key that was put in make.xml for that field. Basically what you have to do is ignore the field name and check if the value is a key expected for this specialized factory class that you are making.<br>
 Let's take a look at the workValue in MakeName class:
@@ -197,6 +198,9 @@ Let's take a look at the workValue in MakeName class:
   }
 ```
 You <b>do not need to check the test names</b>. Make already did for you.   
+
+*   void updateStage(Notification notification); this method is for inform the specialized factories about the stage of the object creation. Usually you will do nothing here. You can leave this method without any implementation if you want to.
+The 
 
 2º   Declare the class in make.xml at tag <factories>: 
 ```<XML>

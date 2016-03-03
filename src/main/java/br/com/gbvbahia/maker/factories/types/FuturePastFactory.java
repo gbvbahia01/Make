@@ -2,7 +2,7 @@ package br.com.gbvbahia.maker.factories.types;
 
 import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.types.complex.MakeCalendar;
 
 import java.lang.reflect.Field;
@@ -87,7 +87,7 @@ public class FuturePastFactory implements ValueFactory {
   public static synchronized ValueFactory getInstance() {
     if (instance == null) {
       instance = new FuturePastFactory();
-      NotifierTests.getNotifyer().addObserver(instance);
+      NotifierStage.getNotifyer().addObserver(instance);
     }
     return instance;
   }

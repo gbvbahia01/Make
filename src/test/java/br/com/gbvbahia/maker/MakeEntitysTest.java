@@ -2,6 +2,7 @@ package br.com.gbvbahia.maker;
 
 import br.com.gbvbahia.entities.EntityNotNullTest;
 import br.com.gbvbahia.maker.factories.Factory;
+import br.com.gbvbahia.maker.factories.types.properties.exception.MakeCreationException;
 import br.com.gbvbahia.maker.log.LogInfo;
 
 import junit.framework.TestCase;
@@ -45,7 +46,7 @@ public class MakeEntitysTest extends TestCase {
     boolean excecao = false;
     try {
       MakeEntity.makes(EntityNotNullTest.class, -10);
-    } catch (IllegalArgumentException e) {
+    } catch (MakeCreationException e) {
       excecao = true;
       logger.debug(e.getMessage());
     }
@@ -53,7 +54,7 @@ public class MakeEntitysTest extends TestCase {
     excecao = false;
     try {
       MakeEntity.makes(EntityNotNullTest.class, -1);
-    } catch (IllegalArgumentException e) {
+    } catch (MakeCreationException e) {
       excecao = true;
       logger.debug(e.getMessage());
     }

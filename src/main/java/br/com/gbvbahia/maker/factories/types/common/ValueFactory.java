@@ -4,7 +4,7 @@
 
 package br.com.gbvbahia.maker.factories.types.common;
 
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests.Notified;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage.Notified;
 
 import java.lang.reflect.Field;
 

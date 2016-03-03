@@ -4,7 +4,7 @@ import br.com.gbvbahia.i18n.I18N;
 import br.com.gbvbahia.maker.factories.types.managers.MakeNumberManager;
 import br.com.gbvbahia.maker.factories.types.managers.NamesManager;
 import br.com.gbvbahia.maker.factories.types.managers.Notification;
-import br.com.gbvbahia.maker.factories.types.managers.NotifierTests;
+import br.com.gbvbahia.maker.factories.types.managers.NotifierStage;
 import br.com.gbvbahia.maker.factories.types.works.commons.NumberHelper;
 import br.com.gbvbahia.maker.factories.types.works.commons.ValueSpecializedFactory;
 import br.com.gbvbahia.maker.factories.types.works.exceptions.ValueSpecializedException;
@@ -147,7 +147,7 @@ public class MakeBetween implements ValueSpecializedFactory {
   public static synchronized ValueSpecializedFactory getInstance() {
     if (instance == null) {
       instance = new MakeBetween();
-      NotifierTests.getNotifyer().addObserver(instance);
+      NotifierStage.getNotifyer().addObserver(instance);
     }
     return instance;
   }
