@@ -227,8 +227,7 @@ And remember:
 <br>DO NOT put XML setup file in make folder test. It is must be put in the application folder resource test.
 
 ## API Reference
-To create those values a large API were made. With a lot of static methods that can be used as a Swiss Army Knife into JUnit tests.<br>
-After add Make as a test dependence in our project you can use all these methods listed below:
+To create those values a large static API were made. With a lot of static methods that can be used as a Swiss Army Knife into JUnit tests. After add Make as a test dependence in our project you can use all these methods listed below:
 
 *   Boolean    MakeBoolean.getBoolean();                    Can return true or false.<br>
 *   Character  MakeCharacter.getNumber();                   A character between 0 and 9.<br>
