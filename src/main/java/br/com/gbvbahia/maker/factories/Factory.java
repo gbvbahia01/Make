@@ -207,7 +207,7 @@ public final class Factory {
         if (this.alwaysNull()) {
           return true;
         }
-        if (this.someNull() && (MakeInteger.getIntervalo(1, 6) == 3)) {
+        if (this.someNull() && (MakeInteger.getRange(1, 6) == 3)) {
           return true;
         }
         return false;
@@ -219,7 +219,7 @@ public final class Factory {
           return true;
         }
         if (this.someNull()) {
-          if (MakeInteger.getIntervalo(1, 6) == 3) {
+          if (MakeInteger.getRange(1, 6) == 3) {
             return true;
           }
         }

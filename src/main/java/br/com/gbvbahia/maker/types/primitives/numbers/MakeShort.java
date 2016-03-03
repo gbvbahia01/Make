@@ -11,12 +11,12 @@ import java.lang.reflect.Field;
 public class MakeShort extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field field, final T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(final Field field, final T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, Short.MIN_VALUE, Short.MAX_VALUE);
     short min = minMax[0].shortValue();
     short max = minMax[1].shortValue();
-    this.insertValue(field, entity, MakeShort.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeShort.getRange(min, max).toString());
   }
 
   @Override
@@ -35,31 +35,31 @@ public class MakeShort extends MakeNumber {
   }
 
   /**
-   * Retorna um número aleatório limitado ao max passado.
+   * A random number limited by max value.
    *
-   * @param max Minimo 1.
-   * @return Short limitado ao max.
+   * @param max maximum acceptable.
+   * @return A random byte limited by max value.
    */
-  public static Short getMax(final short max) {
+  public static Short getMax(short max) {
     return MakeLong.getMax(max).shortValue();
   }
 
   /**
-   * Gera um número entre os valores solicitados.
+   * A random number between min and max parameters.
    *
-   * @param min Número minimo aceitavel.
-   * @param max Número máximo aceitavel.
-   * @return Número aleatório.
+   * @param min minimum number acceptable.
+   * @param max maximum number acceptable.
+   * @return A random number between min and max parameters.
    */
-  public static Short getIntervalo(final short min, final short max) {
-    return MakeLong.getIntervalo(min, max).shortValue();
+  public static Short getRange(short min, short max) {
+    return MakeLong.getRange(min, max).shortValue();
   }
 
   /**
-   * Retorna True para tipos Short ou short.
+   * True is the field type is byte false if is not.
    *
-   * @param field Field a ser avaliado.
-   * @return True para tipos Short ou short, False para outros tipos.
+   * @param field that will be evaluated.
+   * @return True is the field type is byte false if is not.
    */
   public static boolean isShort(final Field field) {
     if (field.getType().equals(Short.class) || field.getType().equals(short.class)) {

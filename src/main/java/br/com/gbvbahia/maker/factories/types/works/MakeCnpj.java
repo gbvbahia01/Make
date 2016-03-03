@@ -82,7 +82,7 @@ public class MakeCnpj implements ValueSpecializedFactory {
     if (MakeBoolean.getBoolean()) {
       Integer filiais = MakeInteger.getMax(11);
       if (filiais > 9) {
-        cnpj += "00" + MakeInteger.getIntervalo(10, 99);
+        cnpj += "00" + MakeInteger.getRange(10, 99);
       } else if (filiais > 5) {
         cnpj += "000" + MakeInteger.getMax(9);
       } else {

@@ -87,7 +87,7 @@ public class MakeSet implements ValueSpecializedFactory {
     CollectionsHelper valueHelper = this.ruleHelper.get(NamesManager.getFiledName(field));
     Set toSet =
         new HashSet(MakeEntity.makes(valueHelper.getClazz(),
-            MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
+            MakeInteger.getRange(valueHelper.getMin(), valueHelper.getMax()), testName));
     if (toSet.size() < valueHelper.getMin()) {
       LogInfo.logWarnInformation("MakeSet",
           I18N.getMsg("setSizeMenorMin", valueHelper.getMin(), toSet.size()));

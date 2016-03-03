@@ -1,12 +1,12 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
-
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
 
 /**
  * @since v.1
@@ -28,7 +28,7 @@ public class MakeDoubleTest extends TestCase {
     logger.debug("Double - GetIntervalo");
     for (double min = 10.1; min < 20.1; min++) {
       for (double max = min + 0.1; max < 20.1; max += 0.1) {
-        Double result = MakeDouble.getIntervalo(min, max);
+        Double result = MakeDouble.getRange(min, max);
         logger.debug("Max: " + max + " Min:" + min + " Result:" + result);
         assertTrue("Intervalo incorreto: Max: " + max + " Min:" + min + " Result: " + result,
             (result >= min) && (result <= max));
@@ -57,7 +57,7 @@ public class MakeDoubleTest extends TestCase {
   public void testIntervalo() {
     logger.debug("Double - Intervalo");
     for (int i = 0; i < 200; i++) {
-      final Double intervalo = MakeDouble.getIntervalo(0.0001, 0.0002);
+      final Double intervalo = MakeDouble.getRange(0.0001, 0.0002);
       LogInfo.logDebugInformation(MakeDoubleTest.class.getSimpleName(), Double.toString(intervalo));
       assertFalse("Teste minimo incorreto", intervalo < 0.0001);
       assertFalse("Teste maximo incorreto", intervalo > 0.0002);

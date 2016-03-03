@@ -25,7 +25,7 @@ public final class MakeCalendar {
    */
   public static Calendar getInFuture() {
     Calendar calendar = Calendar.getInstance();
-    int days = MakeInteger.getIntervalo(1, MAX_DAYS);
+    int days = MakeInteger.getRange(1, MAX_DAYS);
     calendar.add(Calendar.DAY_OF_MONTH, days);
     return calendar;
   }
@@ -37,7 +37,7 @@ public final class MakeCalendar {
    */
   public static Calendar getInPast() {
     Calendar calendar = Calendar.getInstance();
-    int days = MakeInteger.getIntervalo(1, MAX_DAYS);
+    int days = MakeInteger.getRange(1, MAX_DAYS);
     calendar.add(Calendar.DAY_OF_MONTH, -days);
     return calendar;
   }
@@ -50,7 +50,7 @@ public final class MakeCalendar {
    */
   public static Calendar getCalendar() {
     Calendar calendar = Calendar.getInstance();
-    int days = MakeInteger.getIntervalo(-MAX_DAYS, MAX_DAYS);
+    int days = MakeInteger.getRange(-MAX_DAYS, MAX_DAYS);
     calendar.add(Calendar.DAY_OF_MONTH, days);
     return calendar;
   }

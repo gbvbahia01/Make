@@ -15,25 +15,24 @@ import java.lang.reflect.Field;
 public final class MakeCharacter {
 
   /**
-   * Logger para depuração.
+   * Logger.
    */
   private static Log logger = LogInfo.getLog("MakeCharacter");
   /**
-   * Somente numeros.
+   * Only numbers.
    */
   private static final char[] NUMBERS = new char[10];
   /**
-   * Somente letras.
+   * Only letters.
    */
   private static final char[] LETTERS = new char[26];
   /**
-   * Simbolos. Esse array pode variar de uma versão para outra, por isso é public, facilitando
-   * codificação para o mesmo.
+   * The symbols used to return.
    */
   public static final Character[] SYMBOLS = {'!', '@', '#', '$', '&', '%', '?', '-', '+'};
 
   /**
-   * Populas letras e numeros.
+   * Puts letters and numbers.
    */
   static {
     for (int idx = 0; idx < 10; ++idx) {
@@ -45,42 +44,42 @@ public final class MakeCharacter {
   }
 
   /**
-   * Um character entre 0-9.
+   * A character between 0 and 9.
    *
    * @return 0-9.
    */
   public static Character getNumber() {
-    char toReturn = NUMBERS[MakeInteger.getIntervalo(0, NUMBERS.length - 1)];
+    char toReturn = NUMBERS[MakeInteger.getRange(0, NUMBERS.length - 1)];
     logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geNumber", toReturn));
     return toReturn;
   }
 
   /**
-   * Uma letra a-z.
+   * A character between a and Z.
    *
-   * @return a-z.
+   * @return a-Z.
    */
   public static Character getLetter() {
-    char toReturn = LETTERS[MakeInteger.getIntervalo(0, LETTERS.length - 1)];
+    char toReturn = LETTERS[MakeInteger.getRange(0, LETTERS.length - 1)];
     logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geLetter", toReturn));
     return toReturn;
   }
 
   /**
-   * Um simbolo !, @, #, $, &, %, ?, -, +.
+   * A character in !, @, #, $, &, %, ?, -, +.
    *
    * @return !, @, #, $, &, %, ?, -, +
    */
   public static Character getSymbols() {
-    Character toReturn = SYMBOLS[MakeInteger.getIntervalo(0, SYMBOLS.length - 1)];
+    Character toReturn = SYMBOLS[MakeInteger.getRange(0, SYMBOLS.length - 1)];
     logger.debug(I18N.getMsg("returnValue", "MakeCharacter.geSymbols", toReturn));
     return toReturn;
   }
 
   /**
-   * Uma letra ou um numero ou um simbolo.
-   *
-   * @return Qualquer Character de Number, Symbols ou Letter
+   * A letter, number or symbol.
+   * 
+   * @return A letter, number or symbol.
    */
   public static Character getCharacter() {
     switch (MakeInteger.getMax(5)) {
@@ -94,10 +93,10 @@ public final class MakeCharacter {
   }
 
   /**
-   * Retorna True para tipos Character ou char.
-   *
-   * @param field Field a ser avaliado.
-   * @return True para tipos Character ou char, False para outros tipos.
+   * True if the field type is a Character false if not.
+   * 
+   * @param field to be evaluated.
+   * @return True if the field type is a Character false if not.
    */
   public static boolean isCharacter(Field field) {
     if (field.getType().equals(Character.class) || field.getType().equals(char.class)) {
@@ -107,7 +106,7 @@ public final class MakeCharacter {
   }
 
   /**
-   * Não pode ser instânciado.
+   * Cannot be instantiated.
    */
   private MakeCharacter() {}
 }

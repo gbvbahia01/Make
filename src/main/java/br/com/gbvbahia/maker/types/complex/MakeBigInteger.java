@@ -16,17 +16,17 @@ import java.math.BigInteger;
 public class MakeBigInteger extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field field, final T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(final Field field, final T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, Long.MIN_VALUE, Long.MAX_VALUE);
     long min = minMax[0].longValue();
     long max = minMax[1].longValue();
-    this.insertValue(field, entity, MakeLong.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeLong.getRange(min, max).toString());
   }
 
   @Override
-  public <T> void insertValue(Field field, T entity, String value)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(Field field, T entity, String value) throws IllegalArgumentException,
+      IllegalAccessException {
     field.set(entity, new BigInteger(value));
   }
 
@@ -42,8 +42,8 @@ public class MakeBigInteger extends MakeNumber {
    * @param max maximum acceptable number.
    * @return a random number between min and max parameters.
    */
-  public static BigInteger getIntervalo(final long min, final long max) {
-    return new BigInteger(MakeLong.getIntervalo(min, max).toString());
+  public static BigInteger getRange(long min, long max) {
+    return new BigInteger(MakeLong.getRange(min, max).toString());
   }
 
   /**
@@ -53,11 +53,11 @@ public class MakeBigInteger extends MakeNumber {
    * @param max the maximum value the return can be. Must be at least 1.
    * @return a value up max.
    */
-  public static BigInteger getMax(final long max) {
+  public static BigInteger getMax(long max) {
     if (max <= 0) {
       throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
     }
-    return new BigInteger(MakeLong.getIntervalo(0, max).toString());
+    return new BigInteger(MakeLong.getRange(0, max).toString());
   }
 
   /**

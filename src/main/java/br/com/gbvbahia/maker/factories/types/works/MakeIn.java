@@ -95,8 +95,7 @@ public class MakeIn implements ValueSpecializedFactory {
     for (MakeNumber number : this.numberManager.getFactoriesNumber()) {
       if (number.isMyType(field)) {
         try {
-          number.insertValue(field, entity,
-              inList.get(MakeInteger.getIntervalo(0, inList.size() - 1)));
+          number.insertValue(field, entity, inList.get(MakeInteger.getRange(0, inList.size() - 1)));
         } catch (NumberFormatException nf) {
           throw new ValueSpecializedException(this.getClass(), "NumberFormatException",
               new String[] {inList.toString()}, nf);

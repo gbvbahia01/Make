@@ -6,7 +6,7 @@ import br.com.gbvbahia.maker.types.primitives.common.MakeNumber;
 import java.lang.reflect.Field;
 
 /**
- * Gerador de números inteiros aleatório.
+ * Random Long maker.
  *
  * @since 11/05/2012
  * @author Guilherme
@@ -14,12 +14,12 @@ import java.lang.reflect.Field;
 public class MakeFloat extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field field, final T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(final Field field, final T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, -Float.MAX_VALUE, Float.MAX_VALUE);
     float min = minMax[0].floatValue();
     float max = minMax[1].floatValue();
-    Float intervalo = MakeFloat.getIntervalo(min, max);
+    Float intervalo = MakeFloat.getRange(min, max);
     this.insertValue(field, entity,
         new Float(this.maxDecimal(field, intervalo).floatValue()).toString());
   }
@@ -40,37 +40,37 @@ public class MakeFloat extends MakeNumber {
   }
 
   /**
-   * Gera um número entre os valores solicitados.
+   * A random number between min and max parameters.
    *
-   * @param min Número minimo aceitavel.
-   * @param max Número máximo aceitavel.
-   * @return Número aleatório.
+   * @param min minimum acceptable.
+   * @param max maximum acceptable.
+   * @return A random number between min and max parameters.
    */
-  public static Float getIntervalo(final float min, final float max) {
-    float numero = MakeDouble
-        .getIntervalo(new Float(min).doubleValue(), new Float(max).floatValue()).floatValue();
+  public static Float getRange(float min, float max) {
+    float numero =
+        MakeDouble.getRange(new Float(min).doubleValue(), new Float(max).floatValue()).floatValue();
     return numero;
   }
 
   /**
-   * Retorna um número aleatório limitado ao max passado.
-   *
-   * @param max Minimo 1.
-   * @return Double limitado ao max.
+   * A random Float limited by max value.
+   * 
+   * @param max minimum 1.
+   * @return A random float limited by max value.
    */
-  public static Float getMax(final float max) {
+  public static Float getMax(float max) {
     if (max <= 0) {
       throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
     }
 
-    return getIntervalo(0, max);
+    return getRange(0, max);
   }
 
   /**
-   * Retorna True para tipos Float ou float.
-   *
-   * @param field Field a ser avaliado.
-   * @return True para tipos Float ou float, False para outros tipos.
+   * True if the field type is Float false if not.
+   * 
+   * @param field to be evaluated.
+   * @return True if the field type is Float false if not.
    */
   public static boolean isFloat(final Field field) {
     if (field.getType().equals(Float.class) || field.getType().equals(float.class)) {

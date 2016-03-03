@@ -29,7 +29,7 @@ public class MakePassword {
     if (min < 0) {
       throw new IllegalArgumentException(I18N.getMsg("caractereToStringErro", new Integer(min)));
     }
-    int numero = MakeInteger.getIntervalo(min, max);
+    int numero = MakeInteger.getRange(min, max);
     return getPassword(numero);
   }
 
@@ -41,20 +41,20 @@ public class MakePassword {
    */
   public static String getPassword(final int caracteres) {
     if (caracteres > MAX_LENGTH_SUPPORTS) {
-      throw new IllegalArgumentException(
-          I18N.getMsg("passWordsizeLenghFatal", MAX_LENGTH_SUPPORTS));
+      throw new IllegalArgumentException(I18N.getMsg("passWordsizeLenghFatal", MAX_LENGTH_SUPPORTS));
     } else if (caracteres < 0) {
-      throw new IllegalArgumentException(
-          I18N.getMsg("caractereToStringErro", new Integer(caracteres)));
+      throw new IllegalArgumentException(I18N.getMsg("caractereToStringErro", new Integer(
+          caracteres)));
     }
     String toReturn = "";
     for (int i = 0; i < caracteres; i++) {
-      String[] characteres = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", "#", "@", "&",
-          "$", "A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "F", "f", "G", "g", "H", "h", "I",
-          "i", "J", "j", "K", "k", "L", "l", "Z", "z", "!", "#", "@", "&", "$", "1", "2", "3", "4",
-          "5", "6", "7", "8", "9", "0", "K", "k", "L", "l", "M", "m", "N", "n", "O", "o", "P", "p",
-          "Q", "q", "R", "r", "S", "s", "T", "t", "!", "#", "@", "&", "$", "1", "2", "3", "4", "5",
-          "6", "7", "8", "9", "0", "U", "u", "V", "v", "X", "x", "Z", "z"};
+      String[] characteres =
+          {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", "#", "@", "&", "$", "A", "a",
+              "B", "b", "C", "c", "D", "d", "E", "e", "F", "f", "G", "g", "H", "h", "I", "i", "J",
+              "j", "K", "k", "L", "l", "Z", "z", "!", "#", "@", "&", "$", "1", "2", "3", "4", "5",
+              "6", "7", "8", "9", "0", "K", "k", "L", "l", "M", "m", "N", "n", "O", "o", "P", "p",
+              "Q", "q", "R", "r", "S", "s", "T", "t", "!", "#", "@", "&", "$", "1", "2", "3", "4",
+              "5", "6", "7", "8", "9", "0", "U", "u", "V", "v", "X", "x", "Z", "z"};
       int letra1 = MakeInteger.getMax(characteres.length - 1);
       toReturn += characteres[letra1];
     }

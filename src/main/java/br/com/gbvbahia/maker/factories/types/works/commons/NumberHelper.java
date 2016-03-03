@@ -36,12 +36,14 @@ public class NumberHelper {
   public String getValue() {
     if (StringUtils.contains(this.min, ".") || StringUtils.contains(this.max, ".")) {
       int decimal = StringUtils.substringAfter(this.min, ".").length();
-      this.value = MakeBigDecimal
-          .getIntervalo(new Double(this.min).doubleValue(), new Double(this.max).doubleValue())
-          .setScale(decimal, RoundingMode.UP).toString();
+      this.value =
+          MakeBigDecimal
+              .getRange(new Double(this.min).doubleValue(), new Double(this.max).doubleValue())
+              .setScale(decimal, RoundingMode.UP).toString();
     } else {
-      this.value = MakeLong
-          .getIntervalo(new Long(this.min).longValue(), new Long(this.max).longValue()).toString();
+      this.value =
+          MakeLong.getRange(new Long(this.min).longValue(), new Long(this.max).longValue())
+              .toString();
     }
     return this.value;
   }

@@ -13,19 +13,19 @@ import java.lang.reflect.Field;
 public final class MakeBoolean {
 
   /**
-   * Devolve um valor booleano, true ou false.
+   * Can return true or false.
    *
-   * @return True ou False.
+   * @return True or False.
    */
   public static Boolean getBoolean() {
     return MakeInteger.getMax(2) == 2;
   }
 
   /**
-   * Retorna True para tipos Boolean ou boolean.
+   * True if the field type is a boolean false if is not.
    *
-   * @param field Field a ser avaliado.
-   * @return True para tipos Boolean ou boolean, False para outros tipos.
+   * @param field to be evaluated.
+   * @return True if the field type is a boolean false if is not.
    */
   public static boolean isBoolean(Field field) {
     if (field.getType().equals(Boolean.class) || field.getType().equals(boolean.class)) {

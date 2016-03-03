@@ -85,7 +85,7 @@ public class MakeList implements ValueSpecializedFactory {
     CollectionsHelper valueHelper = this.ruleHelper.get(NamesManager.getFiledName(field));
     List toSet =
         new ArrayList(MakeEntity.makes(valueHelper.getClazz(),
-            MakeInteger.getIntervalo(valueHelper.getMin(), valueHelper.getMax()), testName));
+            MakeInteger.getRange(valueHelper.getMin(), valueHelper.getMax()), testName));
     field.set(entity, toSet);
   }
 

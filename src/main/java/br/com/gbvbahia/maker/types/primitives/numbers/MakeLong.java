@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 /**
- * Gerador de números inteiros aleatório.
+ * Random Long maker.
  *
  * @since 11/05/2012
  * @author Guilherme
@@ -18,12 +18,12 @@ import java.util.Random;
 public class MakeLong extends MakeNumber {
 
   @Override
-  public <T> void insertValue(Field field, T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(Field field, T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, Long.MIN_VALUE, Long.MAX_VALUE);
     long min = minMax[0].longValue();
     long max = minMax[1].longValue();
-    this.insertValue(field, entity, MakeLong.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeLong.getRange(min, max).toString());
   }
 
   @Override
@@ -42,18 +42,18 @@ public class MakeLong extends MakeNumber {
   }
 
   /**
-   * Gerador de números aleatórios.
+   * Random engine.
    */
   public static final Random RANDOM = new Random();
 
   /**
-   * Gera um número entre os valores solicitados.
-   *
-   * @param min Número minimo aceitavel.
-   * @param max Número máximo aceitavel.
-   * @return Número aleatório.
+   * A random number between min and max parameters.
+   * 
+   * @param min minimum acceptable.
+   * @param max maximum acceptable.
+   * @return A random number between min and max parameters.
    */
-  public static Long getIntervalo(final long min, final long max) {
+  public static Long getRange(long min, long max) {
     if (min > max) {
       LogInfo.logErrorInformation("MakeLong", I18N.getMsg("nimMaiormax", min, max), null);
       throw new IllegalArgumentException(I18N.getMsg("nimMaiormax", new Object[] {min, max}));
@@ -67,11 +67,13 @@ public class MakeLong extends MakeNumber {
       long longValue;
       if ((max + min) == 0) {
         if ((RANDOM.nextInt() % 2) == 0) {
-          longValue = new BigDecimal((ale * ((max / 2) + min))).setScale(0, RoundingMode.HALF_EVEN)
-              .longValue();
+          longValue =
+              new BigDecimal((ale * ((max / 2) + min))).setScale(0, RoundingMode.HALF_EVEN)
+                  .longValue();
         } else {
-          longValue = new BigDecimal((ale * (max + (min / 2)))).setScale(0, RoundingMode.HALF_EVEN)
-              .longValue();
+          longValue =
+              new BigDecimal((ale * (max + (min / 2)))).setScale(0, RoundingMode.HALF_EVEN)
+                  .longValue();
         }
       } else {
         longValue =
@@ -84,8 +86,10 @@ public class MakeLong extends MakeNumber {
       }
     } else {
       try {
-        numero = min
-            + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN).longValue();
+        numero =
+            min
+                + new BigDecimal((ale * (max - min))).setScale(0, RoundingMode.HALF_EVEN)
+                    .longValue();
       } catch (StackOverflowError s) {
         LogInfo.logWarnInformation("MakeLong", I18N.getMsg("bigErroStack", max, min, ale));
         throw s;
@@ -95,24 +99,23 @@ public class MakeLong extends MakeNumber {
   }
 
   /**
-   * Retorna um número aleatório limitado ao max passado. Este método embora receba long como
-   * parámetro trabalha com Inteiro e o maior número a retornar será o Integer.MAX_VALUE.
+   * A random long limited by max value.
    *
-   * @param max Minimo 1.
-   * @return Long limitado ao max, minimo é zero.
+   * @param max minimum 1.
+   * @return A random long limited by max value.
    */
-  public static Long getMax(final long max) {
+  public static Long getMax(long max) {
     if (max <= 0) {
       throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
     }
-    return getIntervalo(0, max);
+    return getRange(0, max);
   }
 
   /**
-   * Retorna True para tipos Long ou long.
+   * True if the field type is Long false if is not.
    *
-   * @param field Field a ser avaliado.
-   * @return True para tipos Long ou long, False para outros tipos.
+   * @param field to be evaluated.
+   * @return True if the field type is Long false if is not.
    */
   public static boolean isLong(final Field field) {
     if (field.getType().equals(Long.class) || field.getType().equals(long.class)) {

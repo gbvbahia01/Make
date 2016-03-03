@@ -28,7 +28,7 @@ public class EnumFactory implements ValueFactory {
       throw new MakeCreationException(I18N.getMsg("enumInvalida", field.getType().getSimpleName()),
           new UnsupportedOperationException());
     }
-    field.set(entity, enumConstants[MakeInteger.getIntervalo(0, enumSize - 1)]);
+    field.set(entity, enumConstants[MakeInteger.getRange(0, enumSize - 1)]);
   }
 
   @Override

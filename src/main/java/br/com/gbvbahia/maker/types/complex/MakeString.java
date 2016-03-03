@@ -77,7 +77,7 @@ public final class MakeString {
     if (min < 0) {
       throw new IllegalArgumentException(I18N.getMsg("caractereToStringErro", new Integer(min)));
     }
-    int numero = MakeInteger.getIntervalo(min, max);
+    int numero = MakeInteger.getRange(min, max);
     return getString(numero, type);
   }
 
@@ -163,8 +163,8 @@ public final class MakeString {
     if (characters > MAX_LENGTH_SUPPORTS) {
       throw new IllegalArgumentException(I18N.getMsg("sizeLenghFatal", MAX_LENGTH_SUPPORTS));
     } else if (characters < 0) {
-      throw new IllegalArgumentException(
-          I18N.getMsg("caractereToStringErro", new Integer(characters)));
+      throw new IllegalArgumentException(I18N.getMsg("caractereToStringErro", new Integer(
+          characters)));
     } else if (characters == 0) {
       return true;
     }
@@ -182,8 +182,8 @@ public final class MakeString {
     try {
       return ResourceBundle.getBundle("loren_make").getString("loren" + position);
     } catch (Exception exeption) {
-      throw new IllegalArgumentException(
-          I18N.getMsg("loren_make_ResourceError", new Integer(position), exeption));
+      throw new IllegalArgumentException(I18N.getMsg("loren_make_ResourceError", new Integer(
+          position), exeption));
     }
   }
 
@@ -219,8 +219,11 @@ public final class MakeString {
           I18N.getMsg("minLorenError", maxCaracteres, MIN_CARACTERES_LOREN));
     } else if (maxCaracteres > MAX_LENGTH_SUPPORTS) {
       linhas = MAX_CARACTERES_LOREN;
-      LogInfo.logWarnInformation("MakeString", I18N.getMsg("minLorenError", maxCaracteres,
-          MAX_CARACTERES_LOREN * CARACTERES_LINE_LOREN));
+      LogInfo
+          .logWarnInformation(
+              "MakeString",
+              I18N.getMsg("minLorenError", maxCaracteres, MAX_CARACTERES_LOREN
+                  * CARACTERES_LINE_LOREN));
     } else {
       linhas = maxCaracteres / CARACTERES_LINE_LOREN;
       if (linhas == 0) {

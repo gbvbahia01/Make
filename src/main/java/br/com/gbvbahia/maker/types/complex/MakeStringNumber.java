@@ -12,12 +12,12 @@ import java.lang.reflect.Field;
 public class MakeStringNumber extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field field, final T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(final Field field, final T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, -Double.MAX_VALUE, Double.MAX_VALUE);
     double min = minMax[0].doubleValue();
     double max = minMax[1].doubleValue();
-    Double intervalo = MakeDouble.getIntervalo(min, max);
+    Double intervalo = MakeDouble.getRange(min, max);
     this.insertValue(field, entity, this.maxDecimal(field, intervalo).toString());
   }
 

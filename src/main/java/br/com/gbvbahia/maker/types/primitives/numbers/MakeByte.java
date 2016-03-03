@@ -11,12 +11,12 @@ import java.lang.reflect.Field;
 public class MakeByte extends MakeNumber {
 
   @Override
-  public <T> void insertValue(final Field field, final T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(final Field field, final T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, Byte.MIN_VALUE, Byte.MAX_VALUE);
     byte min = minMax[0].byteValue();
     byte max = minMax[1].byteValue();
-    this.insertValue(field, entity, MakeByte.getIntervalo(min, max).toString());
+    this.insertValue(field, entity, MakeByte.getRange(min, max).toString());
   }
 
   @Override
@@ -35,31 +35,31 @@ public class MakeByte extends MakeNumber {
   }
 
   /**
-   * Retorna um número aleatório limitado ao max passado.
-   *
-   * @param max Minimo 1.
-   * @return Byte limitado ao max.
+   * A random byte limited by max value.
+   * 
+   * @param max minimum 1.
+   * @return Byte limited by max value.
    */
-  public static Byte getMax(final byte max) {
+  public static Byte getMax(byte max) {
     return MakeLong.getMax(max).byteValue();
   }
 
   /**
-   * Gera um número entre os valores solicitados.
-   *
-   * @param min Número minimo aceitavel.
-   * @param max Número máximo aceitavel.
-   * @return Número aleatório.
+   * A random number between min and max parameters.
+   * 
+   * @param min minimum acceptable.
+   * @param max maximum acceptable.
+   * @return random between min and max.
    */
-  public static Byte getIntervalo(final byte min, final byte max) {
-    return MakeLong.getIntervalo(min, max).byteValue();
+  public static Byte getRange(byte min, byte max) {
+    return MakeLong.getRange(min, max).byteValue();
   }
 
   /**
-   * Retorna True para tipos Byte ou byte.
+   * True if the Field is Byte type false if is not.
    *
-   * @param field Field a ser avaliado.
-   * @return True para tipos Byte ou byte, False para outros tipos.
+   * @param field Field to be evaluated.
+   * @return True if the Field is Byte type false if is not.
    */
   public static boolean isByte(final Field field) {
     if (field.getType().equals(Byte.class) || field.getType().equals(byte.class)) {

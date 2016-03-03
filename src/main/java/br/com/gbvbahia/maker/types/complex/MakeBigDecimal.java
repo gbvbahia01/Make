@@ -16,18 +16,18 @@ import java.math.BigDecimal;
 public class MakeBigDecimal extends MakeNumber {
 
   @Override
-  public <T> void insertValue(Field field, T entity)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(Field field, T entity) throws IllegalArgumentException,
+      IllegalAccessException {
     Number[] minMax = this.getMinMaxValues(field, -Double.MAX_VALUE, Double.MAX_VALUE);
     double min = minMax[0].doubleValue();
     double max = minMax[1].doubleValue();
-    Double intervalo = new Double(MakeDouble.getIntervalo(min, max));
+    Double intervalo = new Double(MakeDouble.getRange(min, max));
     this.insertValue(field, entity, this.maxDecimal(field, intervalo).toString());
   }
 
   @Override
-  public <T> void insertValue(Field field, T entity, String value)
-      throws IllegalArgumentException, IllegalAccessException {
+  public <T> void insertValue(Field field, T entity, String value) throws IllegalArgumentException,
+      IllegalAccessException {
     field.set(entity, new BigDecimal(value));
   }
 
@@ -43,8 +43,8 @@ public class MakeBigDecimal extends MakeNumber {
    * @param max maximum acceptable number.
    * @return a random number between min and max parameters.
    */
-  public static BigDecimal getIntervalo(final double min, final double max) {
-    return new BigDecimal(MakeDouble.getIntervalo(min, max).toString());
+  public static BigDecimal getRange(double min, double max) {
+    return new BigDecimal(MakeDouble.getRange(min, max).toString());
   }
 
   /**
@@ -54,12 +54,12 @@ public class MakeBigDecimal extends MakeNumber {
    * @param max the maximum value the return can be. Must be at least 1.
    * @return a value up max.
    */
-  public static BigDecimal getMax(final double max) {
+  public static BigDecimal getMax(double max) {
     if (max <= 0) {
       throw new IllegalArgumentException(I18N.getMsg("maxSmall"));
     }
 
-    return getIntervalo(0, max);
+    return getRange(0, max);
   }
 
   /**

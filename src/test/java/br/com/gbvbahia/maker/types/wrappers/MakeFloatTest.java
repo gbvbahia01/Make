@@ -1,13 +1,13 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
-
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeDouble;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeFloat;
 
 /**
  * @since v.1
@@ -28,7 +28,7 @@ public class MakeFloatTest extends TestCase {
     logger.debug("Float - GetIntervalo");
     for (float min = -10.1f; min < 0.1f; min++) {
       for (float max = min + 0.1f; max < 0.1f; max += 0.1f) {
-        Double result = MakeDouble.getIntervalo(min, max);
+        Double result = MakeDouble.getRange(min, max);
         logger.debug("Max: " + max + " Min:" + min + " Result:" + result);
         assertTrue("Intervalo incorreto: Max: " + max + " Min:" + min + " Result: " + result,
             (result >= min) && (result <= max));

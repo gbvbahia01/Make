@@ -1,12 +1,12 @@
 package br.com.gbvbahia.maker.types.wrappers;
 
+import br.com.gbvbahia.maker.log.LogInfo;
+import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
+
 import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.junit.Test;
-
-import br.com.gbvbahia.maker.log.LogInfo;
-import br.com.gbvbahia.maker.types.primitives.numbers.MakeLong;
 
 /**
  * @since v.1
@@ -27,7 +27,7 @@ public class MakeLongTest extends TestCase {
     logger.debug("Long - GetIntervalo");
     for (long min = 1000000000; min < 1000000100; min++) {
       for (long max = min + 1; max < 1000000200; max++) {
-        Long result = MakeLong.getIntervalo(min, max);
+        Long result = MakeLong.getRange(min, max);
         logger.debug("Max: " + max + " Min:" + min + " Result:" + result);
         assertTrue("Intervalo incorreto: Max: " + max + " Min:" + min + " Result: " + result,
             (result >= min) && (result <= max));
@@ -44,15 +44,15 @@ public class MakeLongTest extends TestCase {
     boolean minOk = false;
     boolean maxOk = false;
     for (int i = 0; i < 100; i++) {
-      if (!minOk && (MakeLong.getIntervalo(min, max) == min)) {
+      if (!minOk && (MakeLong.getRange(min, max) == min)) {
         logger.debug("minOk setter true, interation: " + i);
         minOk = true;
       }
-      if (!maxOk && (MakeLong.getIntervalo(min, max) == max)) {
+      if (!maxOk && (MakeLong.getRange(min, max) == max)) {
         logger.debug("maxOk setter true, interation: " + i);
         maxOk = true;
       }
-      if ((MakeLong.getIntervalo(min, max) > max) || (MakeLong.getIntervalo(min, max) < min)) {
+      if ((MakeLong.getRange(min, max) > max) || (MakeLong.getRange(min, max) < min)) {
         fail("Resultado não pode ser menor minimo ou maior que maximo!");
       }
     }
