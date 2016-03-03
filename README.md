@@ -251,6 +251,13 @@ After add Make as a test dependence in our project you can use all these methods
 *   BigInteger MakeBigInteger.getRange(long min, long max)  A random number between min and max parameters.
 *   BigDecimal MakeBigDecimal.getMax(double max);           A random BigDecimal limited by max value.
 *   BigDecimal MakeBigDecimal.getRange(double i, double e); A random number between min and max parameters.
+*   Calendar   MakeCalendar.getInFuture();					A Calendar in the future limited to 1800 days forward.
+*   Calendar   MakeCalendar.getInPast();                    A Calendar in the past limited to 1800 days behind.
+*   Calendar   MakeCalendar.getCalendar();                  A Calendar in the past or in the future with 1800 days limited.
+*   Date       MakeDate.getInFuture();					    A Date in the future limited to 1800 days forward.
+*   Date       MakeDate.getInPast();                        A Date in the past limited to 1800 days behind.
+*   Date       MakeDate.getCalendar();                      A Date in the past or in the future with 1800 days limited.
+   
 
 ## Contributors
 Guilherme Braga <a href="https://br.linkedin.com/in/guilherme-braga-a7994823" target="_blank">(LinkedIn)</a>

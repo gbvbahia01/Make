@@ -3,8 +3,8 @@ package br.com.gbvbahia.maker.types.complex;
 import java.util.Date;
 
 /**
- * Cria uma data aleatória limitada em 1800 dias para frente, futuro ou 1800 dias para traz,
- * passado.
+ * Random Date maker.<br>
+ * Random period is limited in 1800 days forward or behind.
  *
  * @since v.1 24/05/2012
  * @author Guilherme
@@ -12,35 +12,35 @@ import java.util.Date;
 public final class MakeDate {
 
   /**
-   * Cria um Date no futuro, a partir de um dia a mais de hoje até 1800 dias a frente.
+   * A Date in the future limited to 1800 days forward.
    *
-   * @return Date no futuro.
+   * @return Date in the future.
    */
   public static Date getInFuture() {
     return MakeCalendar.getInFuture().getTime();
   }
 
   /**
-   * Cria um Date no passado, a aprtir de um dia a menos de hoje até 1800 dias para traz.
+   * A Date in the past limited to 1800 days behind.
    *
-   * @return Date no passado.
+   * @return Date in the past
    */
   public static Date getInPast() {
     return MakeCalendar.getInPast().getTime();
   }
 
   /**
-   * Cria um Date no futuro ou passado, podendo ser até 1800 dias para frente ou 1800 dias para
-   * traz.
+   * A Date in the past limited to 1800 days behind or a Date in the future limited to 1800 days
+   * forward.
    *
-   * @return Date passdo ou futuro.
+   * @return Date in the past or future.
    */
   public static Date getDate() {
     return MakeCalendar.getCalendar().getTime();
   }
 
   /**
-   * Não pode ser instânciado.
+   * Cannot be instantiated.
    */
   private MakeDate() {}
 }

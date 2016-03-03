@@ -5,8 +5,8 @@ import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 import java.util.Calendar;
 
 /**
- * Cria uma data aleatória limitada em 1800 dias para frente, futuro ou 1800 dias para traz,
- * passado.
+ * Random Calendar maker.<br>
+ * Random period is limited in 1800 days forward or behind.
  *
  * @since v.1 24/05/2012
  * @author Guilherme
@@ -14,14 +14,14 @@ import java.util.Calendar;
 public final class MakeCalendar {
 
   /**
-   * Quantidade maxima de dias no intervalo.
+   * Max days forward or behind.
    */
   public static final int MAX_DAYS = 1800;
 
   /**
-   * Cria um Calendar no futuro, a partir de um dia a mais de hoje até 1800 dias a frente.
+   * A Calendar in the future limited to 1800 days forward.
    *
-   * @return Calendar no futuro.
+   * @return Calendar in the future.
    */
   public static Calendar getInFuture() {
     Calendar calendar = Calendar.getInstance();
@@ -31,9 +31,9 @@ public final class MakeCalendar {
   }
 
   /**
-   * Cria um Calendar no passado, a aprtir de um dia a menos de hoje até 1800 dias para traz.
+   * A Calendar in the past limited to 1800 days behind.
    *
-   * @return Calendar no passado.
+   * @return Calendar in the past.
    */
   public static Calendar getInPast() {
     Calendar calendar = Calendar.getInstance();
@@ -43,10 +43,10 @@ public final class MakeCalendar {
   }
 
   /**
-   * Cria um calendar no futuro ou passado, podendo ser até 1800 dias para frente ou 1800 dias para
-   * traz.
-   *
-   * @return Calendar passado ou futuro.
+   * A Calendar in the past limited to 1800 days behind or a Calendar in the future limited to 1800
+   * days forward.
+   * 
+   * @return Calendar in the past or future.
    */
   public static Calendar getCalendar() {
     Calendar calendar = Calendar.getInstance();
@@ -56,7 +56,7 @@ public final class MakeCalendar {
   }
 
   /**
-   * Não pode ser instânciado.
+   * Cannot be instantiated.
    */
   private MakeCalendar() {}
 }
