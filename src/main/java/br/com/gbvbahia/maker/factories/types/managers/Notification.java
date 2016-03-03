@@ -57,8 +57,12 @@ public class Notification {
     return NotifierStage.MAKE_END.equals(this.stageMake);
   }
 
-  public boolean isTestInRecursion() {
-    return this.recursion >= 1;
+  public boolean isTestRecursionBegin() {
+    return (this.recursion >= 1) && NotifierStage.MAKE_RECURSION_BEGIN.equals(this.stageMake);
+  }
+
+  public boolean isTestRecursionEnd() {
+    return (this.recursion >= 1) && NotifierStage.MAKE_RECURSION_END.equals(this.stageMake);
   }
 
   public String[] getTestName() {
