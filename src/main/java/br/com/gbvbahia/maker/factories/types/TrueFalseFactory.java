@@ -66,7 +66,7 @@ public class TrueFalseFactory implements ValueFactory {
    */
   @Override
   public void updateStage(Notification notification) {
-    if (notification.isTestFinished()) {
+    if (notification.isCreationFinished()) {
       instance = null;
     }
   }
@@ -78,8 +78,7 @@ public class TrueFalseFactory implements ValueFactory {
    * @return True para possui anotação booleana False para não possui.
    */
   private boolean isBoolean(Field field) {
-    if (field.isAnnotationPresent(AssertTrue.class)
-        || field.isAnnotationPresent(AssertFalse.class)) {
+    if (field.isAnnotationPresent(AssertTrue.class) || field.isAnnotationPresent(AssertFalse.class)) {
       return true;
     }
     return false;

@@ -67,7 +67,7 @@ public class MakeCnpj implements ValueSpecializedFactory {
    */
   @Override
   public void updateStage(Notification notification) {
-    if (notification.isTestFinished()) {
+    if (notification.isCreationFinished()) {
       instance = null;
     }
   }

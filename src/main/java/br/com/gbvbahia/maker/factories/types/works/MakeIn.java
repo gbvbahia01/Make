@@ -110,11 +110,11 @@ public class MakeIn implements ValueSpecializedFactory {
    */
   @Override
   public void updateStage(Notification notification) {
-    if (notification.isTestFinished()) {
+    if (notification.isCreationFinished()) {
       this.numberManager.clear();
       instance = null;
     }
-    if (notification.isTestStarted()) {
+    if (notification.isCreationStarted()) {
       this.numberManager.loadNumberFactories();
     }
   }

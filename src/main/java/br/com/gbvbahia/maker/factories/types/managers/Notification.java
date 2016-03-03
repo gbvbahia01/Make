@@ -49,19 +49,19 @@ public class Notification {
     this.recursion = recursion;
   }
 
-  public boolean isTestStarted() {
+  public boolean isCreationStarted() {
     return NotifierStage.MAKE_BEGIN.equals(this.stageMake);
   }
 
-  public boolean isTestFinished() {
+  public boolean isCreationFinished() {
     return NotifierStage.MAKE_END.equals(this.stageMake);
   }
 
-  public boolean isTestRecursionBegin() {
+  public boolean isCreationRecursionBegin() {
     return (this.recursion >= 1) && NotifierStage.MAKE_RECURSION_BEGIN.equals(this.stageMake);
   }
 
-  public boolean isTestRecursionEnd() {
+  public boolean isCreationRecursionEnd() {
     return (this.recursion >= 1) && NotifierStage.MAKE_RECURSION_END.equals(this.stageMake);
   }
 

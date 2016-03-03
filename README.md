@@ -202,8 +202,8 @@ You <b>do not need to check the test names</b>. Make already did for you.
 *   void updateStage(Notification notification); this method is for inform the specialized factories about the stage of the object creation. Usually you will do nothing here. You can leave this method without any implementation if you want to.
 When a object is being created by Make if it has a field that is another complex object Make will call MakeEntity.make again doing a recursion. While a object has another object Make will call MakeEntity.make. If you want to know how many and when this happening the method updateStage is the place.<br>
 The updateStage receives a Notification object that contains some informations about the object creation stage:<br>
-   *   The name or names used to call MakeEntity.make is in the Notification.<br>
-   *   The stage of the object creation can be known using the methods: isTestStarted, isTestFinished, isTestRecursionBegin and isTestRecursionEnd.
+   *   The name or names used to call MakeEntity.make is in Notification.<br>
+   *   The stage of the object creation can be known using the methods: isCreationStarted, isCreationFinished, isCreationRecursionBegin and isCreationRecursionEnd.
    *   To know the amount of recursion made by Make you can call the method getRecursion. If the value is 1 means that two calls are made: the first call by developer and the second call made by framework to create a new complex object.<br>
 The object creation can have 4 stages:<br>
    1   BEGIN: When the MakeEntity.make is called by developer.<br> 

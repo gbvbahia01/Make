@@ -44,7 +44,7 @@ public class EnumFactory implements ValueFactory {
    */
   @Override
   public void updateStage(Notification notification) {
-    if (notification.isTestFinished()) {
+    if (notification.isCreationFinished()) {
       instance = null;
     }
   }

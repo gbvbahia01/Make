@@ -77,7 +77,7 @@ public class ValueFactoryManager implements ValueFactory {
    */
   @Override
   public void updateStage(Notification notification) {
-    if (notification.isTestFinished()) {
+    if (notification.isCreationFinished()) {
       this.valueFactories.clear();
       this.specializedManager.clear();
     }
@@ -163,8 +163,11 @@ public class ValueFactoryManager implements ValueFactory {
       return false;
     }
     final ValueFactoryManager other = (ValueFactoryManager) obj;
-    if ((this.testName == null) ? (other.testName != null)
-        : !this.testName.equals(other.testName)) {
+    if (this.testName == null) {
+      if (other.testName != null) {
+        return false;
+      }
+    } else if (!this.testName.equals(other.testName)) {
       return false;
     }
     return true;

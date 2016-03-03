@@ -100,7 +100,7 @@ public class MakeSet implements ValueSpecializedFactory {
    */
   @Override
   public void updateStage(Notification notification) {
-    if (notification.isTestFinished()) {
+    if (notification.isCreationFinished()) {
       this.ruleHelper.clear();
       instance = null;
     }

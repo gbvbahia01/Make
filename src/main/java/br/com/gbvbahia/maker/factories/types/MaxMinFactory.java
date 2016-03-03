@@ -57,11 +57,11 @@ public class MaxMinFactory implements ValueFactory {
   @Override
   public void updateStage(Notification notification) {
     Notification infoTest = notification;
-    if (infoTest.isTestFinished()) {
+    if (infoTest.isCreationFinished()) {
       this.numberManager.clear();
       instance = null;
     }
-    if (infoTest.isTestStarted()) {
+    if (infoTest.isCreationStarted()) {
       this.numberManager.loadNumberFactories();
     }
   }
