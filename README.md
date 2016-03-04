@@ -28,7 +28,7 @@ To build it you will need the Apache Maven.<br>
 For Eclipse IDE you may need <a href="http://www.eclipse.org/m2e/" target="_blank">M2Eclipse</a> to manage Make project.<br>
 
 ## Installation
-You can download the project and put it as test dependence in your Maven project.<br>
+You can download the project.<br>
 Download the project.<br>
 <b>Eclipse IDE </b><br>
 After download the project and import it in Eclipse right click on project in Maven choose Update project...<br>
@@ -37,7 +37,8 @@ Right click on project again and choose Run As, choose the first Maven build. If
 <b>NetBeans IDE</b><br>
 I believe that in NetBeans any problem will happen. You only need import the project and build.
 
-After IDE steps copy from folder src/test/resource the make.xml file and paste it into your project resource test.<br>
+After you finish the IDE steps you need to put Make as test dependence in your pom.xml project and run the command install. Right click on Make project, Run as, Maven install.<br>
+Copy from folder src/test/resource the make.xml file and paste it into your project resource test folder.<br>
 Follow the next step to configure this file.<br>
 
 ## Setup File
