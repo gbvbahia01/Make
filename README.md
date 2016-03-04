@@ -35,7 +35,7 @@ After download the project and import it in Eclipse right click on project in Ma
 If Eclipse complain about compilation problems right click on project and choose Properties, Java Compiler and uncheck "Use compliance from execution environment..." and in "Compiler compliance level:" choose 1.6. Apply and OK.<br>
 Right click on project again and choose Run As, choose the first Maven build. If Eclipse ask about environment check if in Base directory is the path for the Make folder and in Goals write: package. At least choose run button.<br>
 <b>NetBeans IDE</b><br>
-I believe in NetBeans any problem will happen. You only need import the project and build.
+I believe that  in NetBeans any problem will happen. You only need import the project and build.
 
 After IDE steps copy from folder src/test/resource the make.xml file and paste it into your project resource test.<br>
 Follow the next step to configure this file.<br>
