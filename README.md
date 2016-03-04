@@ -37,7 +37,7 @@ Right click on project again and choose Run As, choose the first Maven build. If
 <b>NetBeans IDE</b><br>
 I believe that in NetBeans any problem will happen. You only need import the project and build.
 
-After you finish the IDE steps you need to put Make as test dependence in your pom.xml project and run the command install. Right click on Make project, Run as, Maven install.<br>
+After you finish the IDE steps you need to put Make as Maven lib in your m2 folder. You must go in the Make folder and run the command: mvn install.<br>
 Copy from folder src/test/resource the make.xml file and paste it into your project resource test folder.<br>
 Follow the next step to configure this file.<br>
 
