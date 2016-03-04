@@ -39,7 +39,7 @@ I believe that in NetBeans any problem will happen. You only need import the pro
 
 After you finish the IDE steps you need to put Make as Maven lib in your m2 folder. You must go in the Make folder and run the command: mvn install.<br>
 Copy from folder src/test/resource the make.xml file and paste it into your project resource test folder.<br>
-A project as example can be downloaded here: <a href="https://github.com/gbvbahia01/Making/tree/master" target="_blank">Making</a>
+A project as example can be downloaded here: <a href="https://github.com/gbvbahia01/Making/tree/master" target="_blank">Making</a><br>
 Follow the next step to configure this file.<br>
 
 ## Setup File
