@@ -14,6 +14,9 @@ List<MyObject> myObjects = MakeEntity.makes(MyObject.class, amount);
 ```
 
 ## Mechanics
+
+<b>For a object be made by Make it only need to have a default constructor. A constructor without arguments.</b><br>
+
 Objects are defined with fields. Usually is necessary to define some rules in those fields. Like a car cannot have -3.5 of gasoline and cannot pass tha maximum amount in its fuel tank.<br>
 Make can create those values respecting all rules.<br>
 If you use JSR303 annotations Make will read them and use to create the fields values. Make will do a reverse engineering to create valid values for each field. With the only exception will be the annotation @Pattern. For this annotation you will have to create a value. A good thing is that  Make has a lot of tools to help you.<br>
@@ -22,11 +25,15 @@ If you do not use JSR303 annotations Make will create open values for all fields
 
 ## Requirements
 To build it you will need the Apache Maven.<br>
-The object to be made by Make needs to have a default constructor. A constructor without arguments.<br>
-Make will create all fields for the object. if the object that is being made has a field that is another complex object is necessary that object has a default constructor too or null will be set.
+For Eclipse IDE you may need <a href="http://www.eclipse.org/m2e/" target="_blank">M2Eclipse</a> to manager a Maven project.<br>
 
 ## Installation
-You can download the project and put it as test dependence in your project.<br>
+You can download the project and put it as test dependence in your Maven project.<br>
+Download the project.<br>
+<b>Eclipse IDE </b>
+After download the project and import it in Eclipse the IDE can complain about compilation problems. If do Right click on project and choose Properties, Java Compiler and uncheck "Use compliance from execution environment..." and in "Compiler compliance level:" choose 1.6. Apply and OK.<br>
+Right click on project again in Mave choose Update project...<br>
+Right click on project again and choose Run As, Run Configurations..., clean package install
 Copy from folder src/test/resource the make.xml file and paste it into your project resource test.<br>
 Follow the next step to configure this file.<br>
 
