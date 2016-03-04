@@ -65,12 +65,17 @@ The make.xml is divided in 3 parts:<br>
 ```<XML>
   <setup>
     <JSR303 value="read" /><!-- read or ignore -->
+    <JPA_ID value="null" /><!-- null fill -->
     <Null value="never" /><!-- never some all -->
   </setup>
 ```
 The JSR303 tag is used to setup the behavior about JSR303 annotations. To read or to ignore those annotations. If your project does not have these annotations, you must set ignore here.<br>
 *   READ: Make will be looking for JSR303 annotations to create valid values.
 *   IGNORE: Make wont be looking for JSR303 and the values will be open to any value that the field can handle.<br>
+
+The JPA_ID tag determine if a field is annotated with javax.persiscente.Id (@Id) must be fill with a value or let it with your default value.<br>
+*   NULL: Make will let the value as default value.
+*   FILL: Make will fill the field with a random value. In this cases the tag Null can change this behavior.
 
 The Null tag determines how the framework will work about to set null values:<br>
 *   NEVER: Make always will create values for all fields. Three cases can set null at a field:<br> 
