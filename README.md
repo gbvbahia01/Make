@@ -31,9 +31,9 @@ For Eclipse IDE you may need <a href="http://www.eclipse.org/m2e/" target="_blan
 You can download the project and put it as test dependence in your Maven project.<br>
 Download the project.<br>
 <b>Eclipse IDE </b>
-After download the project and import it in Eclipse the IDE can complain about compilation problems. If do Right click on project and choose Properties, Java Compiler and uncheck "Use compliance from execution environment..." and in "Compiler compliance level:" choose 1.6. Apply and OK.<br>
-Right click on project again in Mave choose Update project...<br>
-Right click on project again and choose Run As, Run Configurations..., clean package install
+After download the project and import it in Eclipse right click on project in Maven choose Update project...<br>
+If Eclipse complain about compilation problems right click on project and choose Properties, Java Compiler and uncheck "Use compliance from execution environment..." and in "Compiler compliance level:" choose 1.6. Apply and OK.<br>
+Right click on project again and choose Run As, Run Configurations..., Maven build, in upper left choose new (The white sheet with yellow plus), on top give 'Make Build' as name, clean package install
 Copy from folder src/test/resource the make.xml file and paste it into your project resource test.<br>
 Follow the next step to configure this file.<br>
 
