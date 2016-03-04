@@ -52,6 +52,20 @@ public class SetupTest {
     Assert.assertTrue("No error was launched.", someFields != null);
   }
 
+  @Test
+  public void testMakeIdNullTest() {
+    Factory.loadSetup("make.xml");
+    Jsr303ReadSetupTest someFields = MakeEntity.make(Jsr303ReadSetupTest.class);
+    Assert.assertNull("No error was launched.", someFields.getImId());
+  }
+
+  @Test
+  public void testMakeIdFillTest() {
+    Factory.loadSetup("make_read_some.xml");
+    Jsr303ReadSetupTest someFields = MakeEntity.make(Jsr303ReadSetupTest.class);
+    Assert.assertNotNull("Id cannot be null.", someFields.getImId());
+  }
+
   /**
    * Test the first "if" on Setup.useDefaultValuesFactory.<br>
    * This test is evaluating setup working with make.xml.<br>

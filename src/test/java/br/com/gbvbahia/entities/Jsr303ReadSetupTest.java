@@ -1,9 +1,13 @@
 package br.com.gbvbahia.entities;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 public class Jsr303ReadSetupTest {
+
+  @Id
+  private Long imId;
 
   @Null
   private Integer defaultInt = 3;
@@ -65,4 +69,13 @@ public class Jsr303ReadSetupTest {
   public void setNotKeyField(Byte notKeyField) {
     this.notKeyField = notKeyField;
   }
+
+  public Long getImId() {
+    return this.imId;
+  }
+
+  public void setImId(Long imId) {
+    this.imId = imId;
+  }
+
 }

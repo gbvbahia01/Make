@@ -21,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -133,8 +134,11 @@ public final class Factory {
     private static final String NULL_ALWAYS = "all";
     private static final String NULL_SOME = "some";
     private static final String NULL_NEVER = "never";
+    private static final String NULL_PERSISTENCE_ID_YES = "null";
+    private static final String NULL_PERSISTENCE_ID_NO = "fill";
     private String jsr303;
     private String nullFields;
+    private String nullId;
     private boolean created;
 
     /**
@@ -163,29 +167,42 @@ public final class Factory {
     private void changeSetup(Map<String, String> setupMap) {
       this.jsr303 = setupMap.get("JSR303");
       this.nullFields = setupMap.get("Null");
+      this.nullId = setupMap.get("JPA_ID");
       this.checkJsr303SetupValue();
+      this.checkJpaIdSetupValue();
       this.checkNullSetupValue();
     }
 
     private void checkJsr303SetupValue() {
-      if (StringUtils.equals(this.jsr303, JSR303_READ)) {
+      if (StringUtils.equalsIgnoreCase(this.jsr303, JSR303_READ)) {
         return;
       }
-      if (StringUtils.equals(this.jsr303, JSR303_IGNORE)) {
+      if (StringUtils.equalsIgnoreCase(this.jsr303, JSR303_IGNORE)) {
         return;
       }
       throw new IllegalArgumentException(I18N.getMsg("JSR303SetupError",
           new Object[] { JSR303_READ, JSR303_IGNORE }));
     }
 
+    private void checkJpaIdSetupValue() {
+      if (StringUtils.equalsIgnoreCase(this.nullId, NULL_PERSISTENCE_ID_NO)) {
+        return;
+      }
+      if (StringUtils.equalsIgnoreCase(this.nullId, NULL_PERSISTENCE_ID_YES)) {
+        return;
+      }
+      throw new IllegalArgumentException(I18N.getMsg("NULLJPAIDSetupError",
+          new Object[] { NULL_PERSISTENCE_ID_YES, NULL_PERSISTENCE_ID_NO }));
+    }
+
     private void checkNullSetupValue() {
-      if (StringUtils.equals(this.nullFields, NULL_ALWAYS)) {
+      if (StringUtils.equalsIgnoreCase(this.nullFields, NULL_ALWAYS)) {
         return;
       }
-      if (StringUtils.equals(this.nullFields, NULL_SOME)) {
+      if (StringUtils.equalsIgnoreCase(this.nullFields, NULL_SOME)) {
         return;
       }
-      if (StringUtils.equals(this.nullFields, NULL_NEVER)) {
+      if (StringUtils.equalsIgnoreCase(this.nullFields, NULL_NEVER)) {
         return;
       }
       throw new IllegalArgumentException(I18N.getMsg("NullSetupError",
@@ -199,6 +216,11 @@ public final class Factory {
      */
     private <T> boolean useDefaultValuesFactory(final Field field,
         final T entity) {
+      if (this.nullJpaId()) {
+        if (field.isAnnotationPresent(Id.class)) {
+          return true;
+        }
+      }
       if (this.readJsr303()) {
         if (field.isAnnotationPresent(Null.class)) {
           return true;
@@ -266,6 +288,14 @@ public final class Factory {
 
     public boolean neverNull() {
       return StringUtils.equalsIgnoreCase(NULL_NEVER, this.nullFields);
+    }
+
+    public boolean fillJpaId() {
+      return StringUtils.equalsIgnoreCase(NULL_PERSISTENCE_ID_NO, this.nullId);
+    }
+
+    public boolean nullJpaId() {
+      return StringUtils.equalsIgnoreCase(NULL_PERSISTENCE_ID_YES, this.nullId);
     }
 
     /**

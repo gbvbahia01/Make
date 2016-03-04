@@ -2,6 +2,7 @@
 <make>
   <setup>
     <JSR303 value="read" /><!-- read or ignore -->
+    <JPA_ID value="fill" /><!-- null fill -->
     <Null value="some" /><!-- never some all -->
   </setup>
   <factories>
