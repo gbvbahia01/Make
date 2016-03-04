@@ -33,7 +33,7 @@ Download the project.<br>
 <b>Eclipse IDE </b>
 After download the project and import it in Eclipse right click on project in Maven choose Update project...<br>
 If Eclipse complain about compilation problems right click on project and choose Properties, Java Compiler and uncheck "Use compliance from execution environment..." and in "Compiler compliance level:" choose 1.6. Apply and OK.<br>
-Right click on project again and choose Run As, Run Configurations..., Maven build, in upper left choose new (The white sheet with yellow plus), on top give 'Make Build' as name, click in Browse workspace button and choose the Make project, in Goals write: clean package. At least choose run button.<br>
+Right click on project again and choose Run As, choose the first Maven build. If Eclipse ask about environment check if in Base directory is the path for the Make folder and in Goals write: package. At least choose run button.<br>
 Copy from folder src/test/resource the make.xml file and paste it into your project resource test.<br>
 Follow the next step to configure this file.<br>
 
