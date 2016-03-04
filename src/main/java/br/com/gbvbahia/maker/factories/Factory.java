@@ -11,11 +11,10 @@ import br.com.gbvbahia.maker.factories.types.common.ValueFactory;
 import br.com.gbvbahia.maker.factories.types.managers.ValueFactoryManager;
 import br.com.gbvbahia.maker.factories.types.managers.XMLoader;
 import br.com.gbvbahia.maker.factories.types.works.DefaultValuesFactory;
+import br.com.gbvbahia.maker.log.LogInfo;
 import br.com.gbvbahia.maker.types.primitives.numbers.MakeInteger;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.lang.reflect.Field;
 import java.util.LinkedHashSet;
@@ -26,8 +25,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 /**
- * This class will call the XML loader to read the xml setup and prepare all values factories to
- * create the values.
+ * This class will call the XML loader to read the xml setup and prepare all
+ * values factories to create the values.
  * 
  * @since v.1 01/05/2012
  * @author Guilherme
@@ -35,12 +34,8 @@ import javax.validation.constraints.Null;
 public final class Factory {
 
   /**
-   * For logging changes edit the log4j.properties inside src/test/resources
-   */
-  private static Log logger = LogFactory.getLog(Factory.class.getSimpleName());
-
-  /**
-   * Configura o nome do teste para recuperar informações no arquivo make.properties.
+   * Configura o nome do teste para recuperar informações no arquivo
+   * make.properties.
    */
   private static String[] testName;
   /**
@@ -49,32 +44,36 @@ public final class Factory {
   public static Setup SETUP = new Setup(null);
 
   /**
-   * Contém uma lista das Factories para cada tipo, ao ser solicitado uma será retornada.
+   * Contém uma lista das Factories para cada tipo, ao ser solicitado uma será
+   * retornada.
    */
   public static final Set<ValueFactory> FACTORIES = new LinkedHashSet<ValueFactory>();
 
   private static ValueFactoryManager specializedFactoryManager = null;
 
   /**
-   * If you need another xml file for setup or you want rename make.xml you must call this method
-   * before start tests.
+   * If you need another xml file for setup or you want rename make.xml you must
+   * call this method before start tests.
    * 
-   * @param xmlSetupFile the xml setup file to load all test setup.
+   * @param xmlSetupFile
+   *          the xml setup file to load all test setup.
    */
   public static void loadSetup(String xmlSetupFile) {
     SETUP = new Setup(XMLoader.getLoader(xmlSetupFile).loadSetup());
   }
 
-
   /**
    * Start to read the xml to setup all factories that will be used in the test.
    * 
-   * @param testNameProp all tests that will be loaded.
+   * @param testNameProp
+   *          all tests that will be loaded.
    */
   public static void configureFactories(final String... testNameProp) {
     if ((SETUP == null) || !SETUP.isCreated()) {
-      Factory.logger.info(I18N.getMsg("setupMakeXmlDefault"));
-      Factory.logger.info(I18N.getMsg("warnAboutLoadXml"));
+      LogInfo.logInfoInformation(Factory.class.getName(),
+          I18N.getMsg("setupMakeXmlDefault"));
+      LogInfo.logInfoInformation(Factory.class.getName(),
+          I18N.getMsg("warnAboutLoadXml"));
       loadSetup(null);
     }
     FACTORIES.clear();
@@ -91,14 +90,17 @@ public final class Factory {
   }
 
   /**
-   * Run all factories looking for the one that works with the field. If no one factory works with
-   * then DefaultFactory will be used.<br>
-   * Keep attention in xml file setup test like make.xml. The values created will be reflection from
-   * this file.
+   * Run all factories looking for the one that works with the field. If no one
+   * factory works with then DefaultFactory will be used.<br>
+   * Keep attention in xml file setup test like make.xml. The values created
+   * will be reflection from this file.
    *
-   * @param <T> Represent the class of entity
-   * @param field to be created
-   * @param entity entity that contains the field.
+   * @param <T>
+   *          Represent the class of entity
+   * @param field
+   *          to be created
+   * @param entity
+   *          entity that contains the field.
    * @return ValueFactory that will create the value to put at field.
    */
   public static <T> ValueFactory getFactory(final Field field, final T entity) {
@@ -113,12 +115,11 @@ public final class Factory {
     return DefaultFactory.getInstance(testName);
   }
 
-
-
   /**
    * Não pode ser instânciado.
    */
-  private Factory() {}
+  private Factory() {
+  }
 
   /**
    * Where xml setup is kept for all tests.
@@ -138,16 +139,21 @@ public final class Factory {
 
     /**
      * Define all behavior of framework reading the setupMap.<br>
-     * If a null or empty map is sent the setup rules will not be loaded but any exception will be
-     * launched.<br>
-     * To load setup again call Factory.loadSetup(nameXmlSetup) with correctly name of XML setup
-     * file.
+     * If a null or empty map is sent the setup rules will not be loaded but any
+     * exception will be launched.<br>
+     * To load setup again call Factory.loadSetup(nameXmlSetup) with correctly
+     * name of XML setup file.
      * 
-     * @param setupMap a map with all rules declared in XML setup file.
+     * @param setupMap
+     *          a map with all rules declared in XML setup file.
      */
     public Setup(Map<String, String> setupMap) {
       this.created = false;
       if ((setupMap == null) || setupMap.isEmpty()) {
+        String setupTag = "Setup was not informed in XML setup. Using:"
+            + " <setup> <JSR303 value=\"read\" />"
+            + " <Null value=\"never\" /> </setup>";
+        LogInfo.logInfoInformation(Setup.class.getName(), setupTag);
         return;
       }
       this.changeSetup(setupMap);
@@ -168,8 +174,8 @@ public final class Factory {
       if (StringUtils.equals(this.jsr303, JSR303_IGNORE)) {
         return;
       }
-      throw new IllegalArgumentException(I18N.getMsg("JSR303SetupError", new Object[] {JSR303_READ,
-          JSR303_IGNORE}));
+      throw new IllegalArgumentException(I18N.getMsg("JSR303SetupError",
+          new Object[] { JSR303_READ, JSR303_IGNORE }));
     }
 
     private void checkNullSetupValue() {
@@ -182,15 +188,17 @@ public final class Factory {
       if (StringUtils.equals(this.nullFields, NULL_NEVER)) {
         return;
       }
-      throw new IllegalArgumentException(I18N.getMsg("NullSetupError", new Object[] {NULL_ALWAYS,
-          NULL_SOME, NULL_NEVER}));
+      throw new IllegalArgumentException(I18N.getMsg("NullSetupError",
+          new Object[] { NULL_ALWAYS, NULL_SOME, NULL_NEVER }));
     }
 
     /**
-     * Engine that defines the behavior of the test reading the setup test information.<br>
+     * Engine that defines the behavior of the test reading the setup test
+     * information.<br>
      * 
      */
-    private <T> boolean useDefaultValuesFactory(final Field field, final T entity) {
+    private <T> boolean useDefaultValuesFactory(final Field field,
+        final T entity) {
       if (this.readJsr303()) {
         if (field.isAnnotationPresent(Null.class)) {
           return true;
@@ -228,9 +236,11 @@ public final class Factory {
     }
 
     /**
-     * Check if the field is mapped to be worked for some work class. MakeBetween, MakeEmail...
+     * Check if the field is mapped to be worked for some work class.
+     * MakeBetween, MakeEmail...
      * 
-     * @param field the field to check
+     * @param field
+     *          the field to check
      * @return true is mapped false is not.
      */
     private static boolean isKeyField(Field field) {

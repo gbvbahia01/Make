@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<make>
+  <setup>
+    <JSR303 value="read" /><!-- read or ignore -->
+    <Null value="never" /><!-- never some all -->
+  </setup>
+  <factories></factories>
+  <tests></tests>
+</make>
